@@ -73,7 +73,7 @@ Without a WANdisco-provided license file, LiveData Migrator will stop running af
 
 ### Option 1: User Interface (UI)
 
-Install LiveData Migrator with a UI to start using LiveData Migrator quickly and easily. You will need:
+Download and install LiveData Migrator with a UI to start using LiveData Migrator quickly and easily. You will need:
 
 Red Hat or Debian based **Operating system**
 **Java version** 1.8.0
@@ -82,27 +82,25 @@ Red Hat or Debian based **Operating system**
 * 16 CPU Cores / 32 GB Memory / 64 GB Temp disk (SSD) / 192 GB (Premium cache storage) / very high network throughput (recommended)
 
 #### Step 1 - Download LiveData Migrator with the UI
-Copy the correct command for your operating system to download the latest package installer:
-
-* wget https://fusion-jenkins.wandisco.com/view/ONEUI/job/oneui/job/master/lastSuccessfulBuild/artifact/installer/one-ui_lm_rpm_installer.sh
-
-Or
-
-* wget https://fusion-jenkins.wandisco.com/view/ONEUI/job/oneui/job/master/lastSuccessfulBuild/artifact/installer/one-ui_lm_deb_installer.sh
+Copy `wget https://fusion-jenkins.wandisco.com/view/ONEUI/job/oneui/job/master/lastSuccessfulBuild/artifact/installer/one-ui_lm_rpm_installer.sh` or
+`wget https://fusion-jenkins.wandisco.com/view/ONEUI/job/oneui/job/master/lastSuccessfulBuild/artifact/installer/one-ui_lm_deb_installer.sh` depending on your Linux distribution.
 
 #### Step 2 - Install the files
-1. Enter the following commands  in your terminal:
+1. Enter the following commands in your terminal:
+```
 chmod +x one-ui_lm_*_installer.sh
-./one-ui_lm_rpm_installer.sh (or _deb_)
-
-A message appears telling you the installation was successful.
+```
+```
+./one-ui_lm_<package-type>_installer.sh (or _deb_)
+```
 
 2. Check the service statuses:
+```
 /etc/init.d/live-migrator status
+```
+```
 /etc/init.d/one-ui-server status
-
-If you see messages confirming that LiveData Migrator and the user interface are running, you have successfully completed the installation. If you receive a different message, refer to the Troubleshooting section.
-
+```
 :::note
 The UI is referred to as OneUI in terminal messaging.
 
