@@ -59,18 +59,16 @@ When LiveData Migrator is installed as a system service, the following directory
 
 ## Get LiveData Migrator with a user interface (UI)
 
-Download and install LiveData Migrator with a UI to start using LiveData Migrator quickly and easily. You will need:
+If you want to try out LiveData Migrator during public preview, you can download and install LiveData Migrator with a UI. This is a quick way of getting up and running with LiveData Migrator as the bundle includes both installation files and takes minutes to set up.
 
-1. Red Hat or Debian based **Operating system**
-1. **Java version** 1.8.0
-1. **Machine specification**
+You'll need a Red Hat or Debian operating system, a Java version of at least 1.8.0, and the following machine specifications:
 * 4 CPU Cores / 16 GB Memory / 32 GB Temp Disk / 16GB Cache / 2GB Throughput (minimum)
 * 16 CPU Cores / 32 GB Memory / 64 GB Temp disk (SSD) / 192 GB (Premium cache storage) / very high network throughput (recommended)
 
-### Download LiveData Migrator with the UI
-Copy `wget https://fusion-jenkins.wandisco.com/view/ONEUI/job/oneui/job/master/lastSuccessfulBuild/artifact/installer/one-ui_lm_rpm_installer.sh`
+### Download the LiveData Migrator and UI installation files
+Depending on your Linux distribution, copy `wget https://fusion-jenkins.wandisco.com/view/ONEUI/job/oneui/job/master/lastSuccessfulBuild/artifact/installer/one-ui_lm_rpm_installer.sh`
 or
-`wget https://fusion-jenkins.wandisco.com/view/ONEUI/job/oneui/job/master/lastSuccessfulBuild/artifact/installer/one-ui_lm_deb_installer.sh` depending on your Linux distribution.
+`wget https://fusion-jenkins.wandisco.com/view/ONEUI/job/oneui/job/master/lastSuccessfulBuild/artifact/installer/one-ui_lm_deb_installer.sh`
 
 ### Install the files
 1. Run the following commands:
