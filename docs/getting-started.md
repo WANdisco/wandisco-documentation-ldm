@@ -75,9 +75,9 @@ Without a WANdisco-provided license file, LiveData Migrator will stop running af
 
 Download and install LiveData Migrator with a UI to start using LiveData Migrator quickly and easily. You will need:
 
-Red Hat or Debian based **Operating system**
-**Java version** 1.8.0
-**Machine specification**
+1. Red Hat or Debian based **Operating system**
+1. **Java version** 1.8.0
+1. **Machine specification**
 * 4 CPU Cores / 16 GB Memory / 32 GB Temp Disk / 16GB Cache / 2GB Throughput (minimum)
 * 16 CPU Cores / 32 GB Memory / 64 GB Temp disk (SSD) / 192 GB (Premium cache storage) / very high network throughput (recommended)
 
@@ -86,7 +86,7 @@ Copy `wget https://fusion-jenkins.wandisco.com/view/ONEUI/job/oneui/job/master/l
 `wget https://fusion-jenkins.wandisco.com/view/ONEUI/job/oneui/job/master/lastSuccessfulBuild/artifact/installer/one-ui_lm_deb_installer.sh` depending on your Linux distribution.
 
 #### Step 2 - Install the files
-1. Enter the following commands in your terminal:
+1. Run the following commands:
 ```
 chmod +x one-ui_lm_*_installer.sh
 ```
@@ -104,8 +104,7 @@ chmod +x one-ui_lm_*_installer.sh
 :::note
 The UI is referred to as OneUI in terminal messaging.
 
-#### Step 3 - Start using LiveData Migrator
-Create an administrator account to start using the user interface.
+#### Step 3 - Create a LiveData Migrator administrator account
 1. Navigate to http://<your.livedatamigrator.server>:8081
 2. Complete the registration form and click **CREATE ACCOUNT**.
 3. Add storages by clicking the pulsing + button. You need at least one source and one target.

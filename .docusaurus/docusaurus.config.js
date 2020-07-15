@@ -140,10 +140,10 @@ export default {
       {
         "docs": {
           "homePageId": "about",
-          "sidebarPath": "/Users/catrionabarker/Repos/wandisco-documentation-ldm/sidebars.js"
+          "sidebarPath": "/Users/shonaisbister/repos/ldm/sidebars.js"
         },
         "theme": {
-          "customCss": "/Users/catrionabarker/Repos/wandisco-documentation-ldm/src/css/custom.css"
+          "customCss": "/Users/shonaisbister/repos/ldm/src/css/custom.css"
         }
       }
     ]
