@@ -59,7 +59,7 @@ When LiveData Migrator is installed as a system service, the following directory
 
 ## Get LiveData Migrator with a user interface (UI)
 
-If you want to try out LiveData Migrator during public preview, you can download and install LiveData Migrator with a UI. This is a quick way of getting up and running with LiveData Migrator as the bundle includes both installation files and takes minutes to set up.
+If you want to try out LiveData Migrator during public preview, you can download and install LiveData Migrator with a UI. This is a quick way of installing both files and means you can get up and running with LiveData Migrator quickly.
 
 You'll need a Red Hat or Debian operating system, a Java version of at least 1.8.0, and the following machine specifications:
 * 4 CPU Cores / 16 GB Memory / 32 GB Temp Disk / 16GB Cache / 2GB Throughput (minimum)
