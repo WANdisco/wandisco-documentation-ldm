@@ -57,21 +57,7 @@ When LiveData Migrator is installed as a system service, the following directory
 | `/opt/wandisco/live-migrator` | Java archive files for LiveData Migrator |
 | `/opt/wandisco/live-migrator/db` | LiveData Migrator runtime state |
 
-## Running LiveData Migrator
-
-You have two options for running LiveData Migrator:
-* from the _command line_, or
-* as a _system service_.
-
-You only need to install the product if you want to run it as a system service, which allows you to maintain long-lived migrations, have a common configuration that survives service restarts, and to retain logging information in a central directory. Running LiveData Migrator from the command line allows you to get started with migration in just a few seconds, and does not need any special local system privileges to operate.
-
-:::note
-Without a WANdisco-provided license file, LiveData Migrator will stop running after 10 minutes. You have full access to all functionality during that time, but operation will cease immediately after that time period has expired.
-
-[Contact WANdisco](https://www.wandisco.com) for a license that will meet your migration needs.
-:::
-
-### Option 1: User Interface (UI)
+## Get LiveData Migrator with a user interface (UI)
 
 Download and install LiveData Migrator with a UI to start using LiveData Migrator quickly and easily. You will need:
 
@@ -81,11 +67,12 @@ Download and install LiveData Migrator with a UI to start using LiveData Migrato
 * 4 CPU Cores / 16 GB Memory / 32 GB Temp Disk / 16GB Cache / 2GB Throughput (minimum)
 * 16 CPU Cores / 32 GB Memory / 64 GB Temp disk (SSD) / 192 GB (Premium cache storage) / very high network throughput (recommended)
 
-#### Download LiveData Migrator with the UI
-Copy `wget https://fusion-jenkins.wandisco.com/view/ONEUI/job/oneui/job/master/lastSuccessfulBuild/artifact/installer/one-ui_lm_rpm_installer.sh` or
+### Download LiveData Migrator with the UI
+Copy `wget https://fusion-jenkins.wandisco.com/view/ONEUI/job/oneui/job/master/lastSuccessfulBuild/artifact/installer/one-ui_lm_rpm_installer.sh`
+or
 `wget https://fusion-jenkins.wandisco.com/view/ONEUI/job/oneui/job/master/lastSuccessfulBuild/artifact/installer/one-ui_lm_deb_installer.sh` depending on your Linux distribution.
 
-#### Install the files
+### Install the files
 1. Run the following commands:
 ```
 chmod +x one-ui_lm_*_installer.sh
@@ -104,19 +91,32 @@ chmod +x one-ui_lm_*_installer.sh
 :::note
 The UI is referred to as OneUI in terminal messaging.
 
-#### Create a LiveData Migrator administrator account
+### Create a LiveData Migrator administrator account
 1. Navigate to http://<your.livedatamigrator.server>:8081
 2. Complete the registration form and click **CREATE ACCOUNT**.
 3. Add storages by clicking the pulsing + button. You need at least one source and one target.
 
-#### Troubleshooting
+### Troubleshooting
 **How do I check the logs?**
 In your terminal, run the following commands:
 # less /var/log/fusion/one-ui-server/oneui.<YYYY-MM-DD>.log
 # less /var/log/wandisco/live-migrator/live-migrator.log
 
+## Running LiveData Migrator
 
-### Option 2: Command line operation
+You have two options for running LiveData Migrator:
+* from the _command line_, or
+* as a _system service_.
+
+You only need to install the product if you want to run it as a system service, which allows you to maintain long-lived migrations, have a common configuration that survives service restarts, and to retain logging information in a central directory. Running LiveData Migrator from the command line allows you to get started with migration in just a few seconds, and does not need any special local system privileges to operate.
+
+:::note
+Without a WANdisco-provided license file, LiveData Migrator will stop running after 10 minutes. You have full access to all functionality during that time, but operation will cease immediately after that time period has expired.
+
+[Contact WANdisco](https://www.wandisco.com) for a license that will meet your migration needs.
+:::
+
+### Option 1: Command line operation
 
 Download the `live-migrator.jar` file, then as the `hdfs` user on a cluster edge node, execute
 
@@ -145,7 +145,7 @@ to start LiveData Migrator and view the action prompt:
 WANdisco LiveMigrator >>
 ```
 
-### Option 3: System service installation
+### Option 2: System service installation
 
 Download and install LiveData Migrator to begin migrating your Hadoop data to other environments. Download `live-migrator-x.x.x.rpm` or `live-migrator-x.x.x.deb` depending on your Linux distribution, then Installation on RPM-based Linux distributions such as CentOS or Red Hat uses `rpm` or `yum` as the root user:
 
