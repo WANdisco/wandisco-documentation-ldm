@@ -71,7 +71,59 @@ Without a WANdisco-provided license file, LiveData Migrator will stop running af
 [Contact WANdisco](https://www.wandisco.com) for a license that will meet your migration needs.
 :::
 
-### Option 1: Command line operation
+### Option 1: User Interface (UI)
+
+Install LiveData Migrator with a UI to get you up and running quickly. You will need:
+
+Red Hat or Debian based **Operating system**
+**Java version** 1.8.0
+**Machine specification**
+* 4 CPU Cores / 16 GB Memory / 32 GB Temp Disk / 16GB Cache / 2GB Throughput (minimum)
+* 16 CPU Cores / 32 GB Memory / 64 GB Temp disk (SSD) / 192 GB (Premium cache storage) / very high network throughput (recommended)
+
+#### Step 1 - Download LiveData Migrator with the UI
+The following instructions assume your server has an internet connection. If it doesn’t, refer to the [link]Troubleshooting section[/link].
+
+Copy the correct command for your operating system to download the latest package installer.
+
+Wget https://fusion-jenkins.wandisco.com/view/ONEUI/job/oneui/job/master/lastSuccessfulBuild/artifact/installer/one-ui_lm_rpm_installer.sh
+
+Or
+
+Wget https://fusion-jenkins.wandisco.com/view/ONEUI/job/oneui/job/master/lastSuccessfulBuild/artifact/installer/one-ui_lm_deb_installer.sh
+
+#### Step 2 - Install the files
+Enter the following commands  in your terminal:
+chmod +x one-ui_lm_*_installer.sh
+./one-ui_lm_rpm_installer.sh (or _deb_)
+
+A message appears telling you the installation was successful.
+
+Check the service statuses:
+/etc/init.d/live-migrator status
+/etc/init.d/one-ui-server status
+
+If you see messages confirming that LiveData Migrator and the user interface are running, you have successfully completed the installation. If you receive a different message, refer to the Troubleshooting section.
+
+Note: the user interface is referred to as OneUI in terminal messaging.
+
+#### Step 3 - Start using LiveData Migrator
+Create an administrator account to start using the user interface.
+1. Navigate to http://<your.livedatamigrator.server>:8081
+2. Complete the registration form and click **CREATE ACCOUNT**.
+3. Add storages by clicking the pulsing + button. You need at least one source and one target.
+
+#### Troubleshooting
+**I don’t have internet connection on my target machine. What do I do?**
+Download the LiveData Migrator and OneUI files manually. Check your working directory in the XYZ to find the files.
+
+How do I check the logs?
+In your terminal, run the following commands:
+# less /var/log/fusion/one-ui-server/oneui.<YYYY-MM-DD>.log
+# less /var/log/wandisco/live-migrator/live-migrator.log
+
+
+### Option 2: Command line operation
 
 Download the `live-migrator.jar` file, then as the `hdfs` user on a cluster edge node, execute
 
@@ -100,7 +152,7 @@ to start LiveData Migrator and view the action prompt:
 WANdisco LiveMigrator >>
 ```
 
-### Option 2: System service installation
+### Option 3: System service installation
 
 Download and install LiveData Migrator to begin migrating your Hadoop data to other environments. Download `live-migrator-x.x.x.rpm` or `live-migrator-x.x.x.deb` depending on your Linux distribution, then Installation on RPM-based Linux distributions such as CentOS or Red Hat uses `rpm` or `yum` as the root user:
 
