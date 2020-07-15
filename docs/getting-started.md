@@ -102,9 +102,10 @@ In your terminal, run the following commands:
 
 ## Running LiveData Migrator
 
-You have two options for running LiveData Migrator:
-* from the _command line_, or
-* as a _system service_.
+You can run LiveData Migrator:
+* from the _command line_
+* as a _system service_
+* with the UI (if installed)
 
 You only need to install the product if you want to run it as a system service, which allows you to maintain long-lived migrations, have a common configuration that survives service restarts, and to retain logging information in a central directory. Running LiveData Migrator from the command line allows you to get started with migration in just a few seconds, and does not need any special local system privileges to operate.
 
@@ -114,7 +115,7 @@ Without a WANdisco-provided license file, LiveData Migrator will stop running af
 [Contact WANdisco](https://www.wandisco.com) for a license that will meet your migration needs.
 :::
 
-### Option 1: Command line operation
+### Command line operation
 
 Download the `live-migrator.jar` file, then as the `hdfs` user on a cluster edge node, execute
 
@@ -143,7 +144,7 @@ to start LiveData Migrator and view the action prompt:
 WANdisco LiveMigrator >>
 ```
 
-### Option 2: System service installation
+### System service installation
 
 Download and install LiveData Migrator to begin migrating your Hadoop data to other environments. Download `live-migrator-x.x.x.rpm` or `live-migrator-x.x.x.deb` depending on your Linux distribution, then Installation on RPM-based Linux distributions such as CentOS or Red Hat uses `rpm` or `yum` as the root user:
 
