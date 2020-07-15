@@ -73,7 +73,7 @@ Without a WANdisco-provided license file, LiveData Migrator will stop running af
 
 ### Option 1: User Interface (UI)
 
-Install LiveData Migrator with a UI to get you up and running quickly. You will need:
+Install LiveData Migrator with a UI to start using LiveData Migrator quickly and easily. You will need:
 
 Red Hat or Debian based **Operating system**
 **Java version** 1.8.0
@@ -82,30 +82,29 @@ Red Hat or Debian based **Operating system**
 * 16 CPU Cores / 32 GB Memory / 64 GB Temp disk (SSD) / 192 GB (Premium cache storage) / very high network throughput (recommended)
 
 #### Step 1 - Download LiveData Migrator with the UI
-The following instructions assume your server has an internet connection. If it doesn’t, refer to the [link]Troubleshooting section[/link].
+Copy the correct command for your operating system to download the latest package installer:
 
-Copy the correct command for your operating system to download the latest package installer.
-
-Wget https://fusion-jenkins.wandisco.com/view/ONEUI/job/oneui/job/master/lastSuccessfulBuild/artifact/installer/one-ui_lm_rpm_installer.sh
+* wget https://fusion-jenkins.wandisco.com/view/ONEUI/job/oneui/job/master/lastSuccessfulBuild/artifact/installer/one-ui_lm_rpm_installer.sh
 
 Or
 
-Wget https://fusion-jenkins.wandisco.com/view/ONEUI/job/oneui/job/master/lastSuccessfulBuild/artifact/installer/one-ui_lm_deb_installer.sh
+* wget https://fusion-jenkins.wandisco.com/view/ONEUI/job/oneui/job/master/lastSuccessfulBuild/artifact/installer/one-ui_lm_deb_installer.sh
 
 #### Step 2 - Install the files
-Enter the following commands  in your terminal:
+1. Enter the following commands  in your terminal:
 chmod +x one-ui_lm_*_installer.sh
 ./one-ui_lm_rpm_installer.sh (or _deb_)
 
 A message appears telling you the installation was successful.
 
-Check the service statuses:
+2. Check the service statuses:
 /etc/init.d/live-migrator status
 /etc/init.d/one-ui-server status
 
 If you see messages confirming that LiveData Migrator and the user interface are running, you have successfully completed the installation. If you receive a different message, refer to the Troubleshooting section.
 
-Note: the user interface is referred to as OneUI in terminal messaging.
+:::note
+The UI is referred to as OneUI in terminal messaging.
 
 #### Step 3 - Start using LiveData Migrator
 Create an administrator account to start using the user interface.
@@ -114,10 +113,7 @@ Create an administrator account to start using the user interface.
 3. Add storages by clicking the pulsing + button. You need at least one source and one target.
 
 #### Troubleshooting
-**I don’t have internet connection on my target machine. What do I do?**
-Download the LiveData Migrator and OneUI files manually. Check your working directory in the XYZ to find the files.
-
-How do I check the logs?
+**How do I check the logs?**
 In your terminal, run the following commands:
 # less /var/log/fusion/one-ui-server/oneui.<YYYY-MM-DD>.log
 # less /var/log/wandisco/live-migrator/live-migrator.log
