@@ -95,10 +95,12 @@ The UI is referred to as OneUI in terminal messaging.
 3. Add storages by clicking the pulsing + button. You need at least one source and one target.
 
 ### Troubleshooting
-**How do I check the logs?**
+**How do I check the logs?**  
 In your terminal, run the following commands:
-# less /var/log/fusion/one-ui-server/oneui.<YYYY-MM-DD>.log
-# less /var/log/wandisco/live-migrator/live-migrator.log
+
+`less /var/log/fusion/one-ui-server/oneui.<YYYY-MM-DD>.log`
+
+`less /var/log/wandisco/live-migrator/live-migrator.log`
 
 ## Running LiveData Migrator
 
