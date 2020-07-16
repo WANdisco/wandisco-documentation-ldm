@@ -75,20 +75,15 @@ Debian
 ### Install the files
 1. Run the following commands:
 
-```
-chmod +x one-ui_lm_*_installer.sh
-```
-```
-./one-ui_lm_<package-type>_installer.sh
-```
+`chmod +x one-ui_lm_*_installer.sh`
+
+`./one-ui_lm_<package-type>_installer.sh`
 
 2. Check the service statuses:
-```
-/etc/init.d/live-migrator status
-```
-```
-/etc/init.d/one-ui-server status
-```
+
+`/etc/init.d/live-migrator status`
+
+`/etc/init.d/one-ui-server status`
 :::note
 The UI is referred to as OneUI in terminal messaging.
 :::
@@ -99,6 +94,9 @@ The UI is referred to as OneUI in terminal messaging.
 3. Add storages by clicking the pulsing + button. You need at least one source and one target.
 
 ### Troubleshooting
+**I don’t have internet connection on my target machine. What do I do?**  
+Download the LiveData Migrator and OneUI files manually. Check your working directory in the XYZ to find the files.
+
 **How do I check the logs?**  
 In your terminal, run the following commands:
 
