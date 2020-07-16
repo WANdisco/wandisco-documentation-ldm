@@ -62,23 +62,24 @@ When LiveData Migrator is installed as a system service, the following directory
 If you want to try out LiveData Migrator during public preview, you can download and install LiveData Migrator with a UI. This is a quick way of installing both LiveData Migrator and the UI from the command line.
 
 You'll need a Red Hat or Debian operating system, a Java version of at least 1.8, and the following machine specifications:
-* 4 CPU Cores / 16 GB Memory / 32 GB Temp Disk / 16GB Cache / 2GB Throughput (minimum)
-* 16 CPU Cores / 32 GB Memory / 64 GB Temp disk (SSD) / 192 GB (Premium cache storage) / very high network throughput (recommended)
+* **(Minimum):** 4 CPU Cores / 16 GB Memory / 32 GB Temp Disk / 16GB Cache / 2GB throughput
+* **(Recommended):** 16 CPU Cores / 32 GB Memory / 64 GB Temp disk (SSD) / 192 GB (Premium cache storage) / very high network throughput
 
 ### Download the LiveData Migrator and UI installation files
-Red Hat
+Red Hat  
 `wget http://pkg.wandisco.com/yum/`
 
-Debian
-`wget http://pkg.wandisco.com/aot/
+Debian  
+`wget http://pkg.wandisco.com/aot/`
 
 ### Install the files
 1. Run the following commands:
+
 ```
 chmod +x one-ui_lm_*_installer.sh
 ```
 ```
-./one-ui_lm_<package-type>_installer.sh (or _deb_)
+./one-ui_lm_<package-type>_installer.sh
 ```
 
 2. Check the service statuses:
