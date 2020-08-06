@@ -51,4 +51,4 @@ By removing the need to halt your data processing and modifications, you are fre
 
 If you just want to use LiveData Migrator immediately, follow the [Quickstart](./quickstart.md) guide.
 
-You can be fully prepared by following all the [prerequisites](./getting-started.md#prerequisites) to prepare your environment for installation and successful data migrations. You can then learn how to [run LiveData Migrator](./getting-started.md).
+You can be fully prepared by following all the [prerequisites](./getting-started#prerequisites) to prepare your environment for installation and successful data migrations. You can then learn how to [run LiveData Migrator](./getting-started.md).

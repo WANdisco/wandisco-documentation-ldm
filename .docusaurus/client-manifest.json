@@ -1,0 +1,262 @@
+{
+  "entrypoints": [
+    "main"
+  ],
+  "origins": {
+    "1": [
+      0,
+      2,
+      3,
+      10,
+      16,
+      17,
+      1
+    ],
+    "2": [
+      0,
+      1,
+      10,
+      16,
+      17,
+      2
+    ],
+    "styles": [
+      1,
+      2,
+      3,
+      10,
+      14,
+      15,
+      16,
+      17,
+      0
+    ],
+    "@theme/DocItem": [
+      0,
+      1,
+      3
+    ],
+    "@site/docs/about.md": [
+      4
+    ],
+    "@site/docs/readme.md": [
+      5
+    ],
+    "@site/docs/command-reference.md": [
+      6
+    ],
+    "@site/docs/quickstart.md": [
+      7
+    ],
+    "@site/docs/api-reference.md": [
+      8
+    ],
+    "@site/docs/configuration.md": [
+      9
+    ],
+    "@site/src/pages/index.js": [
+      0,
+      1,
+      2,
+      10
+    ],
+    "@site/docs/operation.md": [
+      11
+    ],
+    "~docs/wandisco-documentation-ldm-docs-route-1d0.json": [
+      12
+    ],
+    "@site/docs/getting-started.md": [
+      13
+    ],
+    "main": [
+      0,
+      15,
+      14
+    ],
+    "runtime~main": [
+      0,
+      14,
+      15
+    ],
+    "@theme/DocPage": [
+      0,
+      1,
+      2,
+      17
+    ],
+    "@theme/NotFound": [
+      0,
+      1,
+      2,
+      17
+    ]
+  },
+  "assets": {
+    "0": {
+      "css": [
+        {
+          "file": "styles.8d1449b1.css",
+          "hash": "324d62c331b84f9b171e",
+          "publicPath": "/wandisco-documentation-ldm/styles.8d1449b1.css"
+        }
+      ],
+      "js": [
+        {
+          "file": "styles.ed986fb6.js",
+          "hash": "324d62c331b84f9b171e",
+          "publicPath": "/wandisco-documentation-ldm/styles.ed986fb6.js"
+        }
+      ]
+    },
+    "1": {
+      "js": [
+        {
+          "file": "1.efd1f964.js",
+          "hash": "5eee7a87c3919f664e7d",
+          "publicPath": "/wandisco-documentation-ldm/1.efd1f964.js"
+        }
+      ]
+    },
+    "2": {
+      "js": [
+        {
+          "file": "2.bc651e4e.js",
+          "hash": "a7040de346ced15c1447",
+          "publicPath": "/wandisco-documentation-ldm/2.bc651e4e.js"
+        }
+      ]
+    },
+    "3": {
+      "js": [
+        {
+          "file": "17896441.42163abf.js",
+          "hash": "1bb6c0e834064b997fb6",
+          "publicPath": "/wandisco-documentation-ldm/17896441.42163abf.js"
+        }
+      ]
+    },
+    "4": {
+      "js": [
+        {
+          "file": "3d8d21df.a3be36ff.js",
+          "hash": "79c689fd9b236b6b818a",
+          "publicPath": "/wandisco-documentation-ldm/3d8d21df.a3be36ff.js"
+        }
+      ]
+    },
+    "5": {
+      "js": [
+        {
+          "file": "52e2a80b.936a9d9b.js",
+          "hash": "a78696ca17fefd208fe5",
+          "publicPath": "/wandisco-documentation-ldm/52e2a80b.936a9d9b.js"
+        }
+      ]
+    },
+    "6": {
+      "js": [
+        {
+          "file": "66992f67.e9c74cd5.js",
+          "hash": "894932a00f365606263d",
+          "publicPath": "/wandisco-documentation-ldm/66992f67.e9c74cd5.js"
+        }
+      ]
+    },
+    "7": {
+      "js": [
+        {
+          "file": "8070e160.6f07baab.js",
+          "hash": "416b46e51f462f210807",
+          "publicPath": "/wandisco-documentation-ldm/8070e160.6f07baab.js"
+        }
+      ]
+    },
+    "8": {
+      "js": [
+        {
+          "file": "964ae018.1957f1f9.js",
+          "hash": "36b77ad80472f9e7c6a1",
+          "publicPath": "/wandisco-documentation-ldm/964ae018.1957f1f9.js"
+        }
+      ]
+    },
+    "9": {
+      "js": [
+        {
+          "file": "9ed00105.b0c83f4a.js",
+          "hash": "05b12d7ea28e012d0ca2",
+          "publicPath": "/wandisco-documentation-ldm/9ed00105.b0c83f4a.js"
+        }
+      ]
+    },
+    "10": {
+      "js": [
+        {
+          "file": "c4f5d8e4.bc97e9b3.js",
+          "hash": "6686fa0b79960fbd7114",
+          "publicPath": "/wandisco-documentation-ldm/c4f5d8e4.bc97e9b3.js"
+        }
+      ]
+    },
+    "11": {
+      "js": [
+        {
+          "file": "cceedcf8.88825fbd.js",
+          "hash": "78da8f18a42cc979266f",
+          "publicPath": "/wandisco-documentation-ldm/cceedcf8.88825fbd.js"
+        }
+      ]
+    },
+    "12": {
+      "js": [
+        {
+          "file": "d02841bb.3f86dca4.js",
+          "hash": "ab2685aa2e2f5219dfe4",
+          "publicPath": "/wandisco-documentation-ldm/d02841bb.3f86dca4.js"
+        }
+      ]
+    },
+    "13": {
+      "js": [
+        {
+          "file": "d589d3a7.8018fa5e.js",
+          "hash": "a1193d74f66a380227f5",
+          "publicPath": "/wandisco-documentation-ldm/d589d3a7.8018fa5e.js"
+        }
+      ]
+    },
+    "14": {
+      "js": [
+        {
+          "file": "main.e96f9c4c.js",
+          "hash": "edc555011a5c40404ee7",
+          "publicPath": "/wandisco-documentation-ldm/main.e96f9c4c.js"
+        }
+      ]
+    },
+    "15": {
+      "js": [
+        {
+          "file": "runtime~main.88082c4f.js",
+          "hash": "58b0989440849eb4d8d6",
+          "publicPath": "/wandisco-documentation-ldm/runtime~main.88082c4f.js"
+        }
+      ]
+    },
+    "17": {
+      "js": [
+        {
+          "file": "16.3c847bde.js",
+          "hash": "688997a96295d5f3b6d8",
+          "publicPath": "/wandisco-documentation-ldm/16.3c847bde.js"
+        },
+        {
+          "file": "17.45666fc0.js",
+          "hash": "358f4794ae3d0af1ae67",
+          "publicPath": "/wandisco-documentation-ldm/17.45666fc0.js"
+        }
+      ]
+    }
+  }
+}
