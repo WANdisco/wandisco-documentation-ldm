@@ -55,10 +55,12 @@ WANdisco LiveMigrator >> filesystem add adls2 sharedKey --file-system-id mytarge
 
 ## 3. Migrate your data
 
-Create and auto-start the migration for a directory in your source, like `/repl1`, to the target you created with the identifier `lm2target` using [`migration new`](./command-reference.md#migration-new). e.g.
+Create and auto-start the migration for a directory in your source, like `/repl1`, to the target you created with the identifier `lm2target` using [`migration new`](./command-reference.md#migration-new). You must also provide an identifier for the migration, such as `myNewMigration`.
+
+_Example_
 
 ```
-WANdisco LiveMigrator >> migration new --auto-start --path /repl1 --target lm2target
+WANdisco LiveMigrator >> migration new --auto-start --path /repl1 --target lm2target –-migrationId myNewMigration
 {
   "migrationId" : "343a270e319d5beb0bf1adfbb1a5d0f8f3c0a4d6",
   "path" : "/repl1",

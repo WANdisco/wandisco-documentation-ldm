@@ -756,7 +756,7 @@ SYNOPSYS
 ```text
 WANdisco LiveMigrator >> migration list
 [ {
-  "migrationId" : "f5a541f49bc31500086e7fe22c26226bfa3f2ab0",
+  "migrationId" : "myNewMigration",
   "path" : "/repl1",
   "source" : "auto-discovered-source-hdfs",
   "target" : "mytarget",
@@ -789,7 +789,8 @@ Create a new migration to initiate data migration from your source file system.
 SYNOPSYS
         migration new [--path] string
                       [--target] string
-                      [[--exclusions] string]
+                      [--migrationId] string
+                      [--exclusions] string
                       [--auto-start]
 
 OPTIONS
@@ -798,6 +799,10 @@ OPTIONS
                 [Mandatory]
 
         --target  string
+
+                [Mandatory]
+
+        –-migrationId  string
 
                 [Mandatory]
 
@@ -813,18 +818,19 @@ OPTIONS
 
 * **`--path`** Defines the source file system directory that is the scope of the migration. All content (other than that excluded) will be migrated to the target.
 * **`--target`** Specifies the name of the target file system resource to which migration will occur.
+* **`--migrationId`** Provide an identifier for the new migration.
 
 #### Optional Parameters
 
-* **`--exclusions`** A comma-separated list of exclusions by name
+* **`--exclusions`** A comma-separated list of exclusions by name.
 * **`--auto-start`** Provide this parameter if you want the migration to start immediately. If not provided, the migration will only take effect once run.
 
 #### Examples
 
 ```
-WANdisco LiveMigrator >> migration new --exclusions 100mbfiles --path /repl1 --target mytarget
+WANdisco LiveMigrator >> migration new --exclusions 100mbfiles --path /repl1 --target mytarget –-migrationId myNewMigration
 {
-  "migrationId" : "5c7271676c8f858ad11011bfa155fc8e43b8fe32",
+  "migrationId" : "myNewMigration",
   "path" : "/repl1",
   "source" : "auto-discovered-source-hdfs",
   "target" : "mytarget",
@@ -898,9 +904,9 @@ OPTIONS
 #### Examples
 
 ```
-WANdisco LiveMigrator >> migration show --migration-id 5c7271676c8f858ad11011bfa155fc8e43b8fe32
+WANdisco LiveMigrator >> migration show --migration-id myNewMigration
 {
-  "migrationId" : "5c7271676c8f858ad11011bfa155fc8e43b8fe32",
+  "migrationId" : "myNewMigration",
   "path" : "/repl1",
   "source" : "auto-discovered-source-hdfs",
   "target" : "mytarget",
