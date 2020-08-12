@@ -8,7 +8,7 @@ sidebar_label: Operation - UI
 
 Define exclusion templates that are used to exclude certain file sizes or file names (defined using [regex](https://regexr.com/) patterns) during a migration. These templates are associated with a storage allowing you to selectively ignore content during migration when that storage is used as the source.
 
-Exclusion templates are assigned to a new migration, or an existing migration. Adding exclusions to a new migration ensures the outcome is consistent with those chosen exclusions.
+Exclusion templates are assigned to a new migration or an existing migration. Adding exclusions to a new migration ensures the outcome is consistent with those chosen exclusions.
 
 Modifying exclusions on an existing migration will change the future actions performed for that migration, but will not affect previously migrated content.
 
@@ -18,9 +18,9 @@ Default exclusions will automatically apply to certain storages depending on the
 
 ### Add new exclusion
 
-Select the storage to enter the configuration page. Click **Add new exclusion** to associate the exclusion with this storage.
+When viewing the **Storages** list on the dashboard, click the settings cog for the desired storage to enter the configuration page. Select **LiveData Migrator** under the _Processes_ list to display the exclusion templates.
 
-Enter the parameters for the exclusion:
+Click **Add new exclusion** to associate the exclusion with this storage and enter the parameters for the exclusion:
 
 * **Exclusion type** - _File Size_ or _Regex_.
 * **Name** - The name given to the exclusion template (for example: `100gbfilelimit`).
@@ -34,9 +34,9 @@ Once the exclusion is added and passed validation, it will appear on the exclusi
 
 ### Remove exclusion from templates list
 
-Select the desired storage to enter the configuration page and find the exclusion on the **Exclusion templates** list.
+When viewing the **Storages** list on the dashboard, click the settings cog for the desired storage to enter the configuration page. Select **LiveData Migrator** under the _Processes_ list to display the exclusion templates.
 
-Remove the exclusion by using the trash icon.
+Remove the exclusion by clicking the trash icon.
 
 :::note
 This will not remove the exclusion from an existing migration. See the [Remove exclusion from an existing migration](#remove-exclusion-from-an-existing-migration) section for guidance on how to do this.
@@ -44,9 +44,9 @@ This will not remove the exclusion from an existing migration. See the [Remove e
 
 ### Assign exclusion templates to a new migration
 
-In the new migration page, **Add new exclusion** and select the desired template from the drop-down list
+In the new migration page, **Add new exclusion** and select the desired template from the drop-down list.
 
-These will appear on the exclusion list, you can remove them at any time prior to starting the migration.
+These will appear on the exclusion list. You can remove them at any time prior to starting the migration.
 
 ### Assign exclusion templates to an existing migration
 
