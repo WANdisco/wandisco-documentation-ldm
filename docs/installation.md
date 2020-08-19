@@ -19,7 +19,7 @@ The pre-requisites for running LiveData Migrator are simple, but differ based on
   * Sufficient network bandwidth to accommodate the transfer of existing data and ongoing changes from your source storage.
   * If migrating from HDFS:
     * Hadoop client libraries must be installed on the Linux host.
-    * You will need to be able to authenticate as the [HDFS superuser](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsPermissionsGuide.html#The_Super-User) (for example: `hdfs`).
+    * Ability to authenticate as the [HDFS superuser](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsPermissionsGuide.html#The_Super-User) (for example: `hdfs`).
     * If Kerberos is enabled on your Hadoop cluster, a valid keytab containing a suitable principal for the HDFS superuser must be available on the Linux host.
 
 ## Recommendations
@@ -70,11 +70,11 @@ On your LiveData Migrator host, switch to the HDFS superuser and execute the jar
 
 `$ hadoop jar livedata-migrator.jar`
 
-This will start LiveData Migrator and the action prompt will appear.
+This starts LiveData Migrator and the action prompt appears.
 
 ### Kerberos authentication for CLI
 
-If Kerberos is enabled in your environment, then prior to running the `livedata-migrator.jar`, you must obtain a Kerberos ticket for the HDFS superuser principal.
+If Kerberos is enabled in your environment, obtain a Kerberos ticket for the HDFS superuser principal before running the `livedata-migrator.jar`.
 
 This must be performed by the user that will run LiveData Migrator.
 
@@ -103,15 +103,15 @@ Before starting the service, ensure that you have met any additional requirement
 
 If Kerberos is enabled in your environment, edit the Kerberos security properties in the `/etc/wandisco/live-migrator/application.properties` file.
 
-The required properties are detailed in the [Kerberos Integration](./configuration.md#kerberos-integration) section.
+Refer to the [Kerberos Integration](./configuration.md#kerberos-integration) section for details about the required properties.
 
 ### Start LiveData Migrator
 
-Once installed and configured, you can start the LiveData Migrator service using the init script:
+Once installed and configured, start the LiveData Migrator service:
 
 `# service live-migrator start`
 
-You can stop the service at any time using:
+Stop the service at any time using:
 
 `# service live-migrator stop`
 
@@ -127,7 +127,7 @@ LiveData Migrator offers a REST API and command line interface. Once started, yo
 
 By default, SSH access is insecure, with username `user`, and password `password` on port 2222. Edit the SSH access properties in the `/etc/wandisco/live-migrator/application.properties` file to adjust to your requirements.
 
-The configuration properties for SSH are listed in the [SSH access](./configuration.md#ssh-access) section.
+Refer to the [SSH access](./configuration.md#ssh-access) section for details about the required properties.
 
 #### Default access
 
@@ -140,7 +140,7 @@ Password authentication
 Password: password
 ```
 
-This will start LiveData Migrator and the action prompt will appear.
+This starts LiveData Migrator and the action prompt appears.
 
 #### Use authorized SSH keys
 
