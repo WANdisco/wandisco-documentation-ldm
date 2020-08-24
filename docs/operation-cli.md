@@ -1,10 +1,10 @@
 ---
 id: operation-cli
-title: Using LiveData Migrator through the Command Line
+title: Using LiveData Migrator with the Command Line
 sidebar_label: CLI
 ---
 
-This guide teaches you how to create and manage resources that control your migrations using the command line interface.
+This guide teaches you how to create and manage resources that control your migrations using the command line interface (CLI).
 
 If you're new to the concept of LiveData, or want to know what LiveData Migrator does, see the [introduction to LiveData Migrator](./about.md) before learning [how to install](./installation.md) and use LiveData Migrator.
 
@@ -16,9 +16,9 @@ If you are using the LiveData Migrator jar file, the action prompt will be avail
 
 If you are running the LiveData Migrator system service, ensure [Management Access](./installation.md#management-access) is configured and use SSH to access the action prompt (for example: `ssh user@localhost -p 2222`).
 
-## How LiveData Migrator resources work
+## How LiveData Migrator CLI resources work
 
-Define three different resource types when using LiveData Migrator.
+Define three different resource types when using LiveData Migrator in the CLI.
 
 **File systems**: Create and manage file system resources and define them as the source or target of migrations.
 
