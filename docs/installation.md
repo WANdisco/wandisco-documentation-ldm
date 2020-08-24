@@ -68,7 +68,7 @@ Download the `livedata-migrator.jar` file and upload to your LiveData Migrator h
 
 On your LiveData Migrator host, switch to the HDFS superuser and execute the jar file:
 
-`$ hadoop jar livedata-migrator.jar`
+`hadoop jar livedata-migrator.jar`
 
 This starts LiveData Migrator and the action prompt appears.
 
@@ -88,10 +88,10 @@ Download `live-migrator-<ldm-version>.rpm` or `live-migrator-<ldm-version>.deb` 
 Install the package as the root (or sudo) user:
 
 _Red Hat_  
-`# yum install -y livedata-migrator-<ldm-version>.rpm`
+`yum install -y livedata-migrator-<ldm-version>.rpm`
 
 _Debian_  
-`# apt install -y ./livedata-migrator-<ldm-version>.deb`
+`apt install -y ./livedata-migrator-<ldm-version>.deb`
 
 The above commands assume that the package is inside your working directory.
 
@@ -109,11 +109,11 @@ Refer to the [Kerberos Integration](./configuration.md#kerberos-integration) sec
 
 Once installed and configured, start the LiveData Migrator service:
 
-`# service live-migrator start`
+`service live-migrator start`
 
 Stop the service at any time using:
 
-`# service live-migrator stop`
+`service live-migrator stop`
 
 ### Defining a source
 

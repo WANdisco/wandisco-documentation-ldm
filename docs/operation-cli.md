@@ -4,92 +4,57 @@ title: Using LiveData Migrator through the Command Line
 sidebar_label: CLI
 ---
 
-:::note Public Preview
-LiveData Migrator is in public preview. This gives you access to all product functionality for review, but limits operation time to 10 minutes during the preview period.
-:::
+This guide teaches you how to create and manage resources that control your migrations using the command line interface.
 
-Here, you'll find information about how to interact with LiveData Migrator to create and manage resources that control your migrations.
+If you're new to the concept of LiveData, or want to know what LiveData Migrator does, see the [introduction to LiveData Migrator](./about.md) before learning [how to install](./installation.md) and use LiveData Migrator.
 
-If you're new to the concept of LiveData, or want to know what LiveData Migrator does, please read the [introduction to LiveData Migrator](./about.md) before learning [how to install](./installation.md) and use the product.
+## Before you start
 
-## Operating LiveData Migrator
+The option chosen for [installation](./installation.md#install-livedata-migrator) will define how you access the LiveData Migrator action prompt.
 
-Control how LiveData Migrator performs migrations using commands at the action prompt `WANdisco LiveMigrator >>`. The prompt is available immediately when you run LiveData Migrator from the command line.
+If you are using the LiveData Migrator jar file, the action prompt will be available after running `hadoop jar livedata-migrator.jar`.
 
-If you are running it as a system service, you will need to [configure](./configuration.md#ssh-access) and use SSH to access the action prompt. By default, SSH access is insecure, with username `user`, and password `password` on port 2222.
+If you are running the LiveData Migrator system service, ensure [Management Access](./installation.md#management-access) is configured and use SSH to access the action prompt (for example: `ssh user@localhost -p 2222`).
 
-```text
-$ ssh user@localhost -p 2222
-```
+## How LiveData Migrator resources work
 
-Change this using the [configuration properties](./configuration.md#ssh-access) for SSH access to:
-1. **Comment out the SSH password configuration property** `ssh.shell.password` so that password access is disabled, and
-2. **Specify an authorized keys file** with `ssh.shell.authorized-public-keys-file` to allow access only from authorized clients that hold a matching private key.
+Define three different resource types when using LiveData Migrator.
 
-### Interactive Commands
+**File systems**: Create and manage file system resources and define them as the source or target of migrations.
 
-The action prompt provides many features to guide you during operation, including:
+**Exclusions**: Constrain the content migrated by creating and referencing exclusion resources during a migration. Exclusion resources enforce constraints by file size or by a regular expression match against a file name.
 
-| Feature | How to use it |
-|---|---|
-| **Interactive help** | Type `help` at the action prompt. |
-| **Review available commands** | Commands that cannot be used without creating other resources first are tagged with `*` in the output of the `help` command. |
-| **Command completion** | Hit the `<tab>` key at any time to get assistance or to complete partially-entered commands. |
-| **Cancel input** | Type `<Ctrl-C>` before entering a command to return to an empty action prompt. |
-| **Syntax indication** | Invalid commands are highlighted as you type. |
-| **Clear the display** | Type `<Ctrl-L>` at any time. |
-| **Show command history** | Type `history` at the action prompt. |
-| **Previous commands** | Navigate previous commands using the up and down arrows, and use standard emacs shortcuts. |
-| **Interactive or scripted operation** | You can interact with the command line interface directly, or send it commands on standard input to incorporate it into shell scripts. |
+**Migrations**: A migration resource references the source and target file system resources. Specify the source file system directory path for content to be migrated from, and include any exclusion resources as needed.
 
-### LiveData Migrator Resources
+## LiveData Migrator command overview
 
-You define three different types of resources when operating LiveData Migrator:
+There are five types of commands in LiveData Migrator:
 
-**File systems**: Create and manage file system resources to specify how LiveData Migrator connects to and uses file systems as migration sources and targets.
+* **File System**
+* **Source**
+* **Exclusion**
+* **Migration**
+* **Built-in**
 
-**Migrations**: Initiate data migration by creating migration resources. A migration references the source and target file system resources, and adds additional information to specify the path for content to be migrated, and may reference exclusion resources.
+You can find a summary of those commands here. Each section header links to the appropriate sub-section in the [LiveData Migrator Command Reference](./command-reference.md) page.
 
-**Exclusions**: Constrain the content migrated by creating and referencing exclusion resources. Use different types of exclusions to enforce constaints with different conditions, e.g. by file size or by a regular expression match against the file name.
-
-## LiveData Migrator Commands
-
-There are five types of commands in LiveData Migrator: *Built-in*, *Exclusion*, *File System*, *Migration* and *Source* commands.  Each will respond with either JSON-formatted output, or with plain text output. You can find a summary of those commands here, each of which links to details in the [LiveData Migrator Command Reference](./command-reference.md).
+#### Command line help
 
 Find a full list of commands that can be used at the action prompt with the `help` command. Get command specific help by typing `help <command>` for each command available.
 
-Use tab-completion to become familar with the commands available and options that should be provided to them. Type the `<tab>` key if you are uncertain whether a command requires an additional parameter, or if you need to provide a specific value. It will help auto-complete parameter values, and display options available for any command.
+Use tab-completion to become familiar with the commands available and options that should be provided to them. Type the `<tab>` key if you are uncertain whether a command requires an additional parameter, or if you need to provide a specific value. It will help auto-complete parameter values, and display options available for any command.
 
-### [Built-In Commands](./command-reference.md#built-in-commands)
-
-The built-in commands are always available in a LiveData Migrator command line interactive session. They are unrelated to migration resources and operation (other than `exit`/`quit`), but help you to interact with LiveData Migrator and automate processing through scripts for the action prompt.
-
-| Command | Action |
-|:---|:---|
-| [`clear`](./command-reference.md#clear) | Clear the shell screen |
-| [`exit`](./command-reference.md#exit)/[`quit`](./command-reference.md#exit) | Exit the interactive session with the action prompt, and stop LiveData Migrator if not running as a system service. You can also exit the session with `<Ctrl-D>`. |
-| [`help`](./command-reference.md#help) | Display help about available commands |
-| [`history`](./command-reference.md#history) | Display or save the history of previously run commands |
-| [`script`](./command-reference.md#script) | Read and execute commands from a file |
-| [`stacktrace`](./command-reference.md#stacktrace) | Display the full stacktrace of the last error |
-
-### [Exclusion Commands](./command-reference.md#exclusion-commands)
-
-Define exclusion resources to constrain the content migrated by a migration resource. Different types of exclusions allow you to selectively ignore content from the source file system so that you have full control over what is transferred to, and modified in the target during migration. Exclusions need to be associated with migrations to take effect for them. You can do this when you create a migration resource, or associate exclusions with an existing migration.
-
-Modifying exclusions on a migration that is in progress will change the future actions performed for that migration, but will not affect previously migrated content. Adding exclusions when a migration is created ensures a migration outcome consistent in full with those exclusions.
-
-| Command | Action |
-|:---|:---|
-| [`exclusion add file-size`](./command-reference.md#exclusion-add-file-size) | Create a new file size rule |
-| [`exclusion add regex`](./command-reference.md#exclusion-add-regex) | Create a new regex exclusion rule |
-| [`exclusion del`](./command-reference.md#exclusion-del) | Delete an exclusion rule |
-| [`exclusion list`](./command-reference.md#exclusion-list) | List all exclusion rules |
-| [`exclusion show`](./command-reference.md#exclusion-show) | Get details for a particular exclusion rule |
+## Migrate data
 
 ### [File System Commands](./command-reference.md#file-system-commands)
 
-Create file system resources to provide LiveData Migrator with the information needed to read content from your source and migrate content to your target. A range of different file system types are supported as targets, including [ADLS Gen 2](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction), [HDFS](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html), local file systems, and [S3A](https://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html). LiveData Migrator currently supports HDFS file systems as a migration source.
+Create file system resources to provide LiveData Migrator with the information needed to read content from your source and migrate content to your target.
+
+A range of different file system types are supported as targets, including [ADLS Gen 2](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction), [HDFS](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html), local file systems, and [S3A](https://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html).
+
+:::note
+LiveData Migrator currently supports HDFS file systems as a migration source.
+:::
 
 You can define multiple target file systems, and have migrations operating at the same time to them.
 
@@ -105,11 +70,47 @@ You can define multiple target file systems, and have migrations operating at th
 | [`filesystem show`](./command-reference.md#filesystem-show) | Get target file system details |
 | [`filesystem types`](./command-reference.md#filesystem-types) | List the types of target file systems available |
 
+### [Source Commands](./command-reference.md#source-commands)
+
+LiveData Migrator migrates data from a source file system.
+
+:::note
+The source file system is normally detected on startup if launched using `hadoop jar live-migrator.jar`. It will not be detected automatically if LiveData Migrator is launched as a system service, or if your Hadoop configuration does not contain the information needed to connect to the Hadoop file system.
+:::
+
+You can manage the source file system through these commands.
+
+| Command | Action |
+|:---|:---|
+| [`source clear`](./command-reference.md#source-clear) | Delete all sources |
+| [`source del`](./command-reference.md#source-del) | Delete a source |
+| [`source fs show`](./command-reference.md#source-fs-show) | Show the source FileSystem configuration |
+
+Use the `--source` parameter on the [`filesystem add hdfs`](./command-reference.md#filesystem-add-hdfs) command to create a suitable HDFS source file system when running as a system service.
+
+### [Exclusion Commands](./command-reference.md#exclusion-commands)
+
+Define exclusion resources to constrain the content migrated from a source file system.
+
+Exclusions need to be associated with migrations. You can do this when you create a migration resource, or associate exclusions with an existing migration.
+
+| Command | Action |
+|:---|:---|
+| [`exclusion add file-size`](./command-reference.md#exclusion-add-file-size) | Create a new file size rule |
+| [`exclusion add regex`](./command-reference.md#exclusion-add-regex) | Create a new regex exclusion rule |
+| [`exclusion del`](./command-reference.md#exclusion-del) | Delete an exclusion rule |
+| [`exclusion list`](./command-reference.md#exclusion-list) | List all exclusion rules |
+| [`exclusion show`](./command-reference.md#exclusion-show) | Get details for a particular exclusion rule |
+
+Adding exclusions to a new migration ensures the outcome is consistent with the chosen exclusions. Adding exclusions to an existing migration will change the future actions performed for that migration, but will not affect previously migrated content.
+
 ### [Migration Commands](./command-reference.md#migration-commands)
 
-Create migration resources to define and initiate data migration. Migration occurs from your source file system to a target defined using a `filesystem` command. Migrations will transfer existing data, as well as any subsequent changes made to data in their scope, automatically maintaining the data in the target to be as current as possible with any changes to the source while LiveData Migrator remains in operation.
+Create migration resources to define and initiate data migration.
 
-You will typically create multiple migrations so that you can select specific content from your source file system by location. It is also possible to migrate to multiple independent file systems at the same time by defining multiple migration resources.
+Migration occurs from your source file system to a target defined using a `filesystem` command. Migrations will transfer existing data, as well as any subsequent changes made to the source data (in its scope), while LiveData Migrator remains in operation.
+
+You will typically create multiple migrations so that you can select specific content from your source file system by path/directory. It is also possible to migrate to multiple independent file systems at the same time by defining multiple migration resources.
 
 | Command | Action |
 |:---|:---|
@@ -122,6 +123,8 @@ You will typically create multiple migrations so that you can select specific co
 | [`migration run`](./command-reference.md#migration-run) | Start or resume a migration |
 | [`migration show`](./command-reference.md#migration-show) | Get migration details |
 | [`status`](./command-reference.md#status) | Get migration status |
+
+#### Migration states
 
 Migrations exist in one of eight states:
 
@@ -149,14 +152,33 @@ Migrations exist in one of eight states:
 `ABORTED`
 : An *aborted* migration will not make any changes to the target and cannot be run again.
 
-### [Source Commands](./command-reference.md#source-commands)
+## [Built-In Commands](./command-reference.md#built-in-commands)
 
-LiveData Migrator migrates data from a source file system. The source file system is normally detected on startup when launched using `hadoop jar live-migrator.jar`, but will not be detected automatically if LiveData Migrator is launched as a system service, or if your Hadoop configuration does not contain the information needed to connect to the Hadoop file system. You can manage the source file system through these commands.
+The built-in commands are always available in a LiveData Migrator command line interactive session. They are unrelated to migration resources and operation (other than `exit`/`quit`), but help you to interact with LiveData Migrator and automate processing through scripts for the action prompt.
 
 | Command | Action |
 |:---|:---|
-| [`source clear`](./command-reference.md#source-clear) | Delete all sources |
-| [`source del`](./command-reference.md#source-del) | Delete a source |
-| [`source fs show`](./command-reference.md#source-fs-show) | Show the source FileSystem configuration |
+| [`clear`](./command-reference.md#clear) | Clear the shell screen |
+| [`exit`](./command-reference.md#exit)/[`quit`](./command-reference.md#exit) | Exit the interactive session with the action prompt, and stop LiveData Migrator if not running as a system service. You can also exit the session with `<Ctrl-D>`. |
+| [`help`](./command-reference.md#help) | Display help about available commands |
+| [`history`](./command-reference.md#history) | Display or save the history of previously run commands |
+| [`script`](./command-reference.md#script) | Read and execute commands from a file |
+| [`stacktrace`](./command-reference.md#stacktrace) | Display the full stacktrace of the last error |
 
-Use the `--source` parameter on the [`filesystem add hdfs`](./command-reference.md#filesystem-add-hdfs) command to create a suitable HDFS source file system when running as a system service.
+## Reference
+
+### Interactive Commands
+
+The action prompt provides many features to guide you during operation.
+
+| Feature | How to use it |
+|---|---|
+| **Interactive help** | Type `help` at the action prompt. |
+| **Review available commands** | Commands that cannot be used without creating other resources first are tagged with `*` in the output of the `help` command. |
+| **Command completion** | Hit the `<tab>` key at any time to get assistance or to complete partially-entered commands. |
+| **Cancel input** | Type `<Ctrl-C>` before entering a command to return to an empty action prompt. |
+| **Syntax indication** | Invalid commands are highlighted as you type. |
+| **Clear the display** | Type `<Ctrl-L>` at any time. |
+| **Show command history** | Type `history` at the action prompt. |
+| **Previous commands** | Navigate previous commands using the up and down arrows, and use standard emacs shortcuts. |
+| **Interactive or scripted operation** | You can interact with the command line interface directly, or send it commands on standard input to incorporate it into shell scripts. |
