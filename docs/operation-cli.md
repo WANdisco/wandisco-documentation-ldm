@@ -10,11 +10,42 @@ If you're new to the concept of LiveData, or want to know what LiveData Migrator
 
 ## Before you start
 
-To access the LiveData Migrator action prompt through the system service, ensure [Management Access](./installation.md#management-access) is configured and use SSH to access the action prompt (for example: `ssh user@localhost -p 2222`).
+Configure management Access and use SSH to access the action prompt (you can access the CLI as any system user using SSH.)
 
-### Using the LiveData Migrator jar (optional)
+Edit the SSH access properties in the `/etc/wandisco/livedata-migrator/application.properties` file to adjust to your requirements.
 
-Access the LiveData Migrator action prompt by using the `livedata-migrator.jar`. This is a alternative to using the system service as it does not require configuration.
+Refer to the [SSH access](./configuration.md#ssh-access) section for details about the required properties.
+
+Restart the LiveData Migrator service to make any configuration changes live:
+
+`service livedata-migrator restart`
+
+### Default access
+
+Without any change to configuration, you can login as the `user` user with the password `password` on port `2222`.
+
+_Example_
+
+```bash
+$ ssh user@localhost -p 2222
+Password authentication
+Password: password
+```
+
+This starts LiveData Migrator and the action prompt appears.
+
+### Use authorized SSH keys
+
+Configure the LiveData Migrator service to use authorized SSH keys instead of a password by following these steps:
+
+1. Comment out the `ssh.shell.password` configuration property so that password access is disabled.
+1. Specify an authorized keys file with `ssh.shell.authorized-public-keys-file` to allow access from authorized clients that hold a matching private key.
+1. Restart the LiveData Migrator service afterwards:  
+   `service livedata-migrator restart`
+
+## Using the LiveData Migrator jar (optional)
+
+If you want to try out LiveData Migrator using a quick method, use the `livedata-migrator.jar`. This is an alternative to using the system service and it does not require configuration.
 
 :::important
 Use the system service instead for Production deployment as it allows you to maintain long-lived migrations, have a common configuration that survives service restarts, and retain logging information in a central directory.

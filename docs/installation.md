@@ -74,7 +74,7 @@ Without a WANdisco-provided license file, LiveData Migrator will stop running af
 
 1. You have two options for running LiveData Migrator.
 
-   1. [Configure the LiveData Migrator system service for UI, CLI and API access](#configure-livedata-migrator-for-system-service).
+   1. [Configure the LiveData Migrator system service](#configure-the-livedata-migrator-system-service).
    1. [Run LiveData Migrator using the jar file (CLI access only)](./operation-cli.md#using-the-livedata-migrator-jar-optional).
 
 ## Configure the LiveData Migrator system service
@@ -85,37 +85,6 @@ If Kerberos is enabled in your environment, edit the Kerberos security propertie
 
 Refer to the [Kerberos Integration](./configuration.md#kerberos-integration) section for details about the required properties.
 
-### Management Access
-
-As well as a user interface, LiveData Migrator offers a REST API and command line interface. Once started, you can access the action prompt for LiveData Migrator as any system user using SSH.
-
-Edit the SSH access properties in the `/etc/wandisco/livedata-migrator/application.properties` file to adjust to your requirements.
-
-Refer to the [SSH access](./configuration.md#ssh-access) section for details about the required properties.
-
-#### Default access
-
-Without any change to configuration, you can login as the `user` user with the password `password` on port `2222`.
-
-_Example_
-
-```bash
-$ ssh user@localhost -p 2222
-Password authentication
-Password: password
-```
-
-This starts LiveData Migrator and the action prompt appears.
-
-#### Use authorized SSH keys
-
-Configure the LiveData Migrator service to use authorized SSH keys instead of a password by following these steps:
-
-1. Comment out the `ssh.shell.password` configuration property so that password access is disabled.
-1. Specify an authorized keys file with `ssh.shell.authorized-public-keys-file` to allow access from authorized clients that hold a matching private key.
-
-## Restart LiveData Migrator
-
 Restart the LiveData Migrator service to make any configuration changes live:
 
 `service livedata-migrator restart`
@@ -124,10 +93,11 @@ Restart the LiveData Migrator service to make any configuration changes live:
 
 Once you have LiveData Migrator running, you can configure, manage and monitor resources that control how your migration takes place.
 
-Choose your preferred interface below to get started:
+Use the LiveData Migrator service with the UI, CLI, or REST API. Choose your preferred interface below to get started:
 
 * [UI](./operation-ui.md)
 * [CLI](./operation-cli.md)
+* [REST API](./api-reference.md)
 
 ## Reference
 
