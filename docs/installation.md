@@ -15,6 +15,7 @@ The pre-requisites for running LiveData Migrator are simple, but differ based on
 :::
 
 * Linux host running either Red Hat, CentOS, Debian or Ubuntu.
+  * Java 1.8 64-bit.
   * Network connectivity from your LiveData Migrator host to your target storage (for example: ADLS Gen2 endpoint or S3 bucket).
   * Port 8081 accessible on your Linux host (to access the UI through a web browser).
   * If migrating from HDFS:

@@ -27,11 +27,15 @@ On the LiveData Migrator host, follow the steps below to run the jar:
    `su - hdfs`
 1. Change to the directory where the jar is located:  
    `cd /opt/wandisco/livedata-migrator`
-1. Run the jar file to access the action prompt:  
-   `hadoop jar livedata-migrator.jar`
+1. Run the jar file to access the action prompt.
+
+   * If Kerberos is disabled in your environment, run:  
+     `java -jar livedata-migrator.jar`
    * If Kerberos is enabled in your environment, you must obtain a ticket before running the jar.  
      _Example_  
-     `kinit -kt /etc/security/keytabs/hdfs.keytab hdfs@REALM.COM`
+     `kinit -kt /etc/security/keytabs/hdfs.keytab hdfs@REALM.COM`  
+     Afterwards, run:  
+     `java -Dlm.kerberos.is.enabled=true -jar livedata-migrator.jar`
 
 ## How LiveData Migrator CLI resources work
 
