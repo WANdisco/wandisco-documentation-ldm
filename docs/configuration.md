@@ -8,7 +8,7 @@ sidebar_label: Configuration
 LiveData Migrator is in public preview. This gives you access to all product functionality for review, but limits operation time to 10 minutes during the preview period.
 :::
 
-Find details here for the configuration properties that you can use when running LiveData Migrator as a system service. Properties are defined in the `/etc/wandisco/live-migrator/application.properties` file. Each configuration property can also be provided to LiveData Migrator as a command-line argument when launched, e.g. `--server.port=19999`.
+Find details here for the configuration properties that you can use when running LiveData Migrator as a system service. Properties are defined in the `/etc/wandisco/livedata-migrator/application.properties` file. Each configuration property can also be provided to LiveData Migrator as a command-line argument when launched, e.g. `--server.port=19999`.
 
 An example `application.properties` file:
 

@@ -10,11 +10,28 @@ If you're new to the concept of LiveData, or want to know what LiveData Migrator
 
 ## Before you start
 
-The option chosen for [installation](./installation.md#install-livedata-migrator) will define how you access the LiveData Migrator action prompt.
+To access the LiveData Migrator action prompt through the system service, ensure [Management Access](./installation.md#management-access) is configured and use SSH to access the action prompt (for example: `ssh user@localhost -p 2222`).
 
-If you are using the LiveData Migrator jar file, the action prompt will be available after running `hadoop jar livedata-migrator.jar`.
+### Using the LiveData Migrator jar (optional)
 
-If you are running the LiveData Migrator system service, ensure [Management Access](./installation.md#management-access) is configured and use SSH to access the action prompt (for example: `ssh user@localhost -p 2222`).
+Access the LiveData Migrator action prompt by using the `livedata-migrator.jar`. This is a alternative to using the system service as it does not require configuration.
+
+:::important
+Use the system service instead for Production deployment as it allows you to maintain long-lived migrations, have a common configuration that survives service restarts, and retain logging information in a central directory.
+:::
+
+On the LiveData Migrator host, follow the steps below to run the jar:
+
+1. Switch to the [HDFS superuser](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsPermissionsGuide.html#The_Super-User).  
+   _Example_  
+   `su - hdfs`
+1. Change to the directory where the jar is located:  
+   `cd /opt/wandisco/livedata-migrator`
+1. Run the jar file to access the action prompt:  
+   `hadoop jar livedata-migrator.jar`
+   * If Kerberos is enabled in your environment, you must obtain a ticket before running the jar.  
+     _Example_  
+     `kinit -kt /etc/security/keytabs/hdfs.keytab hdfs@REALM.COM`
 
 ## How LiveData Migrator CLI resources work
 
@@ -30,21 +47,37 @@ Define three different resource types when using LiveData Migrator in the CLI.
 
 There are five types of commands in LiveData Migrator:
 
-* **File System**
 * **Source**
+* **File System**
 * **Exclusion**
 * **Migration**
 * **Built-in**
 
 You can find a summary of those commands here. Each section header links to the appropriate sub-section in the [LiveData Migrator Command Reference](./command-reference.md) page.
 
-#### Command line help
+### Command line help
 
 Find a full list of commands that can be used at the action prompt with the `help` command. Get command specific help by typing `help <command>` for each command available.
 
 Use tab-completion to become familiar with the commands available and options that should be provided to them. Type the `<tab>` key if you are uncertain whether a command requires an additional parameter, or if you need to provide a specific value. It will help auto-complete parameter values, and display options available for any command.
 
 ## Migrate data
+
+### [Source Commands](./command-reference.md#source-commands)
+
+LiveData Migrator migrates data from a source file system.
+
+:::note
+The source file system is normally detected on startup. It will not be detected automatically if your Hadoop configuration does not contain the information needed to connect to the Hadoop file system.
+:::
+
+You can manage the source file system through these commands.
+
+| Command | Action |
+|:---|:---|
+| [`source clear`](./command-reference.md#source-clear) | Delete all sources |
+| [`source del`](./command-reference.md#source-del) | Delete a source |
+| [`source fs show`](./command-reference.md#source-fs-show) | Show the source FileSystem configuration |
 
 ### [File System Commands](./command-reference.md#file-system-commands)
 
@@ -70,23 +103,7 @@ You can define multiple target file systems, and have migrations operating at th
 | [`filesystem show`](./command-reference.md#filesystem-show) | Get target file system details |
 | [`filesystem types`](./command-reference.md#filesystem-types) | List the types of target file systems available |
 
-### [Source Commands](./command-reference.md#source-commands)
-
-LiveData Migrator migrates data from a source file system.
-
-:::note
-The source file system is normally detected on startup if launched using `hadoop jar live-migrator.jar`. It will not be detected automatically if LiveData Migrator is launched as a system service, or if your Hadoop configuration does not contain the information needed to connect to the Hadoop file system.
-:::
-
-You can manage the source file system through these commands.
-
-| Command | Action |
-|:---|:---|
-| [`source clear`](./command-reference.md#source-clear) | Delete all sources |
-| [`source del`](./command-reference.md#source-del) | Delete a source |
-| [`source fs show`](./command-reference.md#source-fs-show) | Show the source FileSystem configuration |
-
-Use the `--source` parameter on the [`filesystem add hdfs`](./command-reference.md#filesystem-add-hdfs) command to create a suitable HDFS source file system when running as a system service.
+If it was not discovered automatically or you wish to assign a new source file system, use the `--source` parameter on the [`filesystem add hdfs`](./command-reference.md#filesystem-add-hdfs) command to create a suitable HDFS source file system.
 
 ### [Exclusion Commands](./command-reference.md#exclusion-commands)
 
