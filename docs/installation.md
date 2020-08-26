@@ -114,6 +114,14 @@ When LiveData Migrator is installed as a [system service](#option-2-system-servi
 
 ### System service commands
 
+#### LiveData Migrator
+
 The LiveData Migrator service script can be used to control operation of the service at any time:
 
 `service livedata-migrator start|stop|force-reload|restart|status`
+
+## UI
+
+The UI service script can be used to control operation of the service at any time:
+
+`service one-ui-server start|stop|force-reload|restart|status`

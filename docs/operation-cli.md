@@ -10,7 +10,7 @@ If you're new to the concept of LiveData, or want to know what LiveData Migrator
 
 ## Before you start
 
-Configure management Access and use SSH to access the action prompt (you can access the CLI as any system user using SSH.)
+Configure management Access and use SSH to access the action prompt (you can access the CLI as any system user using SSH).
 
 Edit the SSH access properties in the `/etc/wandisco/livedata-migrator/application.properties` file to adjust to your requirements.
 
@@ -24,9 +24,7 @@ Restart the LiveData Migrator service to make any configuration changes live:
 
 Without any change to configuration, you can login as the `user` user with the password `password` on port `2222`.
 
-_Example_
-
-```bash
+```bash title="Example"
 $ ssh user@localhost -p 2222
 Password authentication
 Password: password
