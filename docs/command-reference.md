@@ -939,6 +939,25 @@ WANdisco LiveData Migrator >> exclusion add regex --description "No paths that s
 }
 ```
 
+#### Using backslash characters within `--regex` parameter
+
+If you wish to use a `\` character as part of your regex value, you must escape this character with an additional backslash.
+
+```text title="Example"
+WANdisco LiveData Migrator >> exclusion add regex --description "No paths that start with a backslash followed by test"  --id exclusion2 --regex ^\\test\.*
+{
+  "type" : "RegexExclusionDTO",
+  "id" : "exclusion2",
+  "description" : "No paths that start with a backslash followed by test",
+  "fsRestriction" : false,
+  "regex" : "^\\test.*"
+}
+```
+
+The response displayed if running through the CLI (as shown in the example above) will **not** hide the additional backslash. However, the internal representation will be as expected within LiveData Migrator (it will read as `^\test.*`).
+
+This workaround is not required for API inputs, as it only affects the [Spring Shell](https://docs.spring.io/spring-shell/docs/current-SNAPSHOT/reference/htmlsingle/#quotes-handling) implementation used for the CLI.
+
 ----
 ### `exclusion del`
 
