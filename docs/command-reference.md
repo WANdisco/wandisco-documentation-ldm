@@ -41,8 +41,8 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--file-system-id`** The identifier of the source file system resource to delete
-  * UI equivalent = **Storage Name**
+* **`--file-system-id`** The identifier of the source file system resource to delete.
+  * UI: **Storage Name**
 
 ----
 ### `source fs show`
@@ -125,21 +125,21 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--file-system-id`** The identifier to give the new file system resource
-  * UI equivalent = **Storage Name**
-* **`--storage-account-name`** The name of the ADLS Gen 2 storage account to target
-  * UI equivalent = **Account Name**
-* **`--fs.azure.shared.key`** The shared account key to use as credentials to write to the storage account
-  * * UI equivalent = **Access Key**
-* **`--container.name`** The name of the container in the storage account to which content will be migrated
-  * * UI equivalent = **Container Name**
+* **`--file-system-id`** The identifier to give the new file system resource.
+  * UI: **Storage Name**
+* **`--storage-account-name`** The name of the ADLS Gen 2 storage account to target.
+  * UI: **Account Name**
+* **`--fs.azure.shared.key`** The shared account key to use as credentials to write to the storage account.
+  * * UI: **Access Key**
+* **`--container.name`** The name of the container in the storage account to which content will be migrated.
+  * * UI: **Container Name**
 
 #### Optional Parameters
 
 * **`--insecure`** When provided, LiveData Migrator will not use TLS to encrypt communication with ADLS Gen 2. This may improve throughput, but should only be used when you have other means of securing communication.
-  * UI equivalent = **Use Secure Protocol** set to false.
-* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`
-* **`--properties`** Specify properties to use in a comma-separated key/value list
+  * UI: **Use Secure Protocol** set to false.
+* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
+* **`--properties`** Specify properties to use in a comma-separated key/value list.
 
 #### Examples
 
@@ -207,18 +207,18 @@ OPTIONS
 #### Mandatory Parameters
 
 * **`--file-system-id`** The identifier to give the new file system resource.
-  * UI equivalent = **Storage Name**
+  * UI: **Storage Name**
 * **`--fs.defaultFS`** A string that defines how LiveData Migrator accesses HDFS, which can be specified in a number of forms:
-  * UI equivalent = **Default FS**
-  * As a single HDFS URI, such as `hdfs://192.168.1.10:8020` (using an IP address) or `hdfs://myhost.localdomain:8020` (using a hostname),
-  * As a comma-separated list of HDFS URIs, like `hdfs://nn1.localdomain:8020,hdfs://nn2.localdomain:8020` to allow for integration with HA-enabled Hadoop environments, or
-  * As an HDFS URI that references a nameservice ID defined in the cluster properties, like `hdfs://mynameservice`, where there is a configuration property for the cluster that defines the value of the `dfs.nameservices` value to include that nameservice ID, like `mynameservice` and all required configuration properties for that nameservice, like `dfs.ha.namenodes.mynameservice`, `dfs.namenode.rpc-address.mynameservice.nn1`, and `dfs.namenode.http-address.mynameservice.nn1`, etc.
+  1. As a single HDFS URI, such as `hdfs://192.168.1.10:8020` (using an IP address) or `hdfs://myhost.localdomain:8020` (using a hostname).
+  1. As a comma-separated list of HDFS URIs, like `hdfs://nn1.localdomain:8020,hdfs://nn2.localdomain:8020` to allow for integration with HA-enabled Hadoop environments.
+  1. As an HDFS URI that references a nameservice ID defined in the cluster properties, like `hdfs://mynameservice`, where there is a configuration property for the cluster that defines the value of the `dfs.nameservices` value to include that nameservice ID, like `mynameservice` and all required configuration properties for that nameservice, like `dfs.ha.namenodes.mynameservice`, `dfs.namenode.rpc-address.mynameservice.nn1`, and `dfs.namenode.http-address.mynameservice.nn1`, etc.
+  * UI: **Default FS**
 
 #### Optional Parameters
 
 * **`--user`** The name of the HDFS user to be used when performing operations against the file system. This user must be an HDFS super user, such as `hdfs`.
 * **`--source`** Provide this parameter to use the file system resource created as a source.
-  * UI equivalent = Defined when choosing the **Add Source** option.
+  * UI: Defined when choosing the **Add Source** option.
 * **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
@@ -259,13 +259,13 @@ OPTIONS
 #### Mandatory Parameters
 
 * **`--file-system-id`** The identifier to give the new file system resource.
-  * UI equivalent = **Storage Name**
+  * UI: **Storage Name**
 
 #### Optional Parameters
 
 * **`--fs-root`** The path to a location in the file system to treat as the root from which content will be migrated.
 * **`--source`** Provide this parameter to use the file system resource created as a source.
-  * UI equivalent = Defined when choosing the **Add Source** option.
+  * UI: Defined when choosing the **Add Source** option.
 * **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
@@ -316,10 +316,10 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--file-system-id`** The identifier for the new file system resource
-  * UI equivalent = **Storage Name**
-* **`--bucket-name`** The name of your S3 bucket
-  * UI equivalent = **Bucket Name**
+* **`--file-system-id`** The identifier for the new file system resource.
+  * UI: **Storage Name**
+* **`--bucket-name`** The name of your S3 bucket.
+  * UI: **Bucket Name**
 * **`--credentials-provider`** The Java class name of a credentials provider for authenticating with the S3 endpoint, e.g. `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider`.
   Providers available include:
   * **`org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider`**
@@ -334,21 +334,21 @@ OPTIONS
 
     A commonly-used credentials provider chain that looks for credentials in this order:
 
-    * Environment Variables - `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, or `AWS_ACCESS_KEY` and `AWS_SECRET_KEY`
-    * Java System Properties - `aws.accessKeyId` and `aws.secretKey`
-    * Web Identity Token credentials from the environment or container
-    * Credential profiles file at the default location (`~/.aws/credentials`) shared by all AWS SDKs and the AWS CLI
-    * Credentials delivered through the Amazon EC2 container service if `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` environment variable is set and security manager has permission to access the variable,
-    * Instance profile credentials delivered through the Amazon EC2 metadata service
+    * Environment Variables - `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, or `AWS_ACCESS_KEY` and `AWS_SECRET_KEY`.
+    * Java System Properties - `aws.accessKeyId` and `aws.secretKey`.
+    * Web Identity Token credentials from the environment or container.
+    * Credential profiles file at the default location (`~/.aws/credentials`) shared by all AWS SDKs and the AWS CLI.
+    * Credentials delivered through the Amazon EC2 container service if `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` environment variable is set and security manager has permission to access the variable.
+    * Instance profile credentials delivered through the Amazon EC2 metadata service.
 
 <h4 id="s3a-optional-parameters">Optional parameters</h4>
 
-* **`--access-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the access key with this parameter
-  * UI equivalent = **Access Key**
-* **`--secret-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the secret key using this parameter
-  * UI equivalent = **Secret Key**
-* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`
-* **`--properties`** Specify properties to use in a comma-separated key/value list
+* **`--access-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the access key with this parameter.
+  * UI: **Access Key**
+* **`--secret-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the secret key using this parameter.
+  * UI: **Secret Key**
+* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
+* **`--properties`** Specify properties to use in a comma-separated key/value list.
 
 ----
 ### `filesystem clear`
@@ -381,7 +381,7 @@ OPTIONS
 #### Mandatory Parameters
 
 * **`--file-system-id`** The identifier of the file system resource to delete.
-  * UI equivalent = **Storage Name**
+  * UI: **Storage Name**
 
 ----
 ### `filesystem list`
@@ -440,7 +440,7 @@ OPTIONS
 #### Mandatory Parameters
 
 * **`--file-system-id`** The identifier of the file system resource to show.
-  * UI equivalent = **Storage Name**
+  * UI: **Storage Name**
 
 #### Examples
 
@@ -521,7 +521,7 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--migration-id`** The identifier of the migration to abort
+* **`--migration-id`** The identifier of the migration to abort.
 
 #### Examples
 
@@ -546,7 +546,7 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--migration-id`** The identifier of the migration to delete
+* **`--migration-id`** The identifier of the migration to delete.
 
 ----
 ### `migration exclusion add`
@@ -570,8 +570,8 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--migration-id`** The identifier of the migration with which to associate the exclusion
-* **`--exclusion-id`** The identifier of the exclusion to associate with the migration
+* **`--migration-id`** The identifier of the migration with which to associate the exclusion.
+* **`--exclusion-id`** The identifier of the exclusion to associate with the migration.
 
 ----
 ### `migration exclusion del`
@@ -595,8 +595,8 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--migration-id`** The identifier of the migration from which to remove the exclusion
-* **`--exclusion-id`** The identifier of the exclusion to remove from the migration
+* **`--migration-id`** The identifier of the migration from which to remove the exclusion.
+* **`--exclusion-id`** The identifier of the exclusion to remove from the migration.
 
 ----
 ### `migration list`
@@ -734,7 +734,7 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--migration-id`** The identifier of the migration to run
+* **`--migration-id`** The identifier of the migration to run.
 
 ----
 ### `migration show`
@@ -756,7 +756,7 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--migration-id`** The identifier of the migration to show
+* **`--migration-id`** The identifier of the migration to show.
 
 #### Examples
 
@@ -796,15 +796,16 @@ WANdisco LiveMigrator >> migration show --migration-id myNewMigration
 ----
 ### `status`
 
-Get a text description of the overall status of migrations. Information is provided on
-* the total number of migrations defined,
-* average bandwidth being used over 10s, 60s, and 300s intervals,
-* peak bandwidth observed over 300s interval,
-* average file transfer rate per second over  10s, 60s, and 300s intervals,
-* peak file transfer rate per second over a 300s interval,
-* list of live migrations with source path and migration id,
-* list of running migrations with source path and migration id, and
-* a list of non-running migrations source source path and migration id.
+Get a text description of the overall status of migrations. Information is provided on the following:
+
+* Total number of migrations defined.
+* Average bandwidth being used over 10s, 60s, and 300s intervals.
+* Peak bandwidth observed over 300s interval.
+* Average file transfer rate per second over  10s, 60s, and 300s intervals.
+* Peak file transfer rate per second over a 300s interval.
+* List of live migrations with source path and migration id.
+* List of running migrations with source path and migration id.
+* List of non-running migrations source source path and migration id.
 
 ```text title="Get migration status"
 NAME
@@ -867,9 +868,9 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--id`** The identifier for the exclusion policy
-* **`--description`** A user-friendly description for the policy
-* **`--value`** The numerical value for the file size, in a unit defined by
+* **`--id`** The identifier for the exclusion policy.
+* **`--description`** A user-friendly description for the policy.
+* **`--value`** The numerical value for the file size, in a unit defined by.
 * **`--unit`** A string to define the unit used, either `B` for bytes, `GB` for gibibytes, `KB` for kibibytes, `MB` for mebibytes, `PB` for pebibytes, or `TB` for tebibytes.
 
 #### Examples
@@ -912,9 +913,9 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--id`** The identifier for the exclusion policy
-* **`--description`** A user-friendly description for the policy
-* **`--regex`** A regular expression in a syntax similar to that used by Perl
+* **`--id`** The identifier for the exclusion policy.
+* **`--description`** A user-friendly description for the policy.
+* **`--regex`** A regular expression in a syntax similar to that used by Perl.
 
 #### Examples
 
@@ -949,7 +950,7 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--id`** The identifier for the exclusion policy to delete
+* **`--id`** The identifier for the exclusion policy to delete.
 
 ----
 ### `exclusion list`
@@ -1000,7 +1001,7 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--id`** The identifier for the exclusion policy to show
+* **`--id`** The identifier for the exclusion policy to show.
 
 #### Examples
 
@@ -1072,7 +1073,7 @@ Built-In Commands
         clear: Clear the shell screen.
         exit, quit: Exit the shell.
         help: Display help about available commands.
-        history: Display or save the history of previously run commands
+        history: Display or save the history of previously run commands.
         postprocessors: Display the available post processors
         script: Read and execute commands from a file.
         stacktrace: Display the full stacktrace of the last error.
@@ -1085,15 +1086,15 @@ Exclusion Commands
         exclusion show: Get details for a particular exclusion rule.
 
 Filesystem Commands
-        filesystem add adls2 sharedKey: Add an ADLS2 via HCFS API FileSystem With Shared Key
-        filesystem add hdfs: Add an Hadoop HDFS FileSystem
-        filesystem add local: Add an Local FileSystem via HCFS FileSystem
+        filesystem add adls2 sharedKey: Add an ADLS2 via HCFS API FileSystem With Shared Key.
+        filesystem add hdfs: Add an Hadoop HDFS FileSystem.
+        filesystem add local: Add an Local FileSystem via HCFS FileSystem.
         filesystem add s3a: Add an S3A via HCFS API FileSystem.
         filesystem clear: Delete all targets.
         filesystem del: Delete a target.
         filesystem list: List of targets.
         filesystem show: Get target details.
-        filesystem types: List the types of target Filesystems available
+        filesystem types: List the types of target Filesystems available.
 
 Migration Commands
         migration abort: Abort a migration.
@@ -1109,7 +1110,7 @@ Migration Commands
 Source Commands
         source clear: Delete all sources.
         source del: Delete a source.
-        source fs show: Show the source FileSystem Configuration
+        source fs show: Show the source FileSystem Configuration.
 
 Commands marked with (*) are currently unavailable.
 Type `help <command>` to learn more.
@@ -1144,7 +1145,7 @@ OPTIONS
 
 #### Optional Parameters
 
-* **`--file`** The name of the file in which to save the history of commands
+* **`--file`** The name of the file in which to save the history of commands.
 
 ----
 ### `script`
@@ -1162,7 +1163,7 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--file`** The name of the file containing script commands
+* **`--file`** The name of the file containing script commands.
 
 ----
 ### `stacktrace`
