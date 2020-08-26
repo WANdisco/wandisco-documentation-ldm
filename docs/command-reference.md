@@ -669,6 +669,9 @@ OPTIONS
 
         --auto-start
                 [Optional, default = false]
+
+        --action-policy  string
+                [Optional, default = com.wandisco.livemigrator2.migration.OverwriteActionPolicy]
 ```
 
 #### Mandatory Parameters:
@@ -681,6 +684,12 @@ OPTIONS
 
 * **`--exclusions`** A comma-separated list of exclusions by name.
 * **`--auto-start`** Provide this parameter if you want the migration to start immediately. If not provided, the migration will only take effect once run.
+* **`--action-policy`** This parameter determines what happens if the migration encounters content in the target path with the same name and size.  
+  There are two options available:
+  1. **`com.wandisco.livemigrator2.migration.OverwriteActionPolicy`** _(default policy)_  
+     Every file is replaced, even if file size is identical on the target storage.
+  1. **`com.wandisco.livemigrator2.migration.SkipIfSizeMatchActionPolicy`**  
+     If the file size is identical between the source and target, the file is skipped. If it’s a different size, the whole file is replaced.
 
 #### Examples
 
