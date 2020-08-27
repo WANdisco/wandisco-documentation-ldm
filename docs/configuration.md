@@ -21,17 +21,51 @@ An example `application.properties` file:
 ```text
 # pretty print JSON output in API results
 spring.jackson.serialization.INDENT_OUTPUT=true
-springdoc.swagger-ui.path=/lm2-api.html
-# spring.main.lazy-initialization = true
+springdoc.swagger-ui.path=/ldm-api.html
+spring.main.lazy-initialization = false
 pull.threads=50
 engine.threads=1000
 persisted.store=true
-server.port=18080
-shell.history.filePath=~/.livemigrator_history
+migration.file.max.retries=180
+migration.scan.iteration-limit=1000
+migration.scan.allow-stop-path=false
+shell.history.filePath=~/.livedatamigrator_history
 cli.enabled=true
-ssh.shell.enable=true
-ssh.shell.prompt.local.enable=${cli.enabled}
 spring.shell.interactive.enabled=${cli.enabled}
+ssh.shell.enable=false
+ssh.shell.prompt.local.enable=${cli.enabled}
+ssh.shell.interactive.enabled=${cli.enabled}
+ssh.shell.default-commands.jvm=false
+ssh.shell.default-commands.postprocessors=false
+ssh.shell.default-commands.threads=false
+
+# ===================================================================
+# SSL
+# ===================================================================
+# Note: If HTTPS is enabled, it will completely replace HTTP as
+# the protocol over which the REST endpoints and the Data Flow
+# Dashboard interact. Plain HTTP requests will fail
+#
+# To enable TLS in production, generate a certificate using:
+# keytool -genkey -alias livedata-migrator -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
+#
+# You can also use Let's Encrypt:
+# https://maximilian-boehm.com/hp2121/Create-a-Java-Keystore-JKS-from-Let-s-Encrypt-Certificates.htm
+#
+# Then, enable and modify the following server.ssl properties, filling in
+# system specific information (path to key store, password,
+# preferred port etc.)
+#
+server.port=18080
+# server.ssl.key-store=path/to/keystore.p12
+# # This can also be a key on the classpath, instead of a directory
+# # server.ssl.key-store=classpath:keystore.p12
+# server.ssl.key-store-password=password
+# server.ssl.key-store-type=PKCS12
+# server.ssl.key-alias=livedata-migrator
+# # The ciphers suite enforce the security by deactivating some old and deprecated SSL ciphers, this list was tested against SSL Labs (https://www.ssllabs.com/ssltest/)
+# server.ssl.ciphers=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 ,TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 ,TLS_DHE_RSA_WITH_AES_256_GCM_SHA384 ,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA,TLS_RSA_WITH_CAMELLIA_128_CBC_SHA
+# ===================================================================
 
 # prevayler configuration
 install.dir=
@@ -50,13 +84,24 @@ adls1.fs.type.default.properties=fs.scheme,fs.account.name,fs.container.name,fs.
 adls2.fs.type.default.properties=fs.scheme,fs.account.name,fs.container.name,fs.auth.type,fs.oauth2.client.id
 hdfs.fs.type.default.properties=fs.defaultFS
 s3a.fs.type.default.properties=fs.defaultFS
+gcs.fs.type.default.properties=bucket.name
 local.fs.type.default.properties=fs.root
 
+#properties we need to mask when displaying to the user
+adls2.fs.type.masked.properties=fs.secret.Key
+adls1.fs.type.masked.properties=fs.secret.Key
+hdfs.fs.type.masked.properties=
+local.fs.type.masked.properties=
+s3a.fs.type.masked.properties=fs.s3a.access.key,fs.s3a.secret.key
+gcs.fs.type.masked.properties=service.account.private.key.id,service.account.private.key
+
 lm.kerberos.is.enabled=false
-#lm.kerberos.principal=hdfs-dmagen-02@WANDISCO.HADOOP
+#lm.kerberos.principal=hdfs@REALM
 #lm.kerberos.keytab.location=/etc/security/keytabs/hdfs.headless.keytab
 lm.kerberos.principal=
 lm.kerberos.keytab.location=
+
+license.key.location=/opt/wandisco/livedata-migrator/
 
 # HTTP traffic logging config
 logging.level.org.zalando.logbook=TRACE
@@ -66,15 +111,16 @@ logbook.exclude=/v3/api-docs/**,/swagger-ui/**
 # HTTP message masking properties
 #logbook.obfuscate.parameters=access_token,password
 #logbook.obfuscate.headers=authorization,x-auth-password,x-auth-token,X-Secret
-#obfuscate.json.properties=foo,bar
+obfuscate.json.properties=fs.secret.Key,fs.s3a.access.key,fs.s3a.secret.key,${gcs.fs.type.masked.properties}
 
-ssh.shell.prompt.text=WANdisco LiveMigrator >>\u0020
+ssh.shell.prompt.text=WANdisco LiveData Migrator >>\u0020
 ssh.shell.prompt.color=white
 ssh.shell.authentication=simple
 ssh.shell.user=user
 ssh.shell.password=password
+ssh.shell.host=127.0.0.1
 ssh.shell.port=2222
-ssh.shell.historyFile=${user.home}/.livemigrator_history
+ssh.shell.historyFile=${java.io.tmpdir}/.livedatamigrator_history_ssh
 #ssh.shell.authorized-public-keys-file=samples/public-keys-sample
 ```
 
@@ -125,9 +171,35 @@ Configure how LiveData Migrator logs requests made against the [REST API](./api-
 | `logbook.obfuscate.headers` | A comma-separated list of HTTP headers that should not be recorded in log entries, e.g. `authorization,x-auth-password,x-auth-token,X-Secret`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any valid comma-separated list of HTTP headers |
 | `obfuscate.json.properties` | A comma-separated list of JSON request properties by name that should not be recorded in log entries, e.g. `foo,bar`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any valid comma-separated list of property names |
 
+### Server SSL
+
+To enable SSL on the LiveData Migrator REST API (HTTPS), modify the following `server.ssl.*` properties.
+
+:::note
+If HTTPS is enabled on the REST API, plain HTTP requests from the CLI to the REST API will fail.
+:::
+
+| Name | Details |
+| --- | --- |
+| `server.ssl.key-store` | Path to the Java keystore (example:`/path/to/keystore.p12`). <br/> This value can also be key on the classpath (example: `classpath:keystore.p12`). |
+| `server.ssl.key-store-password` | The Java keystore password. |
+| `server.ssl.key-store-type` | The Java keystore type (examples: `JKS`, `PKCS12`). |
+| `server.ssl.key-alias` | The alias for the server certificate entry (example: `livedata-migrator`). |
+| `server.ssl.ciphers` | The ciphers suite enforce the security by deactivating some old and deprecated SSL ciphers, this list was tested against [SSL Labs](https://www.ssllabs.com/ssltest/). <br/><br/> **Default value** <br/> `TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,TLS_DHE_RSA_WITH_AES_256_GCM_SHA384 ,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA,TLS_RSA_WITH_CAMELLIA_128_CBC_SHA` |
+
+:::tip
+The example command below will generate a server certificate and place it inside a new Java keystore named `keystore.p12` (it will be created inside the user's home directory):
+
+```text
+keytool -genkey -alias livedata-migrator -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 365
+```
+
+See the [keytool documentation](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html) for further information on the parameters used.
+:::
+
 ### State
 
-LiveData Migrator employes an internally-managed database to record state during operation called the Prevayler.
+LiveData Migrator uses an internally-managed database to record state during operation called the Prevayler.
 
 | Name | Details |
 | --- | --- |
