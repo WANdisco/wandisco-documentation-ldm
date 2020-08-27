@@ -101,7 +101,7 @@ The Dashboard displays an overview of migrations and their status, showing what 
 Click into the migrations to see more detail.
 
 :::note
-A migration must be stopped before it can be deleted.
+A migration must be stopped before it can be deleted. A stopped migration can not be resumed.
 :::
 
 ## Add and remove exclusions

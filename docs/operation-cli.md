@@ -164,7 +164,7 @@ You will typically create multiple migrations so that you can select specific co
 
 | Command | Action |
 |:---|:---|
-| [`migration abort`](./command-reference.md#migration-abort) | Abort a migration |
+| [`migration stop`](./command-reference.md#migration-stop) | Abort a migration |
 | [`migration del`](./command-reference.md#migration-del) | Delete a migration |
 | [`migration exclusion add`](./command-reference.md#migration-exclusion-add) | Add an exclusion to a migration |
 | [`migration exclusion del`](./command-reference.md#migration-exclusion-del) | Remove an exclusion from a migration |

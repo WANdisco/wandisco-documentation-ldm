@@ -505,13 +505,13 @@ WANdisco LiveMigrator >> filesystem types
 ## Migration Commands
 
 ----
-### `migration abort`
+### `migration stop`
 
-Stop a migration from transferring and content to its target, placing it into the `ABORTED` state. You cannot resume an aborted migration.
+Stop a migration from transferring and content to its target, placing it into the `STOPPED` state. You cannot resume an stopped migration.
 
-```text title="Abort a migration"
+```text title="Stop a migration"
 SYNOPSYS
-        migration abort [--migration-id] string
+        migration stop [--migration-id] string
 
 OPTIONS
         --migration-id  string
@@ -521,18 +521,18 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--migration-id`** The identifier of the migration to abort.
+* **`--migration-id`** The identifier of the migration to stop.
 
 #### Examples
 
 ```
-WANdisco LiveMigrator >> migration abort --migration-id 4ffa620b6ebb0cd34f2c591220d93830f91ccc7e
+WANdisco LiveMigrator >> migration stop --migration-id 4ffa620b6ebb0cd34f2c591220d93830f91ccc7e
 ```
 
 ----
 ### `migration del`
 
-Delete an aborted migration resource.
+Delete a stopped migration resource.
 
 ```text title="Delete a migration"
 SYNOPSYS
@@ -1125,7 +1125,7 @@ Filesystem Commands
         filesystem types: List the types of target Filesystems available.
 
 Migration Commands
-        migration abort: Abort a migration.
+        migration stop: Abort a migration.
         migration del: Delete a migration.
         migration exclusion add: Add an exclusion to a migration.
         migration exclusion del: Remove an exclusion from a migration.
