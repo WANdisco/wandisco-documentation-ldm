@@ -62,21 +62,6 @@ OPTIONS
 
 * **`--verbose`** Include all configuration properties for the source file system in the response.
 
-#### Examples
-
-```
-WANdisco LiveMigrator >> source fs show
-[ {
-  "fsId" : "auto-discovered-source-hdfs",
-  "fsType" : "hdfs",
-  "isSource" : true,
-  "properties" : {
-    "fs.defaultFS" : "hdfs://myhost.localdomain:8020"
-  },
-  "eventsPosition" : 0
-} ]
-```
-
 ## File System Commands
 
 ----
@@ -141,26 +126,10 @@ OPTIONS
 * **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
-#### Examples
+#### Example
 
 ```
 WANdisco LiveMigrator >> filesystem add adls2 sharedKey --file-system-id mytarget --storage-account-name psmadls2 --container.name lm2target --fs.azure.shared.key Ri5NxHGqoQ79DBGLVn+COK/sRDwbNqAREDACTEDaMxRkvXt2ijUtAkVqVCBj/vaS/NbzR5rtjE2CZ31ejVpUVA==
-{
-  "fsId" : "lm2target",
-  "fsType" : "adls2-hcfs",
-  "isSource" : false,
-  "properties" : {
-    "fsId" : "lm2target",
-    "fsType" : "adls2-hcfs",
-    "fs.defaultFS" : "abfss://lm2target@psmadls2.dfs.core.windows.net/",
-    "fs.azure.account.auth.type.psmadls2.dfs.core.windows.net" : "SharedKey",
-    "fs.azure.account.key.psmadls2.dfs.core.windows.net" : "Ri5NxHGqoQ79DBGLVn+COK/sRDwbNqAREDACTEDaMxRkvXt2ijUtAkVqVCBj/vaS/NbzR5rtjE2CZ31ejVpUVA==",
-    "fs.abfss.impl" : "org.apache.hadoop.fs.azurebfs.SecureAzureBlobFileSystem",
-    "fs.AbstractFileSystem.abfss.impl" : "org.apache.hadoop.fs.azurebfs.Abfss",
-    "fs.abfss.impl.disable.cache" : "true"
-  },
-  "eventsPosition" : 0
-}
 ```
 
 ----
@@ -401,24 +370,6 @@ OPTIONS
 
 * **`--verbose`** Include all properties for each file system in the JSON result.
 
-#### Examples
-
-```
-WANdisco LiveMigrator >> filesystem list
-[ {
-  "fsId" : "mytarget",
-  "fsType" : "adls2",
-  "isSource" : false,
-  "properties" : {
-    "fs.container.name" : "lm2target",
-    "fs.auth.type" : "SharedKey",
-    "fs.account.name" : "psmadls2",
-    "fs.scheme" : "abfss"
-  },
-  "eventsPosition" : 0
-} ]
-```
-
 ----
 ### `filesystem show`
 
@@ -442,22 +393,10 @@ OPTIONS
 * **`--file-system-id`** The identifier of the file system resource to show.
   * UI: **Storage Name**
 
-#### Examples
+#### Example
 
 ```
 WANdisco LiveMigrator >> filesystem show --file-system-id mytarget
-{
-  "fsId" : "mytarget",
-  "fsType" : "adls2",
-  "isSource" : false,
-  "properties" : {
-    "fs.container.name" : "lm2target",
-    "fs.auth.type" : "SharedKey",
-    "fs.account.name" : "psmadls2",
-    "fs.scheme" : "abfss"
-  },
-  "eventsPosition" : 0
-}
 ```
 
 ----
@@ -468,38 +407,6 @@ View information about the file system types available for use with LiveData Mig
 ```text title="List the types of target file systems available"
 SYNOPSYS
         filesystem types
-```
-
-#### Examples
-
-```
-WANdisco LiveMigrator >> filesystem types
-[ {
-  "eventListenerType" : "no-op",
-  "fs" : "adls1",
-  "fsDescription" : "ADLS Filesystem via the Hadoop HCFS API",
-  "sourceCapable" : false
-}, {
-  "eventListenerType" : "no-op",
-  "fs" : "adls2",
-  "fsDescription" : "ADLS2 Filesystem via the Hadoop HCFS API",
-  "sourceCapable" : false
-}, {
-  "eventListenerType" : "no-op",
-  "fs" : "local",
-  "fsDescription" : "Hadoop HCFS Wrapper for Local Storage",
-  "sourceCapable" : false
-}, {
-  "eventListenerType" : "inotify",
-  "fs" : "hdfs",
-  "fsDescription" : "Hadoop HDFS Filesystem",
-  "sourceCapable" : true
-}, {
-  "eventListenerType" : "no-op",
-  "fs" : "s3a",
-  "fsDescription" : "S3A Filesystem via the Hadoop HCFS API",
-  "sourceCapable" : false
-} ]
 ```
 
 ## Migration Commands
@@ -523,7 +430,7 @@ OPTIONS
 
 * **`--migration-id`** The identifier of the migration to stop.
 
-#### Examples
+#### Example
 
 ```
 WANdisco LiveMigrator >> migration stop --migration-id 4ffa620b6ebb0cd34f2c591220d93830f91ccc7e
@@ -608,35 +515,6 @@ SYNOPSYS
         migration list
 ```
 
-#### Examples
-
-```text
-WANdisco LiveMigrator >> migration list
-[ {
-  "migrationId" : "myNewMigration",
-  "path" : "/repl1",
-  "source" : "auto-discovered-source-hdfs",
-  "target" : "mytarget",
-  "state" : "NONSCHEDULED",
-  "exclusions" : [ ],
-  "migrationStartTime" : "2020-06-05T04:28:12.835+0000",
-  "migrationEdge" : "/repl1",
-  "scannerSummary" : {
-    "progressSummary" : {
-      "filesScanned" : 0,
-      "directoriesScanned" : 0,
-      "bytesScanned" : 0
-    },
-    "contentSummary" : null
-  },
-  "migrationCompleteTime" : null,
-  "abortReason" : null,
-  "filesSeen" : 0,
-  "dirsSeen" : 0,
-  "sizeOfMigration" : 0
-} ]
-```
-
 ----
 ### `migration new`
 
@@ -691,39 +569,10 @@ OPTIONS
   1. **`com.wandisco.livemigrator2.migration.SkipIfSizeMatchActionPolicy`**  
      If the file size is identical between the source and target, the file is skipped. If it’s a different size, the whole file is replaced.
 
-#### Examples
+#### Example
 
 ```
 WANdisco LiveMigrator >> migration new --exclusions 100mbfiles --path /repl1 --target mytarget –-migrationId myNewMigration
-{
-  "migrationId" : "myNewMigration",
-  "path" : "/repl1",
-  "source" : "auto-discovered-source-hdfs",
-  "target" : "mytarget",
-  "state" : "NONSCHEDULED",
-  "exclusions" : [ {
-    "type" : "FileSizeExclusion",
-    "id" : "100mbfiles",
-    "description" : "Files greater than 100 MB",
-    "maxBytes" : 104857600,
-    "maxBytesFormatted" : "100 MB"
-  } ],
-  "migrationStartTime" : "2020-06-05T04:35:01.690+0000",
-  "migrationEdge" : "/repl1",
-  "scannerSummary" : {
-    "progressSummary" : {
-      "filesScanned" : 0,
-      "directoriesScanned" : 0,
-      "bytesScanned" : 0
-    },
-    "contentSummary" : null
-  },
-  "migrationCompleteTime" : null,
-  "abortReason" : null,
-  "filesSeen" : 0,
-  "dirsSeen" : 0,
-  "sizeOfMigration" : 0
-}
 ```
 
 ----
@@ -767,39 +616,10 @@ OPTIONS
 
 * **`--migration-id`** The identifier of the migration to show.
 
-#### Examples
+#### Example
 
 ```
 WANdisco LiveMigrator >> migration show --migration-id myNewMigration
-{
-  "migrationId" : "myNewMigration",
-  "path" : "/repl1",
-  "source" : "auto-discovered-source-hdfs",
-  "target" : "mytarget",
-  "state" : "NONSCHEDULED",
-  "exclusions" : [ {
-    "type" : "FileSizeExclusion",
-    "id" : "100mbfiles",
-    "description" : "Files greater than 100 MB",
-    "maxBytes" : 104857600,
-    "maxBytesFormatted" : "100 MB"
-  } ],
-  "migrationStartTime" : "2020-06-05T04:35:01.690+0000",
-  "migrationEdge" : "/repl1",
-  "scannerSummary" : {
-    "progressSummary" : {
-      "filesScanned" : 0,
-      "directoriesScanned" : 0,
-      "bytesScanned" : 0
-    },
-    "contentSummary" : null
-  },
-  "migrationCompleteTime" : null,
-  "abortReason" : null,
-  "filesSeen" : 0,
-  "dirsSeen" : 0,
-  "sizeOfMigration" : 0
-}
 ```
 
 ----
@@ -882,17 +702,10 @@ OPTIONS
 * **`--value`** The numerical value for the file size, in a unit defined by.
 * **`--unit`** A string to define the unit used, either `B` for bytes, `GB` for gibibytes, `KB` for kibibytes, `MB` for mebibytes, `PB` for pebibytes, or `TB` for tebibytes.
 
-#### Examples
+#### Example
 
 ```
 WANdisco LiveMigrator >> exclusion add file-size --description "Files greater than 100 MB" --id 100mbfiles --unit MB --value 100
-{
-  "type" : "FileSizeExclusion",
-  "id" : "100mbfiles",
-  "description" : "Files greater than 100 MB",
-  "maxBytes" : 104857600,
-  "maxBytesFormatted" : "100 MB"
-}
 ```
 
 ----
@@ -926,17 +739,10 @@ OPTIONS
 * **`--description`** A user-friendly description for the policy.
 * **`--regex`** A regular expression in a syntax similar to that used by Perl.
 
-#### Examples
+#### Example
 
 ```
 WANdisco LiveData Migrator >> exclusion add regex --description "No paths that start with test"  --id exclusion1 --regex ^test\.*
-{
-  "type" : "RegexExclusion",
-  "id" : "exclusion1",
-  "description" : "No paths that start with test",
-  "fsRestriction" : false,
-  "regex" : "^test.*"
-}
 ```
 
 #### Using backslash characters within `--regex` parameter
@@ -945,16 +751,9 @@ If you wish to use a `\` character as part of your regex value, you must escape 
 
 ```text title="Example"
 WANdisco LiveData Migrator >> exclusion add regex --description "No paths that start with a backslash followed by test"  --id exclusion2 --regex ^\\test\.*
-{
-  "type" : "RegexExclusionDTO",
-  "id" : "exclusion2",
-  "description" : "No paths that start with a backslash followed by test",
-  "fsRestriction" : false,
-  "regex" : "^\\test.*"
-}
 ```
 
-The response displayed if running through the CLI (as shown in the example above) will **not** hide the additional backslash. However, the internal representation will be as expected within LiveData Migrator (it will read as `^\test.*`).
+The response displayed if running through the CLI will **not** hide the additional backslash. However, the internal representation will be as expected within LiveData Migrator (it will read as `^\test.*`).
 
 This workaround is not required for API inputs, as it only affects the [Spring Shell](https://docs.spring.io/spring-shell/docs/current-SNAPSHOT/reference/htmlsingle/#quotes-handling) implementation used for the CLI.
 
@@ -993,25 +792,6 @@ SYNOPSYS
         exclusion list
 ```
 
-#### Examples
-
-```
-WANdisco LiveMigrator >> exclusion list
-[ {
-  "type" : "FileSizeExclusion",
-  "id" : "10bytes",
-  "description" : "Greater than 10 bytes",
-  "maxBytes" : 10,
-  "maxBytesFormatted" : "10 B"
-}, {
-  "type" : "FileSizeExclusion",
-  "id" : "100mbfiles",
-  "description" : "Files greater than 100 MB",
-  "maxBytes" : 104857600,
-  "maxBytesFormatted" : "100 MB"
-} ]
-```
-
 ----
 ### `exclusion show`
 
@@ -1031,17 +811,10 @@ OPTIONS
 
 * **`--id`** The identifier for the exclusion policy to show.
 
-#### Examples
+#### Example
 
 ```
 WANdisco LiveMigrator >> exclusion show --id 100mbfiles
-{
-  "type" : "FileSizeExclusion",
-  "id" : "100mbfiles",
-  "description" : "Files greater than 100 MB",
-  "maxBytes" : 104857600,
-  "maxBytesFormatted" : "100 MB"
-}
 ```
 
 ## Built-in Commands
@@ -1091,7 +864,7 @@ OPTIONS
 #### Optional Parameters
 * **`--command`**, **`-C`** The command for which help information is wanted
 
-#### Examples
+#### Example
 
 ```text
 WANdisco LiveMigrator >> help
