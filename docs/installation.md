@@ -53,7 +53,7 @@ There are two installers available for LiveData Migrator:
 Installing LiveData Migrator as a system service allows you to maintain long-lived migrations, have a common configuration that survives service restarts, and retain logging information in a central directory.
 
 :::note
-Without a WANdisco-provided license file, LiveData Migrator will stop running after 10 minutes. You have full access to all functionality during that time, but operation will cease immediately after that time period has expired.
+Without a WANdisco-provided license file, LiveData Migrator is limited to 14 days operation and 5TB of data migration. You have full functionality available, but operation will cease immediately after reaching either of these limits.
 
 [Contact WANdisco](https://www.wandisco.com) for a license that will meet your migration needs.
 :::
