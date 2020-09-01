@@ -15,6 +15,7 @@ Should you need clarification on any configuration items shown in the UI, you wi
 ## Source Commands
 
 ----
+
 ### `source clear`
 
 Clear all information that LiveData Migrator maintains about the source file system by issuing the `source clear` command. This will allow you to define an alternative source to one previously defined or detected automatically.
@@ -25,6 +26,7 @@ SYNOPSYS
 ```
 
 ----
+
 ### `source del`
 
 Use `source del` to delete information about a specific source file system by identifier. You can obtain the identifier for a source file system with the output of the `source fs show` command.
@@ -51,6 +53,7 @@ source del --file-system-id mysource
 ```
 
 ----
+
 ### `source fs show`
 
 Get information about the source file system configuration.
@@ -71,6 +74,7 @@ OPTIONS
 ## File System Commands
 
 ----
+
 ### `filesystem add adls2 sharedKey`
 
 Add an Azure Data Lake Storage Gen 2 container as a migration target using the `filesystem add adls2 sharedKey` command, which requires credentials in the form of an account key.
@@ -121,9 +125,9 @@ OPTIONS
 * **`--storage-account-name`** The name of the ADLS Gen 2 storage account to target.
   * UI: **Account Name**
 * **`--fs.azure.shared.key`** The shared account key to use as credentials to write to the storage account.
-  * * UI: **Access Key**
+  * UI: **Access Key**
 * **`--container.name`** The name of the container in the storage account to which content will be migrated.
-  * * UI: **Container Name**
+  * UI: **Container Name**
 
 #### Optional Parameters
 
@@ -139,6 +143,7 @@ filesystem add adls2 sharedKey --file-system-id mytarget --storage-account-name 
 ```
 
 ----
+
 ### `filesystem add hdfs`
 
 Add a Hadoop Distributed File System as either a migration source or target using the `filesystem add hdfs` command.
@@ -204,6 +209,7 @@ filesystem add hdfs --file-system-id mysource --source --fs.defaultFS hdfs://myn
 ```
 
 ----
+
 ### `filesystem add local`
 
 Add a local file system as either a migration source or target using the `filesystem add local` command.
@@ -257,6 +263,7 @@ filesystem add local --file-system-id mytarget --fs-root /storage/migration/
 ```
 
 ----
+
 ### `filesystem add s3a`
 
 Add an S3 bucket as a target file system using the `filesystem add s3a` command.
@@ -307,26 +314,27 @@ OPTIONS
   * UI: **Storage Name**
 * **`--bucket-name`** The name of your S3 bucket.
   * UI: **Bucket Name**
-* **`--credentials-provider`** The Java class name of a credentials provider for authenticating with the S3 endpoint.  
-  Providers available include:
-  * **`org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider`**
+* **`--credentials-provider`** The Java class name of a credentials provider for authenticating with the S3 endpoint.
+  * UI: **Credentials Provider**
+  * Providers available include:
+    * **`org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider`**
 
-    Use this provider to offer credentials as an access key and secret access key with the `--access-key` and `--secret-key` Parameters.
+      Use this provider to offer credentials as an access key and secret access key with the `--access-key` and `--secret-key` Parameters.
 
-  * **`com.amazonaws.auth.InstanceProfileCredentialsProvider`**
+    * **`com.amazonaws.auth.InstanceProfileCredentialsProvider`**
 
-    Use this provider when running LiveData Migrator on an EC2 instance that has [been assigned an IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) with policies that allow it to access the S3 bucket.
+      Use this provider when running LiveData Migrator on an EC2 instance that has [been assigned an IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) with policies that allow it to access the S3 bucket.
 
-  * **`com.amazonaws.auth.DefaultAWSCredentialsProviderChain`**
+    * **`com.amazonaws.auth.DefaultAWSCredentialsProviderChain`**
 
-    A commonly-used credentials provider chain that looks for credentials in this order:
+      A commonly-used credentials provider chain that looks for credentials in this order:
 
-    * Environment Variables - `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, or `AWS_ACCESS_KEY` and `AWS_SECRET_KEY`.
-    * Java System Properties - `aws.accessKeyId` and `aws.secretKey`.
-    * Web Identity Token credentials from the environment or container.
-    * Credential profiles file at the default location (`~/.aws/credentials`) shared by all AWS SDKs and the AWS CLI.
-    * Credentials delivered through the Amazon EC2 container service if `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` environment variable is set and security manager has permission to access the variable.
-    * Instance profile credentials delivered through the Amazon EC2 metadata service.
+      * Environment Variables - `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, or `AWS_ACCESS_KEY` and `AWS_SECRET_KEY`.
+      * Java System Properties - `aws.accessKeyId` and `aws.secretKey`.
+      * Web Identity Token credentials from the environment or container.
+      * Credential profiles file at the default location (`~/.aws/credentials`) shared by all AWS SDKs and the AWS CLI.
+      * Credentials delivered through the Amazon EC2 container service if `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` environment variable is set and security manager has permission to access the variable.
+      * Instance profile credentials delivered through the Amazon EC2 metadata service.
 
 <h4 id="s3a-optional-parameters">Optional parameters</h4>
 
@@ -344,6 +352,7 @@ filesystem add s3a --file-system-id mytarget --bucket-name mybucket1 --credentia
 ```
 
 ----
+
 ### `filesystem clear`
 
 Delete all target file system references with the `filesystem clear`. This leaves any migrated content intact in those targets, but removes all resources that act as references to the target file systems.
@@ -357,6 +366,7 @@ SYNOPSYS
 ```
 
 ----
+
 ### `filesystem del`
 
 Delete a specific file system resource by identifier. This leaves all migrated content intact at that target, but removes the resource that acts as a reference to that file system.
@@ -383,6 +393,7 @@ filesystem del --file-system-id mytarget
 ```
 
 ----
+
 ### `filesystem list`
 
 List defined file system resources.
@@ -401,6 +412,7 @@ OPTIONS
 * **`--verbose`** Include all properties for each file system in the JSON result.
 
 ----
+
 ### `filesystem show`
 
 View details for a file system resource.
@@ -430,6 +442,7 @@ filesystem show --file-system-id mytarget
 ```
 
 ----
+
 ### `filesystem types`
 
 View information about the file system types available for use with LiveData Migrator. File systems that provide an `eventListenerType` other than `no-op` can be used in migrations that will migrate ongoing changes during operation.
@@ -442,6 +455,7 @@ SYNOPSYS
 ## Migration Commands
 
 ----
+
 ### `migration stop`
 
 Stop a migration from transferring and content to its target, placing it into the `STOPPED` state. You cannot resume an stopped migration.
@@ -467,6 +481,7 @@ migration stop --migration-id 4ffa620b6ebb0cd34f2c591220d93830f91ccc7e
 ```
 
 ----
+
 ### `migration del`
 
 Delete a stopped migration resource.
@@ -492,6 +507,7 @@ migration del --migration-id 4ffa620b6ebb0cd34f2c591220d93830f91ccc7e
 ```
 
 ----
+
 ### `migration exclusion add`
 
 Associate an exclusion resource with a migration so that the exclusion policy applies to items processed for the migration. Exclusions must be associated with a migration before they take effect.
@@ -523,6 +539,7 @@ migration exclusion add --migration-id 4ffa620b6ebb0cd34f2c591220d93830f91ccc7e 
 ```
 
 ----
+
 ### `migration exclusion del`
 
 Remove an exclusion from association with a migration so that its policy no longer applies to items processed for the migration.
@@ -554,6 +571,7 @@ migration exclusion del --migration-id 4ffa620b6ebb0cd34f2c591220d93830f91ccc7e 
 ```
 
 ----
+
 ### `migration list`
 
 Present the list of all migrations defined.
@@ -564,6 +582,7 @@ SYNOPSYS
 ```
 
 ----
+
 ### `migration new`
 
 Create a new migration to initiate data migration from your source file system.
@@ -600,7 +619,7 @@ OPTIONS
                 [Optional, default = com.wandisco.livemigrator2.migration.OverwriteActionPolicy]
 ```
 
-#### Mandatory Parameters:
+#### Mandatory Parameters
 
 * **`--path`** Defines the source file system directory that is the scope of the migration. All content (other than that excluded) will be migrated to the target.
 * **`--target`** Specifies the name of the target file system resource to which migration will occur.
@@ -619,11 +638,12 @@ OPTIONS
 
 #### Example
 
-```
+```text
 migration new --path /repl1 --target mytarget –-migration-id myNewMigration --exclusions 100mbfiles
 ```
 
 ----
+
 ### `migration run`
 
 Start a migration that was created without the `--auto-start` parameter, or resume a migration that was paused.
@@ -644,11 +664,12 @@ OPTIONS
 
 #### Example
 
-```
+```text
 migration run –-migration-id myNewMigration
 ```
 
 ----
+
 ### `migration show`
 
 Provide a JSON description of a specific migration.
@@ -672,11 +693,12 @@ OPTIONS
 
 #### Example
 
-```
+```text
 migration show --migration-id myNewMigration
 ```
 
 ----
+
 ### `status`
 
 Get a text description of the overall status of migrations. Information is provided on the following:
@@ -700,7 +722,7 @@ SYNOPSYS
 
 #### Examples
 
-```
+```text
 status
 
 Total Migrations:  1
@@ -720,6 +742,7 @@ Ready: 1
 ## Exclusion Commands
 
 ----
+
 ### `exclusion add file-size`
 
 Create an exclusion that can be applied to migrations to constrain the files transferred by a policy based on file size. Once associated with a migration using [`migration exclusion add`](#migration-exclusion-add), files that match the policy will not be migrated.
@@ -758,11 +781,12 @@ OPTIONS
 
 #### Example
 
-```
+```text
 exclusion add file-size --id 100mbfiles --description "Files greater than 100 MB" --value 100 --unit MB
 ```
 
 ----
+
 ### `exclusion add regex`
 
 Create an exclusion that can be applied to migrations to constrain the files transferred by a policy based on matching file name by regular expression. Once associated with a migration using [`migration exclusion add`](#migration-exclusion-add), files that match the policy will not be migrated.
@@ -795,7 +819,7 @@ OPTIONS
 
 #### Example
 
-```
+```text
 exclusion add regex --description "No paths that start with test"  --id exclusion1 --regex ^test\.*
 ```
 
@@ -812,6 +836,7 @@ The response displayed if running through the CLI will **not** hide the addition
 This workaround is not required for API inputs, as it only affects the [Spring Shell](https://docs.spring.io/spring-shell/docs/current-SNAPSHOT/reference/htmlsingle/#quotes-handling) implementation used for the CLI.
 
 ----
+
 ### `exclusion del`
 
 Delete an exclusion policy so that it is no longer available for migrations.
@@ -835,11 +860,12 @@ OPTIONS
 
 #### Example
 
-```
+```text
 exclusion del --id exclusion1
 ```
 
 ----
+
 ### `exclusion list`
 
 List all exclusion policies defined.
@@ -853,6 +879,7 @@ SYNOPSYS
 ```
 
 ----
+
 ### `exclusion show`
 
 Get details for an individual exclusion policy by identifier.
@@ -873,13 +900,14 @@ OPTIONS
 
 #### Example
 
-```
+```text
 exclusion show --id 100mbfiles
 ```
 
 ## Built-in Commands
 
 ----
+
 ### `clear`
 
 Clear the interactive action prompt screen output with the `clear` command. You can also type `<Ctrl-L>` to achieve the same, even while typing another command.
@@ -890,6 +918,7 @@ SYNOPSYS
 ```
 
 ----
+
 ### `exit` or `quit`
 
 Entering either `exit` or `quit` will stop operation of LiveData Migrator when it is run from the command line. All processing will cease, and you will be returned to your system shell.
@@ -907,6 +936,7 @@ ALSO KNOWN AS
 ```
 
 ----
+
 ### `help`
 
 Use the `help` command to get details of all commands available from the action prompt.
@@ -989,6 +1019,7 @@ SYNOPSYS
 ```
 
 ----
+
 ### `history`
 
 Enter `history` at the action prompt to list all previously entered commands.
@@ -1010,6 +1041,7 @@ OPTIONS
 * **`--file`** The name of the file in which to save the history of commands.
 
 ----
+
 ### `script`
 
 Load and execute commands from a text file using the `script --file <filename>` command. This file should have one command per line, and each will be executed as though they were entered directly at the action prompt in that sequence.
@@ -1028,6 +1060,7 @@ OPTIONS
 * **`--file`** The name of the file containing script commands.
 
 ----
+
 ### `stacktrace`
 
  Use the `stacktrace` command to get full technical information about the source of an error during LiveData Migrator operation.
