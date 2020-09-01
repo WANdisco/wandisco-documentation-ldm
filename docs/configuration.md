@@ -251,7 +251,7 @@ LiveData Migrator will poll the Hadoop cluster for NameNode events using the [HD
 
 | Name | Details |
 | --- | --- |
-| `hdfs.inotify.poll.period` | The length of time in milliseconds between each event listener poll. <br/>**Default value**: `1000` <br/>**Allowed values**: An integer value |
+| `hdfs.inotify.poll.period` | The length of time in milliseconds between each event listener poll. <br/>**Default value**: `10` <br/>**Allowed values**: An integer value |
 | `hdfs.inotify.sleep.period` | The length of time in milliseconds for delaying the event listener poll after 10 consecutive retry failures. <br/>**Default value**: `10` <br/>**Allowed values**: An integer value |
 
 ## UI Configuration
