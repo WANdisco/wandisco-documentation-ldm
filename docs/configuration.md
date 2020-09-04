@@ -180,7 +180,7 @@ Configure how LiveData Migrator logs requests made against the [REST API](./api-
 To enable SSL on the LiveData Migrator REST API (HTTPS), modify the following `server.ssl.*` properties.
 
 :::note
-If HTTPS is enabled on the REST API, plain HTTP requests from the CLI to the REST API will fail.
+If HTTPS is enabled on the REST API, plain HTTP requests from the CLI and UI to the REST API will fail.
 :::
 
 | Name | Details |
@@ -216,6 +216,10 @@ LiveData Migrator uses an internally-managed database to record state during ope
 ### Security
 
 Secure access to the LiveData Migrator [REST API](./api-reference.md) through configuration. Choose between no security or HTTP basic security.
+
+:::note
+If security is enabled on the REST API, unauthenticated requests from the CLI or UI to the REST API will fail.
+:::
 
 | Name | Details |
 | --- | --- |
