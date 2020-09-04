@@ -349,6 +349,15 @@ OPTIONS
 * **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
+:::info
+When adding properties via the API or UI, for example to set a custom `fs.s3a.endpoint`, it is required to also set the following properties manually. They are added by default when using the CLI.
+:::
+* `fs.s3a.impl` (default `org.apache.hadoop.fs.s3a.S3AFileSystem`)
+* `fs.AbstractFileSystem.s3a.impl` (default `org.apache.hadoop.fs.s3a.S3A`)
+* `fs.s3a.user.agent.prefix` (default `WANdisco/LiveDataMigrator`)
+* `fs.s3a.impl.disable.cache` (default `true`)
+* `fs.hadoop.tmp.dir`(default `tmp`)
+
 #### Example
 
 ```text
