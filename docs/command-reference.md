@@ -153,7 +153,7 @@ Google Cloud Storage functionality is available as a preview and is not yet a su
 
 Add a Google Cloud Storage as a migration target using the `filesystem add gcs` command, which requires credentials in the form of an account key file.
 
-```text title="Add an ADLS Gen 2 file system"
+```text title="Add a Google Cloud Storage file system"
 SYNOPSYS
         filesystem add gcs  [--file-system-id] string
                             [--service-account-key-file] string
