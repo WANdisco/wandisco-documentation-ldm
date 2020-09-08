@@ -217,10 +217,6 @@ LiveData Migrator uses an internally-managed database to record state during ope
 
 Secure access to the LiveData Migrator [REST API](./api-reference.md) through configuration. Choose between no security or HTTP basic security.
 
-:::note
-If security is enabled on the REST API, unauthenticated requests from the CLI to the REST API will fail.
-:::
-
 | Name | Details |
 | --- | --- |
 | `security.type` | The method of securing access to the REST API<br/><br/>**Default value**: `off`<br/>**Allowed values**: `off`, `basic` |
