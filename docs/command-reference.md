@@ -685,186 +685,6 @@ OPTIONS
 exclusion show --id 100mbfiles
 ```
 
-## Built-in Commands
-
-----
-
-### `clear`
-
-Clear the interactive action prompt screen output with the `clear` command. You can also type `<Ctrl-L>` to achieve the same, even while typing another command.
-
-```text title="Clear the shell screen"
-SYNOPSYS
-        clear
-```
-
-----
-
-### `exit` or `quit`
-
-Entering either `exit` or `quit` will stop operation of LiveData Migrator when it is run from the command line. All processing will cease, and you will be returned to your system shell.
-
-If your LiveData Migrator command line is connected to a LiveData Migrator system service, this command will end your interactive session with that service, which will remain in operation to continue processing Live migrations.
-
-If this command is encountered during non-interactive processing of input (such as when you pipe input to an instance as part of another shell script) no further commands contained in that input will be processed.
-
-```text title="Exit the shell"
-SYNOPSYS
-        exit
-
-ALSO KNOWN AS
-        quit
-```
-
-----
-
-### `help`
-
-Use the `help` command to get details of all commands available from the action prompt.
-
-```text title="Display help about available commands"
-SYNOPSYS
-        help [[-C] string]
-
-OPTIONS
-        -C or --command  string
-                The command to obtain help for.
-                [Optional, default = <none>]
-```
-
-#### Optional Parameters
-
-* **`--command`**, **`-C`** The command for which help information is wanted
-
-#### Example
-
-```text
-help
-AVAILABLE COMMANDS
-
-Built-In Commands
-        clear: Clear the shell screen.
-        exit, quit: Exit the shell.
-        help: Display help about available commands.
-        history: Display or save the history of previously run commands
-        script: Read and execute commands from a file.
-        stacktrace: Display the full stacktrace of the last error.
-
-Exclusion Commands
-        exclusion add file-size: Create a new file size rule.
-        exclusion add regex: Create a new regex exclusion rule.
-        exclusion del: Delete an exclusion rule.
-        exclusion list: List all exclusion rules.
-        exclusion show: Get details for a particular exclusion rule.
-
-Filesystem Commands
-        filesystem add adls2 sharedKey: Add an ADLS2 via HCFS API FileSystem With Shared Key
-        filesystem add gcs: Add a Google Cloud Storage FileSystem
-        filesystem add hdfs: Add an Hadoop HDFS FileSystem
-        filesystem add local: Add an Local FileSystem via HCFS FileSystem
-        filesystem add s3a: Add an S3A via HCFS API FileSystem.
-        filesystem clear: Delete all targets.
-        filesystem del: Delete a target.
-        filesystem list: List of targets.
-        filesystem show: Get target details.
-        filesystem types: List the types of target Filesystems available
-
-Migration Commands
-        migration del: Delete a migration.
-        migration exclusion add: Add an exclusion to a migration.
-        migration exclusion del: Remove an exclusion from a migration.
-        migration list: List running and active migrations.
-      * migration new: Create a new migration.
-        migration run: Start or resume a migration.
-        migration show: Get migration details.
-        migration stop: Abort a migration.
-        status: Get migration status.
-
-Source Commands
-        source clear: Delete all sources.
-        source del: Delete a source.
-        source fs show: Show the source FileSystem Configuration
-
-Commands marked with (*) are currently unavailable.
-Type `help <command>` to learn more.
-```
-
-```text
-help migration\ list
-
-NAME
-        migration list - List running and active migrations.
-
-SYNOPSYS
-        migration list
-```
-
-----
-
-### `history`
-
-Enter `history` at the action prompt to list all previously entered commands.
-
-Entering `history --file <filename>` will save up to 500 most recently entered commands in text form to the file specified. Use this to record commands that you have executed.
-
-```text title="Display or save the history of previously run commands"
-SYNOPSYS
-        history [[--file] file]
-
-OPTIONS
-        --file  file
-                A file to save history to.
-                [Optional, default = <none>]
-```
-
-#### Optional Parameters
-
-* **`--file`** The name of the file in which to save the history of commands.
-
-----
-
-### `script`
-
-Load and execute commands from a text file using the `script --file <filename>` command. This file should have one command per line, and each will be executed as though they were entered directly at the action prompt in that sequence.
-
-```text title="Read and execute commands from a file"
-SYNOPSYS
-        script [--file] file
-
-OPTIONS
-        --file  file
-                [Mandatory]
-```
-
-#### Mandatory Parameters
-
-* **`--file`** The name of the file containing script commands.
-
-----
-
-### `stacktrace`
-
- Use the `stacktrace` command to get full technical information about the source of an error during LiveData Migrator operation.
-
-```text title="Display the full stacktrace of the last error"
-SYNOPSYS
-        stacktrace
-```
-
-## Action Prompt Features
-
-The action prompt provides many features to guide you during operation.
-
-| Feature | How to use it |
-|---|---|
-| **Review available commands** | Commands that cannot be used without creating other resources first are tagged with `*` in the output of the `help` command. |
-| **Command completion** | Hit the `<tab>` key at any time to get assistance or to complete partially-entered commands. |
-| **Cancel input** | Type `<Ctrl-C>` before entering a command to return to an empty action prompt. |
-| **Syntax indication** | Invalid commands are highlighted as you type. |
-| **Clear the display** | Type `<Ctrl-L>` at any time. |
-| **Previous commands** | Navigate previous commands using the up and down arrows, and use standard emacs shortcuts. |
-| **Interactive or scripted operation** | You can interact with the command line interface directly, or send it commands on standard input to incorporate it into shell scripts. |
-
 ## Migration Commands
 
 ----
@@ -1151,6 +971,186 @@ Running: 0
 Ready: 1
      /repl1 5c7271676c8f858ad11011bfa155fc8e43b8fe32
 ```
+
+## Built-in Commands
+
+----
+
+### `clear`
+
+Clear the interactive action prompt screen output with the `clear` command. You can also type `<Ctrl-L>` to achieve the same, even while typing another command.
+
+```text title="Clear the shell screen"
+SYNOPSYS
+        clear
+```
+
+----
+
+### `exit` or `quit`
+
+Entering either `exit` or `quit` will stop operation of LiveData Migrator when it is run from the command line. All processing will cease, and you will be returned to your system shell.
+
+If your LiveData Migrator command line is connected to a LiveData Migrator system service, this command will end your interactive session with that service, which will remain in operation to continue processing Live migrations.
+
+If this command is encountered during non-interactive processing of input (such as when you pipe input to an instance as part of another shell script) no further commands contained in that input will be processed.
+
+```text title="Exit the shell"
+SYNOPSYS
+        exit
+
+ALSO KNOWN AS
+        quit
+```
+
+----
+
+### `help`
+
+Use the `help` command to get details of all commands available from the action prompt.
+
+```text title="Display help about available commands"
+SYNOPSYS
+        help [[-C] string]
+
+OPTIONS
+        -C or --command  string
+                The command to obtain help for.
+                [Optional, default = <none>]
+```
+
+#### Optional Parameters
+
+* **`--command`**, **`-C`** The command for which help information is wanted
+
+#### Example
+
+```text
+help
+AVAILABLE COMMANDS
+
+Built-In Commands
+        clear: Clear the shell screen.
+        exit, quit: Exit the shell.
+        help: Display help about available commands.
+        history: Display or save the history of previously run commands
+        script: Read and execute commands from a file.
+        stacktrace: Display the full stacktrace of the last error.
+
+Exclusion Commands
+        exclusion add file-size: Create a new file size rule.
+        exclusion add regex: Create a new regex exclusion rule.
+        exclusion del: Delete an exclusion rule.
+        exclusion list: List all exclusion rules.
+        exclusion show: Get details for a particular exclusion rule.
+
+Filesystem Commands
+        filesystem add adls2 sharedKey: Add an ADLS2 via HCFS API FileSystem With Shared Key
+        filesystem add gcs: Add a Google Cloud Storage FileSystem
+        filesystem add hdfs: Add an Hadoop HDFS FileSystem
+        filesystem add local: Add an Local FileSystem via HCFS FileSystem
+        filesystem add s3a: Add an S3A via HCFS API FileSystem.
+        filesystem clear: Delete all targets.
+        filesystem del: Delete a target.
+        filesystem list: List of targets.
+        filesystem show: Get target details.
+        filesystem types: List the types of target Filesystems available
+
+Migration Commands
+        migration del: Delete a migration.
+        migration exclusion add: Add an exclusion to a migration.
+        migration exclusion del: Remove an exclusion from a migration.
+        migration list: List running and active migrations.
+      * migration new: Create a new migration.
+        migration run: Start or resume a migration.
+        migration show: Get migration details.
+        migration stop: Abort a migration.
+        status: Get migration status.
+
+Source Commands
+        source clear: Delete all sources.
+        source del: Delete a source.
+        source fs show: Show the source FileSystem Configuration
+
+Commands marked with (*) are currently unavailable.
+Type `help <command>` to learn more.
+```
+
+```text
+help migration\ list
+
+NAME
+        migration list - List running and active migrations.
+
+SYNOPSYS
+        migration list
+```
+
+----
+
+### `history`
+
+Enter `history` at the action prompt to list all previously entered commands.
+
+Entering `history --file <filename>` will save up to 500 most recently entered commands in text form to the file specified. Use this to record commands that you have executed.
+
+```text title="Display or save the history of previously run commands"
+SYNOPSYS
+        history [[--file] file]
+
+OPTIONS
+        --file  file
+                A file to save history to.
+                [Optional, default = <none>]
+```
+
+#### Optional Parameters
+
+* **`--file`** The name of the file in which to save the history of commands.
+
+----
+
+### `script`
+
+Load and execute commands from a text file using the `script --file <filename>` command. This file should have one command per line, and each will be executed as though they were entered directly at the action prompt in that sequence.
+
+```text title="Read and execute commands from a file"
+SYNOPSYS
+        script [--file] file
+
+OPTIONS
+        --file  file
+                [Mandatory]
+```
+
+#### Mandatory Parameters
+
+* **`--file`** The name of the file containing script commands.
+
+----
+
+### `stacktrace`
+
+ Use the `stacktrace` command to get full technical information about the source of an error during LiveData Migrator operation.
+
+```text title="Display the full stacktrace of the last error"
+SYNOPSYS
+        stacktrace
+```
+
+## Action Prompt Features
+
+The action prompt provides many features to guide you during operation.
+
+| Feature | How to use it |
+|---|---|
+| **Review available commands** | Commands that cannot be used without creating other resources first are tagged with `*` in the output of the `help` command. |
+| **Command completion** | Hit the `<tab>` key at any time to get assistance or to complete partially-entered commands. |
+| **Cancel input** | Type `<Ctrl-C>` before entering a command to return to an empty action prompt. |
+| **Syntax indication** | Invalid commands are highlighted as you type. |
+| **Clear the display** | Type `<Ctrl-L>` at any time. |
+| **Previous commands** | Navigate previous commands using the up and down arrows, and use standard emacs shortcuts. |
+| **Interactive or scripted operation** | You can interact with the command line interface directly, or send it commands on standard input to incorporate it into shell scripts. |
 
 ## System service commands
 
