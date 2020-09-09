@@ -10,6 +10,8 @@ If you're new to the concept of LiveData, or want to know what LiveData Migrator
 
 ## Before you start
 
+[Read the release notes](https://community.wandisco.com/s/article/WANdisco-LiveData-Migrator-Release-Notes-1-4-7) to get the latest information about the current version of LiveData Migrator.
+
 ### Prerequisites
 
 * Linux host running either Red Hat, CentOS, Debian or Ubuntu.
