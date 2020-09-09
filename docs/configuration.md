@@ -181,6 +181,12 @@ To enable SSL on the LiveData Migrator REST API (HTTPS), modify the following `s
 
 :::note
 If HTTPS is enabled on the REST API, plain HTTP requests from the CLI to the REST API will fail.
+
+```text title="Example error"
+Bad Request
+This combination of host and port requires TLS.
+```
+
 :::
 
 | Name | Details |
@@ -192,7 +198,7 @@ If HTTPS is enabled on the REST API, plain HTTP requests from the CLI to the RES
 | `server.ssl.ciphers` | The ciphers suite enforce the security by deactivating some old and deprecated SSL ciphers, this list was tested against [SSL Labs](https://www.ssllabs.com/ssltest/). <br/><br/> **Default value** <br/> `TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,TLS_DHE_RSA_WITH_AES_256_GCM_SHA384 ,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA,TLS_RSA_WITH_CAMELLIA_128_CBC_SHA` |
 
 :::tip
-The example command below will generate a server certificate and place it inside a new Java keystore named `keystore.p12` (it will be created inside the user's home directory):
+The example command below will generate a server certificate and place it inside an new Java keystore named `keystore.p12`:
 
 ```text
 keytool -genkey -alias livedata-migrator -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 365
@@ -294,6 +300,17 @@ Configure how the UI uses SSL, which is disabled by default.
 | `server.ssl.key-store-password` | The password to be used to access the key store |
 | `server.ssl.key-alias` | The alias of the certificate to be used |
 | `server.ssl.key-store-type` | Optional: set the key store type. Defaults to `PKCS12` |
+| `application.liveMigratorV2.client.noCheckCertificate` | Optional: add this property and set the value to `true` if you want to implicitly trust certificates from remote LiveData Migrator instances. <br/>**Default value**: `false` <br/><br/> It is not recommended to use this property unless you are fully aware of the consequences. A safer method is to import your server certificate inside a truststore (see the tip below for an example). |
+
+:::tip
+The example command below will import a certificate named `server_cert.key` into an existing Java truststore named `cacerts`:
+
+```text
+keytool -import -trustcacerts -alias wandisco-ui -file server_cert.key -keystore cacerts
+```
+
+See the [Oracle documentation](https://docs.oracle.com/cd/E19906-01/820-4916/geygn/index.html) for details on the parameters used.
+:::
 
 ## Directory structure
 

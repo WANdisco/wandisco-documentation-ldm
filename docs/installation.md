@@ -35,42 +35,41 @@ The LiveData Migrator preview license is limited to 14 days operation and 5TB of
 
 1. Upload your license key to access the customer download page in the WANdisco Customer Portal.
 
-1. Download LiveData Migrator.
+2. Download LiveData Migrator.
 
 <div class="download">
 <a href="https://customer.wandisco.com">Download LiveData Migrator</a>
 </div>
 
-2. Make the script executable and install as the root (or sudo) user. If you're migrating from HDFS, install LiveData Migrator on an edge node in the Hadoop      cluster.
+3. Make the script executable and install as the root (or sudo) user. If you're migrating from HDFS, install LiveData Migrator on an edge node in the Hadoop      cluster.
 
 1. Install LiveData Migrator with one of the following commands. These commands assume that the installer is inside your working directory.
 
-    ```bash title="Red Hat/CentOS"
-    chmod +x one-ui_lm_rpm_installer.sh && ./one-ui_lm_rpm_installer.sh
-    ```
+   ```bash title="Red Hat/CentOS"
+   chmod +x one-ui_lm_rpm_installer.sh && ./one-ui_lm_rpm_installer.sh
+   ```
 
-    ```bash title="Debian"
-    chmod +x one-ui_lm_deb_installer.sh && ./one-ui_lm_deb_installer.sh
-    ```
-  1. Check the service statuses with these commands:
+   ```bash title="Debian"
+   chmod +x one-ui_lm_deb_installer.sh && ./one-ui_lm_deb_installer.sh
+   ```
 
-        ```
-        service livedata-migrator status
-        ```
+1. Check the service statuses with these commands:
 
-        ```
-        service one-ui-server status
-        ```
+   ```bash
+   service livedata-migrator status
+   ```
 
-## Configure Kerberos authentication (optional)
+   ```bash
+   service one-ui-server status
+   ```
 
-If Kerberos is enabled in your environment:
+1. If Kerberos is enabled in your environment:
 
-1. Edit the Kerberos security properties in the `/etc/wandisco/livedata-migrator/application.properties` file. Refer to the [Kerberos Integration](./configuration.md#kerberos-integration) section for details about the required properties.
+   1. Edit the Kerberos security properties in the `/etc/wandisco/livedata-migrator/application.properties` file.  
+      Refer to the [Kerberos Integration](./configuration.md#kerberos-integration) section for details about the required properties.
 
-1. Restart the LiveData Migrator service to make any configuration changes live:
-
-    `service livedata-migrator restart`
+   1. Restart the LiveData Migrator service to make any configuration changes live:  
+      `service livedata-migrator restart`
 
 ## Using LiveData Migrator
 
