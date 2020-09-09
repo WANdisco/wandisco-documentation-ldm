@@ -96,7 +96,7 @@ If your source file system was not discovered automatically or you wish to assig
 You can define multiple target file systems, which you can migrate to at the same time.
 
 :::caution
-Local file system and Google Cloud Storage functionality are available as a preview and is not yet a supported configuration.
+Google Cloud Storage functionality is available as a preview and is not yet a supported configuration.
 :::
 
 | Command | Action |
@@ -104,7 +104,6 @@ Local file system and Google Cloud Storage functionality are available as a prev
 | [`filesystem add adls2 sharedKey`](./command-reference.md#filesystem-add-adls2-sharedkey) | Add an ADLS Gen 2 file system resource |
 | [`filesystem add gcs`](./command-reference.md#filesystem-add-gcs) | Add a Google Cloud Storage file system resource |
 | [`filesystem add hdfs`](./command-reference.md#filesystem-add-hdfs) | Add a Hadoop HDFS file system resource |
-| [`filesystem add local`](./command-reference.md#filesystem-add-local) | Add a local file system resource |
 | [`filesystem add s3a`](./command-reference.md#filesystem-add-s3a) | Add an S3 file system resource |
 
 ### Manage file systems

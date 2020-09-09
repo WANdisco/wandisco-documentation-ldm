@@ -266,26 +266,6 @@ filesystem add hdfs --file-system-id mysource --source --fs.defaultFS hdfs://myn
 
 ----
 
-#### Mandatory Parameters
-
-* **`--file-system-id`** The identifier to give the new file system resource.
-  * UI: **Storage Name**
-
-#### Optional Parameters
-
-* **`--fs-root`** The path to a location in the file system to treat as the root from which content will be migrated.
-* **`--source`** Provide this parameter to use the file system resource created as a source.
-* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
-* **`--properties`** Specify properties to use in a comma-separated key/value list.
-
-#### Example
-
-```text
-filesystem add local --file-system-id mytarget --fs-root /storage/migration/
-```
-
-----
-
 ### `filesystem add s3a`
 
 Add an S3 bucket as a target file system using the `filesystem add s3a` command.
