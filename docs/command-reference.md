@@ -266,43 +266,6 @@ filesystem add hdfs --file-system-id mysource --source --fs.defaultFS hdfs://myn
 
 ----
 
-### `filesystem add local`
-
-:::caution
-Local file system functionality is available as a preview and is not yet a supported configuration.
-:::
-
-Add a local file system as either a migration source or target using the `filesystem add local` command.
-
-```text title="Add a local file system"
-SYNOPSYS
-        filesystem add local [--file-system-id] string
-                             [[--fs-root] string]
-                             [--source]
-                             [[--properties-files] list]
-                             [[--properties] list]
-
-OPTIONS
-        --file-system-id  string
-                Name of the filesystem
-                [Mandatory]
-
-        --fs-root  string
-                Location in the local filesystem to chroot to
-                [Optional, default = /]
-
-        --source   Add this filesystem as the source for migrations
-                [Optional, default = false]
-
-        --properties-files  list
-                Load properties from these files
-                [Optional, default = <none>]
-
-        --properties  list
-                Override properties in comma separated key/value list
-                [Optional, default = <none>]
-```
-
 #### Mandatory Parameters
 
 * **`--file-system-id`** The identifier to give the new file system resource.

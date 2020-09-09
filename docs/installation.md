@@ -35,7 +35,7 @@ The LiveData Migrator preview license is limited to 14 days operation and 5TB of
 
 ## Install LiveData Migrator
 
-1. Make the script executable and install as the root (or sudo) user. If you're migrating from HDFS, install LiveData Migrator on an edge node in the Hadoop      cluster.
+1. Make the installation script executable and install as the root (or sudo) user. If you're migrating from HDFS, install LiveData Migrator on an edge node in the Hadoop      cluster.
 
 1. Install LiveData Migrator with one of the following commands. These commands assume that the installer is inside your working directory.
 
