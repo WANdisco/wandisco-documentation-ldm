@@ -634,7 +634,7 @@ exclusion show --id 100mbfiles
 
 ### `migration stop`
 
-Stop a migration from transferring and content to its target, placing it into the `STOPPED` state. You cannot resume an stopped migration.
+Stop a migration from transferring and content to its target, placing it into the `STOPPED` state. You cannot resume a stopped migration.
 
 ```text title="Stop a migration"
 SYNOPSYS
@@ -822,9 +822,9 @@ migration new --path /repl1 --target mytarget –-migration-id myNewMigration --
 
 ### `migration run`
 
-Start a migration that was created without the `--auto-start` parameter, or resume a migration that was paused.
+Start a migration that was created without the `--auto-start` parameter.
 
-```text title="Start or resume a migration"
+```text title="Start a migration"
 SYNOPSYS
         migration run [--migration-id] string
 
@@ -1005,7 +1005,7 @@ Migration Commands
         migration exclusion del: Remove an exclusion from a migration.
         migration list: List running and active migrations.
       * migration new: Create a new migration.
-        migration run: Start or resume a migration.
+        migration run: Start a migration.
         migration show: Get migration details.
         migration stop: Abort a migration.
         status: Get migration status.

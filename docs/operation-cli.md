@@ -166,7 +166,7 @@ Follow the command links to learn how to set the parameters and see examples.
 | [`migration exclusion add`](./command-reference.md#migration-exclusion-add) | Add an exclusion to a migration |
 | [`migration exclusion del`](./command-reference.md#migration-exclusion-del) | Remove an exclusion from a migration |
 | [`migration list`](./command-reference.md#migration-list) | List running and active migrations |
-| [`migration run`](./command-reference.md#migration-run) | Resume a migration |
+| [`migration run`](./command-reference.md#migration-run) | Start a migration |
 | [`migration show`](./command-reference.md#migration-show) | Get migration details |
 | [`status`](./command-reference.md#status) | Get migration status |
 
