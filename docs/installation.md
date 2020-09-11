@@ -33,27 +33,27 @@ If you're new to the concept of LiveData, or want to know what LiveData Migrator
 
 The LiveData Migrator preview license is limited to 14 days operation and 5TB of data migration. This gives you full use of LiveData Migrator up to either of these limits. [Contact WANdisco to upgrade to a full license.](https://www.wandisco.com)
 
-## Install LiveData Migrator
+## Download and install LiveData Migrator
 
-1. Make the installation script executable and install as the root (or sudo) user. If you're migrating from HDFS, install LiveData Migrator on an edge node in the Hadoop      cluster.
+1. Download LiveData Migrator and upload to your chosen host. If you're migrating from HDFS, install LiveData Migrator on an edge node in the Hadoop cluster.
 
-1. Install LiveData Migrator with one of the following commands. These commands assume that the installer is inside your working directory.
+   <div class="download">
+   <a href="https://wandisco.com/downloads/livedata-migrator.sh">Download LiveData Migrator</a>
+   </div>
 
-   ```bash title="Red Hat/CentOS"
-   chmod +x one-ui_lm_rpm_installer.sh && ./one-ui_lm_rpm_installer.sh
-   ```
+1. Make the installation script executable and install as the root (or sudo) user. These commands assume that the installer is inside your working directory.
 
-   ```bash title="Debian"
-   chmod +x one-ui_lm_deb_installer.sh && ./one-ui_lm_deb_installer.sh
+   ```text
+   chmod +x livedata-migrator.sh && ./livedata-migrator.sh
    ```
 
 1. Check the service statuses with these commands:
 
-   ```bash
+   ```text
    service livedata-migrator status
    ```
 
-   ```bash
+   ```text
    service one-ui-server status
    ```
 
