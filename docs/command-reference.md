@@ -915,6 +915,22 @@ SYNOPSYS
 
 ----
 
+### `echo`
+
+Prints whatever text that you write to the console. This can be used to sanity check a command before running it (for example: `echo migration new --path /repl1 --target mytarget –-migration-id myNewMigration --exclusions 100mbfiles`).
+
+```text title="Print message"
+SYNOPSYS
+        echo [--message] string
+
+OPTIONS
+        --message  string
+
+                [Mandatory]
+```
+
+----
+
 ### `exit` or `quit`
 
 Entering either `exit` or `quit` will stop operation of LiveData Migrator when it is run from the command line. All processing will cease, and you will be returned to your system shell.
