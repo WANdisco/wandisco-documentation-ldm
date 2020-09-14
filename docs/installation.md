@@ -14,7 +14,7 @@ If you're new to the concept of LiveData, or want to know what LiveData Migrator
 
 ### Prerequisites
 
-* Linux host running either Red Hat, CentOS, Debian or Ubuntu.
+* Linux host running either Red Hat/CentOS, Debian/Ubuntu or SLES 12.
 * Java 1.8 64-bit.
 * Network connectivity from your LiveData Migrator host to your target storage (for example: ADLS Gen2 endpoint or S3 bucket).
 * Port 8081 accessible on your Linux host (to access the UI through a web browser).
@@ -26,25 +26,28 @@ If you're new to the concept of LiveData, or want to know what LiveData Migrator
 ### Machine specification
 
 * **16 CPUs, 32 GB RAM** (minimum **4 CPUs, 16 GB RAM**)
+  * If deploying LiveData Migrator on a Hadoop cluster, the host machine should be an edge node that matches at least 75-80% of the NameNode host specification.
 * **200 GB** (SSD-backed volumes) (minimum **100 GB**)
 * **2 Gbps** minimum network. Your network bandwidth must be able to cope with transferring data and ongoing changes from your source storage.
 
 ### License
 
-The LiveData Migrator preview license is limited to 14 days operation and 5TB of data migration. This gives you full use of LiveData Migrator up to either of these limits. [Contact WANdisco to upgrade to a full license.](https://www.wandisco.com)
+The LiveData Migrator trial license is limited to 14 days operation and 5TB of data migration. This gives you full use of LiveData Migrator up to either of these limits. [Contact WANdisco to upgrade to a full license.](https://www.wandisco.com)
 
-## Download and install LiveData Migrator
-
-1. Download LiveData Migrator and upload to your chosen host. If you're migrating from HDFS, install LiveData Migrator on an edge node in the Hadoop cluster.
-
-   <div class="download">
-   <a href="https://wandisco.com/downloads/livedata-migrator.sh">Download LiveData Migrator</a>
-   </div>
+## Install LiveData Migrator
 
 1. Make the installation script executable and install as the root (or sudo) user. These commands assume that the installer is inside your working directory.
 
    ```text
    chmod +x livedata-migrator.sh && ./livedata-migrator.sh
+   ```
+
+   If you're migrating from HDFS, install LiveData Migrator on an edge node in the Hadoop cluster using the HDFS superuser.
+
+   ```text title="Example for HDFS superuser"
+   su - hdfs
+
+   chmod +x livedata-migrator.sh && sudo ./livedata-migrator.sh
    ```
 
 1. Check the service statuses with these commands:

@@ -43,8 +43,7 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--file-system-id`** The identifier of the source file system resource to delete.
-  * UI: **Storage Name**
+* **`--file-system-id`** The identifier of the source file system resource to delete. This is referenced in the UI as **Storage Name**.
 
 #### Example
 
@@ -120,19 +119,14 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--file-system-id`** The identifier to give the new file system resource.
-  * UI: **Storage Name**
-* **`--storage-account-name`** The name of the ADLS Gen 2 storage account to target.
-  * UI: **Account Name**
-* **`--fs.azure.shared.key`** The shared account key to use as credentials to write to the storage account.
-  * UI: **Access Key**
-* **`--container.name`** The name of the container in the storage account to which content will be migrated.
-  * UI: **Container Name**
+* **`--file-system-id`** The identifier to give the new file system resource. This is referenced in the UI as **Storage Name**.
+* **`--storage-account-name`** The name of the ADLS Gen 2 storage account to target. This is referenced in the UI as **Account Name**.
+* **`--fs.azure.shared.key`** The shared account key to use as credentials to write to the storage account. This is referenced in the UI as **Access Key**.
+* **`--container.name`** The name of the container in the storage account to which content will be migrated. This is referenced in the UI as **Container Name**.
 
 #### Optional Parameters
 
-* **`--insecure`** When provided, LiveData Migrator will not use TLS to encrypt communication with ADLS Gen 2. This may improve throughput, but should only be used when you have other means of securing communication.
-  * UI: **Use Secure Protocol** set to false.
+* **`--insecure`** When provided, LiveData Migrator will not use TLS to encrypt communication with ADLS Gen 2. This may improve throughput, but should only be used when you have other means of securing communication. This is referenced in the UI when **Use Secure Protocol** is unchecked.
 * **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
@@ -238,19 +232,17 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--file-system-id`** The identifier to give the new file system resource.
-  * UI: **Storage Name**
-* **`--fs.defaultFS`** A string that defines how LiveData Migrator accesses HDFS, which can be specified in a number of forms:
+* **`--file-system-id`** The identifier to give the new file system resource. This is referenced in the UI as **Storage Name**.
+* **`--fs.defaultFS`** A string that defines how LiveData Migrator accesses HDFS. This is referenced in the UI as **Default FS**.  
+  It can be specified in a number of forms:
   1. As a single HDFS URI, such as `hdfs://192.168.1.10:8020` (using an IP address) or `hdfs://myhost.localdomain:8020` (using a hostname).
   1. As a comma-separated list of HDFS URIs, like `hdfs://nn1.localdomain:8020,hdfs://nn2.localdomain:8020` to allow for integration with HA-enabled Hadoop environments.
   1. As an HDFS URI that references a nameservice ID defined in the cluster properties, like `hdfs://mynameservice`, where there is a configuration property for the cluster that defines the value of the `dfs.nameservices` value to include that nameservice ID, like `mynameservice` and all required configuration properties for that nameservice, like `dfs.ha.namenodes.mynameservice`, `dfs.namenode.rpc-address.mynameservice.nn1`, and `dfs.namenode.http-address.mynameservice.nn1`, etc.
-  * UI: **Default FS**
 
 #### Optional Parameters
 
 * **`--user`** The name of the HDFS user to be used when performing operations against the file system. This user must be an HDFS super user, such as `hdfs`.
-* **`--source`** Provide this parameter to use the file system resource created as a source.
-  * UI: Defined when choosing the **Add Source** option.
+* **`--source`** Provide this parameter to use the file system resource created as a source.  This is referenced in the UI when selecting the **Add Source** option.
 * **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
@@ -312,38 +304,33 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--file-system-id`** The identifier for the new file system resource.
-  * UI: **Storage Name**
-* **`--bucket-name`** The name of your S3 bucket.
-  * UI: **Bucket Name**
-* **`--credentials-provider`** The Java class name of a credentials provider for authenticating with the S3 endpoint.
-  * UI: **Credentials Provider**
-  * Providers available include:
-    * **`org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider`**
+* **`--file-system-id`** The identifier for the new file system resource. This is referenced in the UI as **Storage Name**.
+* **`--bucket-name`** The name of your S3 bucket. This is referenced in the UI as **Bucket Name**.
+* **`--credentials-provider`** The Java class name of a credentials provider for authenticating with the S3 endpoint. This is referenced in the UI as **Credentials Provider**.  
+  The Provider options available include:
+  * **`org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider`**
 
-      Use this provider to offer credentials as an access key and secret access key with the `--access-key` and `--secret-key` Parameters.
+    Use this provider to offer credentials as an access key and secret access key with the `--access-key` and `--secret-key` Parameters.
 
-    * **`com.amazonaws.auth.InstanceProfileCredentialsProvider`**
+  * **`com.amazonaws.auth.InstanceProfileCredentialsProvider`**
 
-      Use this provider when running LiveData Migrator on an EC2 instance that has [been assigned an IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) with policies that allow it to access the S3 bucket.
+    Use this provider when running LiveData Migrator on an EC2 instance that has [been assigned an IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) with policies that allow it to access the S3 bucket.
 
-    * **`com.amazonaws.auth.DefaultAWSCredentialsProviderChain`**
+  * **`com.amazonaws.auth.DefaultAWSCredentialsProviderChain`**
 
-      A commonly-used credentials provider chain that looks for credentials in this order:
+    A commonly-used credentials provider chain that looks for credentials in this order:
 
-      * Environment Variables - `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, or `AWS_ACCESS_KEY` and `AWS_SECRET_KEY`.
-      * Java System Properties - `aws.accessKeyId` and `aws.secretKey`.
-      * Web Identity Token credentials from the environment or container.
-      * Credential profiles file at the default location (`~/.aws/credentials`) shared by all AWS SDKs and the AWS CLI.
-      * Credentials delivered through the Amazon EC2 container service if `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` environment variable is set and security manager has permission to access the variable.
-      * Instance profile credentials delivered through the Amazon EC2 metadata service.
+    * Environment Variables - `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, or `AWS_ACCESS_KEY` and `AWS_SECRET_KEY`.
+    * Java System Properties - `aws.accessKeyId` and `aws.secretKey`.
+    * Web Identity Token credentials from the environment or container.
+    * Credential profiles file at the default location (`~/.aws/credentials`) shared by all AWS SDKs and the AWS CLI.
+    * Credentials delivered through the Amazon EC2 container service if `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` environment variable is set and security manager has permission to access the variable.
+    * Instance profile credentials delivered through the Amazon EC2 metadata service.
 
 <h4 id="s3a-optional-parameters">Optional parameters</h4>
 
-* **`--access-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the access key with this parameter.
-  * UI: **Access Key**
-* **`--secret-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the secret key using this parameter.
-  * UI: **Secret Key**
+* **`--access-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the access key with this parameter. This is referenced in the UI as **Access Key**.
+* **`--secret-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the secret key using this parameter. This is referenced in the UI as **Secret Key**.
 * **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
@@ -394,8 +381,7 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--file-system-id`** The identifier of the file system resource to delete.
-  * UI: **Storage Name**
+* **`--file-system-id`** The identifier of the file system resource to delete. This is referenced in the UI as **Storage Name**.
 
 #### Example
 
@@ -443,8 +429,7 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--file-system-id`** The identifier of the file system resource to show.
-  * UI: **Storage Name**
+* **`--file-system-id`** The identifier of the file system resource to show. This is referenced in the UI as **Storage Name**.
 
 #### Example
 
@@ -498,9 +483,9 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--id`** The identifier for the exclusion policy.
-* **`--description`** A user-friendly description for the policy.
-* **`--value`** The numerical value for the file size, in a unit defined by.
+* **`--id`** The identifier for the exclusion policy. This is referenced in the UI as **Name**.
+* **`--description`** A user-friendly description for the policy. This is referenced in the UI as **Description**.
+* **`--value`** The numerical value for the file size, in a unit defined by. This is referenced in the UI as **Value**.
 * **`--unit`** A string to define the unit used, either `B` for bytes, `GB` for gibibytes, `KB` for kibibytes, `MB` for mebibytes, `PB` for pebibytes, or `TB` for tebibytes.
 
 #### Example
@@ -537,9 +522,9 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--id`** The identifier for the exclusion policy.
-* **`--description`** A user-friendly description for the policy.
-* **`--regex`** A regular expression in a syntax similar to that used by Perl.
+* **`--id`** The identifier for the exclusion policy. This is referenced in the UI as **Name**.
+* **`--description`** A user-friendly description for the policy. This is referenced in the UI as **Description**.
+* **`--regex`** A regular expression in a syntax similar to that used by Perl. This is referenced in the UI as **Regex**.
 
 #### Example
 
@@ -580,7 +565,7 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--id`** The identifier for the exclusion policy to delete.
+* **`--id`** The identifier for the exclusion policy to delete. This is referenced in the UI as **Name**.
 
 #### Example
 
@@ -620,7 +605,7 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--id`** The identifier for the exclusion policy to show.
+* **`--id`** The identifier for the exclusion policy to show. This is referenced in the UI as **Name**.
 
 #### Example
 
@@ -706,7 +691,7 @@ OPTIONS
 #### Mandatory Parameters
 
 * **`--migration-id`** The identifier of the migration with which to associate the exclusion.
-* **`--exclusion-id`** The identifier of the exclusion to associate with the migration.
+* **`--exclusion-id`** The identifier of the exclusion to associate with the migration. This is referenced in the UI as **Name**.
 
 #### Example
 
@@ -738,7 +723,7 @@ OPTIONS
 #### Mandatory Parameters
 
 * **`--migration-id`** The identifier of the migration from which to remove the exclusion.
-* **`--exclusion-id`** The identifier of the exclusion to remove from the migration.
+* **`--exclusion-id`** The identifier of the exclusion to remove from the migration. This is referenced in the UI as **Name**.
 
 #### Example
 
@@ -797,20 +782,20 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--path`** Defines the source file system directory that is the scope of the migration. All content (other than that excluded) will be migrated to the target.
-* **`--target`** Specifies the name of the target file system resource to which migration will occur.
+* **`--path`** Defines the source file system directory that is the scope of the migration. All content (other than that excluded) will be migrated to the target. This is referenced in the UI as **Path for {source-filesystem}**.
+* **`--target`** Specifies the name of the target file system resource to which migration will occur. This is referenced in the UI as **Target**.
 * **`--migration-id`** Provide an identifier for the new migration.
 
 #### Optional Parameters
 
-* **`--exclusions`** A comma-separated list of exclusions by name.
-* **`--auto-start`** Provide this parameter if you want the migration to start immediately. If not provided, the migration will only take effect once run.
-* **`--action-policy`** This parameter determines what happens if the migration encounters content in the target path with the same name and size.  
+* **`--exclusions`** A comma-separated list of exclusions by name. This is referenced in the UI as **Add new exclusion**.
+* **`--auto-start`** Provide this parameter if you want the migration to start immediately. If not provided, the migration will only take effect once run. This is referenced in the UI as **Auto-start migration**.
+* **`--action-policy`** This parameter determines what happens if the migration encounters content in the target path with the same name and size. This is referenced in the UI as **Skip Or Overwrite Settings**.  
   There are two options available:
   1. **`com.wandisco.livemigrator2.migration.OverwriteActionPolicy`** _(default policy)_  
-     Every file is replaced, even if file size is identical on the target storage.
+     Every file is replaced, even if file size is identical on the target storage. This is referenced in the UI as **Overwrite**.
   1. **`com.wandisco.livemigrator2.migration.SkipIfSizeMatchActionPolicy`**  
-     If the file size is identical between the source and target, the file is skipped. If it’s a different size, the whole file is replaced.
+     If the file size is identical between the source and target, the file is skipped. If it’s a different size, the whole file is replaced. This is referenced in the UI as **Skip if Size Match**.
 
 #### Example
 

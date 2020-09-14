@@ -198,7 +198,7 @@ Migrations can be in one of eight states:
 `ABORTED`
 : An *aborted* migration will not make any changes to the target and cannot be run again.
 
-## Using the LiveData Migrator jar (optional)
+## Using the LiveData Migrator jar
 
 If you want to try out LiveData Migrator using a quick method, use the `livedata-migrator.jar`. This is an alternative to using the system service and it does not require configuration.
 
