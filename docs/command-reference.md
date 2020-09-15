@@ -48,7 +48,7 @@ OPTIONS
 #### Example
 
 ```text
-source del --file-system-id mysource
+source del --file-system-id auto-discovered-source-hdfs
 ```
 
 ----
@@ -135,58 +135,6 @@ OPTIONS
 ```text
 filesystem add adls2 sharedKey --file-system-id mytarget --storage-account-name myadls2 --container.name lm2target --fs.azure.shared.key Yi8NxHGqoQ79DBGLVn+COK/sRDwbNqAREDACTEDaMxRkvXt2ijUtAkVqVCBj/vaS/NbzR5rtjE2CZ31eIopUVA==
 ```
-
-----
-
-### `filesystem add gcs`
-
-:::caution
-Google Cloud Storage functionality is available as a preview and is not yet a supported configuration.
-:::
-
-
-Add a Google Cloud Storage as a migration target using the `filesystem add gcs` command, which requires credentials in the form of an account key file.
-
-```text title="Add a Google Cloud Storage file system"
-SYNOPSYS
-        filesystem add gcs  [--file-system-id] string
-                            [--service-account-key-file] string
-                            [--bucket-name] string
-                            [[--properties-file] list]
-                            [[--properties] list]
-
-OPTIONS
-        --file-system-id  string
-
-                [Mandatory]
-
-        --service-account-key-file  string
-
-                [Mandatory]
-
-        --bucket-name  string
-
-                [Mandatory]
-
-        --properties-file  list
-                Load properties from this file
-                [Optional, default = <none>]
-
-        --properties  list
-                Override properties in comma separated key/value list
-                [Optional, default = <none>]
-```
-
-#### Mandatory Parameters
-
-* **`--file-system-id`** The identifier to give the new file system resource.
-* **`--service-account-key-file`** The path to a Service Account Key file.
-* **`--bucket-name`** The bucket name of a Google Cloud Storage account.
-
-#### Optional Parameters
-
-* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
-* **`--properties`** Specify properties to use in a comma-separated key/value list.
 
 ----
 
@@ -755,6 +703,7 @@ SYNOPSYS
                       [--migration-id] string
                       [--exclusions] string
                       [--auto-start]
+                      [--action-policy] string
 
 OPTIONS
         --path  string
@@ -969,55 +918,63 @@ OPTIONS
 
 #### Example
 
+:::caution
+Although present when invoking the `help` command, Google Cloud Storage and Local Filesystem functionality is not yet available. This will be coming soon in a future release.
+:::
+
 ```text
 help
 AVAILABLE COMMANDS
 
 Built-In Commands
-        clear: Clear the shell screen.
-        exit, quit: Exit the shell.
-        help: Display help about available commands.
-        history: Display or save the history of previously run commands
-        script: Read and execute commands from a file.
-        stacktrace: Display the full stacktrace of the last error.
+ clear: Clear the shell screen.
+ echo: Print message
+ exit, quit: Exit the shell.
+ help: Display help about available commands.
+ history: Display or save the history of previously run commands
+ script: Read and execute commands from a file.
+ stacktrace: Display the full stacktrace of the last error.
 
 Exclusion Commands
-        exclusion add file-size: Create a new file size rule.
-        exclusion add regex: Create a new regex exclusion rule.
-        exclusion del: Delete an exclusion rule.
-        exclusion list: List all exclusion rules.
-        exclusion show: Get details for a particular exclusion rule.
+ exclusion add file-size: Create a new file size rule.
+ exclusion add regex: Create a new regex exclusion rule.
+ exclusion del: Delete an exclusion rule.
+ exclusion list: List all exclusion rules.
+ exclusion show: Get details for a particular exclusion rule.
 
 Filesystem Commands
-        filesystem add adls2 sharedKey: Add an ADLS2 via HCFS API FileSystem With Shared Key
-        filesystem add gcs: Add a Google Cloud Storage FileSystem
-        filesystem add hdfs: Add an Hadoop HDFS FileSystem
-        filesystem add local: Add an Local FileSystem via HCFS FileSystem
-        filesystem add s3a: Add an S3A via HCFS API FileSystem.
-        filesystem clear: Delete all targets.
-        filesystem del: Delete a target.
-        filesystem list: List of targets.
-        filesystem show: Get target details.
-        filesystem types: List the types of target Filesystems available
+ filesystem add adls2 sharedKey: Add an ADLS2 via HCFS API FileSystem With Shared Key
+ filesystem add gcs: Add a Google Cloud Storage FileSystem
+ filesystem add hdfs: Add an Hadoop HDFS FileSystem
+ filesystem add local: Add an Local FileSystem via HCFS FileSystem
+ filesystem add s3a: Add an S3A via HCFS API FileSystem.
+ filesystem clear: Delete all targets.
+ filesystem del: Delete a target.
+ filesystem list: List of targets.
+ filesystem show: Get target details.
+ filesystem types: List the types of target Filesystems available
 
 Migration Commands
-        migration del: Delete a migration.
-        migration exclusion add: Add an exclusion to a migration.
-        migration exclusion del: Remove an exclusion from a migration.
-        migration list: List running and active migrations.
-      * migration new: Create a new migration.
-        migration run: Start a migration.
-        migration show: Get migration details.
-        migration stop: Abort a migration.
-        status: Get migration status.
+ migration del: Delete a migration.
+ migration exclusion add: Add an exclusion to a migration.
+ migration exclusion del: Remove an exclusion from a migration.
+ migration list: List running and active migrations.
+ * migration new: Create a new migration.
+ migration run: Start or resume a migration.
+ migration show: Get migration details.
+ migration stop: Abort a migration.
+ status: Get migration status.
 
 Source Commands
-        source clear: Delete all sources.
-        source del: Delete a source.
-        source fs show: Show the source FileSystem Configuration
+ source clear: Delete all sources.
+ source del: Delete a source.
+ source fs show: Show the source FileSystem Configuration
 
 Commands marked with (*) are currently unavailable.
 Type `help <command>` to learn more.
+
+Use backslashes to escape special characters ie. \\ will become \.
+You can test this with the echo command.
 ```
 
 ```text
