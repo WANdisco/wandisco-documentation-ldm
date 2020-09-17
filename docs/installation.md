@@ -14,7 +14,7 @@ If you're new to the concept of LiveData, or want to know what LiveData Migrator
 
 ### Prerequisites
 
-* Linux host running either [SUSE, CentOS or Ubuntu](https://community.wandisco.com/s/article/WANdisco-LiveData-Migrator-Release-Notes-1-4-7).
+* Linux host running either SUSE, CentOS or Ubuntu.
 * Java 1.8 64-bit.
 * Network connectivity from your LiveData Migrator host to your target storage (for example: ADLS Gen2 endpoint or S3 bucket).
 * Port 8081 accessible on your Linux host (to access the UI through a web browser).
