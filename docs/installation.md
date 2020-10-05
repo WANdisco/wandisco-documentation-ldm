@@ -44,16 +44,26 @@ The LiveData Migrator trial license is limited to 14 days operation and 5TB of d
 
 1. Make the installation script executable and install as the root (or sudo) user. These commands assume that the installer is inside your working directory.
 
-   ```text
-   chmod +x livedata-migrator.sh && ./livedata-migrator.sh
+   ```text title="Red Hat/CentOS"
+   chmod +x one-ui_lm_rpm_installer.sh && ./one-ui_lm_rpm_installer.sh
+   ```
+
+   ```text title="Debian"
+   chmod +x one-ui_lm_deb_installer.sh && ./one-ui_lm_deb_installer.sh
    ```
 
    If you're migrating from HDFS, install LiveData Migrator on an edge node in the Hadoop cluster using the HDFS superuser.
 
-   ```text title="Example for HDFS superuser"
+   ```text title="Red Hat/CentOS - example for HDFS superuser"
    su - hdfs
 
-   chmod +x livedata-migrator.sh && sudo ./livedata-migrator.sh
+   chmod +x one-ui_lm_rpm_installer.sh && sudo ./one-ui_lm_rpm_installer.sh
+   ```
+
+   ```text title="Debian - example for HDFS superuser"
+   su - hdfs
+
+   chmod +x one-ui_lm_deb_installer.sh && sudo ./one-ui_lm_deb_installer.sh
    ```
 
 1. Check the service statuses with these commands:
@@ -63,7 +73,7 @@ The LiveData Migrator trial license is limited to 14 days operation and 5TB of d
    ```
 
    ```text
-   service one-ui-server status
+   service livedata-ui status
    ```
 
 1. If Kerberos is enabled in your environment:
