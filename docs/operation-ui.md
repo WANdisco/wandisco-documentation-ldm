@@ -50,6 +50,7 @@ The Bandwidth panel shows how much bandwidth LiveData Migrator is currently usin
 The Storage panel shows the underlying storage used by LiveData Migrator as either a source or target. LiveData Migrator supports one source and one or more targets. Each storage displays its associated processes, such as which LiveData Migrator is used to access it.
 
 Use the Storage panel to:
+
 * View and configure the source and target storages
 * Add further targets
 * Add additional LiveData Migrators and LiveData Plane
@@ -61,6 +62,7 @@ For more information about sources and targets, see the [introduction to LiveDat
 The Rules and Migrations panel in LiveData Migrator shows migrations and their progress. If the UI also manages LiveData Plane, the panel will also show rules.
 
 Use the Rules and Migrations panel to:
+
 * Add further migrations or rules
 * View more detail about existing rules and migrations
 
@@ -73,10 +75,12 @@ The bell icon in the top-right of the UI is where you'll receive notifications a
 ### Configure storage
 
 Configure your storages to define at least one source and at least one target to migrate data. LiveData Migrator will connect to these storages for migration.
+
 * Supported sources are: **HDFS**
-* Supported targets are: **ADSL Gen2** and **S3**
+* Supported targets are: **ADSL Gen2**, **GCS** and **S3**
 
 You can also use the Storage panel to:
+
 * Configure S3-compatible Targets using the [Hadoop S3A configuration](http://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html) exposed in the UI.
 * Connect to additional LiveData Migrator or LiveData Plane instances and configure their respective storages.
 

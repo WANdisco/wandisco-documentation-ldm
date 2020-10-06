@@ -138,6 +138,53 @@ filesystem add adls2 sharedKey --file-system-id mytarget --storage-account-name 
 
 ----
 
+### `filesystem add gcs`
+
+Add a Google Cloud Storage as a migration target using the `filesystem add gcs` command, which requires credentials in the form of an account key file.
+
+```text title="Add a Google Cloud Storage file system"
+SYNOPSYS
+        filesystem add gcs  [--file-system-id] string
+                            [--service-account-key-file] string
+                            [--bucket-name] string
+                            [[--properties-file] list]
+                            [[--properties] list]
+
+OPTIONS
+        --file-system-id  string
+
+                [Mandatory]
+
+        --service-account-key-file  string
+
+                [Mandatory]
+
+        --bucket-name  string
+
+                [Mandatory]
+
+        --properties-file  list
+                Load properties from this file
+                [Optional, default = <none>]
+
+        --properties  list
+                Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
+                [Optional, default = <none>]
+```
+
+#### Mandatory Parameters
+
+* **`--file-system-id`** The identifier to give the new file system resource.
+* **`--service-account-key-file`** The path to a Service Account Key file.
+* **`--bucket-name`** The bucket name of a Google Cloud Storage account.
+
+#### Optional Parameters
+
+* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
+* **`--properties`** Specify properties to use in a comma-separated key/value list.
+
+----
+
 ### `filesystem add hdfs`
 
 Add a Hadoop Distributed File System as either a migration source or target using the `filesystem add hdfs` command.
@@ -919,7 +966,7 @@ OPTIONS
 #### Example
 
 :::caution
-Although present when invoking the `help` command, Google Cloud Storage and Local Filesystem functionality is not yet available. This will be coming soon in a future release.
+Although present when invoking the `help` command, Local Filesystem functionality is not yet available. This will be coming soon in a future release.
 :::
 
 ```text
