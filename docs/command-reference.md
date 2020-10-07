@@ -877,7 +877,7 @@ SYNOPSYS
         status
 ```
 
-#### Examples
+#### Example
 
 ```text
 status
@@ -894,6 +894,60 @@ Running: 0
 
 Ready: 1
      /repl1 5c7271676c8f858ad11011bfa155fc8e43b8fe32
+```
+
+## Bandwidth Policy Commands
+
+----
+
+### `bandwidth policy del`
+
+Delete the current bandwidth policy and revert back to the default policy (unlimited bandwidth).
+
+```text title="Allow the application to use unlimited bandwidth"
+SYNOPSYS
+        bandwidth policy del
+```
+
+----
+
+### `bandwidth policy set`
+
+Delete the current bandwidth policy and revert back to the default policy (unlimited bandwidth).
+
+```text title="Set the application bandwidth limit, in bytes per second"
+SYNOPSYS
+        bandwidth policy set [--value] long  [--unit] string
+
+OPTIONS
+        --value  long
+
+                [Mandatory]
+
+        --unit  string
+
+                [Mandatory]
+```
+
+#### Examples
+
+```text title="Set a limit of 10 Megabytes per second"
+bandwidth policy set --value 10 --unit MB
+```
+
+```text title="Set a limit of 10 Mebibytes per second"
+bandwidth policy set --value 10 --unit MiB
+```
+
+----
+
+### `bandwidth policy show`
+
+Display the current bandwidth policy.
+
+```text title="Get details of the application bandwidth limit, in bytes per second"
+SYNOPSYS
+        bandwidth policy show
 ```
 
 ## Built-in Commands

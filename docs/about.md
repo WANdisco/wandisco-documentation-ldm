@@ -22,6 +22,7 @@ Manage your migrations through a **user interface**, a **command-line interface*
 - Integration with HDFS notifications that describe changes in source data while migration is  underway.
 - Selective and flexible choices of data to be migrated.
 - Measurement and monitoring of migration progress to help estimate completion and plan your other activities.
+- Bandwidth management to control how much of your network capacity is used for migrations.
 
 ## WANdisco LiveData Platform
 

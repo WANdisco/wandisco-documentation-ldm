@@ -121,6 +121,7 @@ Although present when invoking the `help` command, Local Filesystem functionalit
 Exclusions constrain content migrated from a source file system. Adding exclusions to an existing migration will change the future actions performed for that migration, but will not affect previously migrated content.
 
 ### Define exclusions
+
 Define exclusions so you can apply them to migrations.
 
 | Command | Action |
@@ -196,6 +197,20 @@ Migrations can be in one of eight states:
 
 `ABORTED`
 : An *aborted* migration will not make any changes to the target and cannot be run again.
+
+## Bandwidth management
+
+### Manage bandwidth
+
+Limit the total amount of bandwidth LiveData Migrator can use by using the `bandwidth policy` command. Once defined, the bandwidth limit will apply immediately to all migrations (new and ongoing).
+
+Only one bandwidth policy can be active at a time. The default policy is unlimited bandwidth.
+
+| Command | Action |
+|:---|:---|
+| [`bandwidth policy del`](./command-reference.md#bandwidth-policy-del) | Delete a bandwidth policy |
+| [`bandwidth policy set`](./command-reference.md#bandwidth-policy-set) | Define the bandwidth policy |
+| [`bandwidth policy show`](./command-reference.md#bandwidth-policy-show) | Get details for the current bandwidth policy |
 
 ## Using the LiveData Migrator jar
 
