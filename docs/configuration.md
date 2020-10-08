@@ -1,6 +1,6 @@
 ---
 id: configuration
-title: Configuration
+title: Configuration But Shinier
 sidebar_label: Configuration
 ---
 

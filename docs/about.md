@@ -1,6 +1,6 @@
 ---
 id: about
-title: LiveData Migrator
+title: LiveData Migrator Except Better
 sidebar_label: About LiveData Migrator
 ---
 

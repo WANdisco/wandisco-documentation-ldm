@@ -1,6 +1,6 @@
 ---
 id: api-reference
-title: API Reference
+title: API Reference But Stronger
 sidebar_label: API Reference
 ---
 
