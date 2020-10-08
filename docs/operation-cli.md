@@ -126,6 +126,7 @@ Define exclusions so you can apply them to migrations.
 
 | Command | Action |
 |:---|:---|
+| [`exclusion add date`](./command-reference.md#exclusion-add-date) | Create a new date-based rule |
 | [`exclusion add file-size`](./command-reference.md#exclusion-add-file-size) | Create a new file size rule |
 | [`exclusion add regex`](./command-reference.md#exclusion-add-regex) | Create a new regex exclusion rule |
 

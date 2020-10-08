@@ -447,19 +447,59 @@ SYNOPSYS
 
 ----
 
+### `exclusion add date`
+
+Create a date-based exclusion that checks the 'modified date' of any directory or file that the LiveData Migrator encounters during a migration to which the exclusion has been applied. If the path or file being examined by LiveData Migrator has a 'modified date' earlier than the specified date, it will be excluded from the migration.
+
+Once associated with a migration using [`migration exclusion add`](#migration-exclusion-add), files that match the policy will not be migrated.
+
+```text title="Create a new date-based rule"
+SYNOPSYS
+        exclusion add date [--exclusion-id] string
+                           [--description] string
+                           [--before-date] string
+
+OPTIONS
+        --exclusion-id  string
+
+                [Mandatory]
+
+        --description  string
+
+                [Mandatory]
+
+        --before-date  string
+                Expects the ISO format date-time, with an offset, e.g. "2011-12-03T10:15:30+01:00"
+                [Mandatory]
+```
+
+#### Mandatory Parameters
+
+* **`--exclusion-id`** The identifier for the exclusion policy. This is referenced in the UI as **Name**.
+* **`--description`** A user-friendly description for the policy. This is referenced in the UI as **Description**.
+* **`--before-date`** An [ISO formatted](https://www.digi.com/resources/documentation/digidocs/90001437-13/reference/r_iso_8601_date_format.htm) date and time, which can include an offset for a particular time zone. This is referenced in the UI as **TBA**.
+
+#### Example
+
+```text "title=Exclude all files last modified earlier than 1st October 2020 at 10:00am PDT"
+exclusion add date --exclusion-id beforeDate --description "Files earlier than 2020-10-01T10:00:00PDT" --before-date 2020-10-01T10:00:00-07:00
+```
+
+----
+
 ### `exclusion add file-size`
 
 Create an exclusion that can be applied to migrations to constrain the files transferred by a policy based on file size. Once associated with a migration using [`migration exclusion add`](#migration-exclusion-add), files that match the policy will not be migrated.
 
 ```text title="Create a new exclusion by file size policy"
 SYNOPSYS
-        exclusion add file-size [--id] string
+        exclusion add file-size [--exclusion-id] string
                                 [--description] string
                                 [--value] long
                                 [--unit] string
 
 OPTIONS
-        --id  string
+        --exclusion-id  string
 
                 [Mandatory]
 
@@ -478,7 +518,7 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--id`** The identifier for the exclusion policy. This is referenced in the UI as **Name**.
+* **`--exclusion-id`** The identifier for the exclusion policy. This is referenced in the UI as **Name**.
 * **`--description`** A user-friendly description for the policy. This is referenced in the UI as **Description**.
 * **`--value`** The numerical value for the file size, in a unit defined by. This is referenced in the UI as **Value**.
 * **`--unit`** A string to define the unit used, either `B` for bytes, `GB` for gibibytes, `KB` for kibibytes, `MB` for mebibytes, `PB` for pebibytes, or `TB` for tebibytes.
@@ -486,7 +526,7 @@ OPTIONS
 #### Example
 
 ```text
-exclusion add file-size --id 100mbfiles --description "Files greater than 100 MB" --value 100 --unit MB
+exclusion add file-size --exclusion-id 100mbfiles --description "Files greater than 100 MB" --value 100 --unit MB
 ```
 
 ----
@@ -497,12 +537,12 @@ Create an exclusion that can be applied to migrations to constrain the files tra
 
 ```text title="Create a new exclusion by regular expression policy"
 SYNOPSYS
-        exclusion add regex [--id] string
+        exclusion add regex [--exclusion-id] string
                             [--description] string
                             [--regex] string
 
 OPTIONS
-        --id  string
+        --exclusion-id  string
 
                 [Mandatory]
 
@@ -517,14 +557,14 @@ OPTIONS
 
 #### Mandatory Parameters
 
-* **`--id`** The identifier for the exclusion policy. This is referenced in the UI as **Name**.
+* **`--exclusion-id`** The identifier for the exclusion policy. This is referenced in the UI as **Name**.
 * **`--description`** A user-friendly description for the policy. This is referenced in the UI as **Description**.
 * **`--regex`** A regular expression in a syntax similar to that used by Perl. This is referenced in the UI as **Regex**.
 
 #### Example
 
 ```text
-exclusion add regex --description "No paths that start with test"  --id exclusion1 --regex ^test\.*
+exclusion add regex --description "No paths that start with test"  --exclusion-id exclusion1 --regex ^test\.*
 ```
 
 #### Using backslash characters within `--regex` parameter
@@ -532,7 +572,7 @@ exclusion add regex --description "No paths that start with test"  --id exclusio
 If you wish to use a `\` character as part of your regex value, you must escape this character with an additional backslash.
 
 ```text title="Example"
-exclusion add regex --description "No paths that start with a backslash followed by test"  --id exclusion2 --regex ^\\test\.*
+exclusion add regex --description "No paths that start with a backslash followed by test"  --exclusion-id exclusion2 --regex ^\\test\.*
 ```
 
 The response displayed if running through the CLI will **not** hide the additional backslash. However, the internal representation will be as expected within LiveData Migrator (it will read as `^\test.*`).
@@ -550,22 +590,22 @@ NAME
         exclusion del - Delete an exclusion rule.
 
 SYNOPSYS
-        exclusion del [--id] string
+        exclusion del [--exclusion-id] string
 
 OPTIONS
-        --id  string
+        --exclusion-id  string
 
                 [Mandatory]
 ```
 
 #### Mandatory Parameters
 
-* **`--id`** The identifier for the exclusion policy to delete. This is referenced in the UI as **Name**.
+* **`--exclusion-id`** The identifier for the exclusion policy to delete. This is referenced in the UI as **Name**.
 
 #### Example
 
 ```text
-exclusion del --id exclusion1
+exclusion del --exclusion-id exclusion1
 ```
 
 ----
@@ -590,22 +630,22 @@ Get details for an individual exclusion policy by identifier.
 
 ```text title="Get details for a specific exclusion rule"
 SYNOPSYS
-        exclusion show [--id] string
+        exclusion show [--exclusion-id] string
 
 OPTIONS
-        --id  string
+        --exclusion-id  string
 
                 [Mandatory]
 ```
 
 #### Mandatory Parameters
 
-* **`--id`** The identifier for the exclusion policy to show. This is referenced in the UI as **Name**.
+* **`--exclusion-id`** The identifier for the exclusion policy to show. This is referenced in the UI as **Name**.
 
 #### Example
 
 ```text
-exclusion show --id 100mbfiles
+exclusion show --exclusion-id 100mbfiles
 ```
 
 ## Migration Commands
