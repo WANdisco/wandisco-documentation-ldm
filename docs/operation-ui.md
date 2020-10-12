@@ -77,7 +77,7 @@ The bell icon in the top-right of the UI is where you'll receive notifications a
 Configure your storages to define at least one source and at least one target to migrate data. LiveData Migrator will connect to these storages for migration.
 
 * Supported sources are: **HDFS**
-* Supported targets are: **ADSL Gen2**, **GCS** and **S3**
+* Supported targets are: **ADLS Gen2**, **S3**, **GCS**, and **IBM COS**
 
 You can also use the Storage panel to:
 

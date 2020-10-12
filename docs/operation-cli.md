@@ -104,7 +104,7 @@ Although present when invoking the `help` command, Local Filesystem functionalit
 | [`filesystem add adls2 sharedKey`](./command-reference.md#filesystem-add-adls2-sharedkey) | Add an ADLS Gen 2 file system resource |
 | [`filesystem add gcs`](./command-reference.md#filesystem-add-gcs) | Add a Google Cloud Storage file system resource |
 | [`filesystem add hdfs`](./command-reference.md#filesystem-add-hdfs) | Add a Hadoop HDFS file system resource |
-| [`filesystem add s3a`](./command-reference.md#filesystem-add-s3a) | Add an S3 file system resource |
+| [`filesystem add s3a`](./command-reference.md#filesystem-add-s3a) | Add a S3 file system resource (choose this when using IBM COS) |
 
 ### Manage file systems
 

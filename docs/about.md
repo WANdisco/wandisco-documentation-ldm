@@ -14,7 +14,7 @@ WANdisco LiveData Migrator is a fully self-service data migration solution that 
 
 ## Features
 
-LiveData Migrator _migrates changing data_ at scale from HDFS to your choice of target environment, including the ongoing changes made to those data before, throughout and after migration. Targets include  [ADLS Gen 2](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction), [GCS](https://cloud.google.com/storage), [HDFS](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html), and [S3](https://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html).
+LiveData Migrator _migrates changing data_ at scale from HDFS to your choice of target environment, including the ongoing changes made to those data before, throughout and after migration. Targets include  [ADLS Gen 2](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction), [GCS](https://cloud.google.com/storage), [HDFS](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html), and [S3](https://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html) (including [IBM COS](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-getting-started-cloud-object-storage)).
 
 Manage your migrations through a **user interface**, a **command-line interface** or from the self-documenting **REST API**, track and **monitor migration progress**, and take advantage of optional management from WANdisco's **browser-based user interface** and deep integration with **cloud vendors' management interfaces**.
 
@@ -29,7 +29,7 @@ Manage your migrations through a **user interface**, a **command-line interface*
 LiveData Migrator is a part of the WANdisco LiveData Platform, which provides the easiest and most capable solution for migrating your on-premises Hadoop data to cloud environments. Use it to:
 
 - Rapidly **provision a Live Data service** that supports simple and advanced migration needs.
-- **Reduce the cost and risk** of bringing your business-critical data to [Azure Data Lake Storage](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction), [AWS S3](https://aws.amazon.com/s3/), [Google Cloud Storage](https://cloud.google.com/storage), other [HDFS](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html) or [Hadoop-compatible storage platforms](https://cwiki.apache.org/confluence/display/HADOOP2/HCFS).
+- **Reduce the cost and risk** of bringing your business-critical data to [Azure Data Lake Storage](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction), [AWS S3](https://aws.amazon.com/s3/), [IBM Cloud Object Storage](https://www.ibm.com/uk-en/cloud/object-storage), [Google Cloud Storage](https://cloud.google.com/storage), other [HDFS](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html) or [Hadoop-compatible storage platforms](https://cwiki.apache.org/confluence/display/HADOOP2/HCFS).
 - **Continue to run** your on-premises big data operations while migration is in progress.
 
 LiveData Platform solves the challenges of migrating large data volumes from Hadoop to the cloud and keeping those data consistent across storage systems throughput migration, _even while data are under continual change_. It employs a unique, wide-area network capable consensus engine to achieve data consistency and to implement migration of data with consistency guarantees while data are ingested or modified.

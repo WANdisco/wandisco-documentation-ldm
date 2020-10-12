@@ -255,7 +255,7 @@ filesystem add hdfs --file-system-id mysource --source --fs.defaultFS hdfs://myn
 
 ### `filesystem add s3a`
 
-Add an S3 bucket as a target file system using the `filesystem add s3a` command.
+Add an S3 bucket as a target file system using the `filesystem add s3a` command. This method also supports IBM COS buckets.
 
 ```text tile="Add an S3 file system"
 SYNOPSYS
@@ -301,7 +301,7 @@ OPTIONS
 
 * **`--file-system-id`** The identifier for the new file system resource. This is referenced in the UI as **Storage Name**.
 * **`--bucket-name`** The name of your S3 bucket. This is referenced in the UI as **Bucket Name**.
-* **`--credentials-provider`** The Java class name of a credentials provider for authenticating with the S3 endpoint. This is referenced in the UI as **Credentials Provider**.  
+* **`--credentials-provider`** The Java class name of a credentials provider for authenticating with the S3 endpoint. This is referenced in the UI as **Credentials Provider**. This is not a required parameter when adding an IBM COS bucket through the UI.  
   The Provider options available include:
   * **`org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider`**
 
@@ -321,17 +321,19 @@ OPTIONS
     * Credential profiles file at the default location (`~/.aws/credentials`) shared by all AWS SDKs and the AWS CLI.
     * Credentials delivered through the Amazon EC2 container service if `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` environment variable is set and security manager has permission to access the variable.
     * Instance profile credentials delivered through the Amazon EC2 metadata service.
+* **Endpoint** (UI & IBM COS only): This is required when adding an IBM COS bucket. IBM provide a list of available endpoints that can be found in their [public documentation](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-endpoints#endpoints-region).
 
 <h4 id="s3a-optional-parameters">Optional parameters</h4>
 
-* **`--access-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the access key with this parameter. This is referenced in the UI as **Access Key**.
-* **`--secret-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the secret key using this parameter. This is referenced in the UI as **Secret Key**.
+* **`--access-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the access key with this parameter. This is referenced in the UI as **Access Key**. This is a required parameter when adding an IBM COS bucket.
+* **`--secret-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the secret key using this parameter. This is referenced in the UI as **Secret Key**. This is a required parameter when adding an IBM COS bucket.
 * **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
 :::info
 When adding properties via the API or UI, for example to set a custom `fs.s3a.endpoint`, it is required to also set the following properties manually. They are added by default when using the CLI.
 :::
+
 * `fs.s3a.impl` (default `org.apache.hadoop.fs.s3a.S3AFileSystem`)
 * `fs.AbstractFileSystem.s3a.impl` (default `org.apache.hadoop.fs.s3a.S3A`)
 * `fs.s3a.user.agent.prefix` (default `WANdisco/LiveDataMigrator`)
