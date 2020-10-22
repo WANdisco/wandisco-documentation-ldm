@@ -24,15 +24,11 @@ Manage your migrations through a **user interface**, a **command-line interface*
 - Measurement and monitoring of migration progress to help estimate completion and plan your other activities.
 - Bandwidth management to control how much of your network capacity is used for migrations.
 
-## WANdisco LiveData Platform
+## Hive Migrator
 
-LiveData Migrator is a part of the WANdisco LiveData Platform, which provides the easiest and most capable solution for migrating your on-premises Hadoop data to cloud environments. Use it to:
+Hive Migrator is an optional extra component of LiveData Migrator that allows replication of Hive and other SQL engines’ metadata.
 
-- Rapidly **provision a Live Data service** that supports simple and advanced migration needs.
-- **Reduce the cost and risk** of bringing your business-critical data to [Azure Data Lake Storage](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction), [AWS S3](https://aws.amazon.com/s3/), [IBM Cloud Object Storage](https://www.ibm.com/uk-en/cloud/object-storage), [Google Cloud Storage](https://cloud.google.com/storage), other [HDFS](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html) or [Hadoop-compatible storage platforms](https://cwiki.apache.org/confluence/display/HADOOP2/HCFS).
-- **Continue to run** your on-premises big data operations while migration is in progress.
-
-LiveData Platform solves the challenges of migrating large data volumes from Hadoop to the cloud and keeping those data consistent across storage systems throughput migration, _even while data are under continual change_. It employs a unique, wide-area network capable consensus engine to achieve data consistency and to implement migration of data with consistency guarantees while data are ingested or modified.
+The combined LiveData Migrator-Hive Migrator installation package automatically installs Hive Migrator. But if you are using a regular LiveData Migrator installation package, you must install Hive Migrator separately to use it.
 
 ## Get started
 

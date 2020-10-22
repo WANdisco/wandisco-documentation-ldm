@@ -23,6 +23,14 @@ If you're new to the concept of LiveData, or want to know what LiveData Migrator
   * Ability to authenticate as the [HDFS superuser](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsPermissionsGuide.html#The_Super-User) (for example: `hdfs`).
   * If Kerberos is enabled on your Hadoop cluster, a valid keytab containing a suitable principal for the HDFS superuser must be available on the Linux host.
 
+#### Hive Migrator Prerequisites
+
+  If you intend to make use of the Hive Migrator component for LiveData Migrator, ensure the following prerequisites are met:
+
+  * Hive must be present on the cluster.
+  * SSH/CLI access to the cluster.
+  * The Hive keytab and Principal.
+
 ### Machine specification
 
 * **16 CPUs, 32 GB RAM** (minimum **4 CPUs, 16 GB RAM**)
@@ -73,6 +81,10 @@ The LiveData Migrator trial license is limited to 14 days operation and 5TB of d
 
    1. Restart the LiveData Migrator service to make any configuration changes live:  
       `service livedata-migrator restart`
+
+## Installing Hive Migrator
+
+If you intend to make use of the optional extra component for LiveData Migrator, Hive Migrator, you may
 
 ## Using LiveData Migrator
 
