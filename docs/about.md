@@ -28,7 +28,7 @@ Manage your migrations through a **user interface**, a **command-line interface*
 
 Hive Migrator is an optional extra component of LiveData Migrator that allows replication of Hive and other SQL engines’ metadata.
 
-By default, LiveData Migrator installation package automatically installs Hive Migrator. But if you have already installed a previous version of LiveData Migrator that did not include Hive Migrator, you must install Hive Migrator separately to use it.
+By default, the LiveData Migrator installation package automatically installs Hive Migrator. But if you have already installed a previous version of LiveData Migrator that did not include Hive Migrator, you must install Hive Migrator separately to use it.
 
 ## Get started
 

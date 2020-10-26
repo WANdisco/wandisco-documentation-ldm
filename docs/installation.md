@@ -25,7 +25,7 @@ If you're new to the concept of LiveData, or want to know what LiveData Migrator
 
 #### Hive Migrator Prerequisites
 
-If you intend to make use of the Hive Migrator component for LiveData Migrator, ensure the following prerequisites are met:
+If you want to use the Hive Migrator component for LiveData Migrator, ensure the following prerequisites are met:
 
   * Hive must be present on the cluster.
   * SSH/CLI access to the cluster.
@@ -84,7 +84,7 @@ The LiveData Migrator trial license is limited to 14 days operation and 5TB of d
 
 ## Installing Hive Migrator
 
-By default, Hive Migrator is installed alongside LiveData Migrator. But if you are running a previous version of LiveData Migrator that did not come with Hive Migrator or need to install Hive Migrator manually, you may install it with the following steps:
+By default, Hive Migrator is installed alongside LiveData Migrator. But if you are running a previous version of LiveData Migrator that did not come with Hive Migrator or want to install Hive Migrator manually, you may install it with the following steps:
 
 ### Installing Hive Migrator for UI
 
