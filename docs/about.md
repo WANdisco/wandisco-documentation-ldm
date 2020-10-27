@@ -24,11 +24,11 @@ Manage your migrations through a **user interface**, a **command-line interface*
 - Measurement and monitoring of migration progress to help estimate completion and plan your other activities.
 - Bandwidth management to control how much of your network capacity is used for migrations.
 
-## Hive Migrator
+## HiveMigrator
 
-Hive Migrator is an optional extra component of LiveData Migrator that allows replication of Hive and other SQL engines’ metadata.
+HiveMigrator (HVM) is an optional extra component of LiveData Migrator that allows migration of Hive and other SQL engines’ metadata. This can be configured between on-premise and cloud environments as well as cloud-to-cloud.
 
-By default, the LiveData Migrator installation package automatically installs Hive Migrator. But if you have already installed a previous version of LiveData Migrator that did not include Hive Migrator, you must install Hive Migrator separately to use it.
+By default, the LiveData Migrator installation package automatically includes HiveMigrator.
 
 ## Get started
 
