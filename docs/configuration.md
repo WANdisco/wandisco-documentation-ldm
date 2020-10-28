@@ -5,13 +5,14 @@ sidebar_label: Configuration
 ---
 
 Find details here for the configuration properties that you can use when running LiveData Migrator as a system service. Properties are defined in the following files:
+
 * LiveData Migrator `/etc/wandisco/livedata-migrator/application.properties`
 * UI `/etc/wandisco/ui/application-prod.properties`
 
 Each configuration property can also be provided to LiveData Migrator as a command-line argument when launched, e.g. `--server.port=19999`.
 
 :::note
-You'll need to perform a restart after making any configuration changes to LiveData Migrator or the UI. To do this, run `service livedata-migrator restart` or `service one-ui-server restart` as appropriate.
+You'll need to perform a restart after making any configuration changes to LiveData Migrator or the UI. To do this, run `service livedata-migrator restart` or `service livedata-ui restart` as appropriate.
 :::
 
 ## LiveData Migrator Configuration

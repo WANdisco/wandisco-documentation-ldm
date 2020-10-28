@@ -65,6 +65,12 @@ The LiveData Migrator trial license is limited to 14 days operation and 5TB of d
    chmod +x livedata-migrator.sh && sudo ./livedata-migrator.sh
    ```
 
+1. After installation is complete, the following prompt appears:
+
+   `Do you want to start command line interface?`
+
+   Enter `y` if you wish to proceed directly to the [command line interface](./operation-cli.md), or enter `n` to return to the terminal.
+
 1. Check the service statuses with these commands:
 
    ```text
@@ -72,16 +78,12 @@ The LiveData Migrator trial license is limited to 14 days operation and 5TB of d
    ```
 
    ```text
-   service one-ui-server status
+   service hivemigrator status
    ```
 
-1. If Kerberos is enabled in your environment:
-
-   1. Edit the Kerberos security properties in the `/etc/wandisco/livedata-migrator/application.properties` file.  
-      Refer to the [Kerberos Integration](./configuration.md#kerberos-integration) section for details about the required properties.
-
-   1. Restart the LiveData Migrator service to make any configuration changes live:  
-      `service livedata-migrator restart`
+   ```text
+   service livedata-ui status
+   ```
 
 ### HiveMigrator
 
