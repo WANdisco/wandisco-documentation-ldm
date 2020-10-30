@@ -971,6 +971,13 @@ OPTIONS
                 [Mandatory]
 ```
 
+#### Mandatory Parameters
+
+* **`--value`** Define the number of byte units.
+* **`--unit`** Define the byte unit to be used.  
+  Decimal units: `KB`, `MB`, `GB`, `TB`, `PB`, `EB`, `ZB`, `YB`  
+  Binary units: `KiB`, `MiB`, `GiB`, `TiB`, `PiB`, `EiB`, `ZiB`, `YiB`
+
 #### Examples
 
 ```text title="Set a limit of 10 Megabytes per second"
@@ -990,6 +997,279 @@ Display the current bandwidth policy.
 ```text title="Get details of the application bandwidth limit, in bytes per second"
 SYNOPSYS
         bandwidth policy show
+```
+
+## Hive Agent Commands
+
+----
+
+### `hive agent add azure`
+
+Add an Azure hive agent to connect to an [Azure SQL](https://docs.microsoft.com/en-gb/azure/azure-sql/azure-sql-iaas-vs-paas-what-is-overview) database using the `hive agent add azure` command.
+
+:::info
+The Azure hive agent requires a ADLS Gen2 storage account and container name, this is only for the purposes of generating the correct location for the database. The container will not be accessed by the Hive agent and no data will be written to the container.
+:::
+
+```text title="Add Azure SQL agent"
+SYNOPSYS
+        hive agent add azure [[--name] string]  [--db-server-name] string  [--database-name] string  [--database-user] string  [--database-password] string  [--storage-account] string  [--container-name] string  [[--root-folder] string]  [[--hdi-version] string]  [[--insecure] boolean]
+
+OPTIONS
+        --name  string
+                name of the agent
+                [Optional, default = <nothing>]
+
+        --db-server-name  string
+                Azure SQL database server name
+                [Mandatory]
+
+        --database-name  string
+                Azure SQL database name
+                [Mandatory]
+
+        --database-user  string
+                Azure SQL database user
+                [Mandatory]
+
+        --database-password  string
+                Azure SQL database password
+                [Mandatory]
+
+        --storage-account  string
+                Azure storage account name
+                [Mandatory]
+
+        --container-name  string
+                Azure storage account container name
+                [Mandatory]
+
+        --root-folder  string
+                Azure root folder
+                [Optional, default = <nothing>]
+
+        --hdi-version  string
+                Azure HDI version (3.6 or 4.0)
+                [Optional, default = <nothing>]
+
+        --insecure  boolean
+                use insecure connection to Azure
+                [Optional, default = <nothing>]
+```
+
+#### Mandatory Parameters
+
+* **`--db-server-name`** The Azure SQL database server name.
+* **`--database-name`** The Azure SQL database name.
+* **`--database-user`** The user name to access the database.
+* **`--database-password`** The user password to access the database.
+* **`--storage-account`** The name of the ADLS Gen 2 storage account.
+* **`--container-name`** The name of the container in the ADLS Gen2 storage account.
+
+#### Optional Parameters
+
+* **`--name`** The identifier to give to the new Hive agent.
+* **`--root-folder`** The root directory for the Azure database.
+* **`--hdi-version`** The [HDI](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-component-versioning) version. This is relevant if you are intending to integrate your SQL server into a HDInsights cluster.
+* **`--insecure`** Define an insecure connection (SSL disabled) to the Azure SQL database server (default is `false`).
+
+#### Example
+
+```text
+hive agent add azure --name azureAgent --db-server-name mysqlserver --database-name mydb1 --database-user azureuser --database-password mypassword --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6
+```
+
+----
+
+### `hive agent add filesystem`
+
+Add a filesystem hive agent to connect to your host's local filesystem using the `hive agent add filesystem` command.
+
+```text title="Add filesystem agent"
+SYNOPSYS
+        hive agent add filesystem [--filesystem-id] string  [--root-folder] string  [[--name] string]
+
+OPTIONS
+        --filesystem-id  string
+                filesystem id to use by filesystem agent
+                [Mandatory]
+
+        --root-folder  string
+                path to use as root folder by filesystem agent
+                [Mandatory]
+
+        --name  string
+                name of the agent
+                [Optional, default = <nothing>]
+```
+
+#### Mandatory Parameters
+
+* **`--filesystem-id`** The filesystem identifier to be used.
+* **`--root-folder`** The path to use as the root directory for the filesystem agent.
+
+#### Optional Parameters
+
+* **`--name`** The identifier to give to the new Hive agent.
+
+#### Example
+
+```text
+hive agent add filesystem --filesystem-id myfilesystem --root-folder /var/lib/mysql --name fsAgent
+```
+
+----
+
+### `hive agent add glue`
+
+Add an [AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html) hive agent to connect to an [AWS-hosted database](https://docs.aws.amazon.com/whitepapers/latest/aws-overview/database.html) using the `hive agent add glue` command.
+
+```text title="Add AWS Glue agent"
+SYNOPSYS
+        hive agent add glue [[--name] string]  [[--config-path] string]  [[--access-key] string]  [[--secret-key] string]  [[--session-token] string]  [[--glue-endpoint] string]  [[--aws-region] string]  [[--aws-catalog-credentials-provider-factory-class] string]  [[--default-fs] string]
+
+OPTIONS
+        --name  string
+                name of the agent
+                [Optional, default = <nothing>]
+
+        --config-path  string
+                path to a directory containing glue-site.xml
+                [Optional, default = <nothing>]
+
+        --access-key  string
+                AWS access key. Valid for StaticCredentialsProviderFactory and SessionCredentialsProviderFactory.
+                [Optional, default = <nothing>]
+
+        --secret-key  string
+                AWS secret key. Valid for StaticCredentialsProviderFactory and SessionCredentialsProviderFactory.
+                [Optional, default = <nothing>]
+
+        --session-token  string
+                AWS session token. Valid only for SessionCredentialsProviderFactory
+                [Optional, default = <nothing>]
+
+        --glue-endpoint  string
+                AWS Glue endpoint
+                [Optional, default = <nothing>]
+
+        --aws-region  string
+                AWS region. Defaults to us-east-1
+                [Optional, default = <nothing>]
+
+        --aws-catalog-credentials-provider-factory-class  string
+                AWS catalog credentials provider factory class.
+                [Optional, default = <nothing>]
+
+        --default-fs  string
+                base URI of the filesystem to rewrite LOCATION strings into. I.e. s3:///test_bucket/
+                [Optional, default = <nothing>]
+```
+
+#### Mandatory Parameters
+
+Not applicable
+
+#### Optional Parameters
+
+* **`--name`** The identifier to give to the new Hive agent.
+* **`--config-path`** The path to the directory containing the `glue-site.xml`.
+* **`--access-key`** The [AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
+* **`--secret-key`** The [AWS secret key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
+* **`--session-token`** The [AWS session token](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html). Only valid if using `SessionCredentialsProviderFactory` for the `--aws-catalog-credentials-provider-factory-class` parameter.
+* **`--glue-endpoint`** The [AWS Glue endpoint](https://docs.aws.amazon.com/glue/latest/dg/console-connections.html?icmpid=docs_glue_console) for connections to databases.
+* **`--aws-region`** The [AWS region](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) that your database is located in (default is `us-east-1`).
+* **`--aws-catalog-credentials-provider-factory-class`** The [AWS catalog credentials provider factory class](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-specify-provider) (default is [DefaultAWSCredentialsProviderChain](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/index.html?com/amazonaws/auth/DefaultAWSCredentialsProviderChain.html)).
+* **`--default-fs`** The base URI of the filesystem to generate the locations within the database (for example: `s3:///test_bucket/`).
+
+#### Example
+
+```text
+hive agent add glue --name glueAgent --access-key ACCESS6HCFPAQIVZTKEY --secret-key SECRET1vTMuqKOIuhET0HAI78UIPfSRjcswTKEY --aws-region eu-west-1 --default-fs s3:///test_bucket/
+```
+
+### `hive agent add hive`
+
+Add a hive agent to connect to a local or remote [Apache Hive](https://cwiki.apache.org/confluence/display/Hive/Home) metastore using the `hive agent add hive` command.
+
+```text title="Add local or remote hive agent"
+SYNOPSYS
+        hive agent add hive [[--config-path] string]  [[--kerberos-principal] string]  [[--kerberos-keytab] string]  [[--name] string]  [[--host] string]  [[--port] integer]  [--autodeploy]  [[--ssh-user] string]  [[--ssh-key] file]  [[--ssh-port] int]  [--use-sudo]  [--ignore-host-checking]
+
+OPTIONS
+        --config-path  string
+                path to a directory containing hive configuration files
+                [Optional, default = <nothing>]
+
+        --kerberos-principal  string
+                kerberos principal to use
+                [Optional, default = <nothing>]
+
+        --kerberos-keytab  string
+                path to kerberos keytab file
+                [Optional, default = <nothing>]
+
+        --name  string
+                name of the agent
+                [Optional, default = <nothing>]
+
+        --host  string
+                host where remote hive agent will be deployed
+                [Optional, default = <nothing>]
+
+        --port  integer
+                port to use by remote hive agent
+                [Optional, default = <nothing>]
+
+        --autodeploy    automatically deploy remote agent. If specified, you must specify sshKey to connect.
+                [Optional, default = false]
+
+        --ssh-user  string
+                ssh user to use for authentication on remote host to perform automatic deployment
+                [Optional, default = <nothing>]
+
+        --ssh-key  file
+                ssh key to use for authentication on remote host to perform automatic deployment
+                [Optional, default = <nothing>]
+
+        --ssh-port  int
+                ssh port to use to perform automatic deployment
+                [Optional, default = 22]
+
+        --use-sudo      use sudo for privileged commands while performing remote installation
+                [Optional, default = false]
+
+        --ignore-host-checking  ignore strict host key checking for unknown hosts
+                [Optional, default = false]
+```
+
+#### Mandatory Parameters
+
+Not applicable
+
+#### Optional Parameters
+
+* **`--config-path`** The path to the directory containing the Hive configuration files (for example: `/etc/hive/conf`).
+* **`--kerberos-principal`** The Kerberos principal to use for the Hive service (for example: `hive/_HOST@REALM.COM`). Not required if Kerberos is disabled.
+* **`--kerberos-keytab`** The path to the Kerberos keytab containing the principal to use for the Hive service (for example: `/etc/security/keytabs/hive.service.keytab`). Not required if Kerberos is disabled.
+* **`--name`** The identifier to give to the new Hive agent.
+* **`--host`** The host where the remote hive agent will be deployed, not required if deploying a local hive agent.
+* **`--port`** The port for the remote hive agent to use on the remote host, not required if deploying a local hive agent.
+* **`--autodeploy`** The remote agent will be automatically deployed when this flag is used. If using this, the `--ssh-key` parameter must also be specified.
+* **`--ssh-user`** The SSH user to use for authentication on the remote host to perform automatic deployment (when using the `--autodeploy` parameter).
+* **`--ssh-key`** The absolute path to the SSH private key to use for authentication on the remote host to perform automatic deployment (when using the `--autodeploy` parameter).
+* **`--ssh-port`** The SSH port to use for authentication on the remote host to perform automatic deployment (when using the `--autodeploy` parameter).
+* **`--use-sudo`** All commands will use `sudo` on the remote host when performing automatic deployment (using the `--autodeploy` parameter).
+* **`--ignore-host-checking`** Ignore [strict host key checking](https://www.redhat.com/sysadmin/linux-knownhosts-failures) when performing the automatic deployment (using the `--autodeploy` parameter).
+
+#### Examples
+
+```text
+hive agent add hive --name sourceAgent --kerberos-keytab /etc/security/keytabs/hive.service.keytab --kerberos-principal hive/_HOST@REALM.COM
+```
+
+```text
+hive agent add hive --name targetAgent --kerberos-keytab /etc/security/keytabs/hive.service.keytab --kerberos-principal hive/_HOST@REALM.COM --config-path /etc/hive/conf --host myRemoteHost.example.com --port 5052 --autodeploy --ssh-user root --ssh-key /root/.ssh/id_rsa --ssh-port 22
 ```
 
 ## Built-in Commands
@@ -1065,53 +1345,110 @@ OPTIONS
 Although present when invoking the `help` command, Local Filesystem functionality is not yet available. This will be coming in a future release.
 :::
 
-```text
-help
+```text title="help"
 AVAILABLE COMMANDS
 
+Bandwidth Policy Commands
+        bandwidth policy del: Allow the application to use unlimited bandwidth.
+        bandwidth policy set: Set the application bandwidth limit, in bytes per second.
+        bandwidth policy show: Get details of the application bandwidth limit, in bytes per second.
+
 Built-In Commands
- clear: Clear the shell screen.
- echo: Print message
- exit, quit: Exit the shell.
- help: Display help about available commands.
- history: Display or save the history of previously run commands
- script: Read and execute commands from a file.
- stacktrace: Display the full stacktrace of the last error.
+        clear: Clear the shell screen.
+        echo: Print message
+        exit, quit: Exit the api.
+        help: Display help about available commands.
+        history: Display or save the history of previously run commands
+        script: Read and execute commands from a file.
+
+Change log level commands
+        log debug: Enable debug level logging
+        log info: Enable info level logging
+        log off: Disable logging
+        log trace: Enable trace level logging
+
+Connect commands
+        connect hivemigrator: connect hivemigrator
+        connect livemigrator: connect livemigrator
 
 Exclusion Commands
- exclusion add file-size: Create a new file size rule.
- exclusion add regex: Create a new regex exclusion rule.
- exclusion del: Delete an exclusion rule.
- exclusion list: List all exclusion rules.
- exclusion show: Get details for a particular exclusion rule.
+        exclusion add date: Create a new date-based rule.
+        exclusion add file-size: Create a new file size rule.
+        exclusion add regex: Create a new regex exclusion rule.
+        exclusion del: Delete an exclusion rule.
+        exclusion list: List all exclusion rules.
+        exclusion show: Get details for a particular exclusion rule.
 
 Filesystem Commands
- filesystem add adls2 sharedKey: Add an ADLS2 via HCFS API FileSystem With Shared Key
- filesystem add gcs: Add a Google Cloud Storage FileSystem
- filesystem add hdfs: Add an Hadoop HDFS FileSystem
- filesystem add local: Add an Local FileSystem via HCFS FileSystem
- filesystem add s3a: Add an S3A via HCFS API FileSystem.
- filesystem clear: Delete all targets.
- filesystem del: Delete a target.
- filesystem list: List of targets.
- filesystem show: Get target details.
- filesystem types: List the types of target Filesystems available
+        filesystem add adls2 sharedKey: Add an ADLS2 FileSystem via HCFS API FileSystem With Shared Key
+        filesystem add gcs: Add a GCS FileSystem via HCFS API FileSystem
+        filesystem add hdfs: Add a Hadoop HDFS FileSystem FileSystem
+        filesystem add local: Add a Local FileSystem via HCFS
+        filesystem add s3a: Add a S3A FileSystem via HCFS API
+        filesystem auto-discover-source hdfs: Auto-discover-source Hadoop HDFS FileSystem FileSystem
+        filesystem clear: Delete all targets.
+        filesystem del: Delete a target.
+        filesystem list: List of targets.
+        filesystem show: Get target details.
+        filesystem types: List the types of target Filesystems available
+
+Hive Agent configuration commands
+        hive agent add azure: Add Azure SQL agent
+        hive agent add filesystem: Add filesystem agent.
+        hive agent add glue: Add AWS Glue agent
+        hive agent add hive: Add local or remote hive agent.
+        hive agent check: Check if agent configuration is valid & connectable
+        hive agent configure azure: Change agent configuration
+        hive agent configure filesystem: Change agent configuration
+        hive agent configure glue: Change agent configuration
+        hive agent configure hive: Change agent configuration
+        hive agent delete: Delete agent
+        hive agent list: List already added agents.
+        hive agent show: Show agent configuration.
+        hive agent types: Print list of supported agent types.
+
+Hive migration commands
+        hive migration add: create new migration
+        hive migration delete: delete migration from the list. Migration should be stopped
+        hive migration list: print a list of all migrations
+        hive migration pause: pause migration from the list
+        hive migration pause --all: pause all migrations
+        hive migration resume: resume migration from the list
+        hive migration resume --all: resume all migrations
+        hive migration show: show info about specific migration
+        hive migration start: start migration
+        hive migration start --all: start all migrations
+        hive migration status: show migration status
+        hive migration status --all: show all migration statuses
+        hive migration stop: stop running migration
+        hive migration stop --all: stop all running migrations
+
+Hive rule configuration commands
+        hive rule add, hive rule create: Add new hive migration rule
+        hive rule configure: Change selected rule parameters
+        hive rule delete: Delete selected hive migration rule
+        hive rule list: Get a list of defined rules
+        hive rule show: Show rule details
+
+License manipulation commands
+        license show: show used license
+        license upload: upload license file
 
 Migration Commands
- migration del: Delete a migration.
- migration exclusion add: Add an exclusion to a migration.
- migration exclusion del: Remove an exclusion from a migration.
- migration list: List running and active migrations.
- * migration new: Create a new migration.
- migration run: Start or resume a migration.
- migration show: Get migration details.
- migration stop: Abort a migration.
- status: Get migration status.
+      * migration add: Create a new migration.
+        migration del: Delete a migration.
+        migration exclusion add: Add an exclusion to a migration.
+        migration exclusion del: Remove an exclusion from a migration.
+        migration list: List running and active migrations.
+        migration run: Start or resume a migration.
+        migration show: Get migration details.
+        migration stop: Stop migration.
+        status: Get migration status.
 
 Source Commands
- source clear: Delete all sources.
- source del: Delete a source.
- source fs show: Show the source FileSystem Configuration
+        source clear: Delete all sources.
+        source del: Delete a source.
+        source fs show: Show the source FileSystem Configuration
 
 Commands marked with (*) are currently unavailable.
 Type `help <command>` to learn more.
@@ -1198,14 +1535,16 @@ The action prompt provides many features to guide you during operation.
 
 ## System service commands
 
-### LiveData Migrator
+The service scripts can be used to control operation of each individual service at any time.
 
-The LiveData Migrator service script can be used to control operation of the service at any time:
+### LiveData Migrator
 
 `service livedata-migrator start|stop|force-reload|restart|status`
 
-### UI
+### HiveMigrator
 
-The UI service script can be used to control operation of the service at any time:
+`service hivemigrator start|stop|force-reload|restart|status`
+
+### LiveData UI
 
 `service livedata-ui start|stop|force-reload|restart|status`
