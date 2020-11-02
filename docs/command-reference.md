@@ -1272,6 +1272,629 @@ hive agent add hive --name sourceAgent --kerberos-keytab /etc/security/keytabs/h
 hive agent add hive --name targetAgent --kerberos-keytab /etc/security/keytabs/hive.service.keytab --kerberos-principal hive/_HOST@REALM.COM --config-path /etc/hive/conf --host myRemoteHost.example.com --port 5052 --autodeploy --ssh-user root --ssh-key /root/.ssh/id_rsa --ssh-port 22
 ```
 
+----
+
+### `hive agent check`
+
+Check the configuration of an existing hive agent using `hive agent check`.
+
+```text title="Check if agent configuration is valid & connectable"
+SYNOPSYS
+        hive agent check [--name] string
+
+OPTIONS
+        --name  string
+                name of the agent
+                [Mandatory]
+```
+
+#### Example
+
+```text
+hive agent check --name azureAgent
+```
+
+----
+
+### `hive agent configure azure`
+
+Change the configuration of an existing Azure hive agent using `hive agent configure azure`.
+
+The parameters that can be changed are the same as the ones listed in the [`hive agent add azure`](#hive-agent-add-azure) section.
+
+All parameters are optional except `--name`, which is required to specify the existing hive agent that you wish to configure.
+
+#### Example
+
+```text
+hive agent configure azure --name azureAgent --database-password CorrectPassword
+```
+
+----
+
+### `hive agent configure filesystem`
+
+Change the configuration of an existing filesystem hive agent using `hive agent configure filesystem`.
+
+The parameters that can be changed are the same as the ones listed in the [`hive agent add filesystem`](#hive-agent-add-filesystem) section.
+
+All parameters are optional except `--name`, which is required to specify the existing hive agent that you wish to configure.
+
+#### Example
+
+```text
+hive agent configure filesystem --name fsAgent --root-folder /user/dbuser/databases
+```
+
+----
+
+### `hive agent configure glue`
+
+Change the configuration of an existing AWS Glue hive agent using `hive agent configure glue`.
+
+The parameters that can be changed are the same as the ones listed in the [`hive agent add glue`](#hive-agent-add-glue) section.
+
+All parameters are optional except `--name`, which is required to specify the existing hive agent that you wish to configure.
+
+#### Example
+
+```text
+hive agent configure glue --name glueAgent --aws-region us-east-2
+```
+
+----
+
+### `hive agent configure hive`
+
+Change the configuration of an existing Apache hive agent using `hive agent configure hive`.
+
+The parameters that can be changed are the same as the ones listed in the [`hive agent add hive`](#hive-agent-add-hive) section.
+
+All parameters are optional except `--name`, which is required to specify the existing hive agent that you wish to configure.
+
+#### Example
+
+```text
+hive agent configure hive --name sourceAgent --kerberos-keytab /opt/keytabs/hive.keytab --kerberos-principal hive/myhostname.example.com@REALM.COM
+```
+
+----
+
+### `hive agent delete`
+
+Delete the specified hive agent with `hive agent delete`.
+
+```text title="Delete agent"
+SYNOPSYS
+        hive agent delete [--name] string
+
+OPTIONS
+        --name  string
+                name of the agent
+                [Mandatory]
+```
+
+#### Example
+
+```text
+hive agent delete --name azureAgent
+```
+
+----
+
+### `hive agent list`
+
+List configured hive agents with `hive agent list`.
+
+```text title="List already added agents"
+SYNOPSYS
+        hive agent list [--detailed]
+
+OPTIONS
+        --detailed
+                [Optional, default = false]
+```
+
+#### Example
+
+```text
+hive agent list --detailed
+```
+
+----
+
+### `hive agent show`
+
+Show the configuration of a hive agent with `hive agent show`.
+
+```text title="Show agent configuration"
+SYNOPSYS
+        hive agent show [--name] string
+
+OPTIONS
+        --name  string
+                name of the agent
+                [Mandatory]
+```
+
+#### Example
+
+```text
+hive agent show --name azureAgent
+```
+
+----
+
+### `hive agent types`
+
+Print a list of supported hive agent types with `hive agent types`.
+
+```text title="Print list of supported agent types"
+SYNOPSYS
+        hive agent types
+```
+
+#### Example
+
+```text
+hive agent types
+```
+
+## Hive Migration Commands
+
+----
+
+### `hive migration add`
+
+Create a new hive migration to initiate metadata migration from your source database or metastore.
+
+:::info
+[Create hive rules](#hive-rule-addhive-rule-create) before initiating a hive migration to specify which databases and tables are migrated.
+:::
+
+```text title="create new migration"
+SYNOPSYS
+        hive migration add [--source] string  [--target] string  [[--rule-names] list]  [[--name] string]  [--auto-start]  [--once]
+
+OPTIONS
+        --source  string
+                name of agent which should be a source of migration
+                [Mandatory]
+
+        --target  string
+                name of agent which should be a target of migration
+                [Mandatory]
+
+        --rule-names  list
+                rule name or a list of rule names to match objects on a source & target for migration. List of rules can be specified separated by the comma (','). You can also use quotes if there are spaces around commas.
+                [Optional, default = <nothing>]
+
+        --name  string
+                migration name
+                [Optional, default = <nothing>]
+
+        --auto-start    immediately start created migration
+                [Optional, default = <nothing>]
+
+        --once  migration will be stopped after all matching objects are migrated
+                [Optional, default = <nothing>]
+```
+
+#### Mandatory Parameters
+
+* **`--source`** The name of the hive agent for the source of migration.
+* **`--target`** The name of the hive agent for the target of migration.
+
+#### Optional Parameters
+
+* **`--rule-names`** The rule name or list of rule names to use with the migration. Multiple rules need to be comma separated (for example: `rule1,rule2,rule3`).
+* **`--name`** The name to identify the migration with.
+* **`--auto-start`** Specify this parameter to start the migration immediately after creation.
+* **`--once`** Specify this parameter to perform a one-time migration, and not continuously scan for new or changing metadata.
+
+#### Example
+
+```text
+hive migration add --source sourceAgent --target remoteAgent --rule-names test_dbs,user_dbs --name hive_migration --auto-start
+```
+
+----
+
+### `hive migration delete`
+
+Delete a hive migration.
+
+:::note
+A hive migration must be stopped state before it can be deleted, this can be achieved by using the `--force-stop` parameter with this command.
+:::
+
+```text title="Delete migration from the list, migration should be stopped"
+SYNOPSYS
+        hive migration delete [--name] string  [--force-stop]
+
+OPTIONS
+        --name  string
+                migration name
+                [Mandatory]
+
+        --force-stop    also stop migration if it's in progress. By default, migration should be stopped before delete.
+                [Optional, default = false]
+```
+
+#### Example
+
+```text
+hive migration delete --name hive_migration --force-stop
+```
+
+----
+
+### `hive migration list`
+
+List all hive migrations.
+
+```text title="print a list of all migrations"
+SYNOPSYS
+        hive migration list
+```
+
+#### Example
+
+```text
+hive migration list
+```
+
+----
+
+### `hive migration pause`
+
+Pause a hive migration or a list of hive migrations (comma separated).
+
+```text title="Pause migration from the list"
+SYNOPSYS
+        hive migration pause [--names] list
+
+OPTIONS
+        --names  list
+                migration name. List of migrations can be specified separated by comma (','). You can also use quotes if there are spaces around commas.
+                [Mandatory]
+```
+
+#### Example
+
+```text
+hive migration pause --names hive_migration1,hive_migration2
+```
+
+### `hive migration pause --all`
+
+Pause all hive migrations.
+
+```text title="Pause all migrations"
+SYNOPSYS
+        hive migration pause --all
+```
+
+#### Example
+
+```text
+hive migration pause --all
+```
+
+----
+
+### `hive migration resume`
+
+Resume a paused hive migration or a list of paused hive migrations (comma separated).
+
+```text title="Resume migration from the list"
+SYNOPSYS
+        hive migration resume [--names] list
+
+OPTIONS
+        --names  list
+                migration name. List of migrations can be specified separated by comma (','). You can also use quotes if there are spaces around commas.
+                [Mandatory]
+```
+
+#### Example
+
+```text
+hive migration resume --names hive_migration1,hive_migration2
+```
+
+### `hive migration resume --all`
+
+Resume all hive migrations.
+
+```text title="Resume all migrations"
+SYNOPSYS
+        hive migration resume --all
+```
+
+#### Example
+
+```text
+hive migration resume --all
+```
+
+----
+
+### `hive migration show`
+
+Display information about a hive migration.
+
+```text title="Show info about specific migration"
+SYNOPSYS
+        hive migration show [--name] string
+
+OPTIONS
+        --name  string
+                migration name
+                [Mandatory]
+```
+
+#### Example
+
+```text
+hive migration show --name hive_migration
+```
+
+----
+
+### `hive migration start`
+
+Start a hive migration or a list of hive migrations (comma separated).
+
+:::note
+Specify the `--once` parameter to perform a one-time migration, and not continuously scan for new or changing metadata.
+:::
+
+```text title="Start migration"
+SYNOPSYS
+        hive migration start [--names] list  [--once]
+
+OPTIONS
+        --names  list
+                migration name. List of migrations can be specified separated by comma (','). You can also use quotes if there are spaces around commas.
+                [Mandatory]
+
+        --once
+                [Optional, default = false]
+```
+
+#### Example
+
+```text
+hive migration start --names hive_migration1,hive_migration2
+```
+
+### `hive migration start --all`
+
+Start all hive migrations.
+
+:::note
+Specify the `--once` parameter to perform a one-time migration, and not continuously scan for new or changing metadata.
+:::
+
+```text title="Start migration"
+SYNOPSYS
+        hive migration start --all [--once]
+
+OPTIONS
+        --once
+                [Optional, default = false]
+```
+
+#### Example
+
+```text
+hive migration start --all --once
+```
+
+----
+
+### `hive migration status`
+
+Show the status of a hive migration or a list of hive migrations (comma separated).
+
+```text title="Show migration status"
+SYNOPSYS
+        hive migration status [--names] list
+
+OPTIONS
+        --names  list
+                migration name. List of migrations can be speficied separated by comma (','). You can also use quotes if there are spaces around commas.
+                [Mandatory]
+```
+
+#### Example
+
+```text
+hive migration status --names hive_migration1,hive_migration2
+```
+
+### `hive migration status --all`
+
+Show the status of all hive migrations.
+
+```text title="Start migration"
+SYNOPSYS
+        hive migration status --all
+```
+
+#### Example
+
+```text
+hive migration status --all
+```
+
+----
+
+### `hive migration stop`
+
+Stop a running hive migration or a list of running hive migrations (comma separated).
+
+```text title="Stop running migration"
+SYNOPSYS
+        hive migration stop [--names] list
+
+OPTIONS
+        --names  list
+                migration name. List of migrations can be speficied separated by comma (','). You can also use quotes if there are spaces around commas.
+                [Mandatory]
+```
+
+#### Example
+
+```text
+hive migration stop --names hive_migration1,hive_migration2
+```
+
+### `hive migration stop --all`
+
+Stop all running hive migrations.
+
+```text title="Stop all running migrations"
+SYNOPSYS
+        hive migration stop --all
+```
+
+#### Example
+
+```text
+hive migration stop --all
+```
+
+## Hive Rule commands
+
+----
+
+### `hive rule add`,`hive rule create`
+
+Create a hive migration rule that is used to define which databases and tables are migrated.
+
+:::info
+Specify these rules when [starting a new migration](#hive-migration-add) to control which databases and tables are migrated.
+:::
+
+```text title="Add new hive migration rule"
+SYNOPSYS
+        hive rule add [--database-pattern] string  [--table-pattern] string  [[--name] string]
+
+OPTIONS
+        --database-pattern  string
+                Pattern to match database name. For example db* would include all databases starting with 'db', like 'dbname1'.
+                [Mandatory]
+
+        --table-pattern  string
+                Pattern to match table name. For example table* would include all tables starting with 'table', like 'tablename1'.
+                [Mandatory]
+
+        --name  string
+                Rule name
+                [Optional, default = <nothing>]
+
+ALSO KNOWN AS
+        hive rule create
+```
+
+#### Mandatory Parameters
+
+* **`--database-pattern`** Specify a [regex](https://regex101.com/) pattern that will match the database names you want to migrate.
+* **`--table-pattern`** Specify a [regex](https://regex101.com/) pattern that will match the table names you want to migrate.
+
+:::tip
+You can use a single asterisk (`*`) if you want to match all databases and/or all tables within the metastore/database.
+:::
+
+#### Optional Parameters
+
+* **`--name`** The name for the hive rule.
+
+#### Example
+
+```text title="Match all database names that start with test and all tables inside of them"
+hive rule add --name test_databases --database-pattern test* --table-pattern *
+```
+
+----
+
+### `hive rule configure`
+
+Change the parameters of an existing hive rule.
+
+The parameters that can be changed are the same as the ones listed in the [`hive rule add`,`hive rule create`](#hive-rule-addhive-rule-create) section.
+
+All parameters are optional except `--name`, which is required to specify the existing hive rule that you wish to configure.
+
+#### Example
+
+```text
+hive rule configure --name test_databases --database-pattern test_db*
+```
+
+----
+
+### `hive rule delete`
+
+Delete a hive rule.
+
+```text title="Delete selected hive migration rule"
+SYNOPSYS
+        hive rule delete [--name] string
+
+OPTIONS
+        --name  string
+                Rule name
+                [Mandatory]
+```
+
+#### Example
+
+```text
+hive rule delete --name test_databases
+```
+
+----
+
+### `hive rule list`
+
+List all hive rules.
+
+```text title="Get a list of defined rules"
+SYNOPSYS
+        hive rule list
+```
+
+#### Example
+
+```text
+hive rule list
+```
+
+----
+
+### `hive rule show`
+
+Show details of a hive rule.
+
+```text title="Show rule details"
+SYNOPSYS
+        hive rule show [--name] string
+
+OPTIONS
+        --name  string
+                Rule name
+                [Mandatory]
+```
+
+#### Example
+
+```text
+hive rule show --name test_databases
+```
+
 ## Built-in Commands
 
 ----
