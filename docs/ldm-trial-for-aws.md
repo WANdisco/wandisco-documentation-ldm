@@ -11,7 +11,7 @@ The following steps explain how to deploy the HDFS Sandbox and perform a migrati
 
 ## Prerequisites
 
-Follow our guide to create a AWS EC2 instance that has the correct dependencies installed to host the HDP Sandbox:
+Follow our guide to create an AWS EC2 instance that has the correct dependencies installed to host the HDP Sandbox:
 
 [AWS VM Creation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/aws_vm_creation/)
 
