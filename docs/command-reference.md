@@ -1440,6 +1440,135 @@ SYNOPSYS
 hive agent types
 ```
 
+## Hive Rule commands
+
+----
+
+### `hive rule add`,`hive rule create`
+
+Create a hive migration rule that is used to define which databases and tables are migrated.
+
+:::info
+Specify these rules when [starting a new migration](#hive-migration-add) to control which databases and tables are migrated.
+:::
+
+```text title="Add new hive migration rule"
+SYNOPSYS
+        hive rule add [--database-pattern] string  [--table-pattern] string  [[--name] string]
+
+OPTIONS
+        --database-pattern  string
+                Pattern to match database name. For example db* would include all databases starting with 'db', like 'dbname1'.
+                [Mandatory]
+
+        --table-pattern  string
+                Pattern to match table name. For example table* would include all tables starting with 'table', like 'tablename1'.
+                [Mandatory]
+
+        --name  string
+                Rule name
+                [Optional, default = <nothing>]
+
+ALSO KNOWN AS
+        hive rule create
+```
+
+#### Mandatory Parameters
+
+* **`--database-pattern`** Specify a [regex](https://regex101.com/) pattern that will match the database names you want to migrate.
+* **`--table-pattern`** Specify a [regex](https://regex101.com/) pattern that will match the table names you want to migrate.
+
+:::tip
+You can use a single asterisk (`*`) if you want to match all databases and/or all tables within the metastore/database.
+:::
+
+#### Optional Parameters
+
+* **`--name`** The name for the hive rule.
+
+#### Example
+
+```text title="Match all database names that start with test and all tables inside of them"
+hive rule add --name test_databases --database-pattern test* --table-pattern *
+```
+
+----
+
+### `hive rule configure`
+
+Change the parameters of an existing hive rule.
+
+The parameters that can be changed are the same as the ones listed in the [`hive rule add`,`hive rule create`](#hive-rule-addhive-rule-create) section.
+
+All parameters are optional except `--name`, which is required to specify the existing hive rule that you wish to configure.
+
+#### Example
+
+```text
+hive rule configure --name test_databases --database-pattern test_db*
+```
+
+----
+
+### `hive rule delete`
+
+Delete a hive rule.
+
+```text title="Delete selected hive migration rule"
+SYNOPSYS
+        hive rule delete [--name] string
+
+OPTIONS
+        --name  string
+                Rule name
+                [Mandatory]
+```
+
+#### Example
+
+```text
+hive rule delete --name test_databases
+```
+
+----
+
+### `hive rule list`
+
+List all hive rules.
+
+```text title="Get a list of defined rules"
+SYNOPSYS
+        hive rule list
+```
+
+#### Example
+
+```text
+hive rule list
+```
+
+----
+
+### `hive rule show`
+
+Show details of a hive rule.
+
+```text title="Show rule details"
+SYNOPSYS
+        hive rule show [--name] string
+
+OPTIONS
+        --name  string
+                Rule name
+                [Mandatory]
+```
+
+#### Example
+
+```text
+hive rule show --name test_databases
+```
+
 ## Hive Migration Commands
 
 ----
@@ -1764,135 +1893,6 @@ SYNOPSYS
 
 ```text
 hive migration stop --all
-```
-
-## Hive Rule commands
-
-----
-
-### `hive rule add`,`hive rule create`
-
-Create a hive migration rule that is used to define which databases and tables are migrated.
-
-:::info
-Specify these rules when [starting a new migration](#hive-migration-add) to control which databases and tables are migrated.
-:::
-
-```text title="Add new hive migration rule"
-SYNOPSYS
-        hive rule add [--database-pattern] string  [--table-pattern] string  [[--name] string]
-
-OPTIONS
-        --database-pattern  string
-                Pattern to match database name. For example db* would include all databases starting with 'db', like 'dbname1'.
-                [Mandatory]
-
-        --table-pattern  string
-                Pattern to match table name. For example table* would include all tables starting with 'table', like 'tablename1'.
-                [Mandatory]
-
-        --name  string
-                Rule name
-                [Optional, default = <nothing>]
-
-ALSO KNOWN AS
-        hive rule create
-```
-
-#### Mandatory Parameters
-
-* **`--database-pattern`** Specify a [regex](https://regex101.com/) pattern that will match the database names you want to migrate.
-* **`--table-pattern`** Specify a [regex](https://regex101.com/) pattern that will match the table names you want to migrate.
-
-:::tip
-You can use a single asterisk (`*`) if you want to match all databases and/or all tables within the metastore/database.
-:::
-
-#### Optional Parameters
-
-* **`--name`** The name for the hive rule.
-
-#### Example
-
-```text title="Match all database names that start with test and all tables inside of them"
-hive rule add --name test_databases --database-pattern test* --table-pattern *
-```
-
-----
-
-### `hive rule configure`
-
-Change the parameters of an existing hive rule.
-
-The parameters that can be changed are the same as the ones listed in the [`hive rule add`,`hive rule create`](#hive-rule-addhive-rule-create) section.
-
-All parameters are optional except `--name`, which is required to specify the existing hive rule that you wish to configure.
-
-#### Example
-
-```text
-hive rule configure --name test_databases --database-pattern test_db*
-```
-
-----
-
-### `hive rule delete`
-
-Delete a hive rule.
-
-```text title="Delete selected hive migration rule"
-SYNOPSYS
-        hive rule delete [--name] string
-
-OPTIONS
-        --name  string
-                Rule name
-                [Mandatory]
-```
-
-#### Example
-
-```text
-hive rule delete --name test_databases
-```
-
-----
-
-### `hive rule list`
-
-List all hive rules.
-
-```text title="Get a list of defined rules"
-SYNOPSYS
-        hive rule list
-```
-
-#### Example
-
-```text
-hive rule list
-```
-
-----
-
-### `hive rule show`
-
-Show details of a hive rule.
-
-```text title="Show rule details"
-SYNOPSYS
-        hive rule show [--name] string
-
-OPTIONS
-        --name  string
-                Rule name
-                [Mandatory]
-```
-
-#### Example
-
-```text
-hive rule show --name test_databases
 ```
 
 ## Built-in Commands

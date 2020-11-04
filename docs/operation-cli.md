@@ -24,7 +24,7 @@ Your trial license will last 14 days and is valid for 5TB of data. If you want t
 1. See the [How to upgrade your license](https://community.wandisco.com/s/article/How-to-upgrade-your-license) page for information on how to purchase a license key.
 1. Once you have obtained your license key, upload it to your LiveData Migrator host.
 1. Move the license key to the default license location for LiveData Migrator.
-   
+
    ```text title="Example"
    mv license.key /opt/wandisco/livedata-migrator/
    ```
@@ -71,6 +71,14 @@ Use the following commands to manage resources and migrate data with the LiveDat
 * [**Exclusion**](./command-reference.md#exclusion-commands): Constrain the content migrated by creating and referencing exclusions during a migration. Exclusion constrain content by file size or by a regular expression match against a file name.
 
 * [**Migration**](./command-reference.md#migration-commands): A migration references the source and target file systems. Specify the source file system directory path for content to be migrated from, and include any exclusions as needed.
+
+* [**Hive Agent**](./command-reference.md#hive-agent-commands): Create hive agents to connect to your source and target metastores and/or databases.
+
+* [**Hive Rule**](./command-reference.md#hive-rule-commands): A hive rule is used to determine which databases and tables will be included for migration. Multiple hive rules can be applied when starting a hive migration.
+
+* [**Hive Migration**](./command-reference.md#hive-migration-commands): A hive migration references the source and target metastores/databases. Manage your hive migrations by specifying which hive rules to use.
+
+* [**Bandwidth Policy**](./command-reference.md#bandwidth-policy-commands): A bandwidth policy defines how much of the available bandwidth LiveData Migrator will use for all migrations.
 
 See the [Command Reference](./command-reference.md) page for a full list of LiveData Migrator commands and parameters.
 
@@ -163,7 +171,7 @@ Define exclusions so you can apply them to migrations.
 
 ## Migrate data
 
-### Create migrations
+### Create data migrations
 
 Migrate data from your source file system to a target defined using the `migration` command. Migrations will transfer existing data, as well as any subsequent changes made to the source data (in its scope), while LiveData Migrator remains in operation.
 
@@ -173,15 +181,15 @@ Follow the command links to learn how to set the parameters and see examples.
 
 1. Create a new migration:
 
-    [`migration new`](./command-reference.md#migration-new)
+   [`migration new`](./command-reference.md#migration-new)
 
-    Apply the [`--auto-start`](./command-reference.md#optional-parameters-4) parameter if you would like the migration to start right away.
+   Apply the [`--auto-start`](./command-reference.md#optional-parameters-4) parameter if you would like the migration to start right away.
 
 1. If you don't have auto-start enabled, manually start the migration:
 
-    [`migration run`](./command-reference.md#migration-run)
+   [`migration run`](./command-reference.md#migration-run)
 
-### Manage migrations
+### Manage data migrations
 
 | Command | Action |
 |:---|:---|
@@ -194,7 +202,7 @@ Follow the command links to learn how to set the parameters and see examples.
 | [`migration show`](./command-reference.md#migration-show) | Get migration details |
 | [`status`](./command-reference.md#status) | Get migration status |
 
-### Migration states
+### Data migration states
 
 Migrations can be in one of eight states:
 
@@ -221,6 +229,106 @@ Migrations can be in one of eight states:
 
 `ABORTED`
 : An *aborted* migration will not make any changes to the target and cannot be run again.
+
+## Create hive agents
+
+### Add hive agents
+
+Add hive agents to provide HiveMigrator with the information needed to read content from your source metastore/database and migrate content to your target metastore/database.
+
+A variety of platforms are supported, including [Apache Hive](https://cwiki.apache.org/confluence/display/Hive/Home), [Azure SQL](https://docs.microsoft.com/en-gb/azure/azure-sql/azure-sql-iaas-vs-paas-what-is-overview), [AWS-hosted database](https://docs.aws.amazon.com/whitepapers/latest/aws-overview/database.html), and local filesystem.
+
+Metadata can be migrated in any direction between these supported metastore and database formats.
+
+| Command | Action |
+|:---|:---|
+| [`hive agent add azure`](./command-reference.md#hive-agent-add-azure) | Add a hive agent for an Azure SQL database server |
+| [`hive agent add filesystem`](./command-reference.md#hive-agent-add-filesystem) | Add a hive agent for a local filesystem |
+| [`hive agent add glue`](./command-reference.md#hive-agent-add-glue) | Add a hive agent for an AWS-hosted database server |
+| [`hive agent add hive`](./command-reference.md#hive-agent-add-hive) | Add a hive agent for a local or remote Apache Hive metastore |
+
+### Configure existing hive agents
+
+| Command | Action |
+|:---|:---|
+| [`hive agent configure azure`](./command-reference.md#hive-agent-configure-azure) | Change the configuration of an existing hive agent for the Azure SQL database server |
+| [`hive agent configure filesystem`](./command-reference.md#hive-agent-configure-filesystem) | Change the configuration of an existing hive agent for the local filesystem |
+| [`hive agent configure glue`](./command-reference.md#hive-agent-configure-glue) | Change the configuration of an existing hive agent for the AWS-hosted database server |
+| [`hive agent configure hive`](./command-reference.md#hive-agent-configure-hive) | Change the configuration of an existing hive agent for the Apache Hive metastore |
+
+### Manage hive agents
+
+| Command | Action |
+|:---|:---|
+| [`hive agent check`](./command-reference.md#hive-agent-check) | Check whether the hive agent can connect to the metastore or database |
+| [`hive agent delete`](./command-reference.md#hive-agent-delete) | Delete a hive agent |
+| [`hive agent list`](./command-reference.md#hive-agent-list) | List all configured hive agents |
+| [`hive agent show`](./command-reference.md#hive-agent-show) | Show the configuration for a hive agent |
+| [`hive agent types`](./command-reference.md#hive-agent-types) | List supported hive agent types |
+
+## Define hive rules
+
+### Add hive rules
+
+Define which databases and tables you want to migrate by creating hive rules.
+
+Create a database pattern and a table pattern using [regex](https://regex101.com/) that will match the databases and tables you want to migrate. For example, using `--database-pattern test*` will match any database that has "test" at the beginning of its name, such as `test01`, `test02`, `test03`.
+
+| Command | Action |
+|:---|:---|
+| [`hive rule add`,`hive rule create`](./command-reference.md#hive-rule-addhive-rule-create) | Create a hive rule that can be used for a migration |
+
+### Configure existing hive rules
+
+| Command | Action |
+|:---|:---|
+| [`hive rule configure`](./command-reference.md#hive-rule-configure) | Configure an existing hive rule |
+
+### Manage hive rules
+
+| Command | Action |
+|:---|:---|
+| [`hive rule delete`](./command-reference.md#hive-rule-delete) | Delete a hive rule |
+| [`hive rule list`](./command-reference.md#hive-rule-list) | List all hive rules |
+| [`hive rule show`](./command-reference.md#hive-rule-show) | Show the configuration of a hive rule |
+
+## Migrate metadata
+
+### Create metadata migrations
+
+Migrate metadata from your source metastore/database to a target metastore/database using the `hive migration` command. Migrations will transfer existing metadata, as well as any subsequent changes made to the source metadata (in its scope), while HiveMigrator remains in operation.
+
+Define the source and target using the [hive agent names](#add-hive-agents), and apply the [hive rule names](#add-hive-rules) to the migration.
+
+Follow the command links to learn how to set the parameters and see examples.
+
+1. Create a new hive migration:
+
+   [`hive migration add`](./command-reference.md#hive-migration-add)
+
+   Apply the [`--auto-start`](./command-reference.md#optional-parameters-10) parameter if you would like the migration to start right away.
+
+1. If you don't have auto-start enabled, manually start the migration:
+
+   [`hive migration start`](./command-reference.md#hive-migration-start)
+
+### Manage metadata migrations
+
+| Command | Action |
+|:---|:---|
+| [`hive migration delete`](./command-reference.md#hive-migration-delete) | Delete a hive migration |
+| [`hive migration list`](./command-reference.md#hive-migration-list) | List all hive migrations |
+| [`hive migration pause`](./command-reference.md#hive-migration-pause) | Pause a hive migration or a list of hive migrations |
+| [`hive migration pause --all`](./command-reference.md#hive-migration-pause---all) | Pause all hive migrations |
+| [`hive migration resume`](./command-reference.md#hive-migration-resume) | Resume a hive migration or a list of hive migrations |
+| [`hive migration resume --all`](./command-reference.md#hive-migration-resume---all) | Resume all hive migrations |
+| [`hive migration show`](./command-reference.md#hive-migration-show) | Display information about a hive migration |
+| [`hive migration start`](./command-reference.md#hive-migration-start) | Start a hive migration or a list of hive migrations |
+| [`hive migration start --all`](./command-reference.md#hive-migration-start---all) | Start all hive migrations |
+| [`hive migration status`](./command-reference.md#hive-migration-status) | Show the status of a hive migration or a list of hive migrations |
+| [`hive migration status --all`](./command-reference.md#hive-migration-status---all) | Show the status of all hive migrations |
+| [`hive migration stop`](./command-reference.md#hive-migration-stop) | Stop a hive migration or a list of hive migrations |
+| [`hive migration stop --all`](./command-reference.md#hive-migration-stop---all) | Stop all hive migrations |
 
 ## Bandwidth management
 
