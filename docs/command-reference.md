@@ -1192,6 +1192,12 @@ hive agent add glue --name glueAgent --access-key ACCESS6HCFPAQIVZTKEY --secret-
 
 Add a hive agent to connect to a local or remote [Apache Hive](https://cwiki.apache.org/confluence/display/Hive/Home) metastore using the `hive agent add hive` command.
 
+:::info remote deployments
+When connecting to a remote Apache Hive metastore, specify a host on the remote cluster that will be used to communicate with the local LiveData Migrator server (constrained to a user-defined port).
+
+A small service will be deployed on this remote host so that the hive agent can migrate data to and/or from the remote Apache Hive metastore.
+:::
+
 ```text title="Add local or remote hive agent"
 SYNOPSYS
         hive agent add hive [[--config-path] string]  [[--kerberos-principal] string]  [[--kerberos-keytab] string]  [[--name] string]  [[--host] string]  [[--port] integer]  [--autodeploy]  [[--ssh-user] string]  [[--ssh-key] file]  [[--ssh-port] int]  [--use-sudo]  [--ignore-host-checking]
@@ -1249,26 +1255,31 @@ Not applicable
 
 #### Optional Parameters
 
+##### Parameters for local or remote hive agents
+
 * **`--config-path`** The path to the directory containing the Hive configuration files (for example: `/etc/hive/conf`).
-* **`--kerberos-principal`** The Kerberos principal to use for the Hive service (for example: `hive/_HOST@REALM.COM`). Not required if Kerberos is disabled.
-* **`--kerberos-keytab`** The path to the Kerberos keytab containing the principal to use for the Hive service (for example: `/etc/security/keytabs/hive.service.keytab`). Not required if Kerberos is disabled.
+* **`--kerberos-principal`** The Kerberos principal to use to access the Hive service (for example: `hive/_HOST@REALM.COM`). Not required if Kerberos is disabled.
+* **`--kerberos-keytab`** The path to the Kerberos keytab containing the principal to access the Hive service (for example: `/etc/security/keytabs/hive.service.keytab`). Not required if Kerberos is disabled.
 * **`--name`** The identifier to give to the new Hive agent.
-* **`--host`** The host where the remote hive agent will be deployed, not required if deploying a local hive agent.
-* **`--port`** The port for the remote hive agent to use on the remote host, not required if deploying a local hive agent.
+
+##### Parameters for remote hive agents only
+
+* **`--host`** The host where the remote hive agent will be deployed.
+* **`--port`** The port for the remote hive agent to use on the remote host. This port is used to communicate with the local LiveData Migrator server.
 * **`--autodeploy`** The remote agent will be automatically deployed when this flag is used. If using this, the `--ssh-key` parameter must also be specified.
 * **`--ssh-user`** The SSH user to use for authentication on the remote host to perform automatic deployment (when using the `--autodeploy` parameter).
 * **`--ssh-key`** The absolute path to the SSH private key to use for authentication on the remote host to perform automatic deployment (when using the `--autodeploy` parameter).
-* **`--ssh-port`** The SSH port to use for authentication on the remote host to perform automatic deployment (when using the `--autodeploy` parameter).
-* **`--use-sudo`** All commands will use `sudo` on the remote host when performing automatic deployment (using the `--autodeploy` parameter).
+* **`--ssh-port`** The SSH port to use for authentication on the remote host to perform automatic deployment (when using the `--autodeploy` parameter). Default is port `22`.
+* **`--use-sudo`** All commands performed by the SSH user will use `sudo` on the remote host when performing automatic deployment (using the `--autodeploy` parameter).
 * **`--ignore-host-checking`** Ignore [strict host key checking](https://www.redhat.com/sysadmin/linux-knownhosts-failures) when performing the automatic deployment (using the `--autodeploy` parameter).
 
 #### Examples
 
-```text
+```text title="Example for local Apache Hive deployment"
 hive agent add hive --name sourceAgent --kerberos-keytab /etc/security/keytabs/hive.service.keytab --kerberos-principal hive/_HOST@REALM.COM
 ```
 
-```text
+```text title="Example for remote Apache Hive deployment"
 hive agent add hive --name targetAgent --kerberos-keytab /etc/security/keytabs/hive.service.keytab --kerberos-principal hive/_HOST@REALM.COM --config-path /etc/hive/conf --host myRemoteHost.example.com --port 5052 --autodeploy --ssh-user root --ssh-key /root/.ssh/id_rsa --ssh-port 22
 ```
 

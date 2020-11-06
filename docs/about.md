@@ -16,6 +16,8 @@ WANdisco LiveData Migrator is a fully self-service data migration solution that 
 
 LiveData Migrator _migrates changing data_ at scale from HDFS to your choice of target environment, including the ongoing changes made to those data before, throughout and after migration. Targets include  [ADLS Gen 2](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction), [GCS](https://cloud.google.com/storage), [HDFS](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html), and [S3](https://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html) (including [IBM COS](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-getting-started-cloud-object-storage)).
 
+It also allows you to migrate metadata in either direction between metastores and databases. Supported platforms include [Apache Hive](https://cwiki.apache.org/confluence/display/Hive/Home), [Azure SQL](https://docs.microsoft.com/en-gb/azure/azure-sql/azure-sql-iaas-vs-paas-what-is-overview), [AWS-hosted databases](https://docs.aws.amazon.com/whitepapers/latest/aws-overview/database.html), and local filesystems.
+
 Manage your migrations through a **user interface**, a **command-line interface** or from the self-documenting **REST API**, track and **monitor migration progress**, and take advantage of optional management from WANdisco's **browser-based user interface** and deep integration with **cloud vendors' management interfaces**.
 
 - A robust and efficient scanner that visits source items only once to identify content for migration.
@@ -23,12 +25,6 @@ Manage your migrations through a **user interface**, a **command-line interface*
 - Selective and flexible choices of data to be migrated.
 - Measurement and monitoring of migration progress to help estimate completion and plan your other activities.
 - Bandwidth management to control how much of your network capacity is used for migrations.
-
-## HiveMigrator
-
-HiveMigrator (HVM) is an optional extra component of LiveData Migrator that allows migration of Hive and other SQL engines’ metadata. This can be configured between on-premise and cloud environments as well as cloud-to-cloud.
-
-By default, the LiveData Migrator installation package automatically includes HiveMigrator.
 
 ## Get started
 

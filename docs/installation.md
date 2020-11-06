@@ -6,7 +6,7 @@ sidebar_label: Installation
 
 Ready to install? Check the prerequisites and then follow these steps to get up and running with LiveData Migrator.
 
-If you're new to the concept of LiveData, or want to know what LiveData Migrator does (including HiveMigrator), see the [introduction to LiveData Migrator](./about.md).
+If you're new to the concept of LiveData, or want to know what LiveData Migrator does, see the [introduction to LiveData Migrator](./about.md).
 
 ## Before you start
 
@@ -23,14 +23,10 @@ If you're new to the concept of LiveData, or want to know what LiveData Migrator
   * Hadoop client libraries must be installed on the Linux host.
   * Ability to authenticate as the [HDFS superuser](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsPermissionsGuide.html#The_Super-User) (for example: `hdfs`).
   * If Kerberos is enabled on your Hadoop cluster, a valid keytab containing a suitable principal for the HDFS superuser must be available on the Linux host.
-
-#### HiveMigrator Prerequisites
-
-If you want to use the HiveMigrator component for LiveData Migrator, ensure the following prerequisites are met:
-
-* The Hive service must be present on the cluster.
-* SSH/CLI access to the cluster.
-* If Kerberos is enabled on the cluster, access to the Hive service keytab and principal.
+* If migrating metadata to or from [Apache Hive](https://cwiki.apache.org/confluence/display/Hive/Home):
+  * The Hive service must be present on the cluster.
+  * SSH/CLI access to the cluster.
+  * If Kerberos is enabled on your Hadoop cluster, a valid keytab containing a suitable principal for the Hive service user must be available. The host for the keytab will depend on whether you deploy locally, remotely, or both (see the [`hive agent add hive`](./command-reference.md#hive-agent-add-hive) section for more information).
 
 ### Machine specification
 
