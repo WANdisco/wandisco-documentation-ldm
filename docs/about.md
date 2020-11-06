@@ -4,11 +4,11 @@ title: LiveData Migrator
 sidebar_label: About LiveData Migrator
 ---
 
-WANdisco LiveData Migrator is a fully self-service data migration solution that is immediate, live, and scalable.
+WANdisco LiveData Migrator is a fully self-service data and metadata migration solution that is immediate, live, and scalable.
 
 **Immediate:** enabling administrators to easily deploy the solution and begin migration of data lake content to the cloud immediately. It is entirely non-intrusive and requires zero changes to applications, cluster or node configuration or operation.
 
-**Live:** WANdisco’s LiveData capabilities enable data migration to occur while the source data is under active change, without requiring any production system downtime or business disruption supporting complete and continuous data migration.
+**Live:** WANdisco’s LiveData capabilities enable data migration to occur while the source data and metadata is under active change, without requiring any production system downtime or business disruption supporting complete and continuous data and metadata migration.
 
 **Scalable:** able to accommodate data migration at any scale, without any risk of data loss.
 

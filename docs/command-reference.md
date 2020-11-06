@@ -1166,10 +1166,6 @@ OPTIONS
                 [Optional, default = <nothing>]
 ```
 
-#### Mandatory Parameters
-
-Not applicable
-
 #### Optional Parameters
 
 * **`--name`** The identifier to give to the new Hive agent.
@@ -1249,20 +1245,14 @@ OPTIONS
                 [Optional, default = false]
 ```
 
-#### Mandatory Parameters
-
-Not applicable
-
-#### Optional Parameters
-
-##### Parameters for local or remote hive agents
+#### Parameters for local or remote hive agents
 
 * **`--config-path`** The path to the directory containing the Hive configuration files (for example: `/etc/hive/conf`).
 * **`--kerberos-principal`** The Kerberos principal to use to access the Hive service (for example: `hive/_HOST@REALM.COM`). Not required if Kerberos is disabled.
 * **`--kerberos-keytab`** The path to the Kerberos keytab containing the principal to access the Hive service (for example: `/etc/security/keytabs/hive.service.keytab`). Not required if Kerberos is disabled.
 * **`--name`** The identifier to give to the new Hive agent.
 
-##### Parameters for remote hive agents only
+#### Parameters for remote hive agents only
 
 * **`--host`** The host where the remote hive agent will be deployed.
 * **`--port`** The port for the remote hive agent to use on the remote host. This port is used to communicate with the local LiveData Migrator server.

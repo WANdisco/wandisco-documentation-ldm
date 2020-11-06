@@ -81,12 +81,6 @@ The LiveData Migrator trial license is limited to 14 days operation and 5TB of d
    service livedata-ui status
    ```
 
-### HiveMigrator
-
- By default, the LiveData Migrator installation package automatically includes HiveMigrator.
-
- If you have already installed a previous version of LiveData Migrator that did not include HiveMigrator, uninstall the old version and install the new LiveData Migrator package (that includes HiveMigrator).
-
 ## Using LiveData Migrator
 
 Once you have LiveData Migrator running, you can use the [UI](./operation-ui.md), [CLI](./operation-cli.md), or [REST API](./api-reference.md) to start migrating data.

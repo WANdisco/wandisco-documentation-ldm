@@ -60,35 +60,7 @@ Configure the LiveData Migrator service to use authorized SSH keys instead of a 
 1. Restart the LiveData Migrator service afterwards:  
    `service livedata-migrator restart`
 
-## LiveData Migrator commands
-
-Use the following commands to manage resources and migrate data with the LiveData Migrator CLI. Follow the links to learn the  mandatory and optional parameters, and see examples.
-
-* [**Source**](./command-reference.md#source-commands): Manage your source file system.
-
-* [**Filesystem**](./command-reference.md#file-system-commands): Create and manage file systems (storages) and define them as the source or target of migrations.
-
-* [**Exclusion**](./command-reference.md#exclusion-commands): Constrain the content migrated by creating and referencing exclusions during a migration. Exclusion constrain content by file size or by a regular expression match against a file name.
-
-* [**Migration**](./command-reference.md#migration-commands): A migration references the source and target file systems. Specify the source file system directory path for content to be migrated from, and include any exclusions as needed.
-
-* [**Hive Agent**](./command-reference.md#hive-agent-commands): Create hive agents to connect to your source and target metastores and/or databases.
-
-* [**Hive Rule**](./command-reference.md#hive-rule-commands): A hive rule is used to determine which databases and tables will be included for migration. Multiple hive rules can be applied when starting a hive migration.
-
-* [**Hive Migration**](./command-reference.md#hive-migration-commands): A hive migration references the source and target metastores/databases. Manage your hive migrations by specifying which hive rules to use.
-
-* [**Bandwidth Policy**](./command-reference.md#bandwidth-policy-commands): A bandwidth policy defines how much of the available bandwidth LiveData Migrator will use for all migrations.
-
-See the [Command Reference](./command-reference.md) page for a full list of LiveData Migrator commands and parameters.
-
-### Built-in commands
-
-The built-in commands are always available in a LiveData Migrator command line interactive session. They are unrelated to migration resources and operation (other than `exit`/`quit`), but help you to interact with LiveData Migrator and automate processing through scripts for the action prompt.
-
-See the [Built-In Commands](./command-reference.md#built-in-commands) section in Command Reference for further details of the available commands.
-
-### Command line help
+## Command line help
 
 Find a full list of commands that can be used at the action prompt with the `help` command. Get command specific help by typing `help <command>` for each command available.
 
@@ -230,7 +202,7 @@ Migrations can be in one of eight states:
 `ABORTED`
 : An *aborted* migration will not make any changes to the target and cannot be run again.
 
-## Create hive agents
+## Connect to metastores or databases
 
 ### Add hive agents
 
@@ -266,7 +238,7 @@ Metadata can be migrated in any direction between these supported metastore and 
 | [`hive agent show`](./command-reference.md#hive-agent-show) | Show the configuration for a hive agent |
 | [`hive agent types`](./command-reference.md#hive-agent-types) | List supported hive agent types |
 
-## Define hive rules
+## Define metadata rules
 
 ### Add hive rules
 
@@ -343,6 +315,12 @@ Only one bandwidth policy can be active at a time. The default policy is unlimit
 | [`bandwidth policy del`](./command-reference.md#bandwidth-policy-del) | Delete a bandwidth policy |
 | [`bandwidth policy set`](./command-reference.md#bandwidth-policy-set) | Define the bandwidth policy |
 | [`bandwidth policy show`](./command-reference.md#bandwidth-policy-show) | Get details for the current bandwidth policy |
+
+## Built-in commands
+
+The built-in commands are always available in a LiveData Migrator command line interactive session. They are unrelated to migration resources and operation (other than `exit`/`quit`), but help you to interact with LiveData Migrator and automate processing through scripts for the action prompt.
+
+See the [Built-In Commands](./command-reference.md#built-in-commands) section in Command Reference for further details of the available commands.
 
 ## Using the LiveData Migrator jar
 
