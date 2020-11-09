@@ -4,10 +4,10 @@ title: Configuration
 sidebar_label: Configuration
 ---
 
-Find details here for the configuration properties that you can use when running LiveData Migrator as a system service. Properties are defined in the following files:
+Find details here for the configuration properties of the LiveData Migrator components. Properties are defined in the following files:
 
-* LiveData Migrator `/etc/wandisco/livedata-migrator/application.properties`
-* UI `/etc/wandisco/ui/application-prod.properties`
+* LiveData Migrator: `/etc/wandisco/livedata-migrator/application.properties`
+* LiveData UI: `/etc/wandisco/ui/application-prod.properties`
 
 Each configuration property can also be provided to LiveData Migrator as a command-line argument when launched, e.g. `--server.port=19999`.
 
@@ -31,7 +31,7 @@ migration.file.max.retries=180
 migration.scan.iteration-limit=1000
 migration.scan.allow-stop-path=false
 shell.history.filePath=~/.livedatamigrator_history
-cli.enabled=true
+cli.enabled=false
 spring.shell.interactive.enabled=${cli.enabled}
 ssh.shell.enable=false
 ssh.shell.prompt.local.enable=${cli.enabled}
@@ -90,20 +90,18 @@ gcs.fs.type.default.properties=bucket.name
 local.fs.type.default.properties=fs.root
 
 #properties we need to mask when displaying to the user
-adls2.fs.type.masked.properties=fs.secret.Key
-adls1.fs.type.masked.properties=fs.secret.Key
+adls2.fs.type.masked.properties=fs.secret.Key,sharedKey
+adls1.fs.type.masked.properties=fs.secret.Key,sharedKey
 hdfs.fs.type.masked.properties=
 local.fs.type.masked.properties=
-s3a.fs.type.masked.properties=fs.s3a.access.key,fs.s3a.secret.key
-gcs.fs.type.masked.properties=service.account.private.key.id,service.account.private.key
+s3a.fs.type.masked.properties=fs.s3a.access.key,fs.s3a.secret.key,secretKey,accessKey
+gcs.fs.type.masked.properties=fs.gs.auth.service.account.private.key.id,fs.gs.auth.service.account.private.key,privateKey,privateKeyId,jsonKeyFile,p12KeyFile
 
-lm.kerberos.is.enabled=false
-#lm.kerberos.principal=hdfs@REALM
-#lm.kerberos.keytab.location=/etc/security/keytabs/hdfs.headless.keytab
-lm.kerberos.principal=
-lm.kerberos.keytab.location=
 
 license.key.location=/opt/wandisco/livedata-migrator/
+authentication.key.location=/opt/wandisco/livedata-migrator/
+log.dir=./logs
+threaddump.directory=${log.dir}/threads
 
 # HTTP traffic logging config
 logging.level.org.zalando.logbook=TRACE
@@ -113,7 +111,7 @@ logbook.exclude=/v3/api-docs/**,/swagger-ui/**
 # HTTP message masking properties
 #logbook.obfuscate.parameters=access_token,password
 #logbook.obfuscate.headers=authorization,x-auth-password,x-auth-token,X-Secret
-obfuscate.json.properties=fs.secret.Key,fs.s3a.access.key,fs.s3a.secret.key,${gcs.fs.type.masked.properties}
+obfuscate.json.properties=${hdfs.fs.type.masked.properties},${adls2.fs.type.masked.properties},${s3a.fs.type.masked.properties},${gcs.fs.type.masked.properties}
 
 ssh.shell.prompt.text=WANdisco LiveData Migrator >>\u0020
 ssh.shell.prompt.color=white
@@ -125,8 +123,14 @@ ssh.shell.port=2222
 ssh.shell.historyFile=${java.io.tmpdir}/.livedatamigrator_history_ssh
 #ssh.shell.authorized-public-keys-file=samples/public-keys-sample
 
-hdfs.inotify.poll.period=10
-hdfs.inotify.sleep.period=10
+
+
+management.endpoints.web.exposure.include=health,info,threaddump,heapdump,env,metrics,prometheus
+management.endpoint.health.show-details=always
+management.endpoints.web.exposure.exclude=
+management.endpoints.jmx.exposure.include=*
+management.endpoints.jmx.exposure.exclude=
+management.metrics.export.jmx.domain=com.wandisco.livemigrator2.metrics
 ```
 
 ### General configuration
@@ -254,7 +258,7 @@ Each file system supported by LiveData Migrator can apply properties defined usi
 
 ### HDFS inotify
 
-LiveData Migrator will poll the Hadoop cluster for NameNode events using the [HDFS inotify](https://hadoop.apache.org/docs/r3.2.0/api/org/apache/hadoop/hdfs/inotify/package-summary.html) system. These properties can be configured to change the default poll periods.
+LiveData Migrator will poll the Hadoop cluster for NameNode events using the [HDFS inotify](https://hadoop.apache.org/docs/r3.2.0/api/org/apache/hadoop/hdfs/inotify/package-summary.html) system. These properties can be added and configured to change the default poll periods.
 
 | Name | Details |
 | --- | --- |
@@ -267,7 +271,8 @@ An example `application-prod.properties` file, which overrides any application d
 
 ```text
 #Updated Application Properties
-#Wed Aug 26 11:39:52 UTC 2020
+#Thu Nov 05 14:40:38 UTC 2020
+application.hiveMigrator.servers=localhost\:6780
 spring.datasource.password=ENC(xxx)
 logging.output.path=/var/log/wandisco/ui
 application.liveMigratorV2.servers=localhost\:18080
@@ -279,7 +284,7 @@ Configure how the UI is run overall.
 
 | Name | Details |
 | --- | --- |
-| `server.port` | Set the port on which the UI will be available. This is overriden by the `server.ssl.port` when SSL is enabled.<br/><br/>**Default value**: `8081`<br/>**Allowed values**: An integer value between `1024` and `65535` |
+| `server.port` | Set the port on which the UI will be available. This is overridden by the `server.ssl.port` when SSL is enabled.<br/><br/>**Default value**: `8081`<br/>**Allowed values**: An integer value between `1024` and `65535` |
 
 ### Logging
 
@@ -315,7 +320,7 @@ See the [Oracle documentation](https://docs.oracle.com/cd/E19906-01/820-4916/gey
 
 ## Directory structure
 
-When LiveData Migrator is installed as a [system service](#option-2-system-service), the following directories are used:
+The following directories are used for the LiveData Migrator core package:
 
 | Location | Content |
 |---|---|
@@ -324,7 +329,15 @@ When LiveData Migrator is installed as a [system service](#option-2-system-servi
 | `/opt/wandisco/livedata-migrator` | Java archive files |
 | `/opt/wandisco/livedata-migrator/db` | LiveData Migrator runtime state |
 
-The following UI directories are used:
+The following directories are used for HiveMigrator:
+
+| Location | Content |
+|---|---|
+| `/var/log/wandisco/hivemigrator` | Logs |
+| `/etc/wandisco/hivemigrator` | Configuration files |
+| `/opt/wandisco/hivemigrator` | Java archive files |
+
+The following directories are used for the LiveData UI:
 
 | Location | Content |
 |---|---|
@@ -332,3 +345,70 @@ The following UI directories are used:
 | `/etc/wandisco/ui` | Configuration files |
 | `/opt/wandisco/ui` | Operation files |
 | `/var/run/wandisco/ui` | UI runtime state |
+
+## Recommendations
+
+### Metadata migrations
+
+#### Enable Hive metastore event listener
+
+:::note
+This recommendation is currently supported on HDP platforms only.
+:::
+
+When deploying a [hive agent for Apache Hive](./command-reference.md#hive-agent-add-hive), it is recommended to enable the standard [`DBNotificationListener`](https://hive.apache.org/javadocs/r2.3.7/api/org/apache/hive/hcatalog/listener/DbNotificationListener.html) listener for the Hive metastore. This allows a publisher-subscriber mechanism and dramatically reduces the load on the metastore after the initial scan of the metastore is complete.
+
+1. To enable it, add the following properties and values to the Apache Hive metastore's `hive-site.xml`:
+
+   ```text
+   <property>
+     <name>hive.metastore.event.listeners</name>
+     <value>org.apache.hive.hcatalog.listener.DbNotificationListener</value>
+   </property>
+   <property>
+     <name>hive.metastore.event.db.listener.timetolive</name>
+     <value>86400s</value>
+   </property>
+   ```
+
+   A restart of the Hive metastore services is required for the changes to take effect.
+
+1. LiveData Migrator will rescan its configuration at the start of a migration, and auto-detects the presence of the `DbNotificationListener`.
+
+   As such, all running metadata migrations should be stopped and started.
+
+   ```text title="Stop all metadata migrations through the CLI"
+   hive migration stop --all
+   ```
+
+   ```text title="Start all metadata migrations through the CLI"
+   hive migration start --all
+   ```
+
+   Any new migrations will auto-detect the presence of the listener straight away.
+
+1. Confirm that migrations are now using the listener by checking the status of a hive migration:
+
+   ```text title="Example status command"
+   hive migration status --name hivemigration1
+   ```
+
+   ```text title="Example output"
+   {
+     "migrationName": "hivemigration1",
+     "migratedRules": [
+       {
+         "name": "test",
+         "dbNamePattern": "test*",
+         "tableNamePattern": "test*"
+       }
+     ],
+     "discoveredItems": 2752,
+     "migratedItems": 50,
+     "state": "RUNNING",
+     "upToDate": true,
+     "description": "Listening to events..."
+   }
+   ```
+
+   The description should state `"Listening to events..."`.
