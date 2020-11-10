@@ -1255,7 +1255,10 @@ OPTIONS
 #### Parameters for remote hive agents only
 
 * **`--host`** The host where the remote hive agent will be deployed.
-* **`--port`** The port for the remote hive agent to use on the remote host. This port is used to communicate with the local LiveData Migrator server.
+* **`--port`** The port for the remote hive agent to use on the remote host. Default is `5052`. This port is used to communicate with the local LiveData Migrator server.
+
+##### Parameters for automated deployment
+
 * **`--autodeploy`** The remote agent will be automatically deployed when this flag is used. If using this, the `--ssh-key` parameter must also be specified.
 * **`--ssh-user`** The SSH user to use for authentication on the remote host to perform automatic deployment (when using the `--autodeploy` parameter).
 * **`--ssh-key`** The absolute path to the SSH private key to use for authentication on the remote host to perform automatic deployment (when using the `--autodeploy` parameter).
@@ -1263,15 +1266,49 @@ OPTIONS
 * **`--use-sudo`** All commands performed by the SSH user will use `sudo` on the remote host when performing automatic deployment (using the `--autodeploy` parameter).
 * **`--ignore-host-checking`** Ignore [strict host key checking](https://www.redhat.com/sysadmin/linux-knownhosts-failures) when performing the automatic deployment (using the `--autodeploy` parameter).
 
+##### Steps for manual deployment
+
+If you do not wish to use the `--autodeploy` function, follow these steps to deploy a remote hive agent for Apache Hive manually:
+
+1. Transfer the remote server installer to your remote host:
+
+   ```text title="Example of secure transfer from local to remote host"
+   scp /opt/wandisco/hivemigrator/hivemigrator-remote-server-installer.sh myRemoteHost:~
+   ```
+
+1. On your remote host, run the installer as root (or sudo) user in silent mode:
+
+   ```text
+   ./hivemigrator-remote-server-installer.sh -- --silent
+   ```
+
+1. On your remote host, start the remote server service:
+
+   ```text
+   service hivemigrator-remote-server start
+   ```
+
+1. On your local host, run the `hive agent add hive` command without using `--autodeploy` and its related parameters to configure your remote hive agent.
+
+   See the **Example for remote Apache Hive deployment - manual** example below for further guidance.
+
 #### Examples
 
 ```text title="Example for local Apache Hive deployment"
-hive agent add hive --name sourceAgent --kerberos-keytab /etc/security/keytabs/hive.service.keytab --kerberos-principal hive/_HOST@REALM.COM
+hive agent add hive --name sourceAgent --kerberos-keytab /etc/security/keytabs/hive.service.keytab --kerberos-principal hive/_HOST@LOCALREALM.COM
 ```
 
-```text title="Example for remote Apache Hive deployment"
-hive agent add hive --name targetAgent --kerberos-keytab /etc/security/keytabs/hive.service.keytab --kerberos-principal hive/_HOST@REALM.COM --config-path /etc/hive/conf --host myRemoteHost.example.com --port 5052 --autodeploy --ssh-user root --ssh-key /root/.ssh/id_rsa --ssh-port 22
+```text title="Example for remote Apache Hive deployment - automated"
+hive agent add hive --name targetautoAgent --autodeploy --ssh-user root --ssh-key /root/.ssh/id_rsa --ssh-port 22 --host myRemoteHost.example.com --port 5052 --kerberos-keytab /etc/security/keytabs/hive.service.keytab --kerberos-principal hive/_HOST@REMOTEREALM.COM --config-path /etc/hive/conf
 ```
+
+```text title="Example for remote Apache Hive deployment - manual"
+hive agent add hive --name targetmanualAgent --host myRemoteHost.example.com --port 5052 --kerberos-keytab /etc/security/keytabs/hive.service.keytab --kerberos-principal hive/_HOST@REMOTEREALM.COM --config-path /etc/hive/conf
+```
+
+:::note
+If specifying Kerberos and config path information for remote agents, ensure that the directories and Kerberos principal are correct for your chosen remote host (and not your local host).
+:::
 
 ----
 
