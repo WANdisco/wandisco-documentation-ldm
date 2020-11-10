@@ -1307,7 +1307,7 @@ hive agent add hive --name targetmanualAgent --host myRemoteHost.example.com --p
 ```
 
 :::note
-If specifying Kerberos and config path information for remote agents, ensure that the directories and Kerberos principal are correct for your chosen remote host (and not your local host).
+If specifying Kerberos and config path information for remote agents, ensure that the directories and Kerberos principal are correct for your chosen remote host (not your local host).
 :::
 
 ----

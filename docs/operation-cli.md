@@ -243,9 +243,9 @@ Metadata can be migrated in any direction between these supported metastore and 
 ### Add hive rules
 
 :::important
-Ensure that you have [migrated](#migrate-data) the underlying HCFS data for the databases and tables that you want to migrate.
+Ensure that you have [migrated](#migrate-data) the HCFS data for the databases and tables that you want to migrate.
 
-Both underlying HCFS data and metadata are needed before successful queries can be run on migrated databases.
+Both HCFS data and associated metadata are needed before successful queries can be run on migrated databases.
 :::
 
 Define which databases and tables you want to migrate by creating hive rules.
@@ -256,7 +256,7 @@ Create a database pattern and a table pattern using [regex](https://regex101.com
 |:---|:---|
 | [`hive rule add`,`hive rule create`](./command-reference.md#hive-rule-addhive-rule-create) | Create a hive rule that can be used for a migration |
 
-#### Default hive rule
+#### Default metadata rule
 
 A default hive rule is created during installation named `DEFAULT`. This has a simple "include all" pattern for databases and for tables:
 
@@ -270,7 +270,7 @@ hive rule show --name DEFAULT
 }
 ```
 
-In most cases, you will need to migrate only a selection of databases and tables, which is achieved by defining new hive rules. However, this rule is available to use if wishing to migrate all your metastore/database content.
+When [creating a metadata migration](#create-metadata-migrations), use the default rule to migrate all of your metastore/database content or define and use new rules to migrate a selection of databases and tables.
 
 ### Configure existing hive rules
 

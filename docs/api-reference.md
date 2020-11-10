@@ -19,9 +19,9 @@ This version will reflect exactly the API exposed from your instance of LiveData
 
 ## Metadata migrations
 
-Commands related to metadata migrations (such as `hive agent`, `hive rule`, `hive migration`) are serviced through the HiveMigrator component.
+Commands related to metadata migrations (such as `hive agent`, `hive rule`, `hive migration`) are serviced through a different REST API port.
 
-Similar to the LiveData Migrator REST API, access the API documentation for HiveMigrator on your host machine:  
+Access the API documentation for metadata migrations on your host machine:  
 `http(s)://<ldm-hostname>:<hvm-port>/docs`
 
 ```text title="Example"
