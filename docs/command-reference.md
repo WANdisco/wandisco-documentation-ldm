@@ -189,28 +189,33 @@ OPTIONS
 
 Add a Hadoop Distributed File System as either a migration source or target using the `filesystem add hdfs` command.
 
-Creating an HDFS file system resource with this command will normally only be used when migrating to that HDFS as a target (rather than another storage service like ADLS Gen 2). LiveData Migrator will normally auto-detect the *source* HDFS file system when started from the command line. When started as a system service, you will need to define an HDFS source with this command, including the `--source` parameter.
+Creating an HDFS file system resource with this command will normally only be used when migrating to a target HDFS (rather than another storage service like ADLS Gen 2 or S3a). LiveData Migrator will attempt to auto-detect the *source* HDFS file system when started from the command line unless Kerberos is enabled on your source environment.
+
+If Kerberos is enabled on your source environment, use the [`filesystem auto-discover-source hdfs`](#filesystem-auto-discover-source-hdfs) command to provide Kerberos credentials and auto-discover your source HDFS configuration.
 
 ```text title="Add a Hadoop Distributed File System"
 SYNOPSYS
-        filesystem add hdfs [--file-system-id] string
-                            [--fs.defaultFS] string
-                            [[--user] string]
-                            [--source]
-                            [[--properties-files] list]
-                            [[--properties] list]
+        filesystem add hdfs [--file-system-id] string  [[--default-fs] string]  [[--user] string]  [[--kerberos-principal] string]  [[--kerberos-keytab] string]  [--source]  [[--properties-files] list]  [[--properties] string]
 
 OPTIONS
         --file-system-id  string
                 Name of the filesystem
                 [Mandatory]
 
-        --fs.defaultFS  string
+        --default-fs  string
 
-                [Mandatory]
+                [Optional, default = <nothing>]
 
         --user  string
                 FileSystem username to perform migration actions as
+                [Optional, default = <nothing>]
+
+        --kerberos-principal  string
+                Kerberos principal to authenticate with and perform migration actions as
+                [Optional, default = <none>]
+
+        --kerberos-keytab  string
+                Kerberos keytab to use when authenticating the provided kerberos principal
                 [Optional, default = <none>]
 
         --source        Add this filesystem as the source for migrations
@@ -218,11 +223,11 @@ OPTIONS
 
         --properties-files  list
                 Load properties from these files
-                [Optional, default = <none>]
+                [Optional, default = <nothing>]
 
-        --properties  list
-                Override properties in comma separated key/value list
-                [Optional, default = <none>]
+        --properties  string
+                Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
+                [Optional, default = <nothing>]
 ```
 
 #### Mandatory Parameters
@@ -236,19 +241,25 @@ OPTIONS
 
 #### Optional Parameters
 
-* **`--user`** The name of the HDFS user to be used when performing operations against the file system. This user must be an HDFS super user, such as `hdfs`.
+* **`--user`** The name of the HDFS user to be used when performing operations against the file system. In environments where Kerberos is disabled, this user must be the HDFS super user, such as `hdfs`.
+* **`--kerberos-principal`** The Kerberos principal to authenticate with and perform migrations as. This principal should map to the [HDFS super user](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsPermissionsGuide.html#The_Super-User) using [auth_to_local](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SecureMode.html#Mapping_from_Kerberos_principals_to_OS_user_accounts) rules.
+* **`--kerberos-keytab`** The Kerberos keytab containing the principal defined for the `--kerberos-principal` parameter. This must be accessible to the local system user running the LiveData Migrator service (default is `hdfs`).
 * **`--source`** Provide this parameter to use the file system resource created as a source.  This is referenced in the UI when selecting the **Add Source** option.
 * **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
 #### Examples
 
-```text
-filesystem add hdfs --file-system-id mysource --source --fs.defaultFS hdfs://myhost.localdomain:8020
+```text title="Example for target single NameNode cluster"
+filesystem add hdfs --file-system-id mytarget --fs.defaultFS hdfs://myhost.localdomain:8020 --user hdfs
 ```
 
-```text
+```text title="Example for source NameNode HA cluster"
 filesystem add hdfs --file-system-id mysource --source --fs.defaultFS hdfs://mynameservice --properties-files /etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml
+```
+
+```text title="Example for source NameNode HA cluster with Kerberos enabled"
+filesystem add hdfs --file-system-id mysource --source --fs.defaultFS hdfs://mynameservice --properties-files /etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml --kerberos-keytab /etc/security/keytabs/hdfs.headless.keytab --kerberos-principal hdfs@REALM.COM
 ```
 
 ----
@@ -344,6 +355,39 @@ When adding properties via the API or UI, for example to set a custom `fs.s3a.en
 
 ```text
 filesystem add s3a --file-system-id mytarget --bucket-name mybucket1 --credentials-provider org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider --access-key B6ZAI18Z3UIO002Y777A --secret-key OP87Chokisf4hsTP0Q5j95yI904lT7AaDBGJpp0D
+```
+
+----
+
+### `filesystem auto-discover-source hdfs`
+
+Discover your local HDFS filesystem by specifying the Kerberos credentials for your source environment.
+
+You can also manually configure the source HDFS filesystem using the [`filesystem add hdfs`](#filesystem-add-hdfs) command.
+
+```text title="Auto-discover-source Hadoop HDFS FileSystem FileSystem"
+SYNOPSYS
+        filesystem auto-discover-source hdfs [[--kerberos-principal] string]  [[--kerberos-keytab] string]
+
+OPTIONS
+        --kerberos-principal  string
+                Kerberos principal to authenticate with and perform migration actions as
+                [Optional, default = <none>]
+
+        --kerberos-keytab  string
+                Kerberos keytab to use when authenticating the provided kerberos principal
+                [Optional, default = <none>]
+```
+
+#### Kerberos parameters
+
+* **`--kerberos-principal`** The Kerberos principal to authenticate with and perform migrations as. This principal should map to the [HDFS super user](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsPermissionsGuide.html#The_Super-User) using [auth_to_local](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SecureMode.html#Mapping_from_Kerberos_principals_to_OS_user_accounts) rules.
+* **`--kerberos-keytab`** The Kerberos keytab containing the principal defined for the `--kerberos-principal` parameter. This must be accessible to the local system user running the LiveData Migrator service (default is `hdfs`).
+
+#### Example
+
+```text
+filesystem auto-discover-source hdfs --kerberos-keytab /etc/security/keytabs/hdfs.headless.keytab --kerberos-principal hdfs@REALM.COM
 ```
 
 ----

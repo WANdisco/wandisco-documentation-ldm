@@ -31,7 +31,9 @@ Type the `<tab>` key if you are uncertain whether a command requires an addition
 LiveData Migrator migrates data from a source file system. Validate that the correct source file system is registered or delete the existing one (you'll define a new source in the [Add File Systems](#add-file-systems) step).
 
 :::info
-The source file system is normally detected on startup. It will not be detected automatically if your Hadoop configuration does not contain the information needed to connect to the Hadoop file system.
+The source file system is normally detected on startup. It will not be detected automatically if Kerberos is enabled or your Hadoop configuration does not contain the information needed to connect to the Hadoop file system.
+
+If Kerberos is enabled, use the [`filesystem auto-discover-source hdfs`](./command-reference.md#filesystem-auto-discover-source-hdfs) command to provide your Kerberos credentials and auto-discover your source HDFS configuration.
 :::
 
 You can manage the source file system through these commands.
@@ -41,6 +43,7 @@ You can manage the source file system through these commands.
 | [`source clear`](./command-reference.md#source-clear) | Delete all sources |
 | [`source del`](./command-reference.md#source-del) | Delete a source |
 | [`source fs show`](./command-reference.md#source-fs-show) | Show the source FileSystem configuration |
+| [`filesystem auto-discover-source hdfs`](./command-reference.md#filesystem-auto-discover-source-hdfs) | Provide your Kerberos credentials to access your source HDFS configuration |
 
 ### Add file systems
 
