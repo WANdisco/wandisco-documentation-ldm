@@ -1933,6 +1933,45 @@ SYNOPSYS
 hive migration stop --all
 ```
 
+## License Commands
+
+----
+
+### `license show`
+
+Show the details of the active license.
+
+```text title="show used license"
+SYNOPSYS
+        license show [--full]
+
+OPTIONS
+        --full  show license details
+                [Optional, default = false]
+```
+
+----
+
+### `license upload`
+
+Upload a new license by submitting its location on the local filesystem.
+
+```text title="upload license file"
+SYNOPSYS
+        license upload [--path] string
+
+OPTIONS
+        --path  string
+                path to the license file in the local filesystem
+                [Mandatory]
+```
+
+#### Example
+
+```text
+license upload --path /user/hdfs/license.key
+```
+
 ## Built-in Commands
 
 ----
