@@ -138,7 +138,7 @@ OPTIONS
 * **`--oauth2-client-id`** The client ID (also known as [application ID](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#get-tenant-and-app-id-values-for-signing-in)) for your Azure service principal.
 * **`--oauth2-client-secret`** The client secret (also known as [application secret](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#option-2-create-a-new-application-secret)) for the Azure service principal.
 * **`--oauth2-client-endpoint`** The [client endpoint](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols#endpoints) for the Azure service principal.  
-This will often take the form of `https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token` where `{tenant}` is your [directory ID](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#get-tenant-and-app-id-values-for-signing-in). You can specify a custom URL if desired (such as a proxy endpoint that manually interfaces with Azure Active Directory).
+This will often take the form of `https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token` where `{tenant}` is the [directory ID](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#get-tenant-and-app-id-values-for-signing-in) for the Azure service principal. You can specify a custom URL if desired (such as a proxy endpoint that manually interfaces with Azure Active Directory).
 * **`--container.name`** The name of the container in the storage account to which content will be migrated. This is referenced in the UI as **Container Name**.
 
 #### Optional Parameters
@@ -338,16 +338,28 @@ OPTIONS
 
 #### Examples
 
-```text title="Example for target single NameNode cluster"
-filesystem add hdfs --file-system-id mytarget --fs.defaultFS hdfs://myhost.localdomain:8020 --user hdfs
-```
+##### HDFS as source
 
 ```text title="Example for source NameNode HA cluster"
-filesystem add hdfs --file-system-id mysource --source --fs.defaultFS hdfs://mynameservice --properties-files /etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml
+filesystem add hdfs --file-system-id mysource --source --fs.defaultFS hdfs://sourcenameservice --properties-files /etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml
 ```
 
 ```text title="Example for source NameNode HA cluster with Kerberos enabled"
-filesystem add hdfs --file-system-id mysource --source --fs.defaultFS hdfs://mynameservice --properties-files /etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml --kerberos-keytab /etc/security/keytabs/hdfs.headless.keytab --kerberos-principal hdfs@REALM.COM
+filesystem add hdfs --file-system-id mysource --source --fs.defaultFS hdfs://sourcenameservice --properties-files /etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml --kerberos-keytab /etc/security/keytabs/hdfs.headless.keytab --kerberos-principal hdfs@SOURCEREALM.COM
+```
+
+##### HDFS as target
+
+:::note
+When specifying a HDFS filesystem as a target, the property files (and Kerberos keytab) for the target cluster must exist on the local filesystem and be accessible to the LiveData Migrator system user.
+:::
+
+```text title="Example for target NameNode HA cluster with Kerberos enabled"
+filesystem add hdfs --file-system-id mytarget --fs.defaultFS hdfs://targetnameservice --properties-files /etc/targetClusterConfig/core-site.xml,/etc/targetClusterConfig/hdfs-site.xml --kerberos-keytab /etc/targetClusterKeytabs/hdfs.headless.keytab --kerberos-principal hdfs@TARGETREALM.COM
+```
+
+```text title="Example for target single NameNode cluster"
+filesystem add hdfs --file-system-id mytarget --fs.defaultFS hdfs://namenode.targetdomain:8020 --user hdfs
 ```
 
 ----
@@ -2155,6 +2167,108 @@ OPTIONS
 
 ```text
 license upload --path /user/hdfs/license.key
+```
+
+## Connect Commands
+
+----
+
+### `connect livemigrator`
+
+Connect to the LiveData Migrator service on your LiveData Migrator host with this command.
+
+:::note
+This is a manual method of connecting to the LiveData Migrator service as the `livedata-migrator --host=localhost` command (shown in the [CLI - Log in](./operation-cli.md#log-in) section) will attempt to establish this connection automatically.
+:::
+
+```text title="connect livemigrator"
+SYNOPSYS
+        connect livemigrator [--host] string
+                             [--ssl]
+                             [[--port] int]
+                             [[--timeout] integer]
+
+OPTIONS
+        --host  string
+                host to connect to
+                [Mandatory]
+
+        --ssl   use ssl connection
+                [Optional, default = false]
+
+        --port  int
+                port of the service, either http or https, depending on the ssl flag
+                [Optional, default = 18080]
+
+        --timeout  integer
+                override default(5m) connection timeout in milliseconds
+                [Optional, default = <nothing>]
+```
+
+#### Mandatory Parameters
+
+* **`--host`** The hostname or IP address for the LiveData Migrator host.
+
+#### Optional Parameters
+
+* **`--ssl`** Specify this parameter if you want to establish an SSL connection to LiveData Migrator. Enable [Server SSL](./configuration.md#server-ssl) on the LiveData Migrator service before using this parameter.
+* **`--port`** The LiveData Migrator port to connect on (default is `18080`).
+* **`--timeout`** Define the connection timeout in milliseconds. Set this parameter to override the default connection timeout of 5 minutes (300000ms).
+
+#### Example
+
+```text
+connect livemigrator --host localhost --port 18080
+```
+
+----
+
+### `connect hivemigrator`
+
+Connect to the HiveMigrator service on your LiveData Migrator host with this command.
+
+:::note
+This is a manual method of connecting to the HiveMigrator service as the `livedata-migrator --host=localhost` command (shown in the [CLI - Log in](./operation-cli.md#log-in) section) will attempt to establish this connection automatically.
+:::
+
+```text title="connect hivemigrator"
+SYNOPSYS
+        connect hivemigrator [--host] string
+                             [--ssl]
+                             [[--port] int]
+                             [[--timeout] long]
+
+OPTIONS
+        --host  string
+                host to connect to
+                [Mandatory]
+
+        --ssl   use ssl connection
+                [Optional, default = false]
+
+        --port  int
+                host to connect to
+                [Optional, default = 6780]
+
+        --timeout  long
+                override default(5m) connection timeout in milliseconds
+                [Optional, default = <nothing>]
+```
+
+#### Mandatory Parameters
+
+* **`--host`** The hostname or IP address for the LiveData Migrator host that contains the HiveMigrator service.
+
+#### Optional Parameters
+
+* **`--ssl`** Specify this parameter if you want to establish an SSL connection to HiveMigrator.
+* **`--port`** The HiveMigrator service port to connect on (default is `6780`).
+* **`--timeout`** Define the connection timeout in milliseconds. Set this parameter to override the default connection timeout of 5 minutes (300000ms).
+
+#### Example
+
+```text
+connect hivemigrator --host localhost --port 6780
 ```
 
 ## Built-in Commands
