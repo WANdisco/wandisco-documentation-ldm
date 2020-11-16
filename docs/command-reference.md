@@ -2224,3 +2224,12 @@ The service scripts can be used to control operation of each individual service 
 ### LiveData UI
 
 `service livedata-ui start|stop|force-reload|restart|status`
+
+## Log Commands
+
+The following commands will only affect logging of the CLI terminal, and will not affect other components of LiveData Migrator:
+
+`log off`
+`log info`
+`log debug`
+`log trace`
