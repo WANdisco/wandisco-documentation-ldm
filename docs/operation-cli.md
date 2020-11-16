@@ -350,3 +350,43 @@ On the LiveData Migrator host, follow the steps below to run the jar:
      `kinit -kt /etc/security/keytabs/hdfs.keytab hdfs@REALM.COM`  
      Afterwards, run:  
      `java -Dlm.kerberos.is.enabled=true -jar livedata-migrator.jar`
+
+## Change Log Level Commands
+
+You can change the amount of detail in Migrator operation data logs by adjusting the logging level. A higher level means less information, while a lower level means more. Lower levels will log data from all higher levels in addition to their own logged data. Starting at the highest level, these are as follows:
+
+### Off
+
+Disable data logging on all levels.
+
+`log off`
+
+### Error
+
+Enable error logging, which will only display information about critical issues, such as an encountered problem that requires Migrator to shut down completely.
+
+`log error`
+
+### Warnings
+
+Enable the logging of warnings, which will display non-critical issues such as failed authentication or low disk space.
+
+`log warning`
+
+### Information
+
+Enable information logging, which will display a large amount of operation data. Examples include information about which folders have been migrated, which paths have been scanned, and which migrations have been completed.
+
+`log info`
+
+### Debug
+
+Enable the logging of debug information. This log level will feature data, variables and other debug text enabled by the developers of Migrator and any third-party libraries you're using with Migrator. This is useful for reporting an issue, if you're able to reproduce it with debug logging enabled.
+
+`log debug`
+
+### Trace
+
+The lowest level of logging. This level logs absolutely all data about LiveData Migrator options: some libraries log every http call made. Logging at this level may require a large amount of disk space.
+
+`log trace`
