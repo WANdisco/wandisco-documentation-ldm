@@ -225,44 +225,81 @@ Add a Google Cloud Storage as a migration target using the `filesystem add gcs` 
 
 ```text title="Add a Google Cloud Storage file system"
 SYNOPSYS
-        filesystem add gcs  [--file-system-id] string
-                            [--service-account-key-file] string
-                            [--bucket-name] string
-                            [[--properties-file] list]
-                            [[--properties] list]
+        filesystem add gcs [--file-system-id] string
+                           [[--service-account-json-key-file] string]
+                           [[--service-account-p12-key-file] string]
+                           [[--service-account-json-key-file-server-location] string]
+                           [[--service-account-p12-key-file-server-location] string]
+                           [[--service-account-email] string]
+                           [--bucket-name] string
+                           [[--properties-files] list]
+                           [[--properties] string]
 
 OPTIONS
         --file-system-id  string
 
                 [Mandatory]
 
-        --service-account-key-file  string
+        --service-account-json-key-file  string
 
-                [Mandatory]
+                [Optional, default = <none>]
+
+        --service-account-p12-key-file  string
+
+                [Optional, default = <none>]
+
+        --service-account-json-key-file-server-location  string
+                Permanent location of the GCS KeyFile on the LiveData Migrator server
+                [Optional, default = <none>]
+
+        --service-account-p12-key-file-server-location  string
+                Permanent location of the GCS KeyFile on the LiveData Migrator server
+                [Optional, default = <none>]
+
+        --service-account-email  string
+                GCS Service Account Email
+                [Optional, default = <none>]
 
         --bucket-name  string
 
                 [Mandatory]
 
-        --properties-file  list
-                Load properties from this file
-                [Optional, default = <none>]
+        --properties-files  list
+                Load properties from these files
+                [Optional, default = <nothing>]
 
-        --properties  list
+        --properties  string
                 Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
-                [Optional, default = <none>]
+                [Optional, default = <nothing>]
 ```
 
 #### Mandatory Parameters
 
 * **`--file-system-id`** The identifier to give the new file system resource.
-* **`--service-account-key-file`** The path to a Service Account Key file.
 * **`--bucket-name`** The bucket name of a Google Cloud Storage account.
+
+#### Service account key parameters
+
+:::info
+Provide your service account key for the GCS bucket by choosing one of the parameters below.
+:::
+
+* **`--service-account-json-key-file-server-location`** The absolute filesystem path on the LiveData Migrator server of your service account key file in JSON format. You can either [create a GCS service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys) or [use an existing one](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#listing_service_account_keys).
+* **`--service-account-p12-key-file-server-location`** The absolute filesystem path on the LiveData Migrator server of your service account key file in P12 format. You can either [create a GCS service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys) or [use an existing one](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#listing_service_account_keys).
+* **`--service-account-json-key-file`** The absolute filesystem path on the host running the LiveData Migrator CLI of your service account key file in JSON format. Only use this parameter if you are running the LiveData Migrator CLI on a different host to your LiveData Migrator server.
+* **`--service-account-p12-key-file`** The absolute filesystem path on the host running the LiveData Migrator CLI of your service account key file in P12 format. Only use this parameter if you are running the LiveData Migrator CLI on a different host to your LiveData Migrator server.
 
 #### Optional Parameters
 
+* **`--service-account-email`** The email address linked to your GCS service account.
 * **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
+
+#### Example
+
+```text
+filesystem add gcs --file-system-id gcsAgent --bucket-name myGcsBucket --service-account-p12-key-file-server-location /user/hdfs/targetStorage/myAccountKey.p12 --service-account-email user@mydomain.com
+```
 
 ----
 
