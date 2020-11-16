@@ -1888,7 +1888,7 @@ OPTIONS
 
 #### Optional Parameters
 
-* **`--rule-names`** The rule name or list of rule names to use with the migration. Multiple rules need to be comma separated (for example: `rule1,rule2,rule3`).
+* **`--rule-names`** The rule name or list of rule names to use with the migration. Multiple rules need to be comma-separated (for example: `rule1,rule2,rule3`).
 * **`--name`** The name to identify the migration with.
 * **`--auto-start`** Specify this parameter to start the migration immediately after creation.
 * **`--once`** Specify this parameter to perform a one-time migration, and not continuously scan for new or changing metadata.
@@ -1949,7 +1949,7 @@ hive migration list
 
 ### `hive migration pause`
 
-Pause a hive migration or a list of hive migrations (comma separated).
+Pause a hive migration or a list of hive migrations (comma-separated).
 
 ```text title="Pause migration from the list"
 SYNOPSYS
@@ -1986,7 +1986,7 @@ hive migration pause --all
 
 ### `hive migration resume`
 
-Resume a paused hive migration or a list of paused hive migrations (comma separated).
+Resume a paused hive migration or a list of paused hive migrations (comma-separated).
 
 ```text title="Resume migration from the list"
 SYNOPSYS
@@ -2045,7 +2045,7 @@ hive migration show --name hive_migration
 
 ### `hive migration start`
 
-Start a hive migration or a list of hive migrations (comma separated).
+Start a hive migration or a list of hive migrations (comma-separated).
 
 :::note
 Specify the `--once` parameter to perform a one-time migration, and not continuously scan for new or changing metadata.
@@ -2097,7 +2097,7 @@ hive migration start --all --once
 
 ### `hive migration status`
 
-Show the status of a hive migration or a list of hive migrations (comma separated).
+Show the status of a hive migration or a list of hive migrations (comma-separated).
 
 ```text title="Show migration status"
 SYNOPSYS
@@ -2134,7 +2134,7 @@ hive migration status --all
 
 ### `hive migration stop`
 
-Stop a running hive migration or a list of running hive migrations (comma separated).
+Stop a running hive migration or a list of running hive migrations (comma-separated).
 
 ```text title="Stop running migration"
 SYNOPSYS
