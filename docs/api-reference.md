@@ -15,7 +15,7 @@ http://localhost:18080/ldm-api.html
 
 This version will reflect exactly the API exposed from your instance of LiveData Migrator.
 
-[![LiveData Migrator Swagger Documentation](/wandisco-documentation-ldm/img/swagger.png)](http://localhost:18080/ldm-api.html)
+[![LiveData Migrator Swagger Documentation](/img/swagger.png)](http://localhost:18080/ldm-api.html)
 
 ## Metadata migrations
 
