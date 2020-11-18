@@ -1,0 +1,46 @@
+{
+  "version-1.4.7/someSidebar": [
+    {
+      "collapsed": true,
+      "type": "category",
+      "label": "Documentation",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-1.4.7/about"
+        },
+        {
+          "type": "doc",
+          "id": "version-1.4.7/installation"
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Using LiveData Migrator",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-1.4.7/operation-ui"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.4.7/operation-cli"
+            }
+          ]
+        },
+        {
+          "type": "doc",
+          "id": "version-1.4.7/configuration"
+        },
+        {
+          "type": "doc",
+          "id": "version-1.4.7/command-reference"
+        },
+        {
+          "type": "doc",
+          "id": "version-1.4.7/api-reference"
+        }
+      ]
+    }
+  ]
+}
