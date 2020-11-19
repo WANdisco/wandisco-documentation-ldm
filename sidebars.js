@@ -15,6 +15,7 @@ module.exports = {
           ],
       },
       'configuration',
+      'use-cases',
       'command-reference',
       {
         "Alternatives to the UI or CLI": [

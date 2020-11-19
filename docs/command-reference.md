@@ -1417,6 +1417,8 @@ hive agent add glue --name glueAgent --access-key ACCESS6HCFPAQIVZTKEY --secret-
 
 Add a hive agent to connect to a local or remote [Apache Hive](https://cwiki.apache.org/confluence/display/Hive/Home) metastore using the `hive agent add hive` command.
 
+Before deploying an agent, see our recommendations section on [enabling the Hive metastore event listener](./configuration.md#enable-hive-metastore-event-listener) for Apache Hive environments.
+
 :::info remote deployments
 When connecting to a remote Apache Hive metastore, specify a host on the remote cluster that will be used to communicate with the local LiveData Migrator server (constrained to a user-defined port).
 
@@ -2444,7 +2446,7 @@ The action prompt provides many features to guide you during operation.
 | **Previous commands** | Navigate previous commands using the up and down arrows, and use standard emacs shortcuts. |
 | **Interactive or scripted operation** | You can interact with the command line interface directly, or send it commands on standard input to incorporate it into shell scripts. |
 
-## System service commands
+## System Service Commands
 
 The service scripts can be used to control operation of each individual service at any time.
 
@@ -2464,7 +2466,7 @@ The service scripts can be used to control operation of each individual service 
 
 The following commands will only affect logging of the CLI terminal, and will not affect other components of LiveData Migrator:
 
-`log off`
-`log info`
-`log debug`
+`log off`  
+`log info`  
+`log debug`  
 `log trace`
