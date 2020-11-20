@@ -15,7 +15,11 @@ module.exports = {
           ],
       },
       'configuration',
-      'use-cases',
+      {
+        "Common Use Cases": [
+          'uc-on-prem-hadoop-hdi'
+          ],
+      },
       'command-reference',
       {
         "Alternatives to the UI or CLI": [

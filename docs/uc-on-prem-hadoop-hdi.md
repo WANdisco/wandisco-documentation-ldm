@@ -1,12 +1,10 @@
 ---
-id: use-cases
-title: Use Cases for LiveData Migrator
-sidebar_label: Use Cases
+id: uc-on-prem-hadoop-hdi
+title: On-premises Hadoop cluster to Azure HDInsights cluster
+sidebar_label: On-premises Hadoop to Azure HDI
 ---
 
-LiveData Migrator can be configured in a variety of ways depending on the filesystems and databases that you want to target for migration.
-
-Below is an outline of the steps needed for each given use case.
+Below is an outline of the steps needed to ready your environment for migration of data and metadata.
 
 :::note
 The steps on this page assume that you are using LiveData Migrator through the CLI. Follow the links for each command to see the required parameters and example usage.
@@ -14,33 +12,35 @@ The steps on this page assume that you are using LiveData Migrator through the C
 Alternative steps for the UI will be provided in a future release.
 :::
 
-## On-premise Hadoop cluster to Azure HDInsights cluster
+## Prerequisites
 
-### Prerequisites
+### On-premises Hadoop cluster
 
-Ensure that all [prerequisites](./prereqs.md#prerequisites) are met for the source environment. This would include:
+Ensure that all [prerequisites](./prereqs.md#prerequisites) are met for the source environment. This also includes:
 
-* LiveData Migrator installed on an edge node in the Hadoop cluster.
-* The HDFS and Hive client libraries installed on the edge node.
-* If Kerberos is enabled on the cluster, the HDFS and Hive keytabs are available on the edge node and accessible to the LiveData Migrator service users (default is `hdfs` and `hive`).
-* Network connectivity between your edge node and your Azure HDInsights cluster.
+* Network connectivity between your edge node and your ADLS Gen2 storage container.
+* If using an [Azure SQL Database](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-use-external-metadata-stores#create-and-config-azure-sql-database-for-the-custom-metastore) on your HDInsights cluster, network connectivity between your edge node and this database.
+
+### Azure HDInsights cluster
 
 For your target environment, ensure the following prerequisites are met:
 
 * Your HDInsights cluster is using [ADLS Gen2](https://docs.microsoft.com/en-us/azure/hdinsight/overview-data-lake-storage-gen2) as its primary storage type.
-* If using a [default metastore](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-use-external-metadata-stores#default-metastore), SSH access to an edge node on the HDInsights cluster. The edge node requires the following:
+* (Recommended) [Check that your default Hive warehouse directory is configured the same as your source on-premises Hadoop cluster](./configuration.md#default-hive-metastore-warehouse-directory).
+* If using a [default metastore](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-use-external-metadata-stores#default-metastore), SSH access to an edge node on the HDInsights cluster.  
+  The edge node requires the following:
   * HDFS and Hive client libraries installed.
-  * Port 5052 open for outbound connections to communicate with the LiveData Migrator service on the on-premise Hadoop edge node.
+  * Port 5052 open for outbound connections to communicate with the LiveData Migrator service on the on-premises Hadoop edge node.
 
-### Configure for data migrations
+## Configure for data migrations
 
-#### Add HDFS as source filesystem
+### Add HDFS as source filesystem
 
 1. If Kerberos is enabled on your Hadoop cluster, specify the Kerberos credentials for the HDFS superuser on your Hadoop cluster:
 
    [`filesystem auto-discover-source hdfs`](./command-reference.md#filesystem-auto-discover-source-hdfs)
 
-2. Check that HDFS on your on-premises Hadoop cluster is set as your source filesystem:
+1. Check that HDFS on your on-premises Hadoop cluster is set as your source filesystem:
 
    [`source fs show`](./command-reference.md#source-fs-show)
 
@@ -50,16 +50,16 @@ For your target environment, ensure the following prerequisites are met:
 
    Ensure to include the `--source` parameter when using the command above.
 
-#### Add ADLS Gen2 storage as target filesystem
+### Add ADLS Gen2 storage as target filesystem
 
 Configure your ADLS Gen2 storage container as your target filesystem. The method chosen will depend on the authentication method:
 
 * Using a [service principal](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal) and [OAuth 2](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols) credentials: [`filesystem add adls2 oauth`](./command-reference.md#filesystem-add-adls2-oauth)
 * Using [access key](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) credentials: [`filesystem add adls2 sharedKey`](./command-reference.md#filesystem-add-adls2-sharedkey)
 
-### Configure for metadata migrations
+## Configure for metadata migrations
 
-#### Add source hive agent
+### Add source hive agent
 
 1. (Recommended) [Enable the Hive metastore event listener](./configuration.md#enable-hive-metastore-event-listener) on the on-premises Hadoop cluster.
 
@@ -73,13 +73,13 @@ Configure your ADLS Gen2 storage container as your target filesystem. The method
    hive agent check --name hiveAgent
    ```
 
-#### Add target hive agent
+### Add target hive agent
 
-HDInsights can either use a [default metastore](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-use-external-metadata-stores#default-metastore), or it can use a [custom metastore](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-use-external-metadata-stores#custom-metastore) in the form of an [Azure SQL Database](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-use-external-metadata-stores#create-and-config-azure-sql-database-for-the-custom-metastore).
+HDInsights can use either a [default metastore](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-use-external-metadata-stores#default-metastore), or a [custom metastore](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-use-external-metadata-stores#custom-metastore) in the form of an [Azure SQL Database](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-use-external-metadata-stores#create-and-config-azure-sql-database-for-the-custom-metastore).
 
 Choose one of the methods below depending on the type of metastore deployed in your HDInsights cluster.
 
-##### Default metastore
+#### Default metastore
 
 1. Deploy and configure a remote hive agent:
 
@@ -95,7 +95,7 @@ Choose one of the methods below depending on the type of metastore deployed in y
    hive agent check --name azureAgent
    ```
 
-##### Custom metastore (Azure SQL database)
+#### Custom metastore (Azure SQL database)
 
 1. Configure a hive agent to connect to an Azure SQL database:
 
