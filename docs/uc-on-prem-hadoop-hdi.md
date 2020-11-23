@@ -106,3 +106,7 @@ Choose one of the methods below depending on the type of metastore deployed in y
    ```text title="Example"
    hive agent check --name azureAgent
    ```
+
+## Next steps
+
+Start [defining exclusions](./operation-cli.md#configure-exclusions) and [migrating data](./operation-cli.md#create-data-migrations). You can also [create metadata rules](./operation-cli.md#define-metadata-rules-preview) and start [migrating metadata](./operation-cli.md#migrate-metadata).

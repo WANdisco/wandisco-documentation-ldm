@@ -10,9 +10,11 @@ If you're new to the concept of LiveData, or want to know what LiveData Migrator
 
 ## Before you start
 
-The UI is available on port 8081 on the host with your LiveData Migrator installation. For example, if you were running LiveData Migrator locally, the port would be:
+The UI is available on port 8081 on your LiveData Migrator host. For example, if you were running LiveData Migrator on a host named `myldmhost.example.com`, the URL would be:
 
-http://127.0.0.1:8081
+```text
+http://myldmhost.example.com:8081
+```
 
 ### Register
 
@@ -29,9 +31,9 @@ If you want to upgrade to a full license before you start using LiveData Migrato
 
    Once your license has been sent, ensure it is available on your local machine.
 1. Upload your new license.
-1. Review the license preview and ensure it is correct before selecting **Upload**.
+1. Check the **License Information** window and ensure that your new data limit has been applied.
 
-   The License panel displays your license limits and expiry date. We'll notify you when it's time to renew your license.
+   The License panel also displays the expiry date. We'll notify you when it's time to renew your license.
 
 ## How the UI works
 
@@ -53,7 +55,7 @@ Use the Storage panel to:
 
 * View and configure the source and target storages
 * Add further targets
-* Add additional LiveData Migrators and LiveData Plane
+* Add additional LiveData Migrator servers and [LiveData Plane](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/get-started) servers
 
 For more information about sources and targets, see the [introduction to LiveData Migrator](./about.md).
 
@@ -70,19 +72,81 @@ Use the Rules and Migrations panel to:
 
 The bell icon in the top-right of the UI is where you'll receive notifications about errors, warnings, or important milestones in your usage.
 
-## Migrate data
-
-### Configure storage
+## Configure storage
 
 Configure your storages to define at least one source and at least one target to migrate data. LiveData Migrator will connect to these storages for migration.
 
 * Supported sources are: **HDFS**
-* Supported targets are: **ADLS Gen2**, **S3**, **GCS**, and **IBM COS**
+* Supported targets are: **ADLS Gen2**, **S3**, **Google Cloud Storage**, and **IBM Cloud Object Storage (S3)**
 
 You can also use the Storage panel to:
 
 * Configure S3-compatible Targets using the [Hadoop S3A configuration](http://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html) exposed in the UI.
 * Connect to additional LiveData Migrator or LiveData Plane instances and configure their respective storages.
+
+### Configure source storage
+
+:::info
+The source file system is normally detected on startup. It will not be detected automatically if Kerberos is enabled or your Hadoop configuration does not contain the information needed to connect to the Hadoop file system.
+:::
+
+If Kerberos is enabled, on the [Storage](#storage) panel, select to configure your _Unknown source_ and provide your source HDFS configuration:
+
+* **File System ID** - Provide a name for your source storage.
+* **Default FS** - Provide the `fs.defaultFS` value from your HDFS configuration.
+* Kerberos Configuration
+  * **Kerberos Principal** - Provide a principal that will map to the [HDFS super user](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsPermissionsGuide.html#The_Super-User) using [auth_to_local](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SecureMode.html#Mapping_from_Kerberos_principals_to_OS_user_accounts) rules.
+  * **Kerberos Keytab Location** - Provide the path to the Kerberos keytab containing the **Kerberos Principal**. This must be accessible to the local system user running the LiveData Migrator service (default is `hdfs`).
+* Additional Configuration
+  * **Provide a path to files** - Provide the directory or directories containing your HDFS configuration (such as the `core-site.xml` and `hdfs-site.xml`) on your LiveData Migrator host's local filesystem.
+  * **Additional Configuration** (Optional) - Override properties or specify additional properties by adding Key/Value pairs.
+
+### Add target storages
+
+Selecting to configure your _Target_ storage on the [Storage](#storage) panel, see the links below for the configuration needed for each platform.
+
+* ADLS Gen2 - The configuration needed will depend on the **Authentication Type** chosen:
+  * [Shared Key](./command-reference.md#mandatory-parameters-2)
+  * [Service Principal (OAuth2)](./command-reference.md#mandatory-parameters-1)
+* [GCS](./command-reference.md#mandatory-parameters-3)
+* [HDFS](./command-reference.md#mandatory-parameters-4)
+* [S3a (including IBM COS)](./command-reference.md#mandatory-parameters-5)
+
+## Configure exclusions
+
+Define exclusions to exclude certain file sizes or file names (defined using [regex](https://regexr.com/) patterns) during a migration. These templates are associated with a storage, allowing you to selectively ignore content during migration when that storage is used as the source.
+
+Assign exclusions to new or existing migrations.
+
+:::note
+Default exclusions will automatically apply to certain storages depending on the platform. For example, ADLS storage types have a maximum individual file size limit of 5TB.
+:::
+
+### Add new exclusions
+
+1. In the **Storages** list on the dashboard, click the settings cog for the appropriate storage.
+1. Select **LiveData Migrator** under the _Processes_ list to display the exclusion templates.
+1. Click **Add Exclusion Template** to associate the exclusion with the selected storage and enter the parameters for the exclusion:
+    * **Exclusion type** - _Regex_, _File Size_, or _Date_.
+    * **Name** - The name given to the exclusion template (for example: `100gbfilelimit`).
+    * **Description** - A brief description of what the exclusion is doing. For example: "_Files larger than 100GB are excluded_").
+    * _File Size_ = **Value / Unit** - The value and unit for the file size limit (for example: `100` `GB`).
+    * _Regex_ = **Regex** - The regex pattern to be used for the filename exclusion (for example: `/**/.hive-staging**`).
+    * _Date_ = **Select Date** - Any files that have been modified before the specified date will be excluded during migrations.
+
+Once the exclusion is added and passed validation, it appears on the exclusion list.
+
+### Remove exclusions from the templates list
+
+1. In the **Storages** list on the dashboard, click the settings cog for the appropriate storage.
+1. Select **LiveData Migrator** under the _Processes_ list to display the exclusion templates.
+1. Click the trash icon.
+
+:::note
+This will not remove the exclusion from an existing migration. See the [Remove exclusions from an existing migration](#remove-exclusions-from-an-existing-migration) section for guidance on how to do this.
+:::
+
+## Migrate data
 
 ### Create migrations
 
@@ -94,13 +158,24 @@ To create a migration:
 
 1. Choose a source and target from previously defined [storages](#configure-storage).
 2. Choose the Path to set the scope of the migration.
-3. [Apply any exclusions](#add-new-exclusions) to reduce the scope within this Path.
+3. [Apply any exclusions](#assign-exclusions-to-a-new-migration) to reduce the scope within this Path.
 
 Migrations can be automatically started when they're created, or started at a later point when [viewing migration details](#view-migrations).
 
 If you've already migrated some data from the same source to the same target, you can choose whether to overwrite all the content (Overwrite) or only migrate new content that isn't already there (Skip).
 
-### View migrations
+#### Assign exclusions to a new migration
+
+Adding exclusions to a new migration ensures the outcome is consistent with the chosen exclusions.
+
+1. In the new migration page, click **Add new exclusion**
+1. Select the appropriate exclusion template from the drop-down list.
+
+The exclusion appears in the list, and can be removed before the migration is started.
+
+### Manage migrations
+
+#### View migrations
 
 The Dashboard displays an overview of migrations and their status, showing what pre-existing data has been moved and data added since the migration started.
 
@@ -110,52 +185,14 @@ Click into the migrations to see more detail.
 A migration must be stopped before it can be deleted. A stopped migration can not be resumed.
 :::
 
-## Add and remove exclusions
+#### Assign exclusions to an existing migration
 
-Define exclusion templates to exclude certain file sizes or file names (defined using [regex](https://regexr.com/) patterns) during a migration. These templates are associated with a storage, allowing you to selectively ignore content during migration when that storage is used as the source.
-
-Assign exclusion templates to new migration or existing migrations. Adding exclusions to a new migration ensures the outcome is consistent with the chosen exclusions. Adding exclusions to an existing migration will change the future actions performed for that migration, but will not affect previously migrated content.
-
-:::note
-Default exclusions will automatically apply to certain storages depending on the platform. For example, ADLS storage types have a maximum individual file size limit of 5TB.
-:::
-
-### Add new exclusions
-
-1. In the **Storages** list on the dashboard, click the settings cog for the appropriate storage.
-1. Select **LiveData Migrator** under the _Processes_ list to display the exclusion templates.
-1. Click **Add new exclusion** to associate the exclusion with the selected storage and enter the parameters for the exclusion:
-    * **Exclusion type** - _File Size_ or _Regex_.
-    * **Name** - The name given to the exclusion template (for example: `100gbfilelimit`).
-    * **Description** - A brief description of what the exclusion is doing. For example: "_Files larger than 100GB are excluded_").
-    * _File Size_ = **Value / Unit** - The value and unit for the file size limit (for example: `100` `GB`).
-    * _Regex_ = **Regex** - The regex pattern to be used for the filename exclusion (for example: `/**/.hive-staging**`)
-
-Once the exclusion is added and passed validation, it appears on the exclusion list.
-
-### Remove exclusions from the templates list
-
-1. In the **Storages** list on the dashboard, click the settings cog for the appropriate storage.
-1. Select **LiveData Migrator** under the _Processes_ list to display the exclusion templates.
-1. Click the trash icon.
-
-:::note
-This will not remove the exclusion from an existing migration. See the [Remove exclusion from an existing migration](#remove-exclusion-from-an-existing-migration) section for guidance on how to do this.
-:::
-
-### Assign exclusion templates to a new migration
-
-1. In the new migration page, click **Add new exclusion**
-1. Select the appropriate exclusion template from the drop-down list.
-
-The exclusion appears in the list, and can be removed before the migration is started.
-
-### Assign exclusion templates to an existing migration
+Adding exclusions to an existing migration will change the future actions performed for that migration, but will not affect previously migrated content.
 
 1. In the dashboard, select an ongoing migration to view its **Exclusions**.
 1. Click **Add** and select the appropriate exclusion template from the drop-down list.
 
-### Remove exclusion from an existing migration
+#### Remove exclusions from an existing migration
 
 1. In the dashboard, select an ongoing migration to view its **Exclusions**.
 1. Remove any of the exclusions one at a time.
