@@ -293,11 +293,7 @@ LiveData Migrator uses pending regions to keep your directories up to date if th
 
 LiveData Migrator collects pending regions automatically during a migration, but you can manually add them if you want the directories to be re-scanned after further updates. You can also re-run the entire migration by making the root directory the pending region.
 
-Add a pending region to a migration by running the `migration pending-region add` command.
-
-```text title="Example"
-migration pending-region add --migration-id myFirstMigration --path /dir1/userA
-```
+[`migration pending-region add`](./command-reference.md#migration-pending-region-add)
 
 ## Bandwidth management
 
