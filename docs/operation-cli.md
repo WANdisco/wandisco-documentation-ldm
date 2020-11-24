@@ -249,7 +249,7 @@ When [creating a metadata migration](#create-metadata-migrations), use the defau
 | [`hive rule list`](./command-reference.md#hive-rule-list) | List all hive rules |
 | [`hive rule show`](./command-reference.md#hive-rule-show) | Show the configuration of a hive rule |
 
-## Migrate metadata
+## Migrate metadata (preview)
 
 ### Create metadata migrations
 
