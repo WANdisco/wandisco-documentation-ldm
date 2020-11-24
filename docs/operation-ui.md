@@ -103,14 +103,13 @@ If Kerberos is enabled, on the [Storage](#storage) panel, select to configure yo
 
 ### Add target storages
 
-Selecting to configure your _Target_ storage on the [Storage](#storage) panel, see the links below for the configuration needed for each platform.
+Selecting to configure your _Target_ storage on the [Storage](#storage) panel, see the links below for the configuration needed for each platform:
 
 * ADLS Gen2 - The configuration needed will depend on the **Authentication Type** chosen:
   * [Shared Key](./command-reference.md#mandatory-parameters-2)
   * [Service Principal (OAuth2)](./command-reference.md#mandatory-parameters-1)
-* [GCS](./command-reference.md#mandatory-parameters-3)
-* [HDFS](./command-reference.md#mandatory-parameters-4)
-* [S3a (including IBM COS)](./command-reference.md#mandatory-parameters-5)
+* [S3 / IBM Cloud Object Storage (S3)](./command-reference.md#mandatory-parameters-5)
+* [Google Cloud Storage](./command-reference.md#mandatory-parameters-3)
 
 ## Configure exclusions
 
@@ -119,12 +118,12 @@ Define exclusions to exclude certain file sizes or file names (defined using [re
 Assign exclusions to new or existing migrations.
 
 :::note
-Default exclusions will automatically apply to certain storages depending on the platform. For example, ADLS storage types have a maximum individual file size limit of 5TB.
+Default exclusions will automatically apply to certain storages depending on the platform. For example, ADLS storage types have a maximum individual file size limit of 4.55TiB.
 :::
 
 ### Add new exclusions
 
-1. In the **Storages** list on the dashboard, click the settings cog for the appropriate storage.
+1. In the **Storages** list on the dashboard, click the settings for the appropriate storage.
 1. Select **LiveData Migrator** under the _Processes_ list to display the exclusion templates.
 1. Click **Add Exclusion Template** to associate the exclusion with the selected storage and enter the parameters for the exclusion:
     * **Exclusion type** - _Regex_, _File Size_, or _Date_.
@@ -138,7 +137,7 @@ Once the exclusion is added and passed validation, it appears on the exclusion l
 
 ### Remove exclusions from the templates list
 
-1. In the **Storages** list on the dashboard, click the settings cog for the appropriate storage.
+1. In the **Storages** list on the dashboard, click the settings for the appropriate storage.
 1. Select **LiveData Migrator** under the _Processes_ list to display the exclusion templates.
 1. Click the trash icon.
 
@@ -157,12 +156,15 @@ You will typically create multiple migrations so that you can select specific co
 To create a migration:
 
 1. Choose a source and target from previously defined [storages](#configure-storage).
-2. Choose the Path to set the scope of the migration.
-3. [Apply any exclusions](#assign-exclusions-to-a-new-migration) to reduce the scope within this Path.
+1. Choose the Path to set the scope of the migration.
+1. Enable the **Auto-start migration** option if you want to start the migration immediately after creation.  
+   Migrations can be started at a later point when [viewing migration details](#view-migrations).
+1. [Apply any exclusions](#assign-exclusions-to-a-new-migration) to reduce the scope within this Path.
+1. Select the **Overwrite** or **Skip if Size Match** setting for the migration.  
+   * **Skip if Size Match** - If the file size is identical between the source and target, the file is skipped. If it’s a different size, the whole file is replaced.
+   * **Overwrite** - Everything is replaced, even if the file size is identical.
 
-Migrations can be automatically started when they're created, or started at a later point when [viewing migration details](#view-migrations).
-
-If you've already migrated some data from the same source to the same target, you can choose whether to overwrite all the content (Overwrite) or only migrate new content that isn't already there (Skip).
+If you've already migrated some data from the same source to the same target, you can choose whether to overwrite all the content (Overwrite) or only migrate new content that isn't already there (Skip if Size Match).
 
 #### Assign exclusions to a new migration
 
@@ -179,7 +181,7 @@ The exclusion appears in the list, and can be removed before the migration is st
 
 The Dashboard displays an overview of migrations and their status, showing what pre-existing data has been moved and data added since the migration started.
 
-Click into the migrations to see more detail.
+Click to View migration to see more detail.
 
 :::note
 A migration must be stopped before it can be deleted. A stopped migration can not be resumed.
@@ -196,3 +198,16 @@ Adding exclusions to an existing migration will change the future actions perfor
 
 1. In the dashboard, select an ongoing migration to view its **Exclusions**.
 1. Remove any of the exclusions one at a time.
+
+## Bandwidth management
+
+By default, LiveData Migrator will use all network bandwidth available to the server unless a specific limit is applied.
+
+To apply a bandwidth limit between the source and target storage(s), follow the steps below:
+
+1. In the **Storages** list on the dashboard, click the settings for the appropriate storage.
+1. Select **Bandwidth Management** under the _Grouping_ list.
+1. Uncheck the **Unlimited** option.
+1. Define the **Maximum bandwidth limit** and **Unit** (for example: MiB/s), and click **Apply**.
+
+You will need to define a bandwidth limit for each LiveData Migrator server (if you have more than one).
