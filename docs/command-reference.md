@@ -996,20 +996,24 @@ SYNOPSYS
 
 ----
 
-### `migration new`
+### `migration add`
 
 Create a new migration to initiate data migration from your source file system.
 
 ```text title="Create a new migration"
 SYNOPSYS
-        migration new [--path] string
+        migration add [[--migration-id] string]
+                      [--path] string
                       [--target] string
-                      [--migration-id] string
-                      [--exclusions] string
+                      [[--exclusions] string]
+                      [[--action-policy] string]
                       [--auto-start]
-                      [--action-policy] string
 
 OPTIONS
+        --migration-id  string
+
+                [Optional, default = <nothing>]
+
         --path  string
 
                 [Mandatory]
@@ -1018,29 +1022,26 @@ OPTIONS
 
                 [Mandatory]
 
-        –-migration-id  string
-
-                [Mandatory]
-
         --exclusions  string
 
                 [Optional, default = <none>]
 
+        --action-policy  string
+
+                [Optional, default = com.wandisco.livemigrator2.migration.OverwriteActionPolicy]
+
         --auto-start
                 [Optional, default = false]
-
-        --action-policy  string
-                [Optional, default = com.wandisco.livemigrator2.migration.OverwriteActionPolicy]
 ```
 
 #### Mandatory Parameters
 
 * **`--path`** Defines the source file system directory that is the scope of the migration. All content (other than that excluded) will be migrated to the target. This is referenced in the UI as **Path for {source-filesystem}**.
 * **`--target`** Specifies the name of the target file system resource to which migration will occur. This is referenced in the UI as **Target**.
-* **`--migration-id`** Provide an identifier for the new migration.
 
 #### Optional Parameters
 
+* **`--migration-id`** Provide an identifier for the new migration. An identifier will be auto-generated if one is not provided.
 * **`--exclusions`** A comma-separated list of exclusions by name. This is referenced in the UI as **Add new exclusion**.
 * **`--auto-start`** Provide this parameter if you want the migration to start immediately. If not provided, the migration will only take effect once run. This is referenced in the UI as **Auto-start migration**.
 * **`--action-policy`** This parameter determines what happens if the migration encounters content in the target path with the same name and size. This is referenced in the UI as **Skip Or Overwrite Settings**.  
@@ -1053,7 +1054,7 @@ OPTIONS
 #### Example
 
 ```text
-migration new --path /repl1 --target mytarget –-migration-id myNewMigration --exclusions 100mbfiles
+migration add --path /repl1 --target mytarget –-migration-id myNewMigration --exclusions 100mbfiles
 ```
 
 ----
@@ -2332,7 +2333,7 @@ SYNOPSYS
 
 ### `echo`
 
-Prints whatever text that you write to the console. This can be used to sanity check a command before running it (for example: `echo migration new --path /repl1 --target mytarget –-migration-id myNewMigration --exclusions 100mbfiles`).
+Prints whatever text that you write to the console. This can be used to sanity check a command before running it (for example: `echo migration add --path /repl1 --target mytarget –-migration-id myNewMigration --exclusions 100mbfiles`).
 
 ```text title="Print message"
 SYNOPSYS

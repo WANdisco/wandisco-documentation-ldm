@@ -115,9 +115,9 @@ Follow the command links to learn how to set the parameters and see examples.
 
 1. Create a new migration:
 
-   [`migration new`](./command-reference.md#migration-new)
+   [`migration add`](./command-reference.md#migration-add)
 
-   Apply the [`--auto-start`](./command-reference.md#optional-parameters-4) parameter if you would like the migration to start right away.
+   Apply the [`--auto-start`](./command-reference.md#optional-parameters-5) parameter if you would like the migration to start right away.
 
 1. If you don't have auto-start enabled, manually start the migration:
 
