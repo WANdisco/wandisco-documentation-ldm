@@ -1,32 +1,79 @@
 module.exports = {
-  someSidebar: {
-    Documentation: [
-      'about',
-      {
-        "Installation": [
-          'prereqs',
-          'installation'
-          ],
-      },
-      {
-        "Using LiveData Migrator": [
-          'operation-ui',
-          'operation-cli'
-          ],
-      },
-      'configuration',
-      {
-        "Common Use Cases": [
-          'uc-on-prem-hadoop-hdi'
-          ],
-      },
-      'command-reference',
-      {
-        "Alternatives to the UI or CLI": [
-          'jar',
-          'api-reference'
-          ],
-      },
-    ],
-  },
+  "someSidebar": [
+    {
+      "collapsed": true,
+      "type": "category",
+      "label": "Documentation",
+      "items": [
+        {
+          "type": "doc",
+          "id": "about"
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Installation",
+          "items": [
+            {
+              "type": "doc",
+              "id": "prereqs"
+            },
+            {
+              "type": "doc",
+              "id": "installation"
+            }
+          ]
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Using LiveData Migrator",
+          "items": [
+            {
+              "type": "doc",
+              "id": "operation-ui"
+            },
+            {
+              "type": "doc",
+              "id": "operation-cli"
+            }
+          ]
+        },
+        {
+          "type": "doc",
+          "id": "configuration"
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Common Use Cases",
+          "items": [
+            {
+              "type": "doc",
+              "id": "uc-on-prem-hadoop-hdi"
+            }
+          ]
+        },
+        {
+          "type": "doc",
+          "id": "command-reference"
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Alternatives to the UI or CLI",
+          "items": [
+            {
+              "type": "doc",
+              "id": "jar"
+            },
+            {
+              "type": "doc",
+              "id": "api-reference"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 };
