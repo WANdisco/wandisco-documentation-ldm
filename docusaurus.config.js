@@ -65,7 +65,7 @@ module.exports = {
            * URL for editing a doc in the website repo.
            * Example: 'https://github.com/facebook/docusaurus/edit/master/website/'
            */
-          editUrl: 'https://github.com/WANdisco/wandisco-documentation-ldm/tree/master/docs',
+          //editUrl: 'https://github.com/WANdisco/wandisco-documentation-ldm/tree/master/docs',
           /**
            * Whether to display the author who last updated the doc.
            */
