@@ -365,17 +365,62 @@ OPTIONS
 * **`--fs.defaultFS`** A string that defines how LiveData Migrator accesses HDFS. This is referenced in the UI as **Default FS**.  
   It can be specified in a number of forms:
   1. As a single HDFS URI, such as `hdfs://192.168.1.10:8020` (using an IP address) or `hdfs://myhost.localdomain:8020` (using a hostname).
-  1. As a comma-separated list of HDFS URIs, like `hdfs://nn1.localdomain:8020,hdfs://nn2.localdomain:8020` to allow for integration with HA-enabled Hadoop environments.
   1. As an HDFS URI that references a nameservice ID defined in the cluster properties, like `hdfs://mynameservice`, where there is a configuration property for the cluster that defines the value of the `dfs.nameservices` value to include that nameservice ID, like `mynameservice` and all required configuration properties for that nameservice, like `dfs.ha.namenodes.mynameservice`, `dfs.namenode.rpc-address.mynameservice.nn1`, and `dfs.namenode.http-address.mynameservice.nn1`, etc.
 
 #### Optional Parameters
+
+:::important Kerberos: Cross-realm authentication required between source and target HDFS
+[Cross-realm authentication](https://web.mit.edu/kerberos/krb5-1.5/krb5-1.5.4/doc/krb5-admin/Cross_002drealm-Authentication.html) is required in the following scenario:
+
+* Migration will occur between a source and target HDFS.
+* Kerberos is enabled on both clusters.
+
+See the links below for guidance for common Hadoop distributions:
+
+* [CDH](https://docs.cloudera.com/documentation/enterprise/6/6.3/topics/cm_sg_kdc_def_domain_s2.html)
+* [CDP](https://docs.cloudera.com/cdp-private-cloud-base/7.1.5/security-kerberos-authentication/topics/cm-security-kerberos-authentication-kdc-cross-realm-trust.html)
+* [Red Hat](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system-level_authentication_guide/using_trusts)
+* [HDP](https://community.cloudera.com/t5/Community-Articles/Kerberos-cross-realm-trust-for-distcp/ta-p/245590)
+:::
 
 * **`--user`** The name of the HDFS user to be used when performing operations against the file system. In environments where Kerberos is disabled, this user must be the HDFS super user, such as `hdfs`.
 * **`--kerberos-principal`** The Kerberos principal to authenticate with and perform migrations as. This principal should map to the [HDFS super user](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsPermissionsGuide.html#The_Super-User) using [auth_to_local](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SecureMode.html#Mapping_from_Kerberos_principals_to_OS_user_accounts) rules.
 * **`--kerberos-keytab`** The Kerberos keytab containing the principal defined for the `--kerberos-principal` parameter. This must be accessible to the local system user running the LiveData Migrator service (default is `hdfs`).
 * **`--source`** Provide this parameter to use the file system resource created as a source.  This is referenced in the UI when configuring the _Unknown source_.
-* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
-* **`--properties`** Specify properties to use in a comma-separated key/value list.
+* **`--properties-files`** Reference a list of existing properties files that contain Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.  This is referenced in the UI as **Provide a path to files** under the _Additional Configuration_ option.
+* **`--properties`** Specify properties to use in a comma-separated key/value list. This is referenced in the UI as **Additional Configuration** under the _Additional Configuration_ option.
+
+##### Properties files are required for NameNode HA
+
+If your Hadoop cluster has [NameNode HA enabled](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HDFSHighAvailabilityWithQJM.html), you must provide the local filesystem path to the properties files that define the configuration for the nameservice ID.
+
+**Source HDFS filesystem**: These configuration files will likely be in a default location depending on the distribution of the Hadoop cluster.
+
+**Target HDFS filesystem**: Ensure that the target Hadoop cluster configuration is available on your LiveData Migrator host's local filesystem.
+
+* For the UI, use **Provide a path to files** under the _Additional Configuration_ option and define the directory containing the `core-site.xml` and `hdfs-site.xml` files.
+  
+  ```text title="Example for path containing source cluster configuration"
+  /etc/hadoop/conf
+  ```
+
+  ```text title="Example for path containing target cluster configuration"
+  /etc/targetClusterConfig
+  ```
+
+  Alternatively, define the absolute filesystem paths to these files:
+
+  ```text title="Example for absolute paths to source cluster configuration files"
+  /etc/hadoop/conf/core-site.xml
+  /etc/hadoop/conf/hdfs-site.xml
+  ```
+
+  ```text title="Example for absolute paths to target cluster configuration files"
+  /etc/targetClusterConfig/core-site.xml
+  /etc/targetClusterConfig/hdfs-site.xml
+  ```
+
+* For the CLI/API, use the `--properties-files` parameter and define the absolute paths to the `core-site.xml` and `hdfs-site.xml` files (see the [Examples](#examples) section for CLI usage of this parameter).
 
 #### Examples
 
@@ -392,11 +437,11 @@ filesystem add hdfs --file-system-id mysource --source --fs.defaultFS hdfs://sou
 ##### HDFS as target
 
 :::note
-When specifying a HDFS filesystem as a target, the property files (and Kerberos keytab) for the target cluster must exist on the local filesystem and be accessible to the LiveData Migrator system user.
+When specifying a HDFS filesystem as a target, the property files for the target cluster must exist on the local filesystem and be accessible to the LiveData Migrator system user.
 :::
 
 ```text title="Example for target NameNode HA cluster with Kerberos enabled"
-filesystem add hdfs --file-system-id mytarget --fs.defaultFS hdfs://targetnameservice --properties-files /etc/targetClusterConfig/core-site.xml,/etc/targetClusterConfig/hdfs-site.xml --kerberos-keytab /etc/targetClusterKeytabs/hdfs.headless.keytab --kerberos-principal hdfs@TARGETREALM.COM
+filesystem add hdfs --file-system-id mytarget --fs.defaultFS hdfs://targetnameservice --properties-files /etc/targetClusterConfig/core-site.xml,/etc/targetClusterConfig/hdfs-site.xml --kerberos-keytab /etc/security/keytabs/hdfs.headless.keytab --kerberos-principal hdfs@SOURCEREALM.COM
 ```
 
 ```text title="Example for target single NameNode cluster"
