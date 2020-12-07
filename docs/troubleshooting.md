@@ -25,3 +25,21 @@ When LiveData Migrator encounters an unexpected run-time exception, it will emit
 Any issue triggering this notification will cause the application to shut down with a return code of -1, indicating an abnormal termination.
 
 ### HighPendingRegionNotification
+
+When folders are moved or modified in a migrating directory during a migration, these are logged as pending regions. Exceeding the configured maximum number of pending regions during a migration will cause it to automatically abort.
+
+This issue can be resolved by raising the maximum number of pending regions in the migration.
+
+This notification displays when the number of pending regions exceeds the "high watermark" percentage of maximum pending regions, and is resolved when the number falls below the "low watermark" percentage.
+
+Both watermarks may be configured by adding settings to application.properties. The following setting configures the high watermark percentage of pending regions:
+
+```text title="Example"
+notifications.pending.region.warn.percent=60
+```
+
+And the following setting determines the low watermark percentage:
+
+```text title="Example"
+notifications.pending.region.clear.percent=50
+```
