@@ -7,7 +7,9 @@ sidebar_label: Uninstall a previous release
 Follow these steps to uninstall LiveData Migrator and all of its components.
 
 :::important
-Make a note of your current migrations and backup any configuration files (located in `/etc/wandisco`) before uninstalling LiveData Migrator.
+Backup any configuration files that you wish to save (located in `/etc/wandisco`) before uninstalling LiveData Migrator.
+
+If you are installing a newer release afterward, note the details of any current migrations that you want to start again once the new version is installed.
 :::
 
 ## Stop all active migrations
