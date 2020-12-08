@@ -3,7 +3,7 @@ module.exports = {
     {
       "collapsed": true,
       "type": "category",
-      "label": "Documentation",
+      "label": "Introduction",
       "items": [
         {
           "type": "doc",

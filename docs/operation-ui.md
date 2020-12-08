@@ -22,26 +22,9 @@ You'll be asked to register a LiveData Migrator account the first time you use t
 
 Internet access from the host is not required, but when it is available, you'll be sent confirmation of your registration. We'll use your registration information to send you important information about your LiveData Migrator account, such as a reminder before your license expires. You can also opt in to receive additional product updates.
 
-### Upgrade your license
-
-If you want to upgrade to a full license before you start using LiveData Migrator, follow these steps:
-
-1. Click **Upgrade License**.
-1. Click the option to purchase a license now. Follow the provided instructions to get your license.
-
-   Once your license has been sent, ensure it is available on your local machine.
-1. Upload your new license.
-1. Check the **License Information** window and ensure that your new data limit has been applied.
-
-   The License panel also displays the expiry date. We'll notify you when it's time to renew your license.
-
 ## How the UI works
 
 The UI has four main panels and a Notification system.
-
-### License information
-
-Use the License information panel to see current license information (including warnings if the product is approaching license limits), and uploading a new license.
 
 ### Bandwidth usage
 
