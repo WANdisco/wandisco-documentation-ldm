@@ -1,7 +1,7 @@
 ---
 id: license
-title: Upgrade your LiveData Migrator License
-sidebar_label: Upgrade Your License
+title: Upgrade your LiveData Migrator license
+sidebar_label: Upgrade your license
 ---
 
 The LiveData Migrator trial license includes 14 days operation and 5TB of data migration. This gives you full use of LiveData Migrator up to either of these limits.
@@ -23,9 +23,9 @@ Upload your new license in the License panel of the UI. This panel displays curr
 
 ## Upgrade your license with the CLI
 
-[Contact WANdisco](https://www.wandisco.com) to purchase a full license. Once you have your new license, Use the following commands to upload the license key to LiveData Migrator.
+[Contact WANdisco](https://www.wandisco.com) to purchase a full license. Once you have your new license, use the following commands to upload the new license key to LiveData Migrator.
 
-1. Log into your LiveData Migrator host.
+1. Log in to the LiveData Migrator host.
 
 1. Use the [`license show`](./command-reference.md#license-show) command to see details of your current LiveData Migrator license.
 
@@ -38,4 +38,4 @@ Upload your new license in the License panel of the UI. This panel displays curr
 
 ## Next Steps
 
-Once you have LiveData Migrator running, you can use the [UI](./operation-ui.md) or [CLI](./operation-cli.md) to start migrating data.
+You're ready to migrate data! Learn how to use LiveData Migrator with either the [UI](./operation-ui.md) or [CLI](./operation-cli.md).

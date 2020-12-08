@@ -1,7 +1,7 @@
 ---
 id: jar
 title: Using the LiveData Migrator jar
-sidebar_label: Jar
+sidebar_label: LiveData Migrator Jar
 
 ---
 

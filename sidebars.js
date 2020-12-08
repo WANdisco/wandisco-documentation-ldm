@@ -59,21 +59,21 @@ module.exports = {
           ]
         },
         {
-          "type": "doc",
-          "id": "command-reference"
-        },
-        {
           "collapsed": true,
           "type": "category",
-          "label": "Alternatives to the UI or CLI",
+          "label": "Reference",
           "items": [
             {
               "type": "doc",
-              "id": "jar"
+              "id": "command-reference"
             },
             {
               "type": "doc",
               "id": "api-reference"
+            },
+            {
+              "type": "doc",
+              "id": "jar"
             }
           ]
         }
