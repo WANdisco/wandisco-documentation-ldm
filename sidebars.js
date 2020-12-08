@@ -21,6 +21,10 @@ module.exports = {
             {
               "type": "doc",
               "id": "installation"
+            },
+            {
+              "type": "doc",
+              "id": "license"
             }
           ]
         },
