@@ -58,11 +58,11 @@ module.exports = {
         {
           "collapsed": true,
           "type": "category",
-          "label": "Using LiveData Migrator",
+          "label": "Migrate metadata",
           "items": [
             {
               "type": "doc",
-              "id": "operation-ui"
+              "id": "connect-metastores"
             },
             {
               "type": "doc",
