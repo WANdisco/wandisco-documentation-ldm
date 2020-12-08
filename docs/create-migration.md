@@ -4,6 +4,8 @@ title: Create a migration
 sidebar_label: Create a migration
 ---
 
+Create new migrations with LiveData Migrator using either the [UI](#create-a-new-migration-with-the-ui) or [CLI](#create-a-new-migration-with-the-CLI).
+
 Migrations transfer existing data from the defined source to a target. LiveData Migrator migrates any changes made to the source data while it is being migrated and ensures that the target is up to date with those changes. It does this while continuing to perform the migration.
 
 You will typically create multiple migrations so that you can select specific content from your source storage by Path. You can also migrate to multiple independent storages at the same time by defining multiple migration resources.
@@ -43,6 +45,10 @@ Follow the command links to learn how to set the parameters and see examples.
    [`migration add`](./command-reference.md#migration-add)
 
    Apply the [`--auto-start`](./command-reference.md#optional-parameters-5) parameter if you would like the migration to start right away.
+
+1. Assign exclusions to the migration:
+
+    [`migration exclusion add`](./command-reference.md#migration-exclusion-add)
 
 1. If you don't have auto-start enabled, manually start the migration:
 

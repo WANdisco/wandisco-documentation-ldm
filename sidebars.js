@@ -43,11 +43,7 @@ module.exports = {
             },
             {
               "type": "doc",
-              "id": "installation"
-            },
-            {
-              "type": "doc",
-              "id": "license"
+              "id": "manage-migrations"
             }
           ]
         },
