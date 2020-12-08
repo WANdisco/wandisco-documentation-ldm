@@ -66,13 +66,21 @@ module.exports = {
             },
             {
               "type": "doc",
-              "id": "operation-cli"
-            }
+              "id": "define-metadata-rules"
+            },
+            {
+              "type": "doc",
+              "id": "migrate-metadata"
+            },
           ]
         },
         {
           "type": "doc",
           "id": "configuration"
+        },
+        {
+          "type": "doc",
+          "id": "manage-bandwidth"
         },
         {
           "collapsed": true,

@@ -12,6 +12,10 @@ Each command description below includes the information available from the actio
 Should you need clarification on any configuration items shown in the UI, you will also find them here (located with the equivalent CLI mandatory and optional parameters).
 :::
 
+## Built-in commands
+
+The built-in commands are always available in a LiveData Migrator command line interactive session. They are unrelated to migration resources and operation (other than `exit`/`quit`), but help you to interact with LiveData Migrator and automate processing through scripts for the action prompt.
+
 ## Source Commands
 
 ----
@@ -399,7 +403,7 @@ If your Hadoop cluster has [NameNode HA enabled](https://hadoop.apache.org/docs/
 **Target HDFS filesystem**: Ensure that the target Hadoop cluster configuration is available on your LiveData Migrator host's local filesystem.
 
 * For the UI, use **Provide a path to files** under the _Additional Configuration_ option and define the directory containing the `core-site.xml` and `hdfs-site.xml` files.
-  
+
   ```text title="Example for path containing source cluster configuration"
   /etc/hadoop/conf
   ```
