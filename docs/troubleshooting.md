@@ -8,11 +8,11 @@ This article provides details on some of the issues you may face when installing
 
 Please ensure you have read the [Prerequisites](./prereqs.md) as if any of these items are missed, issues may be encountered.
 
-# Notifications
+## Notifications
 
 This article lists some common notifications that may be encountered during the deployment or use of LiveData Migrator.
 
-## LiveMigratorPanicNotification
+### LiveMigratorPanicNotification
 
 When LiveData Migrator encounters an unexpected run-time exception, it will emit a log message with the notification `LiveMigratorPanicNotification`. The message provided, and therefore the resolution, will vary based on the cause of the exception. For example:
 
