@@ -1,10 +1,12 @@
 ---
 id: license
 title: Upgrade your LiveData Migrator License
-sidebar_label: Upgrade your License
+sidebar_label: Upgrade Your License
 ---
 
-The LiveData Migrator trial license includes 14 days operation and 5TB of data migration. This gives you full use of LiveData Migrator up to either of these limits. [Contact WANdisco to purchase a full license](https://www.wandisco.com). Once you have your new license, follow the steps below to upload it to your instance of LiveData Migrator.
+The LiveData Migrator trial license includes 14 days operation and 5TB of data migration. This gives you full use of LiveData Migrator up to either of these limits.
+
+When you want to upgrade to a full license, [contact WANdisco](https://www.wandisco.com). Once you have your new license, follow these steps to upload the license key to LiveData Migrator with either the [UI](#upgrade-your-license-in-the-ui) or [CLI](#upgrade-your-license-with-the-cli).
 
 ## Upgrade your license in the UI
 
@@ -20,6 +22,19 @@ Upload your new license in the License panel of the UI. This panel displays curr
    We'll notify you when it's time to renew your license.
 
 ## Upgrade your license with the CLI
+
+Use the following commands to upload your new license.
+
+1. Log into your LiveData Migrator host.
+
+1. Use the [`license show`](./command-reference.md#license-show) command to see details of your current LiveData Migrator license.
+
+1. Upload the new license key with the [`license upload`](./command-reference.md#license-upload) command.
+
+  ```text title="Example"
+  license upload --path /user/hdfs/license.key
+
+  ```
 
 ## Next Steps
 

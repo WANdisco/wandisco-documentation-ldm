@@ -307,17 +307,6 @@ Only one bandwidth policy can be active at a time. The default policy is unlimit
 | [`bandwidth policy set`](./command-reference.md#bandwidth-policy-set) | Define the bandwidth policy |
 | [`bandwidth policy show`](./command-reference.md#bandwidth-policy-show) | Get details for the current bandwidth policy |
 
-## License management
-
-Upload a new license or show details of your current license with these commands.
-
-See the [How to upgrade your license](https://community.wandisco.com/s/article/How-to-upgrade-your-license) page for information on how to purchase a license key.
-
-| Command | Action |
-|:---|:---|
-| [`license show`](./command-reference.md#license-show) | Show details of your active license |
-| [`license upload`](./command-reference.md#license-upload) | Upload a new license file |
-
 ## Built-in commands
 
 The built-in commands are always available in a LiveData Migrator command line interactive session. They are unrelated to migration resources and operation (other than `exit`/`quit`), but help you to interact with LiveData Migrator and automate processing through scripts for the action prompt.
