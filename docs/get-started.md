@@ -4,11 +4,15 @@ title: Before you start
 sidebar_label: Before you start
 ---
 
+You can use either LiveData Migrator's UI or CLI to manage resources and migrate data. From release 1.8.3, you can also migrate metadata with the CLI.
 
+Get started with the LiveData Migrator [UI](#get-started-with-the-livedata-migrator-ui) or [CLI](#get-started-with-the-livedata-migrator-cli) with these simple first steps.
 
 ## Get started with the LiveData Migrator UI
 
 LiveData Migrator's UI can manage multiple LiveData Migrators as well as LiveData Plane from one convenient interface. It is designed to be intuitive and contains on-screen instructions to help you perform migrations and configuration tasks successfully.
+
+### Ports
 
 The UI is available on port 8081 on your LiveData Migrator host. For example, if you were running LiveData Migrator on a host named `myldmhost.example.com`, the URL would be:
 
