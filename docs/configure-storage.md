@@ -17,9 +17,9 @@ The Storage panel shows the underlying storage used by LiveData Migrator as eith
 
 Use the Storage panel to:
 
-* View and configure the source and target storages
-* Add further targets
-* Add additional LiveData Migrator servers and [LiveData Plane](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/get-started) servers
+* View and configure the source and target storages.
+* Add further targets.
+* Add additional LiveData Migrator servers and [LiveData Plane](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/get-started) servers.
 * Configure S3-compatible Targets using the [Hadoop S3A configuration](http://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html) exposed in the UI.
 * Connect to additional LiveData Migrator or LiveData Plane instances and configure their respective storages.
 
@@ -29,7 +29,7 @@ Use the Storage panel to:
 The source file system is normally detected on startup. It will not be detected automatically if Kerberos is enabled or your Hadoop configuration does not contain the information needed to connect to the Hadoop file system.
 :::
 
-If Kerberos is enabled, on the [Storage](#storage) panel, select to configure your _Unknown source_ and provide your source HDFS configuration:
+If Kerberos is enabled, on the Storage panel, select to configure your _Unknown source_ and provide your source HDFS configuration:
 
 * **File System ID** - Provide a name for your source storage.
 * **Default FS** - Provide the `fs.defaultFS` value from your HDFS configuration.
@@ -42,7 +42,7 @@ If Kerberos is enabled, on the [Storage](#storage) panel, select to configure yo
 
 ### Add target storages
 
-Selecting to configure your _Target_ storage on the [Storage](#storage) panel, see the links below for the configuration needed for each platform:
+Selecting to configure your _Target_ storage on the Storage panel, see the links below for the configuration needed for each platform:
 
 * ADLS Gen2 - The configuration needed will depend on the **Authentication Type** chosen:
   * [Shared Key](./command-reference.md#mandatory-parameters-2)
@@ -106,3 +106,7 @@ Although present when invoking the `help` command, Local Filesystem functionalit
 | [`filesystem list`](./command-reference.md#filesystem-list) | List of target file systems |
 | [`filesystem show`](./command-reference.md#filesystem-show) | Get target file system details |
 | [`filesystem types`](./command-reference.md#filesystem-types) | List the types of target file systems available |
+
+## Next Steps
+
+Once you have your source and target storage configured, [configure exclusions](./configure-exclusions.md) to define the data you want to exclude from data migrations.

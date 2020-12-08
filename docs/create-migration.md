@@ -4,7 +4,7 @@ title: Create a migration
 sidebar_label: Create a migration
 ---
 
-Create new migrations with LiveData Migrator using either the [UI](#create-a-new-migration-with-the-ui) or [CLI](#create-a-new-migration-with-the-CLI).
+Create new migrations with LiveData Migrator using either the [UI](#create-a-new-migration-with-the-ui) or [CLI](#create-a-new-migration-with-the-cli).
 
 Migrations transfer existing data from the defined source to a target. LiveData Migrator migrates any changes made to the source data while it is being migrated and ensures that the target is up to date with those changes. It does this while continuing to perform the migration.
 
@@ -12,10 +12,9 @@ You will typically create multiple migrations so that you can select specific co
 
 ## Create a new migration with the UI
 
-1. Choose a source and target from previously defined [storages](#configure-storage).
+1. Choose a source and target from one of your [storages](./configure-storage.md).
 1. Choose the Path to set the scope of the migration.
-1. Enable the **Auto-start migration** option if you want to start the migration immediately after creation.  
-   Migrations can be started at a later point when [viewing migration details](#view-migrations).
+1. Enable the **Auto-start migration** option if you want to start the migration right away. (You can start it manually when [viewing it later](./manage-migrations.md#manage-migrations-with-the-ui) if you prefer.) 
 1. [Apply any exclusions](#assign-exclusions-to-a-new-migration) to reduce the scope within this Path.
 1. Select the **Overwrite** or **Skip if Size Match** setting for the migration.  
    * **Skip if Size Match** - If the file size is identical between the source and target, the file is skipped. If it’s a different size, the whole file is replaced.
@@ -32,7 +31,7 @@ Adding exclusions to a new migration ensures the outcome is consistent with the 
 
 The exclusion appears in the list, and can be removed before the migration is started.
 
-## Create a migration with the CLI
+## Create a new migration with the CLI
 
 Migrate data from your source file system to a target defined using the `migration` command. Migrations will transfer existing data, as well as any subsequent changes made to the source data (in its scope), while LiveData Migrator remains in operation.
 

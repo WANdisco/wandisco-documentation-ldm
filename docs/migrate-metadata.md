@@ -8,7 +8,7 @@ Migrate metadata from your source metastore/database to a target metastore/datab
 
 ## Create a metadata migration
 
-Define the source and target using the [hive agent names](#add-hive-agents), and apply the [hive rule names](#add-hive-rules) to the migration.
+Define the source and target using the [hive agent names](./connect-metastores.md#add-hive-agents), and apply the [hive rule names](./define-metadata-rules.md#add-hive-rules) to the migration.
 
 Follow the command links to learn how to set the parameters and see examples.
 

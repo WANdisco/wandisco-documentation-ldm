@@ -23,7 +23,7 @@ Upload your new license in the License panel of the UI. This panel displays curr
 
 ## Upgrade your license with the CLI
 
-[Contact WANdisco](https://www.wandisco.com) to purchase a full license. Once you have your new license, use the following commands to upload the new license key to LiveData Migrator.
+[Contact WANdisco](https://www.wandisco.com/contact) to purchase a full license. Once you have your new license, use the following commands to upload the new license key to LiveData Migrator.
 
 1. Log in to the LiveData Migrator host.
 

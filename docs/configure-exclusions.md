@@ -4,7 +4,7 @@ title: Configure exclusions
 sidebar_label: Configure exclusions
 ---
 
-Define exclusions to exclude certain file sizes or file names (defined using [regex](https://regexr.com/) patterns) from your data migrations. Exclusion templates are associated with a storage, allowing you to selectively ignore content during migration when that storage is used as the source.
+After configuring storage, the next step is to define exclusions. Exclusions prevent certain file sizes or file names (defined using [regex](https://regexr.com/) patterns) from your data migrations. Exclusion templates are associated with a storage, allowing you to selectively ignore content during migration when that storage is used as the source.
 
 Use the [UI](#configure-exclusions-with-the-ui) or the [CLI](#configure-exclusions-with-the-cli) to configure exclusions.
 
@@ -61,3 +61,7 @@ Define exclusions so you can apply them to migrations.
 | [`exclusion del`](./command-reference.md#exclusion-del) | Delete an exclusion rule |
 | [`exclusion list`](./command-reference.md#exclusion-list) | List all exclusion rules |
 | [`exclusion show`](./command-reference.md#exclusion-show) | Get details for a particular exclusion rule |
+
+## Next Steps
+
+Once your exclusions are defined, you're ready to [migrate data](./create-migration.md).

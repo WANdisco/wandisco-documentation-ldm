@@ -33,18 +33,18 @@ module.exports = {
           "id": "get-started"
         },
         {
-          "type": "doc",
-          "id": "configure-storage"
-        },
-        {
-          "type": "doc",
-          "id": "configure-exclusions"
-        },
-        {
           "collapsed": true,
           "type": "category",
           "label": "Migrate data",
           "items": [
+            {
+              "type": "doc",
+              "id": "configure-storage"
+            },
+            {
+              "type": "doc",
+              "id": "configure-exclusions"
+            },
             {
               "type": "doc",
               "id": "create-migration"
@@ -75,14 +75,6 @@ module.exports = {
           ]
         },
         {
-          "type": "doc",
-          "id": "configuration"
-        },
-        {
-          "type": "doc",
-          "id": "manage-bandwidth"
-        },
-        {
           "collapsed": true,
           "type": "category",
           "label": "Common Use Cases",
@@ -92,6 +84,14 @@ module.exports = {
               "id": "uc-on-prem-hadoop-hdi"
             }
           ]
+        },
+        {
+          "type": "doc",
+          "id": "configuration"
+        },
+        {
+          "type": "doc",
+          "id": "manage-bandwidth"
         },
         {
           "collapsed": true,
