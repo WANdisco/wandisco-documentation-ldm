@@ -33,8 +33,23 @@ module.exports = {
           "id": "get-started"
         },
         {
-          "type": "doc",
-          "id": "migrate-data"
+          "collapsed": true,
+          "type": "category",
+          "label": "Migrate data",
+          "items": [
+            {
+              "type": "doc",
+              "id": "create-migration"
+            },
+            {
+              "type": "doc",
+              "id": "installation"
+            },
+            {
+              "type": "doc",
+              "id": "license"
+            }
+          ]
         },
         {
           "collapsed": true,
