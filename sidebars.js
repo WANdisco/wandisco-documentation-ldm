@@ -33,6 +33,10 @@ module.exports = {
           "id": "get-started"
         },
         {
+          "type": "doc",
+          "id": "migrate-data"
+        },
+        {
           "collapsed": true,
           "type": "category",
           "label": "Using LiveData Migrator",

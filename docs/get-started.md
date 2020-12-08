@@ -39,3 +39,7 @@ livedata-migrator --host=localhost
 ```
 
 The command prompt will then load and automatically connect to the LiveData Migrator services located on your host.
+
+## Next Steps
+
+Ready to migrate data? [Configure your storage](./configure-storage.md) to start.

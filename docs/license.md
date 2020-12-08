@@ -38,4 +38,4 @@ Upload your new license in the License panel of the UI. This panel displays curr
 
 ## Next Steps
 
-You're ready to migrate data! Learn how to use LiveData Migrator with either the [UI](./operation-ui.md) or [CLI](./operation-cli.md).
+You're ready to migrate data! Learn how to [get started with LiveData Migrator](./get-started.md).
