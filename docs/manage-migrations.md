@@ -4,7 +4,7 @@ title: Manage migrations
 sidebar_label: Manage migrations
 ---
 
-Manage your migrations with LiveData Migrator using either the [UI](#manage-migrations-with-the-ui) or [CLI](#manage-migrations-with-the-CLI).
+Manage your migrations with LiveData Migrator using either the [UI](#manage-migrations-with-the-ui) or [CLI](#manage-migrations-with-the-cli).
 
 ## Manage migrations with the UI
 

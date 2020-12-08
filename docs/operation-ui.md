@@ -30,18 +30,6 @@ The UI has four main panels and a Notification system.
 
 The Bandwidth panel shows how much bandwidth LiveData Migrator is currently using to migrate data. It shows this over the most recent 5 minute period and continually updates. The left axis scales automatically to accommodate the highest throughput during that period.
 
-### Storage
-
-The Storage panel shows the underlying storage used by LiveData Migrator as either a source or target. LiveData Migrator supports one source and one or more targets. Each storage displays its associated processes, such as which LiveData Migrator is used to access it.
-
-Use the Storage panel to:
-
-* View and configure the source and target storages
-* Add further targets
-* Add additional LiveData Migrator servers and [LiveData Plane](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/get-started) servers
-
-For more information about sources and targets, see the [introduction to LiveData Migrator](./about.md).
-
 ### Rules and Migrations
 
 The Rules and Migrations panel in LiveData Migrator shows migrations and their progress. If the UI also manages LiveData Plane, the panel will also show rules.

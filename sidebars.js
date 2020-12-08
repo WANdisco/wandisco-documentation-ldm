@@ -33,6 +33,14 @@ module.exports = {
           "id": "get-started"
         },
         {
+          "type": "doc",
+          "id": "configure-storage"
+        },
+        {
+          "type": "doc",
+          "id": "configure-exclusions"
+        },
+        {
           "collapsed": true,
           "type": "category",
           "label": "Migrate data",
