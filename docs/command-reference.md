@@ -4,12 +4,12 @@ title: Command Reference
 sidebar_label: Command Reference
 ---
 
-Find a comprehensive description of each command available from the LiveData Migrator action prompt here. Review the [LiveData Migrator Operation](./operation-cli.md) guide for information on how to use the commands to perform migration.
+Looking to learn more about LiveData Migrator commands? This reference page includes a comprehensive description of each command available from the LiveData Migrator CLI.
 
-Each command description below includes the information available from the action prompt using the `help` command. Tab-completion will also give you guidance when entering commands on the available options and help auto-complete the needed values.
+Each command description includes the information available from the `help` command. Tab-completion will also give you guidance when entering commands on the available options and help auto-complete the needed values.
 
-:::info
-Should you need clarification on any configuration items shown in the UI, you will also find them here (located with the equivalent CLI mandatory and optional parameters).
+:::tip
+You can also find information about UI configuration items here. Look for them in their equivalent CLI mandatory and optional parameters.
 :::
 
 ## Built-in commands

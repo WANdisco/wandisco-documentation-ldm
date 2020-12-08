@@ -90,7 +90,7 @@ Choose one of the methods below depending on the type of metastore deployed in y
    As mentioned in the [prerequisites](#prerequisites), you will need to specify a suitable edge node on your HDInsights cluster to deploy the hive agent service.
 
 1. Check that the configuration for the hive agent is correct:
-  
+
    ```text title="Example"
    hive agent check --name azureAgent
    ```
@@ -102,11 +102,11 @@ Choose one of the methods below depending on the type of metastore deployed in y
    [`hive agent add azure`](./command-reference.md#hive-agent-add-azure)
 
 1. Check that the configuration for the hive agent is correct:
-  
+
    ```text title="Example"
    hive agent check --name azureAgent
    ```
 
-## Next steps
+## Next Steps
 
-Start [defining exclusions](./operation-cli.md#configure-exclusions) and [migrating data](./operation-cli.md#create-data-migrations). You can also [create metadata rules](./operation-cli.md#define-metadata-rules-preview) and start [migrating metadata](./operation-cli.md#migrate-metadata-preview).
+Start [defining exclusions](./configure-exclusions.md) and [migrating data](./create-migration.md). You can also [create metadata rules](./define-metadata-rules.md) and start [migrating metadata](./migrate-metadata.md).
