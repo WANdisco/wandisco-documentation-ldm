@@ -287,14 +287,6 @@ Follow the command links to learn how to set the parameters and see examples.
 | [`hive migration stop`](./command-reference.md#hive-migration-stop) | Stop a hive migration or a list of hive migrations |
 | [`hive migration stop --all`](./command-reference.md#hive-migration-stop---all) | Stop all hive migrations |
 
-## Add pending regions
-
-LiveData Migrator uses pending regions to keep your directories up to date if they change during data migrations. If directories are updated while being migrated, the changed paths on the source filesystem are tracked by the migration so they can be re-scanned for updates when the migration finishes.
-
-LiveData Migrator collects pending regions automatically during a migration, but you can manually add them if you want the directories to be re-scanned after further updates. You can also re-run the entire migration by making the root directory the pending region.
-
-[`migration pending-region add`](./command-reference.md#migration-pending-region-add)
-
 ## Bandwidth management
 
 Limit the total amount of bandwidth LiveData Migrator can use by using the `bandwidth policy` command. Once defined, the bandwidth limit will apply immediately to all migrations (new and ongoing).
