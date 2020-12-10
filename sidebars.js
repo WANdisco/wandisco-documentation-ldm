@@ -44,8 +44,19 @@ module.exports = {
           ]
         },
         {
-          "type": "doc",
-          "id": "configuration"
+          "collapsed":true,
+          "type": "category",
+          "label": "Configuration",
+          "items": [
+            {
+              "type": "doc",
+              "id": "configuration-migrator"
+            },
+            {
+              "type": "doc",
+              "id": "configuration-ui"
+            }
+          ]
         },
         {
           "collapsed": true,
