@@ -77,7 +77,7 @@ The bell icon in the top-right of the UI is where you'll receive notifications a
 Configure your storages to define at least one source and at least one target to migrate data. LiveData Migrator will connect to these storages for migration.
 
 * Supported sources are: **HDFS**
-* Supported targets are: **ADLS Gen2**, **S3**, **Google Cloud Storage**, and **IBM Cloud Object Storage (S3)**
+* Supported targets are: **ADLS Gen2**, **S3**, **Google Cloud Storage**, **IBM Cloud Object Storage (S3)** and **HDFS**
 
 You can also use the Storage panel to:
 
@@ -106,10 +106,11 @@ If Kerberos is enabled, on the [Storage](#storage) panel, select to configure yo
 Selecting to configure your _Target_ storage on the [Storage](#storage) panel, see the links below for the configuration needed for each platform:
 
 * ADLS Gen2 - The configuration needed will depend on the **Authentication Type** chosen:
-  * [Shared Key](./command-reference.md#mandatory-parameters-2)
-  * [Service Principal (OAuth2)](./command-reference.md#mandatory-parameters-1)
-* [S3 / IBM Cloud Object Storage (S3)](./command-reference.md#mandatory-parameters-5)
-* [Google Cloud Storage](./command-reference.md#mandatory-parameters-3)
+  * [Shared Key](./command-reference.md/#mandatory-parameters-2)
+  * [Service Principal (OAuth2)](./command-reference.md/#mandatory-parameters-1)
+* [S3 / IBM Cloud Object Storage (S3)](./command-reference.md/#mandatory-parameters-5)
+* [Google Cloud Storage](./command-reference.md/#mandatory-parameters-3)
+* [HDFS](./command-reference/#mandatory-parameters-4)
 
 ## Configure exclusions
 
