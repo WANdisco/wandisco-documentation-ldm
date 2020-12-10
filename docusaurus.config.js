@@ -1,6 +1,6 @@
 const versions = require('./versions.json');
 
-const currentVersion = '1.8.3';
+const currentVersion = 'TBA';
 
 module.exports = {
   title: 'LiveData Migrator',
