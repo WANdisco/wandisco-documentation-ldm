@@ -1,5 +1,5 @@
 ---
-id: configuration-migrator
+id: configuration-ldm
 title: Configuring LiveData Migrator
 sidebar_label: LiveData Migrator
 ---
@@ -10,7 +10,7 @@ Find details here for the configuration properties of LiveData Migrator. Propert
 
 An example `application.properties` file:
 
-```text
+```text name="Example"
 # pretty print JSON output in API results
 spring.jackson.serialization.INDENT_OUTPUT=true
 springdoc.swagger-ui.path=/ldm-api.html

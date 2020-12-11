@@ -10,7 +10,10 @@ These are the docs:
 * [UI](operation-ui.md)
 * [CLI](operation-cli.md)
 
-[Configuration](configuration.md)
+**Configuration**
+[LiveData Migrator](configuration-ldm.md)
+[LiveData UI](configuration-ui.md)
+[Environment Setup](configuration-env.md)
 
 [Command Reference](command-reference.md)
 

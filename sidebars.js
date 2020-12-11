@@ -50,11 +50,15 @@ module.exports = {
           "items": [
             {
               "type": "doc",
-              "id": "configuration-migrator"
+              "id": "configuration-ldm"
             },
             {
               "type": "doc",
               "id": "configuration-ui"
+            },
+            {
+              "type": "doc",
+              "id": "configuration-env"
             }
           ]
         },
