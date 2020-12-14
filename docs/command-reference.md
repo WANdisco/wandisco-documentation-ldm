@@ -1102,8 +1102,6 @@ OPTIONS
 migration add --path /repl1 --target mytarget –-migration-id myNewMigration --exclusions 100mbfiles
 ```
 
-----
-
 ### `migration run`
 
 Start a migration that was created without the `--auto-start` parameter.
