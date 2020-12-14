@@ -1,5 +1,5 @@
-module.exports = {
-  "someSidebar": [
+{
+  "version-1.8.3/someSidebar": [
     {
       "collapsed": true,
       "type": "category",
@@ -7,7 +7,7 @@ module.exports = {
       "items": [
         {
           "type": "doc",
-          "id": "about"
+          "id": "version-1.8.3/about"
         },
         {
           "collapsed": true,
@@ -16,15 +16,11 @@ module.exports = {
           "items": [
             {
               "type": "doc",
-              "id": "prereqs"
+              "id": "version-1.8.3/prereqs"
             },
             {
               "type": "doc",
-              "id": "installation"
-            },
-            {
-              "type": "doc",
-              "id": "uninstall"
+              "id": "version-1.8.3/installation"
             }
           ]
         },
@@ -35,17 +31,17 @@ module.exports = {
           "items": [
             {
               "type": "doc",
-              "id": "operation-ui"
+              "id": "version-1.8.3/operation-ui"
             },
             {
               "type": "doc",
-              "id": "operation-cli"
+              "id": "version-1.8.3/operation-cli"
             }
           ]
         },
         {
           "type": "doc",
-          "id": "configuration"
+          "id": "version-1.8.3/configuration"
         },
         {
           "collapsed": true,
@@ -54,17 +50,13 @@ module.exports = {
           "items": [
             {
               "type": "doc",
-              "id": "uc-on-prem-hadoop-hdi"
+              "id": "version-1.8.3/uc-on-prem-hadoop-hdi"
             }
           ]
         },
         {
           "type": "doc",
-          "id": "troubleshooting"
-        },
-        {
-          "type": "doc",
-          "id": "command-reference"
+          "id": "version-1.8.3/command-reference"
         },
         {
           "collapsed": true,
@@ -73,15 +65,15 @@ module.exports = {
           "items": [
             {
               "type": "doc",
-              "id": "jar"
+              "id": "version-1.8.3/jar"
             },
             {
               "type": "doc",
-              "id": "api-reference"
+              "id": "version-1.8.3/api-reference"
             }
           ]
         }
       ]
     }
   ]
-};
+}
