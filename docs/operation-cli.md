@@ -33,7 +33,7 @@ LiveData Migrator migrates data from a source file system. Validate that the cor
 :::info
 The source file system is normally detected on startup. It will not be detected automatically if Kerberos is enabled or your Hadoop configuration does not contain the information needed to connect to the Hadoop file system.
 
-If Kerberos is enabled, use the [`filesystem auto-discover-source hdfs`](./command-reference.md#filesystem-auto-discover-source-hdfs) command to provide your Kerberos credentials and auto-discover your source HDFS configuration.
+If Kerberos is enabled, use the [`filesystem auto-discover-source hdfs`](./command-reference#filesystem-auto-discover-source-hdfs) command to provide your Kerberos credentials and auto-discover your source HDFS configuration.
 :::
 
 You can manage the source file system through these commands.
@@ -286,6 +286,14 @@ Follow the command links to learn how to set the parameters and see examples.
 | [`hive migration status --all`](./command-reference.md#hive-migration-status---all) | Show the status of all hive migrations |
 | [`hive migration stop`](./command-reference.md#hive-migration-stop) | Stop a hive migration or a list of hive migrations |
 | [`hive migration stop --all`](./command-reference.md#hive-migration-stop---all) | Stop all hive migrations |
+
+## Add pending regions
+
+LiveData Migrator uses pending regions to keep your directories up to date if they change during data migrations. If directories are updated while being migrated, the changed paths on the source filesystem are tracked by the migration so they can be re-scanned for updates when the migration finishes.
+
+LiveData Migrator collects pending regions automatically during a migration, but you can manually add them if you want the directories to be re-scanned after further updates. You can also re-run the entire migration by making the root directory the pending region.
+
+[`migration pending-region add`](./command-reference.md#migration-pending-region-add)
 
 ## Bandwidth management
 
