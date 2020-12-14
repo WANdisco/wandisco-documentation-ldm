@@ -2279,7 +2279,7 @@ OPTIONS
 
 #### Optional Parameters
 
-* **`--ssl`** Specify this parameter if you want to establish an SSL connection to LiveData Migrator. Enable [Server SSL](./configuration.md#server-ssl) on the LiveData Migrator service before using this parameter.
+* **`--ssl`** Specify this parameter if you want to establish an SSL connection to LiveData Migrator. Enable [Server SSL](./configuration-ldm.md#server-ssl) on the LiveData Migrator service before using this parameter.
 * **`--port`** The LiveData Migrator port to connect on (default is `18080`).
 * **`--timeout`** Define the connection timeout in milliseconds. Set this parameter to override the default connection timeout of 5 minutes (300000ms).
 
