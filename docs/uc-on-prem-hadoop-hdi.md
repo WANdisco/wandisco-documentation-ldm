@@ -26,7 +26,7 @@ Ensure that all [prerequisites](./prereqs.md#prerequisites) are met for the sour
 For your target environment, ensure the following prerequisites are met:
 
 * Your HDInsights cluster is using [ADLS Gen2](https://docs.microsoft.com/en-us/azure/hdinsight/overview-data-lake-storage-gen2) as its primary storage type.
-* (Recommended) [Check that your default Hive warehouse directory is configured the same as your source on-premises Hadoop cluster](./configuration.md#default-hive-metastore-warehouse-directory).
+* (Recommended) [Check that your default Hive warehouse directory is configured the same as your source on-premises Hadoop cluster](./configuration-ui.md#default-hive-metastore-warehouse-directory).
 * If using a [default metastore](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-use-external-metadata-stores#default-metastore), SSH access to an edge node on the HDInsights cluster.  
   The edge node requires the following:
   * HDFS and Hive client libraries installed.
@@ -61,7 +61,7 @@ Configure your ADLS Gen2 storage container as your target filesystem. The method
 
 ### Add source hive agent
 
-1. (Recommended) [Enable the Hive metastore event listener](./configuration.md#enable-hive-metastore-event-listener) on the on-premises Hadoop cluster.
+1. (Recommended) [Enable the Hive metastore event listener](./configuration-ui.md#enable-hive-metastore-event-listener) on the on-premises Hadoop cluster.
 
 1. Configure the source hive agent to connect to the Hive metastore on the on-premises Hadoop cluster:
 

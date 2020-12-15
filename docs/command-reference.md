@@ -1477,7 +1477,7 @@ hive agent add glue --name glueAgent --access-key ACCESS6HCFPAQIVZTKEY --secret-
 
 Add a hive agent to connect to a local or remote [Apache Hive](https://cwiki.apache.org/confluence/display/Hive/Home) metastore using the `hive agent add hive` command.
 
-Before deploying an agent, see our recommendations section on [enabling the Hive metastore event listener](./configuration.md#enable-hive-metastore-event-listener) for Apache Hive environments.
+Before deploying an agent, see our recommendations section on [enabling the Hive metastore event listener](./configuration-env.md#enable-hive-metastore-event-listener) for Apache Hive environments.
 
 :::info remote deployments
 When connecting to a remote Apache Hive metastore, specify a host on the remote cluster that will be used to communicate with the local LiveData Migrator server (constrained to a user-defined port).
@@ -2305,7 +2305,7 @@ OPTIONS
 
 #### Optional Parameters
 
-* **`--ssl`** Specify this parameter if you want to establish an SSL connection to LiveData Migrator. Enable [Server SSL](./configuration.md#server-ssl) on the LiveData Migrator service before using this parameter.
+* **`--ssl`** Specify this parameter if you want to establish an SSL connection to LiveData Migrator. Enable [Server SSL](./configuration-ldm.md#server-ssl) on the LiveData Migrator service before using this parameter.
 * **`--port`** The LiveData Migrator port to connect on (default is `18080`).
 * **`--timeout`** Define the connection timeout in milliseconds. Set this parameter to override the default connection timeout of 5 minutes (300000ms).
 

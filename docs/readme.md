@@ -22,7 +22,9 @@ The live docs are currently available at https://docs.wandisco.com/live-data-mig
 **Common use cases**
 * [On-premises Hadoop to Azure HDI](uc-on-prem-hadoop-hdi.md)
 
-[Configuration](configuration.md)
+[Configuring LiveData Migrator](configuration-ldm.md)
+[Configuring LiveData UI](configuration-ui.md)
+[Configuring your environment](configuration-env.md)
 
 [Bandwidth management](manage-bandwidth.md)
 

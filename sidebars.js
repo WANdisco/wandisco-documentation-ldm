@@ -86,8 +86,23 @@ module.exports = {
           ]
         },
         {
-          "type": "doc",
-          "id": "configuration"
+          "collapsed":true,
+          "type": "category",
+          "label": "Configuration",
+          "items": [
+            {
+              "type": "doc",
+              "id": "configuration-ldm"
+            },
+            {
+              "type": "doc",
+              "id": "configuration-ui"
+            },
+            {
+              "type": "doc",
+              "id": "configuration-env"
+            }
+          ]
         },
         {
           "type": "doc",
