@@ -85,7 +85,7 @@ Choose one of the methods below depending on the type of metastore deployed in y
 
    [`hive agent add hive`](./command-reference.md#hive-agent-add-hive)
 
-   Use the [automated deployment parameters](./command-reference.md#parameters-for-automated-deployment) or follow the [steps for manual deployment](./command-reference.md#steps-for-manual-deployment).
+   Use the [automated deployment parameters](./command-reference.md#parameters-for-automated-deployment-1) or follow the [steps for manual deployment](./command-reference.md#steps-for-manual-deployment-1).
 
    As mentioned in the [prerequisites](#prerequisites), you will need to specify a suitable edge node on your HDInsights cluster to deploy the hive agent service.
 
