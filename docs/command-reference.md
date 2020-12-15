@@ -1295,11 +1295,19 @@ OPTIONS
 
         --database-user  string
                 Azure SQL database user
-                [Mandatory]
+                [Optional, default = <nothing>]
 
         --database-password  string
                 Azure SQL database password
+                [Optional, default = <nothing>]
+
+        --auth-method  azure-sqlauthentication-method
+                Azure SQL database connection authentication method (SQL_PASSWORD, AD_MSI, AD_INTEGRATED, AD_PASSWORD, ACCESS_TOKEN)
                 [Mandatory]
+
+        --client-id  string
+                Azure resource's clientId
+                [Optional, default = <nothing>]
 
         --storage-account  string
                 Azure storage account name
@@ -1360,10 +1368,28 @@ The Azure hive agent requires a ADLS Gen2 storage account and container name, th
 
 * **`--db-server-name`** The Azure SQL database server name. Only the name given to the server is required, the `.database.windows.net` suffix should be omitted.
 * **`--database-name`** The Azure SQL database name.
-* **`--database-user`** The user name to access the database.
-* **`--database-password`** The user password to access the database.
 * **`--storage-account`** The name of the ADLS Gen 2 storage account.
 * **`--container-name`** The name of the container in the ADLS Gen2 storage account.
+
+#### Authentication Parameters
+
+:::note
+Please choose one of the authentication methods listed.
+:::
+
+* **`--auth-method`** The authentication method to use to connect to the Azure SQL database.  
+  The following methods can be used:
+  * `SQL_PASSWORD` - Provide a username and password to access the database.
+  * `AD_MSI` - Use a system-assigned or user-assigned [managed identity](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types).
+
+##### Required Parameters for SQL_PASSWORD
+
+* **`--database-user`** The user name to access the database.
+* **`--database-password`** The user password to access the database.
+
+##### Required Parameters for AD_MSI
+
+* **`--client-id`** The ID of the managed identity.
 
 #### Optional Parameters
 

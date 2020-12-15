@@ -4,7 +4,7 @@ title: Environment Setup
 sidebar_label: Environment Setup
 ---
 
-Find recommendations here for configuration properties for other environments.
+Find recommendations here for configuration properties for your Hadoop or Cloud environment.
 
 ## Metadata migrations (preview)
 
