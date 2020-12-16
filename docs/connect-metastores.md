@@ -8,6 +8,10 @@ The **1.8.3** version of LiveData Migrator includes a **preview** of a feature t
 
 Ready to migrate metadata? First, connect to your metastores by adding Hive agents. Then, [define metadata rules](./define-metadata-rules.md) before [migrating metadata](./migrate-metadata.md).
 
+:::note
+Metadata migration functionality is only available when using the CLI.
+:::
+
 ## Add hive agents
 
 Add hive agents to provide HiveMigrator with the information needed to read content from your source metastore/database and migrate content to your target metastore/database.

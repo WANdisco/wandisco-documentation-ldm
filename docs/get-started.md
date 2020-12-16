@@ -1,12 +1,10 @@
 ---
 id: get-started
-title: Before you start
-sidebar_label: Before you start
+title: Get started
+sidebar_label: Get started
 ---
 
-You can use either LiveData Migrator's UI or CLI to manage resources and migrate data. From release 1.8.3, you can also migrate metadata with the CLI.
-
-Get started with the LiveData Migrator [UI](#get-started-with-the-livedata-migrator-ui) or [CLI](#get-started-with-the-livedata-migrator-cli) with these simple first steps.
+You can use either LiveData Migrator's UI or CLI to manage resources and migrate data. If you're using the [UI](#get-started-with-the-livedata-migrator-ui) to operate LiveData Migrator, you'll need to open ports and register your LiveData Migrator account next after installation. If you're using the [CLI](#get-started-with-the-livedata-migrator-cli) to operate LiveData Migrator, you're ready to log in.
 
 ## Get started with the LiveData Migrator UI
 
