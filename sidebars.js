@@ -3,7 +3,7 @@ module.exports = {
     {
       "collapsed": true,
       "type": "category",
-      "label": "Introduction",
+      "label": "LiveData Migrator",
       "items": [
         {
           "type": "doc",
@@ -81,7 +81,7 @@ module.exports = {
         {
           "collapsed": true,
           "type": "category",
-          "label": "Common Use Cases",
+          "label": "Common use cases",
           "items": [
             {
               "type": "doc",

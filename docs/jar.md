@@ -24,5 +24,3 @@ On the LiveData Migrator host, follow the steps below to run the jar:
    * If Kerberos is enabled in your environment, you must obtain a ticket before running the jar.  
      _Example_  
      `kinit -kt /etc/security/keytabs/hdfs.keytab hdfs@REALM.COM`  
-     Afterwards, run:  
-     `java -Dlm.kerberos.is.enabled=true -jar livedata-migrator.jar`

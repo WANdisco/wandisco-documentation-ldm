@@ -1,10 +1,10 @@
 ---
 id: manage-bandwidth
-title: Bandwidth management
+title: Define your bandwidth policy
 sidebar_label: Bandwidth management
 ---
 
-By default, LiveData Migrator will use all network bandwidth available to the server unless a specific limit is applied. Follow the [UI](#manage-bandwidth-with-the-ui) or [CLI](#manage-bandwidth-with-the-cli) instructions to set bandwidth limits. 
+By default, LiveData Migrator will use all network bandwidth available to the server unless a specific limit is applied. Follow the [UI](#manage-bandwidth-with-the-ui) or [CLI](#manage-bandwidth-with-the-cli) instructions to set bandwidth limits.
 
 ## Manage bandwidth with the UI
 

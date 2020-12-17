@@ -4,12 +4,12 @@ title: Connect metastores for metadata migrations (preview)
 sidebar_label: Connect metastores
 ---
 
-The **1.8.3** version of LiveData Migrator includes a **preview** of a feature that migrates metadata in either direction between metastores and databases. Supported platforms include [Apache Hive](https://cwiki.apache.org/confluence/display/Hive/Home), [Azure SQL](https://docs.microsoft.com/en-gb/azure/azure-sql/azure-sql-iaas-vs-paas-what-is-overview), [AWS-hosted databases](https://docs.aws.amazon.com/whitepapers/latest/aws-overview/database.html), and local filesystems.
+The **1.8.3** version of LiveData Migrator includes a **preview** of a feature that migrates metadata between metastores. Metadata can be migrated from [Apache Hive](https://cwiki.apache.org/confluence/display/Hive/Home) and [AWS Glue](https://aws.amazon.com/glue/?whats-new-cards.sort-by=item.additionalFields.postDateTime&whats-new-cards.sort-order=desc).
 
 Ready to migrate metadata? First, connect to your metastores by adding Hive agents. Then, [define metadata rules](./define-metadata-rules.md) before [migrating metadata](./migrate-metadata.md).
 
 :::note
-Metadata migration functionality is only available when using the CLI.
+Metadata migration functionality is only available when using the CLI. [Read the release notes](https://community.wandisco.com/s/article/WANdisco-LiveData-Migrator-Release-Notes-1-8-3) for more details about metadata migration in LiveData Migrator.
 :::
 
 ## Add hive agents

@@ -1,8 +1,10 @@
 ---
 id: configuration-metadata
-title: Metadata migrations (preview)
+title: Configuring metadata migrations (preview)
 sidebar_label: Metadata migrations
 ---
+
+Find details here for the configuration properties of metadata migrations.
 
 ## Enable Hive metastore event listener
 
