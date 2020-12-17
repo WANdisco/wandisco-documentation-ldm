@@ -1373,9 +1373,7 @@ The Azure hive agent requires a ADLS Gen2 storage account and container name, th
 
 #### Authentication Parameters
 
-:::note
-Please choose one of the authentication methods listed.
-:::
+Choose one of the authentication methods listed and include the additional parameters required for the chosen method.
 
 * **`--auth-method`** The authentication method to use to connect to the Azure SQL database.  
   The following methods can be used:
@@ -1389,7 +1387,9 @@ Please choose one of the authentication methods listed.
 
 ##### Required Parameters for AD_MSI
 
-* **`--client-id`** The ID of the managed identity.
+If you are using a user-assigned managed identity, the `--client-id` parameter must be specified:
+
+* **`--client-id`** The Client ID of your Azure managed identity.
 
 #### Optional Parameters
 
