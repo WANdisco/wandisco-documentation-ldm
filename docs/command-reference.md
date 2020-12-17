@@ -1108,27 +1108,7 @@ migration add --path /repl1 --target mytarget –-migration-id myNewMigration --
 
 ----
 
-### `migration pending-region add`
 
-Add a pending region manually to re-scan a directory if it has been updated.
-
-```text title="Add a pending region"
-SYNOPSYS
-        migration pending-region add
-```
-
-#### Mandatory Parameter
-
-* **`--migration-id`** The identifier of the migration to show.
-* **`--path`** The path to the pending region you want to add.
-
-#### Example
-
-```text title="Add a pending region to a migration"
-migration pending-region add --migration-id myFirstMigration --path /dir1/userA
-```
-
-----
 
 ### `migration run`
 

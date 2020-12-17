@@ -1,10 +1,10 @@
 ---
 id: configuration-metadata
-title: Configuring metadata migrations (preview)
+title: Configuring your environment for metadata migrations (preview)
 sidebar_label: Metadata migrations
 ---
 
-Find details here for the configuration properties of metadata migrations.
+We recommend that you make the following configuration changes to your environment to prepare for metadata migrations.
 
 ## Enable Hive metastore event listener
 

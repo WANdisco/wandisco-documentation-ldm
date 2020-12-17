@@ -1,7 +1,7 @@
 ---
 id: configuration-ui
-title: Configuring the LiveData Migrator UI
-sidebar_label: LiveData Migrator UI
+title: Configuring the LiveData UI
+sidebar_label: LiveData UI
 ---
 
 Find details here for the configuration properties of LiveData Migrator UI. Properties are defined in the following file:
