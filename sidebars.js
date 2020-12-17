@@ -3,7 +3,7 @@ module.exports = {
     {
       "collapsed": true,
       "type": "category",
-      "label": "Documentation",
+      "label": "LiveData Migrator",
       "items": [
         {
           "type": "doc",
@@ -21,32 +21,68 @@ module.exports = {
             {
               "type": "doc",
               "id": "installation"
-            }
-          ]
-        },
-        {
-          "collapsed": true,
-          "type": "category",
-          "label": "Using LiveData Migrator",
-          "items": [
-            {
-              "type": "doc",
-              "id": "operation-ui"
             },
             {
               "type": "doc",
-              "id": "operation-cli"
+              "id": "license"
             }
           ]
         },
         {
           "type": "doc",
-          "id": "configuration"
+          "id": "get-started"
         },
         {
           "collapsed": true,
           "type": "category",
-          "label": "Common Use Cases",
+          "label": "Migrate data",
+          "items": [
+            {
+              "type": "doc",
+              "id": "configure-storage"
+            },
+            {
+              "type": "doc",
+              "id": "create-migration"
+            },
+            {
+              "type": "doc",
+              "id": "configure-exclusions"
+            },
+
+            {
+              "type": "doc",
+              "id": "manage-migrations"
+            },
+            {
+              "type": "doc",
+              "id": "manage-bandwidth"
+            }
+          ]
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Migrate metadata",
+          "items": [
+            {
+              "type": "doc",
+              "id": "connect-metastores"
+            },
+            {
+              "type": "doc",
+              "id": "define-metadata-rules"
+            },
+            {
+              "type": "doc",
+              "id": "migrate-metadata"
+            },
+          ]
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Common use cases",
           "items": [
             {
               "type": "doc",
@@ -55,21 +91,40 @@ module.exports = {
           ]
         },
         {
-          "type": "doc",
-          "id": "command-reference"
+          "collapsed":true,
+          "type": "category",
+          "label": "Configuration",
+          "items": [
+            {
+              "type": "doc",
+              "id": "configuration-ldm"
+            },
+            {
+              "type": "doc",
+              "id": "configuration-ui"
+            },
+            {
+              "type": "doc",
+              "id": "configuration-metadata"
+            }
+          ]
         },
         {
           "collapsed": true,
           "type": "category",
-          "label": "Alternatives to the UI or CLI",
+          "label": "Reference",
           "items": [
             {
               "type": "doc",
-              "id": "jar"
+              "id": "command-reference"
             },
             {
               "type": "doc",
               "id": "api-reference"
+            },
+            {
+              "type": "doc",
+              "id": "jar"
             }
           ]
         }

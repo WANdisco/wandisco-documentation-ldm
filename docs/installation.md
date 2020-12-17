@@ -44,4 +44,4 @@ Ready to install? Check the [prerequisites](./prereqs.md) and then follow these 
 
 ## Next Steps
 
-Once you have LiveData Migrator running, you can use the [UI](./operation-ui.md) or [CLI](./operation-cli.md) to start migrating data.
+Once you have LiveData Migrator running, you're ready to [get started](./get-started.md).
