@@ -52,6 +52,10 @@ module.exports = {
             {
               "type": "doc",
               "id": "manage-migrations"
+            },
+            {
+              "type": "doc",
+              "id": "manage-bandwidth"
             }
           ]
         },
@@ -100,13 +104,9 @@ module.exports = {
             },
             {
               "type": "doc",
-              "id": "configuration-env"
+              "id": "configuration-metadata"
             }
           ]
-        },
-        {
-          "type": "doc",
-          "id": "manage-bandwidth"
         },
         {
           "collapsed": true,

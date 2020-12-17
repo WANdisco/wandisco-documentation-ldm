@@ -1,14 +1,10 @@
 ---
-id: configuration-env
-title: Environment Setup
-sidebar_label: Environment Setup
+id: configuration-metadata
+title: Metadata migrations (preview)
+sidebar_label: Metadata migrations
 ---
 
-Find recommendations here for configuration properties for other environments.
-
-## Metadata migrations (preview)
-
-### Enable Hive metastore event listener
+## Enable Hive metastore event listener
 
 :::note
 This recommendation is currently supported on HDP platforms only.
@@ -71,7 +67,7 @@ When deploying a [hive agent for Apache Hive](./command-reference.md#hive-agent-
 
    The description should state `"Listening to events..."`.
 
-### Default Hive metastore warehouse directory
+## Default Hive metastore warehouse directory
 
 When deploying a hive agent for a HDInsights cluster (which can either be [Azure SQL](./command-reference.md#hive-agent-add-azure) or remote [Apache Hive](./command-reference.md#hive-agent-add-hive)), the default hive warehouse directory will be as follows:
 
