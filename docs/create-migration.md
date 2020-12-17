@@ -14,7 +14,7 @@ You will typically create multiple migrations so that you can select specific co
 
 1. Choose a source and target from one of your [storages](./configure-storage.md).
 1. Choose the Path to set the scope of the migration.
-1. Enable the **Auto-start migration** option if you want to start the migration right away. (You can start it manually when [viewing it later](./manage-migrations.md#manage-migrations-with-the-ui) if you prefer.) 
+1. Enable the **Auto-start migration** option if you want to start the migration right away. (You can start it manually when [viewing it later](./manage-migrations.md#manage-migrations-with-the-ui) if you prefer.)
 1. [Apply any exclusions](#assign-exclusions-to-a-new-migration) to reduce the scope within this Path.
 1. Select the **Overwrite** or **Skip if Size Match** setting for the migration.  
    * **Skip if Size Match** - If the file size is identical between the source and target, the file is skipped. If it’s a different size, the whole file is replaced.
@@ -24,7 +24,7 @@ If you've already migrated some data from the same source to the same target, yo
 
 ### Assign exclusions to a new migration
 
-Adding exclusions to a new migration ensures the outcome is consistent with the chosen exclusions.
+Assign exclusions to your migration to exclude specific file sizes or file names from the migration. If you want to exclude file sizes or names from your migration but haven't defined any exclusion templates yet, see the [define exclusions](./configure-exclusions.md) topic to learn how.
 
 1. In the new migration page, click **Add new exclusion**
 1. Select the appropriate exclusion template from the drop-down list.

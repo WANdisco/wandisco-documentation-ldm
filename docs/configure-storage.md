@@ -109,4 +109,4 @@ Although present when invoking the `help` command, Local Filesystem functionalit
 
 ## Next Steps
 
-Once you have your source and target storage configured, [configure exclusions](./configure-exclusions.md) to define the data you want to exclude from data migrations.
+Once you have your source and target storage configured, you're ready to [migrate data](./create-migration.md). If you want to  exclude specific file sizes or file names from your data migrations, [define exclusions](./configure-exclusions.md) next.

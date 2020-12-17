@@ -43,12 +43,13 @@ module.exports = {
             },
             {
               "type": "doc",
-              "id": "configure-exclusions"
+              "id": "create-migration"
             },
             {
               "type": "doc",
-              "id": "create-migration"
+              "id": "configure-exclusions"
             },
+
             {
               "type": "doc",
               "id": "manage-migrations"
