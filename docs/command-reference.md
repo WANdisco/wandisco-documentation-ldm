@@ -2252,7 +2252,7 @@ license upload --path /user/hdfs/license.key
 Connect to the LiveData Migrator service on your LiveData Migrator host with this command.
 
 :::note
-This is a manual method of connecting to the LiveData Migrator service as the `livedata-migrator --host=localhost` command (shown in the [CLI - Log in](./operation-cli.md#log-in) section) will attempt to establish this connection automatically.
+This is a manual method of connecting to the LiveData Migrator service as the `livedata-migrator --host=localhost` command (shown in [CLI - Log in](./get-started.md)) will attempt to establish this connection automatically.
 :::
 
 ```text title="connect livemigrator"
@@ -2302,7 +2302,7 @@ connect livemigrator --host localhost --port 18080
 Connect to the HiveMigrator service on your LiveData Migrator host with this command.
 
 :::note
-This is a manual method of connecting to the HiveMigrator service as the `livedata-migrator --host=localhost` command (shown in the [CLI - Log in](./operation-cli.md#log-in) section) will attempt to establish this connection automatically.
+This is a manual method of connecting to the HiveMigrator service as the `livedata-migrator --host=localhost` command (shown in [CLI - Log in](./get-started.md) section) will attempt to establish this connection automatically.
 :::
 
 ```text title="connect hivemigrator"
