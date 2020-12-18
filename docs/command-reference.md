@@ -1106,11 +1106,8 @@ OPTIONS
 migration add --path /repl1 --target mytarget –-migration-id myNewMigration --exclusions 100mbfiles
 ```
 
-<<<<<<< HEAD
-=======
 ----
 
->>>>>>> shona-topicsv2
 ### `migration run`
 
 Start a migration that was created without the `--auto-start` parameter.
@@ -1544,11 +1541,7 @@ hive agent add glue --name glueAgent --access-key ACCESS6HCFPAQIVZTKEY --secret-
 
 Add a hive agent to connect to a local or remote [Apache Hive](https://cwiki.apache.org/confluence/display/Hive/Home) metastore using the `hive agent add hive` command.
 
-<<<<<<< HEAD
-Before deploying an agent, see our recommendations section on [enabling the Hive metastore event listener](./configuration-ui.md#enable-hive-metastore-event-listener) for Apache Hive environments.
-=======
 Before deploying an agent, see our recommendations section on [enabling the Hive metastore event listener](./configuration-env.md#enable-hive-metastore-event-listener) for Apache Hive environments.
->>>>>>> shona-topicsv2
 
 :::info remote deployments
 When connecting to a remote Apache Hive metastore, specify a host on the remote cluster that will be used to communicate with the local LiveData Migrator server (constrained to a user-defined port).
