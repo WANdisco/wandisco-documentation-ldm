@@ -7,7 +7,7 @@ sidebar_label: Configure storage
 The first step in the process of migrating data is to configure your storage, which defines where data is being migrated from (the source) and to (the target).
 
 * Supported sources are: **HDFS**
-* Supported targets are: **ADLS Gen2**, **S3**, **Google Cloud Storage**, and **IBM Cloud Object Storage (S3)**
+* Supported targets are: **ADLS Gen2**, **S3**, **Google Cloud Storage**, **IBM Cloud Object Storage (S3)** and **HDFS**
 
 Configure storage with either the [UI](#configure-storage-with-the-ui) or the [CLI](#configure-storage-with-the-cli).
 
@@ -49,6 +49,7 @@ Selecting to configure your _Target_ storage on the Storage panel, see the links
   * [Service Principal (OAuth2)](./command-reference.md#mandatory-parameters-1)
 * [S3 / IBM Cloud Object Storage (S3)](./command-reference.md#mandatory-parameters-5)
 * [Google Cloud Storage](./command-reference.md#mandatory-parameters-3)
+* [HDFS](./command-reference/#mandatory-parameters-4)
 
 ## Configure storage with the CLI
 
