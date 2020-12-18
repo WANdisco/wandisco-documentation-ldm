@@ -53,6 +53,7 @@ module.exports = {
               "type": "doc",
               "id": "configure-exclusions"
             },
+
             {
               "type": "doc",
               "id": "manage-migrations"
@@ -64,22 +65,6 @@ module.exports = {
           ]
         },
         {
-          "collapsed":true,
-          "type": "category",
-          "label": "Configuration",
-          "items": [
-            {
-              "type": "doc",
-              "id": "configuration-ldm"
-            },
-            {
-              "type": "doc",
-              "id": "configuration-ui"
-            },
-            {
-              "type": "doc",
-              "id": "configuration-env"
-            }
           "collapsed": true,
           "type": "category",
           "label": "Migrate metadata",
@@ -95,7 +80,7 @@ module.exports = {
             {
               "type": "doc",
               "id": "migrate-metadata"
-            }
+            },
           ]
         },
         {
