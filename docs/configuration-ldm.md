@@ -8,6 +8,7 @@ Find details here for the configuration properties of LiveData Migrator. Propert
 
 `/etc/wandisco/livedata-migrator/application.properties`
 
+<<<<<<< HEAD:docs/configuration-ldm.md
 An example `application.properties` file:
 
 ```text name="Example"
@@ -125,6 +126,9 @@ management.metrics.export.jmx.domain=com.wandisco.livemigrator2.metrics
 ```
 
 ### General configuration
+=======
+## General configuration
+>>>>>>> shona-topicsv2:docs/configuration-ldm.md
 
 These configuration properties are used to adjust general items of operation.
 
@@ -140,7 +144,7 @@ These configuration properties are used to adjust general items of operation.
 | `cli.enabled` | Whether the action prompt interface will be made available from the LiveData Migrator instance<br/><br/>**Default value**: `false`<br/>**Allowed values**: `true`, `false` |
 | `spring.shell.interactive.enabled` | Whether the console session with the action prompt is interactive or non-interactive, affecting prompt output, command completion and other interactive features<br/><br/>**Default value**: `${cli.enabled}`<br/>**Allowed values**: `true`, `false` |
 
-### SSH access
+## SSH access
 
 These configuration properties govern whether and how access to LiveData Migrator is provided using the [SSH protocol](https://en.wikipedia.org/wiki/Secure_Shell). You can manage LiveData Migrator by enabling SSH access to the console interface (as an alternative to the [CLI connection method](./operation-cli.md#log-in)).
 
@@ -157,7 +161,7 @@ These configuration properties govern whether and how access to LiveData Migrato
 | `ssh.shell.historyFile` | The full path to the file in which the record of commands issued to the action prompt will be recorded<br/><br/>**Default value**: `${java.io.tmpdir}/.livedatamigrator_history_ssh`<br/>**Allowed values**: The full path to a valid filename in a directory that is writable by the user running LiveData Migrator (typically `hdfs`.)
 | `ssh.shell.authorized-public-keys-file` | The file containing public keys against which client credentials will be matched to authorize access to the console over SSH when LiveData Migrator is configured for `security` authentication<br/><br/>**Default value**: `samples/public-keys-sample`<br/>**Allowed values**: The full path to a file that contains one line entry per public key, in the same format used by `sshd`. |
 
-### Logging
+## Logging
 
 Configure how LiveData Migrator logs requests made against the [REST API](./api-reference.md).
 
@@ -171,7 +175,7 @@ Configure how LiveData Migrator logs requests made against the [REST API](./api-
 | `logbook.obfuscate.headers` | A comma-separated list of HTTP headers that should not be recorded in log entries, e.g. `authorization,x-auth-password,x-auth-token,X-Secret`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any valid comma-separated list of HTTP headers |
 | `obfuscate.json.properties` | A comma-separated list of JSON request properties by name that should not be recorded in log entries, e.g. `foo,bar`<br/><br/>**Default value**: `${hdfs.fs.type.masked.properties},${adls2.fs.type.masked.properties},${s3a.fs.type.masked.properties},${gcs.fs.type.masked.properties}`<br/>**Allowed values**: Any valid comma-separated list of property names |
 
-### Server SSL
+## Server SSL
 
 To enable SSL on the LiveData Migrator REST API (HTTPS), modify the following `server.ssl.*` properties.
 
@@ -203,7 +207,7 @@ keytool -genkey -alias livedata-migrator -storetype PKCS12 -keyalg RSA -keysize 
 See the [keytool documentation](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html) for further information on the parameters used.
 :::
 
-### State
+## State
 
 LiveData Migrator uses an internally-managed database to record state during operation called the Prevayler.
 
@@ -215,7 +219,7 @@ LiveData Migrator uses an internally-managed database to record state during ope
 | `prevayler.bufferedJournal` | Whether buffered journal I/O is used for the database<br/><br/>**Default value**: `true`<br/>**Allowed values**: `true`, `false` |
 | `prevayler.mirrored` | Whether actions tracked in-memory by the database are mirrored to disk on every modification. The alternative is for operation to periodically flush to disk and flush on shutdown.<br/><br/>**Default value**: `true`<br/>**Allowed values**: `true`, `false` |
 
-### Security
+## Security
 
 Secure access to the LiveData Migrator [REST API](./api-reference.md) through configuration. Choose between no security or HTTP basic security.
 
@@ -225,7 +229,7 @@ Secure access to the LiveData Migrator [REST API](./api-reference.md) through co
 | `security.basic.user` | The username that needs to be provided by a REST client to gain access to a secured REST API, e.g. `admin`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any string that defines a username (no whitespace) |
 | `security.basic.password` | A bcrypt-encrypted representation of the password that needs to be provided using HTTP basic authentication to access the REST API when LiveData Migrator is configured for `basic` security, e.g. `{bcrypt}$2a$10$kXzfqwiiCY/ZW9e9BboNmuIbe5xe2kNjdk1YNUxmsCaQ7PlBLCe4W`<br/><br/>**Default value**: (none)<br/>**Allowed values**: A valid bcrypt-encrypted string |
 
-### File system defaults
+## File system defaults
 
 Each file system supported by LiveData Migrator can apply properties defined using the `--properties` or `--properties-files` parameters to the [various `filesystem add` commands](./command-reference#file-system-commands). You can set default properties that will apply to each type of file system at time of creation through these configuration items.
 
@@ -238,7 +242,7 @@ Each file system supported by LiveData Migrator can apply properties defined usi
 | `gcs.fs.type.default.properties` | A comma-separated list of default properties to apply to GCS resources on creation.<br/><br/>**Default value**: `bucket.name`<br/>**Allowed values**: Any comma-separated list of valid GCS configuration properties |
 | `local.fs.type.default.properties` | A comma-separated list of default properties to apply to local file system resources on creation.<br/><br/>**Default value**: `fs.root`<br/>**Allowed values**: Any comma-separated list of valid S3A configuration properties |
 
-### HDFS inotify
+## HDFS inotify
 
 LiveData Migrator will poll the Hadoop cluster for NameNode events using the [HDFS inotify](https://hadoop.apache.org/docs/r3.2.0/api/org/apache/hadoop/hdfs/inotify/package-summary.html) system. These properties can be added and configured to change the default poll periods.
 

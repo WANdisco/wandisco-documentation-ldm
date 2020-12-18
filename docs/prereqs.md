@@ -31,10 +31,6 @@ Ready to start? Check the prerequisites and then follow these steps to get ready
 * **200 GB** (SSD-backed volumes) (minimum **100 GB**)
 * **2 Gbps** minimum network. Your network bandwidth must be able to cope with transferring data and ongoing changes from your source storage.
 
-## License
-
-The LiveData Migrator trial license is limited to 14 days operation and 5TB of data migration. This gives you full use of LiveData Migrator up to either of these limits. [Contact WANdisco to upgrade to a full license.](https://www.wandisco.com)
-
 ## Next Steps
 
 Once you have all the prerequisites, you're ready to [download and install](./installation.md) LiveData Migrator.

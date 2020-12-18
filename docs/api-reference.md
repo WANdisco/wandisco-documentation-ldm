@@ -4,7 +4,7 @@ title: API Reference
 sidebar_label: API Reference
 ---
 
-LiveData Migrator exposes a REST API for use by external clients. These API resources provide equivalent functionality to the commands described in the [Command Reference](./command-reference.md) except for the commands related to [metadata migrations](#metadata-migrations).
+LiveData Migrator exposes a REST API for use by external clients. These API resources provide equivalent functionality to the commands described in the [Command Reference](./command-reference.md) except for the commands related to [metadata migrations](./migrate-metadata.md).
 
 You can access the API documentation for LiveData Migrator directly on your host machine:  
 `http(s)://<ldm-hostname>:<ldm-port>/ldm-api.html`

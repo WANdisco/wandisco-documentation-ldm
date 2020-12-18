@@ -4,13 +4,17 @@ title: Command Reference
 sidebar_label: Command Reference
 ---
 
-Find a comprehensive description of each command available from the LiveData Migrator action prompt here. Review the [LiveData Migrator Operation](./operation-cli.md) guide for information on how to use the commands to perform migration.
+Looking to learn more about LiveData Migrator commands? This reference page includes a comprehensive description of each command available from the LiveData Migrator CLI.
 
-Each command description below includes the information available from the action prompt using the `help` command. Tab-completion will also give you guidance when entering commands on the available options and help auto-complete the needed values.
+Each command description includes the information available from the `help` command. Tab-completion will also give you guidance when entering commands on the available options and help auto-complete the needed values.
 
-:::info
-Should you need clarification on any configuration items shown in the UI, you will also find them here (located with the equivalent CLI mandatory and optional parameters).
+:::tip
+You can also find information about UI configuration items here. Look for them in their equivalent CLI mandatory and optional parameters.
 :::
+
+## Built-in commands
+
+The built-in commands are always available in a LiveData Migrator command line interactive session. They are unrelated to migration resources and operation (other than `exit`/`quit`), but help you to interact with LiveData Migrator and automate processing through scripts for the action prompt.
 
 ## Source Commands
 
@@ -1102,6 +1106,11 @@ OPTIONS
 migration add --path /repl1 --target mytarget –-migration-id myNewMigration --exclusions 100mbfiles
 ```
 
+<<<<<<< HEAD
+=======
+----
+
+>>>>>>> shona-topicsv2
 ### `migration run`
 
 Start a migration that was created without the `--auto-start` parameter.
@@ -1535,7 +1544,11 @@ hive agent add glue --name glueAgent --access-key ACCESS6HCFPAQIVZTKEY --secret-
 
 Add a hive agent to connect to a local or remote [Apache Hive](https://cwiki.apache.org/confluence/display/Hive/Home) metastore using the `hive agent add hive` command.
 
+<<<<<<< HEAD
 Before deploying an agent, see our recommendations section on [enabling the Hive metastore event listener](./configuration-ui.md#enable-hive-metastore-event-listener) for Apache Hive environments.
+=======
+Before deploying an agent, see our recommendations section on [enabling the Hive metastore event listener](./configuration-env.md#enable-hive-metastore-event-listener) for Apache Hive environments.
+>>>>>>> shona-topicsv2
 
 :::info remote deployments
 When connecting to a remote Apache Hive metastore, specify a host on the remote cluster that will be used to communicate with the local LiveData Migrator server (constrained to a user-defined port).

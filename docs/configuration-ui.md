@@ -1,10 +1,18 @@
 ---
 id: configuration-ui
+<<<<<<< HEAD
 title: Configuring LiveData UI
 sidebar_label: LiveData UI
 ---
 
 Find details here for the configuration properties of LiveData UI. Properties are defined in the following file:
+=======
+title: Configuring the LiveData UI
+sidebar_label: LiveData UI
+---
+
+Find details here for the configuration properties of LiveData Migrator UI. Properties are defined in the following file:
+>>>>>>> shona-topicsv2
 
 `/etc/wandisco/ui/application-prod.properties`
 
@@ -19,7 +27,11 @@ logging.output.path=/var/log/wandisco/ui
 application.liveMigratorV2.servers=localhost\:18080
 ```
 
+<<<<<<< HEAD
 ### General configuration
+=======
+## General configuration
+>>>>>>> shona-topicsv2
 
 Configure how the UI is run overall.
 
@@ -86,6 +98,7 @@ The following directories are used for the LiveData UI:
 | `/etc/wandisco/ui` | Configuration files |
 | `/opt/wandisco/ui` | Operation files |
 | `/var/run/wandisco/ui` | UI runtime state |
+<<<<<<< HEAD
 
 ## Metadata migrations (preview)
 
@@ -161,3 +174,5 @@ When deploying a hive agent for a HDInsights cluster (which can either be [Azure
 This is different from the majority of Hadoop clusters, as such, it may be necessary to adjust this property in your HDInsights cluster so that it is the same as your source environment.
 
 Doing so will allow you to start using your source data and metadata on your HDInsights cluster immediately after migration, as it will be referenced correctly by your target metastore/database.
+=======
+>>>>>>> shona-topicsv2

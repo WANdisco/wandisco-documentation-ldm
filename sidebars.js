@@ -3,7 +3,7 @@ module.exports = {
     {
       "collapsed": true,
       "type": "category",
-      "label": "Documentation",
+      "label": "LiveData Migrator",
       "items": [
         {
           "type": "doc",
@@ -24,22 +24,92 @@ module.exports = {
             },
             {
               "type": "doc",
+              "id": "license"
+            }
+            {
+              "type": "doc",
               "id": "uninstall"
             }
           ]
         },
         {
+          "type": "doc",
+          "id": "get-started"
+        },
+        {
           "collapsed": true,
           "type": "category",
-          "label": "Using LiveData Migrator",
+          "label": "Migrate data",
           "items": [
             {
               "type": "doc",
-              "id": "operation-ui"
+              "id": "configure-storage"
             },
             {
               "type": "doc",
-              "id": "operation-cli"
+              "id": "create-migration"
+            },
+            {
+              "type": "doc",
+              "id": "configure-exclusions"
+            },
+
+            {
+              "type": "doc",
+              "id": "manage-migrations"
+            },
+            {
+              "type": "doc",
+              "id": "manage-bandwidth"
+            }
+          ]
+        },
+        {
+<<<<<<< HEAD
+          "collapsed":true,
+          "type": "category",
+          "label": "Configuration",
+          "items": [
+            {
+              "type": "doc",
+              "id": "configuration-ldm"
+            },
+            {
+              "type": "doc",
+              "id": "configuration-ui"
+            },
+            {
+              "type": "doc",
+              "id": "configuration-env"
+            }
+=======
+          "collapsed": true,
+          "type": "category",
+          "label": "Migrate metadata",
+          "items": [
+            {
+              "type": "doc",
+              "id": "connect-metastores"
+            },
+            {
+              "type": "doc",
+              "id": "define-metadata-rules"
+            },
+            {
+              "type": "doc",
+              "id": "migrate-metadata"
+            },
+>>>>>>> shona-topicsv2
+          ]
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Common use cases",
+          "items": [
+            {
+              "type": "doc",
+              "id": "uc-on-prem-hadoop-hdi"
             }
           ]
         },
@@ -58,41 +128,26 @@ module.exports = {
             },
             {
               "type": "doc",
-              "id": "configuration-env"
+              "id": "configuration-metadata"
             }
           ]
         },
         {
           "collapsed": true,
           "type": "category",
-          "label": "Common Use Cases",
+          "label": "Reference",
           "items": [
             {
               "type": "doc",
-              "id": "uc-on-prem-hadoop-hdi"
-            }
-          ]
-        },
-        {
-          "type": "doc",
-          "id": "troubleshooting"
-        },
-        {
-          "type": "doc",
-          "id": "command-reference"
-        },
-        {
-          "collapsed": true,
-          "type": "category",
-          "label": "Alternatives to the UI or CLI",
-          "items": [
-            {
-              "type": "doc",
-              "id": "jar"
+              "id": "command-reference"
             },
             {
               "type": "doc",
               "id": "api-reference"
+            },
+            {
+              "type": "doc",
+              "id": "jar"
             }
           ]
         }

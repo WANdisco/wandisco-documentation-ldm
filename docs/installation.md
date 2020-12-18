@@ -48,4 +48,4 @@ Do you have an older version already installed? If so, perform the steps in the 
 
 ## Next Steps
 
-Once you have LiveData Migrator running, you can use the [UI](./operation-ui.md) or [CLI](./operation-cli.md) to start migrating data.
+Once you have LiveData Migrator running, you're ready to [get started](./get-started.md).
