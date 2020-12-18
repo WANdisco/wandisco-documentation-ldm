@@ -9,7 +9,6 @@ Find details here for the configuration properties of LiveData Migrator. Propert
 `/etc/wandisco/livedata-migrator/application.properties`
 
 ## General configuration
->>>>>>> shona-topicsv2:docs/configuration-ldm.md
 
 These configuration properties are used to adjust general items of operation.
 
