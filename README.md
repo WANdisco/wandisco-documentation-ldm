@@ -14,7 +14,7 @@ The live docs are currently available at https://docs.wandisco.com/live-data-mig
 * [Configure exclusions](./docs/configure-exclusions.md)
 * [Create a migration](./docs/create-migration.md)
 * [Manage migrations](./docs/manage-migrations.md)
-* [Bandwidth management](manage-bandwidth.md)
+* [Bandwidth management](./docs/manage-bandwidth.md)
 
 **Migrate metadata**
 * [Connect metastores](./docs/connect-metastores.md)
