@@ -1301,11 +1301,19 @@ OPTIONS
 
         --database-user  string
                 Azure SQL database user
-                [Mandatory]
+                [Optional, default = <nothing>]
 
         --database-password  string
                 Azure SQL database password
+                [Optional, default = <nothing>]
+
+        --auth-method  azure-sqlauthentication-method
+                Azure SQL database connection authentication method (SQL_PASSWORD, AD_MSI, AD_INTEGRATED, AD_PASSWORD, ACCESS_TOKEN)
                 [Mandatory]
+
+        --client-id  string
+                Azure resource's clientId
+                [Optional, default = <nothing>]
 
         --storage-account  string
                 Azure storage account name
@@ -1366,10 +1374,57 @@ The Azure hive agent requires a ADLS Gen2 storage account and container name, th
 
 * **`--db-server-name`** The Azure SQL database server name. Only the name given to the server is required, the `.database.windows.net` suffix should be omitted.
 * **`--database-name`** The Azure SQL database name.
-* **`--database-user`** The user name to access the database.
-* **`--database-password`** The user password to access the database.
 * **`--storage-account`** The name of the ADLS Gen 2 storage account.
 * **`--container-name`** The name of the container in the ADLS Gen2 storage account.
+
+#### Authentication Parameters
+
+Choose one of the authentication methods listed and include the additional parameters required for the chosen method.
+
+* **`--auth-method`** The authentication method to use to connect to the Azure SQL server.  
+  The following methods can be used:
+  * `SQL_PASSWORD` - Provide a username and password to access the database.
+  * `AD_MSI` - Use a system-assigned or user-assigned [managed identity](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types).
+
+##### Required Parameters for SQL_PASSWORD
+
+* **`--database-user`** The user name to access the database.
+* **`--database-password`** The user password to access the database.
+
+##### Required Parameters for AD_MSI
+
+To use this method, the following pre-requirements must be met:
+
+* LiveData Migrator or the remote Azure hive agent must be installed on an [Azure resource with the managed identity assigned to it](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/qs-configure-portal-windows-vm). The host must also have [Azure Active Directory authentication](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/login-using-aad) enabled.
+* Your Azure SQL server must be enabled for [Azure Active Directory authentication](https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-configure?tabs=azure-powershell).
+* You have [created a contained user in the Azure SQL database that is mapped to the Azure Active Directory resource](https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-configure?tabs=azure-powershell#create-contained-users-mapped-to-azure-ad-identities) (where LiveData Migrator or the remote Azure hive agent is installed).
+  * The username of the contained user will depend on whether you are using a system-assigned or user-assigned identity.
+
+    ```text title="Azure SQL database command for a system-assigned managed identity"
+    CREATE USER "<azure_resource_name>" FROM EXTERNAL PROVIDER;
+    ALTER ROLE db_owner ADD MEMBER "<azure_resource_name>";
+    ```
+
+    The `<azure_resource_name>` is the name of the Azure resource where LiveData Migrator or remote Azure hive agent is installed (for example: `myAzureVM`).
+
+    ```text title="Azure SQL database command for a user-assigned managed identity"
+    CREATE USER <managed_identity_name> FROM EXTERNAL PROVIDER;
+    ALTER ROLE db_owner ADD MEMBER <managed_identity_name>;
+    ```
+
+    The `<managed_identity_name>` is the name of the user-assigned managed identity (for example: `myManagedIdentity`).
+
+Once all pre-requirements are met, see the [system-assigned identity](#system-assigned-identity) or [user-assigned identity](#user-assigned-identity) parameters.
+
+###### System-assigned identity
+
+No other parameters are required for a system-managed identity.
+
+###### User-assigned identity
+
+The `--client-id` parameter must be specified:
+
+* **`--client-id`** The Client ID of your Azure managed identity.
 
 #### Optional Parameters
 
@@ -1420,16 +1475,16 @@ If you do not wish to use the `--autodeploy` function, follow these steps to dep
 
 #### Examples
 
-```text title="Example for local Azure SQL deployment"
-hive agent add azure --name azureAgent --db-server-name mysqlserver --database-name mydb1 --database-user azureuser --database-password mypassword --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6
+```text title="Example for local Azure SQL deployment with SQL username/password"
+hive agent add azure --name azureAgent --db-server-name mysqlserver --database-name mydb1 --auth-method SQL_PASSWORD --database-user azureuser --database-password mypassword --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6
 ```
 
-```text title="Example for remote Azure SQL deployment - automated"
-hive agent add azure --name azureRemoteAgent --db-server-name mysqlserver --database-name mydb1 --database-user azureuser --database-password mypassword --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6 --autodeploy --ssh-user root --ssh-key /root/.ssh/id_rsa --ssh-port 22 --host myRemoteHost.example.com --port 5052
+```text title="Example for remote Azure SQL deployment with System-assigned managed identity - automated"
+hive agent add azure --name azureRemoteAgent --db-server-name mysqlserver --database-name mydb1 --auth-method AD_MSI --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6 --autodeploy --ssh-user root --ssh-key /root/.ssh/id_rsa --ssh-port 22 --host myRemoteHost.example.com --port 5052
 ```
 
-```text title="Example for remote Azure SQL deployment - manual"
-hive agent add azure --name azureRemoteAgent --db-server-name mysqlserver --database-name mydb1 --database-user azureuser --database-password mypassword --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6 --host myRemoteHost.example.com --port 5052
+```text title="Example for remote Azure SQL deployment with User-assigned managed identity - manual"
+hive agent add azure --name azureRemoteAgent --db-server-name mysqlserver --database-name mydb1 --auth-method AD_MSI --client-id b67f67ex-ampl-e2eb-bd6d-client9385id --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6 --host myRemoteHost.example.com --port 5052
 ```
 
 ----
