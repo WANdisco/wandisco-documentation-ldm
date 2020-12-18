@@ -7,7 +7,7 @@ The live docs are currently available at https://docs.wandisco.com/live-data-mig
 * [Install LiveData Migrator](./docs/installation.md)
 * [Uninstall a previous release](./docs/uninstall.md)
 
-[Get started](get-started.md)
+[Get started](./docs/get-started.md)
 
 **Migrate data**
 * [Configure storage](./docs/configure-storage.md)
