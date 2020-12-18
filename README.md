@@ -1,6 +1,6 @@
 The live docs are currently available at https://docs.wandisco.com/live-data-migrator/docs/
 
-[Introduction](about.md)
+[Introduction](./about.md)
 
 **Installation**
 * [Prerequisites](prereqs.md)
