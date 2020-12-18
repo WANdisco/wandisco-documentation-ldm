@@ -65,7 +65,6 @@ module.exports = {
           ]
         },
         {
-<<<<<<< HEAD
           "collapsed":true,
           "type": "category",
           "label": "Configuration",
@@ -82,7 +81,6 @@ module.exports = {
               "type": "doc",
               "id": "configuration-env"
             }
-=======
           "collapsed": true,
           "type": "category",
           "label": "Migrate metadata",
@@ -99,7 +97,6 @@ module.exports = {
               "type": "doc",
               "id": "migrate-metadata"
             },
->>>>>>> shona-topicsv2
           ]
         },
         {
