@@ -19,8 +19,8 @@ The live docs are currently available at https://docs.wandisco.com/live-data-mig
 **Configuration**
 [LiveData Migrator](configuration-ldm.md)
 [LiveData UI](configuration-ui.md)
-[Environment Setup](configuration-env.md)
-=======
+[Metadata migrations](configuration-metadata.md)
+
 **Migrate metadata**
 * [Connect metastores](connect-metastores.md)
 * [Define metadata rules](define-metadata-rules.md)
