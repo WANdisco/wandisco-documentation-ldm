@@ -26,6 +26,10 @@ module.exports = {
               "type": "doc",
               "id": "license"
             }
+            {
+              "type": "doc",
+              "id": "uninstall"
+            }
           ]
         },
         {
