@@ -5,8 +5,9 @@ The live docs are currently available at https://docs.wandisco.com/live-data-mig
 **Installation**
 * [Prerequisites](prereqs.md)
 * [Install LiveData Migrator](installation.md)
+* [Uninstall a previous release](uninstall.md)
 
-[Before you start](get-started.md)
+[Get started](get-started.md)
 
 **Migrate data**
 * [Configure storage](configure-storage.md)
@@ -14,7 +15,6 @@ The live docs are currently available at https://docs.wandisco.com/live-data-mig
 * [Create a migration](create-migration.md)
 * [Manage migrations](manage-migrations.md)
 
-<<<<<<< HEAD
 **Configuration**
 [LiveData Migrator](configuration-ldm.md)
 [LiveData UI](configuration-ui.md)
