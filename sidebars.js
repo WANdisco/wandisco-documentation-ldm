@@ -25,7 +25,7 @@ module.exports = {
             {
               "type": "doc",
               "id": "license"
-            }
+            },
             {
               "type": "doc",
               "id": "uninstall"
@@ -53,7 +53,6 @@ module.exports = {
               "type": "doc",
               "id": "configure-exclusions"
             },
-
             {
               "type": "doc",
               "id": "manage-migrations"
@@ -96,7 +95,7 @@ module.exports = {
             {
               "type": "doc",
               "id": "migrate-metadata"
-            },
+            }
           ]
         },
         {
