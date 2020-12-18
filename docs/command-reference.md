@@ -1369,7 +1369,7 @@ OPTIONS
 #### Mandatory Parameters
 
 :::info
-The Azure hive agent requires a ADLS Gen2 storage account and container name, this is only for the purposes of generating the correct location for the database. The container will not be accessed by the Hive agent and no data will be written to the container.
+The Azure hive agent requires a ADLS Gen2 storage account and container name. This is only for the purposes of generating the correct location for the database. The container will not be accessed by the hive agent and no data will be written to the container.
 :::
 
 * **`--db-server-name`** The Azure SQL database server name. Only the name given to the server is required, the `.database.windows.net` suffix should be omitted.
@@ -1422,7 +1422,7 @@ No other parameters are required for a system-managed identity.
 
 ###### User-assigned identity
 
-The `--client-id` parameter must be specified:
+Specify the `--client-id` parameter:
 
 * **`--client-id`** The Client ID of your Azure managed identity.
 
@@ -1596,7 +1596,7 @@ hive agent add glue --name glueAgent --access-key ACCESS6HCFPAQIVZTKEY --secret-
 
 Add a hive agent to connect to a local or remote [Apache Hive](https://cwiki.apache.org/confluence/display/Hive/Home) metastore using the `hive agent add hive` command.
 
-Before deploying an agent, see our recommendations section on [enabling the Hive metastore event listener](./configuration-env.md#enable-hive-metastore-event-listener) for Apache Hive environments.
+Before deploying an agent, see our section on [enabling the Hive metastore event listener](./configuration-metadata.md#enable-hive-metastore-event-listener) for Apache Hive environments.
 
 :::info remote deployments
 When connecting to a remote Apache Hive metastore, specify a host on the remote cluster that will be used to communicate with the local LiveData Migrator server (constrained to a user-defined port).
