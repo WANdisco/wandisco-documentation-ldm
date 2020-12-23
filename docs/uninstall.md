@@ -1,10 +1,12 @@
 ---
 id: uninstall
-title: Uninstall a previous release
-sidebar_label: Uninstall a previous release
+title: Uninstall and upgrade LiveData Migrator
+sidebar_label: Uninstalling and upgrading
 ---
 
-Follow these steps to uninstall LiveData Migrator and all of its components.
+We recommend that you regularly upgrade LiveData Migrator so you can take advantage of new functionality and other improvements. To upgrade, uninstall your current version and then [install the new version](./installation.md).
+
+The following steps explain how to uninstall LiveData Migrator and its components.
 
 :::important
 Backup any configuration files that you wish to save (located in `/etc/wandisco`) before uninstalling LiveData Migrator.
@@ -14,10 +16,21 @@ If you are installing a newer release afterward, note the details of any current
 
 ## Stop all active migrations
 
-Stop all active migrations of data and/or metadata:
+Before uninstalling LiveData Migrator, stop all active migrations of data and/or metadata.
 
-* [UI](./operation-ui.md#manage-migrations)
-* [CLI: Data](./command-reference.md#migration-stop) / [CLI: Metadata](./command-reference.md#hive-migration-stop---all)
+* Stop migrations in the UI when [viewing the migration](./manage-migrations.md#manage-migrations-with-the-ui).
+
+* If you prefer to stop data migrations in the CLI, run the [stop migration](./command-reference.md#migration-stop) command:
+
+  ```text title="Example"
+  migration stop --migration-id <nigration-id>
+  ```
+
+* To stop metadata migrations, run the [stop metadata migration](./command-reference.md#hive-migration-stop---all) command:
+
+  ```text title="Example"
+  hive migration stop --names hive_migration1,hive_migration2
+  ```
 
 ## Uninstall LiveData Migrator
 
@@ -46,3 +59,7 @@ Stop all active migrations of data and/or metadata:
    ```text
    rm -rf /etc/wandisco /opt/wandisco /var/log/wandisco /var/run/wandisco
    ```
+
+## Next Steps
+
+[Install the latest version](./installation.md) of LiveData Migrator.
