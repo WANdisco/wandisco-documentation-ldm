@@ -26,7 +26,7 @@ These configuration properties are used to adjust general items of operation.
 
 ## SSH access
 
-These configuration properties govern whether and how access to LiveData Migrator is provided using the [SSH protocol](https://en.wikipedia.org/wiki/Secure_Shell). You can manage LiveData Migrator by enabling SSH access to the console interface (as an alternative to the [CLI connection method](./operation-cli.md#log-in)).
+These configuration properties govern whether and how access to LiveData Migrator is provided using the [SSH protocol](https://en.wikipedia.org/wiki/Secure_Shell). You can manage LiveData Migrator by enabling SSH access to the console interface (as an alternative to the [CLI connection method](./get-started.md#log-in-to-the-livedata-migrator-cli)).
 
 | Name | Details |
 | --- | --- |

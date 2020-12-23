@@ -27,15 +27,9 @@ module.exports = {
               "id": "license"
             },
             {
-<<<<<<< HEAD
               "type": "doc",
               "id": "uninstall"
             }
-=======
-             "type": "doc",
-             "id": "uninstall"
-           }
->>>>>>> 5ad0f5a2... Shona uninstall (#115)
           ]
         },
         {
@@ -137,6 +131,10 @@ module.exports = {
               "id": "jar"
             }
           ]
+        },
+        {
+          "type": "doc",
+          "id": "troubleshooting"
         }
       ]
     }

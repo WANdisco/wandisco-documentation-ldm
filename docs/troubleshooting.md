@@ -8,6 +8,20 @@ This article provides details on some of the issues you may face when installing
 
 Please ensure you have read the [Prerequisites](./prereqs.md) as if any of these items are missed, issues may be encountered.
 
+### Insufficient container permissions with an ADLS2 target filesystem when using OAuth2 authentication
+
+When creating or updating an ADLS2 target filesystem using the OAuth2 authentication protocol, you may have insufficient permission to guarantee a successful migration. This is usually because the Role Based Access Control on the service principal does not guarantee root access. In this case, the migration will fail to start (or resume) and issue a warning.
+
+To force the migration to start (or resume) despite the warning, update the ADLS2 filesystem with the following property and restart LiveData Migrator afterwards:
+
+```text="Property"
+fs.ignore-authentication-privileges=true
+```
+
+```text="Example Usage"
+filesystem update adls2 oauth -file-system-id targ  -properties fs.ignore-authentication-privileges=true
+```
+
 ## Notifications
 
 This article lists some common notifications that may be encountered during the deployment or use of LiveData Migrator.

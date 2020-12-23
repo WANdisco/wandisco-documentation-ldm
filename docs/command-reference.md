@@ -1596,7 +1596,7 @@ hive agent add glue --name glueAgent --access-key ACCESS6HCFPAQIVZTKEY --secret-
 
 Add a hive agent to connect to a local or remote [Apache Hive](https://cwiki.apache.org/confluence/display/Hive/Home) metastore using the `hive agent add hive` command.
 
-Before deploying an agent, see our section on [enabling the Hive metastore event listener](./configuration-metadata.md#enable-hive-metastore-event-listener) for Apache Hive environments.
+Before deploying an agent, see our recommendations section on [enabling the Hive metastore event listener](./configuration-metadata.md#enable-hive-metastore-event-listener) for Apache Hive environments.
 
 :::info remote deployments
 When connecting to a remote Apache Hive metastore, specify a host on the remote cluster that will be used to communicate with the local LiveData Migrator server (constrained to a user-defined port).
@@ -2391,7 +2391,7 @@ license upload --path /user/hdfs/license.key
 Connect to the LiveData Migrator service on your LiveData Migrator host with this command.
 
 :::note
-This is a manual method of connecting to the LiveData Migrator service as the `livedata-migrator --host=localhost` command (shown in the [CLI - Log in](./operation-cli.md#log-in) section) will attempt to establish this connection automatically.
+This is a manual method of connecting to the LiveData Migrator service as the `livedata-migrator --host=localhost` command (shown in [CLI - Log in](./get-started.md)) will attempt to establish this connection automatically.
 :::
 
 ```text title="connect livemigrator"
@@ -2441,7 +2441,7 @@ connect livemigrator --host localhost --port 18080
 Connect to the HiveMigrator service on your LiveData Migrator host with this command.
 
 :::note
-This is a manual method of connecting to the HiveMigrator service as the `livedata-migrator --host=localhost` command (shown in the [CLI - Log in](./operation-cli.md#log-in) section) will attempt to establish this connection automatically.
+This is a manual method of connecting to the HiveMigrator service as the `livedata-migrator --host=localhost` command (shown in [CLI - Log in](./get-started.md) section) will attempt to establish this connection automatically.
 :::
 
 ```text title="connect hivemigrator"

@@ -20,17 +20,20 @@ The live docs are currently available at https://docs.wandisco.com/live-data-mig
 * [Connect metastores](connect-metastores.md)
 * [Define metadata rules](define-metadata-rules.md)
 * [Create a metadata migration](migrate-metadata.md)
+* [Bandwidth management](manage-bandwidth.md)
 
 **Common use cases**
 * [On-premises Hadoop to Azure HDI](uc-on-prem-hadoop-hdi.md)
 
 **Configuration**
-* [LiveData Migrator](configuration-ldm.md)
-* [LiveData UI](configuration-ui.md)
-* [Metadata migrations](configuration-metadata.md)
+* [Configuring LiveData Migrator](configuration-ldm.md)
+* [Configuring LiveData UI](configuration-ui.md)
+* [Configuring your environment](configuration-metadata.md)
 
 **Reference**
 
 * [Command Reference](command-reference.md)
 * [API Reference](api-reference.md)
 * [LiveData Migrator Jar](jar.md)
+
+[Troubleshooting](troubleshooting.md)
