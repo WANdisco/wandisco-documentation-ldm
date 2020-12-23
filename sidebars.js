@@ -127,6 +127,10 @@ module.exports = {
               "id": "jar"
             }
           ]
+        },
+        {
+          "type": "doc",
+          "id": "troubleshooting"
         }
       ]
     }
