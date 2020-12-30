@@ -23,13 +23,13 @@ Before uninstalling LiveData Migrator, stop all active migrations of data and/or
 * If you prefer to stop data migrations in the CLI, run the [stop migration](./command-reference.md#migration-stop) command:
 
   ```text title="Example"
-  migration stop --migration-id <nigration-id>
+  migration stop --migration-id <migration-id>
   ```
 
 * To stop metadata migrations, run the [stop metadata migration](./command-reference.md#hive-migration-stop---all) command:
 
   ```text title="Example"
-  hive migration stop --names hive_migration1,hive_migration2
+  hive migration stop --all
   ```
 
 ## Uninstall LiveData Migrator
