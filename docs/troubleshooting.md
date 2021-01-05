@@ -8,7 +8,7 @@ This article details issues that you may face when installing and using LiveData
 
 Please ensure you have read the [Prerequisites](./prereqs.md) as you may experience problems if you miss any of these requirements.
 
-### Insufficient container permissions with an ADLS2 target filesystem when using OAuth2 authentication
+## Insufficient container permissions with an ADLS2 target filesystem when using OAuth2 authentication
 
 When creating or updating an ADLS2 target filesystem using the OAuth2 authentication protocol, you may have insufficient permission to guarantee a successful migration. This is usually because the Role Based Access Control on the service principal does not guarantee root access. In this case, the migration will fail to start (or resume) and issue a warning.
 
