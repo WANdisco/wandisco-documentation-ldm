@@ -4,9 +4,9 @@ title: Troubleshooting
 sidebar_label: Troubleshooting
 ---
 
-This article provides details on some of the issues you may face when installing and using LiveData Migrator, and provides steps to help you resolve these problem.
+This article details issues that you may face when installing and using LiveData Migrator. Follow the provided steps if you encounter these issues.
 
-Please ensure you have read the [Prerequisites](./prereqs.md) as if any of these items are missed, issues may be encountered.
+Please ensure you have read the [Prerequisites](./prereqs.md) as you may experience problems if you miss any of these requirements.
 
 ### Insufficient container permissions with an ADLS2 target filesystem when using OAuth2 authentication
 
@@ -25,7 +25,7 @@ filesystem update adls2 oauth -file-system-id targ  -properties fs.ignore-authen
 
 ## Notifications
 
-This article lists some common notifications that may be encountered during the deployment or use of LiveData Migrator.
+Below are some of the most common notifications that you may encounter during the deployment or use of LiveData Migrator.
 
 ### LiveMigratorPanicNotification
 
@@ -41,7 +41,7 @@ Any issue triggering this notification will cause the application to shut down w
 
 ### HighPendingRegionNotification
 
-When folders are moved or modified in a migrating directory during a migration, these are logged as pending regions. Exceeding the configured maximum number of pending regions during a migration will cause it to automatically abort.
+When directories are migrated, moved or modified they are logged as pending regions. Exceeding the configured maximum number of pending regions, during migration, will cause the migration to abort.
 
 This issue can be resolved by raising the maximum number of pending regions in the migration.
 
