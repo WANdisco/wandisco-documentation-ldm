@@ -50,7 +50,7 @@ module.exports = {
       contextualSearch: true,
 
       // Optional: Algolia search parameters
-      //searchParameters: {},
+      searchParameters: {},
     },
     footer: {
       style: 'dark',
