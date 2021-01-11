@@ -42,6 +42,16 @@ module.exports = {
         },
       ],
     },
+    algolia: {
+      apiKey: '113b7a18a22b690636954bfeced8c1ad',
+      indexName: 'wandisco-live-data-migrator',
+
+      // Optional: see doc section bellow
+      contextualSearch: true,
+
+      // Optional: Algolia search parameters
+      searchParameters: {},
+    },
     footer: {
       style: 'dark',
       copyright: `Copyright © ${new Date().getFullYear()} WANdisco Inc.`,
