@@ -42,8 +42,7 @@ Ready to install? Check the [prerequisites](./prereqs.md) and then follow these 
    service livedata-ui status
    ```
 
-   ---
-   **NOTE**
+:::note
 
    The default user used in the above processes is `hdfs`. To install and deploy the LiveData Migrator service as a different user, update the `USERNAME` and `GROUPNAME` environment variables stored in `/etc/wandisco/livedata-migrator/vars.env`.
 
@@ -51,7 +50,7 @@ Ready to install? Check the [prerequisites](./prereqs.md) and then follow these 
 
    `systemctl edit livedata-migrator`
 
-   ---
+:::
 
 ## Next Steps
 
