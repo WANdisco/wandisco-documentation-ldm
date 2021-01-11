@@ -43,8 +43,8 @@ module.exports = {
       ],
     },
     algolia: {
-      apiKey: 'YOUR_API_KEY',
-      indexName: 'YOUR_INDEX_NAME',
+      apiKey: '113b7a18a22b690636954bfeced8c1ad',
+      indexName: 'wandisco-live-data-migrator',
 
       // Optional: see doc section bellow
       contextualSearch: true,
