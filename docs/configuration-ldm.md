@@ -122,6 +122,10 @@ Each file system supported by LiveData Migrator can apply properties defined usi
 | `gcs.fs.type.default.properties` | A comma-separated list of default properties to apply to GCS resources on creation.<br/><br/>**Default value**: `bucket.name`<br/>**Allowed values**: Any comma-separated list of valid GCS configuration properties |
 | `local.fs.type.default.properties` | A comma-separated list of default properties to apply to local file system resources on creation.<br/><br/>**Default value**: `fs.root`<br/>**Allowed values**: Any comma-separated list of valid S3A configuration properties |
 
+## HDFS Marker Storage
+
+LiveData Migrator 
+
 ## HDFS inotify
 
 LiveData Migrator will poll the Hadoop cluster for NameNode events using the [HDFS inotify](https://hadoop.apache.org/docs/r3.2.0/api/org/apache/hadoop/hdfs/inotify/package-summary.html) system. These properties can be added and configured to change the default poll periods.
