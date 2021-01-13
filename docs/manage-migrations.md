@@ -69,3 +69,6 @@ Migrations can be in one of eight states:
 
 `ABORTED`
 : An *aborted* migration will not make any changes to the target and cannot be run again.
+
+`COMPLETED`
+: A *completed* migration has scanned through all source content and finished transferring all applicable data to the target filesystem, and has ignored any updates to the source data.
