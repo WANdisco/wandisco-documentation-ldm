@@ -1391,7 +1391,7 @@ hive agent add filesystem --filesystem-id myfilesystem --root-folder /var/lib/my
 
 ### `hive agent add glue`
 
-Add an [AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/populate-data-catalog.html) hive agent to connect to an [AWS-hosted database](https://docs.aws.amazon.com/whitepapers/latest/aws-overview/database.html) using the `hive agent add glue` command.
+Add an [AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html) hive agent to connect to an [AWS Glue data catalog](https://docs.aws.amazon.com/glue/latest/dg/populate-data-catalog.html) using the `hive agent add glue` command.
 
 ```text title="Add AWS Glue agent"
 SYNOPSYS
@@ -1431,7 +1431,7 @@ OPTIONS
                 [Optional, default = <nothing>]
 
         --default-fs  string
-                base URI of the filesystem to rewrite LOCATION strings into. I.e. s3:///test_bucket/
+                base URI of the filesystem to rewrite LOCATION strings into. I.e. s3://test_bucket/
                 [Optional, default = <nothing>]
 ```
 
@@ -1445,12 +1445,12 @@ OPTIONS
 * **`--glue-endpoint`** The [AWS Glue endpoint](https://docs.aws.amazon.com/glue/latest/dg/console-connections.html?icmpid=docs_glue_console) for connections to databases.
 * **`--aws-region`** The [AWS region](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) that your database is located in (default is `us-east-1`).
 * **`--aws-catalog-credentials-provider-factory-class`** The [AWS catalog credentials provider factory class](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-specify-provider) (default is [DefaultAWSCredentialsProviderChain](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/index.html?com/amazonaws/auth/DefaultAWSCredentialsProviderChain.html)).
-* **`--default-fs`** The base URI of the filesystem to generate the locations within the database (for example: `s3:///test_bucket/`).
+* **`--default-fs`** The base URI of the filesystem to generate the locations within the database (for example: `s3://test_bucket/`).
 
 #### Example
 
 ```text
-hive agent add glue --name glueAgent --access-key ACCESS6HCFPAQIVZTKEY --secret-key SECRET1vTMuqKOIuhET0HAI78UIPfSRjcswTKEY --aws-region eu-west-1 --default-fs s3:///test_bucket/
+hive agent add glue --name glueAgent --access-key ACCESS6HCFPAQIVZTKEY --secret-key SECRET1vTMuqKOIuhET0HAI78UIPfSRjcswTKEY --aws-region eu-west-1 --default-fs s3://test_bucket/
 ```
 
 ### `hive agent add hive`
