@@ -4,19 +4,17 @@ title: Connect metastores for metadata migrations (preview)
 sidebar_label: Connect metastores
 ---
 
-The **1.8.3** version of LiveData Migrator includes a **preview** of a feature that migrates metadata between metastores. Metadata can be migrated from [Apache Hive](https://cwiki.apache.org/confluence/display/Hive/Home) and [AWS Glue](https://aws.amazon.com/glue/?whats-new-cards.sort-by=item.additionalFields.postDateTime&whats-new-cards.sort-order=desc).
+The **1.8.3** version of LiveData Migrator includes a **preview** of a feature that migrates metadata. Metadata can be migrated from [Apache Hive](https://cwiki.apache.org/confluence/display/Hive/Home) and [AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/populate-data-catalog.html).
 
 Ready to migrate metadata? First, connect to your metastores by adding Hive agents. Then, [define metadata rules](./define-metadata-rules.md) before [migrating metadata](./migrate-metadata.md).
 
 :::note
-Metadata migration functionality is only available when using the CLI. [Read the release notes](https://community.wandisco.com/s/article/WANdisco-LiveData-Migrator-Release-Notes-1-8-3) for more details about metadata migration in LiveData Migrator.
+Metadata migration functionality is only available when using the CLI. [Read the release notes](https://community.wandisco.com/s/article/WANdisco-LiveData-Migrator-Release-Notes-1-8-3) for more details about migrating metadata with LiveData Migrator.
 :::
 
 ## Add hive agents
 
-Add hive agents to provide HiveMigrator with the information needed to read content from your source metastore/database and migrate content to your target metastore/database.
-
-Metadata can be migrated in any direction between these supported metastore and database formats.
+Add hive agents to connect your source and target metastores.
 
 | Command | Action |
 |:---|:---|
@@ -38,7 +36,7 @@ Metadata can be migrated in any direction between these supported metastore and 
 
 | Command | Action |
 |:---|:---|
-| [`hive agent check`](./command-reference.md#hive-agent-check) | Check whether the hive agent can connect to the metastore or database |
+| [`hive agent check`](./command-reference.md#hive-agent-check) | Check whether the hive agent can connect to the metastore |
 | [`hive agent delete`](./command-reference.md#hive-agent-delete) | Delete a hive agent |
 | [`hive agent list`](./command-reference.md#hive-agent-list) | List all configured hive agents |
 | [`hive agent show`](./command-reference.md#hive-agent-show) | Show the configuration for a hive agent |
@@ -46,4 +44,4 @@ Metadata can be migrated in any direction between these supported metastore and 
 
 ## Next Steps
 
-Connected to your metastores and databases? [Define metadata rules](./define-metadata-rules.md) for your metadata migrations.
+Connected to your metastores? [Define metadata rules](./define-metadata-rules.md) for your metadata migrations.
