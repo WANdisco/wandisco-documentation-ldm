@@ -4,16 +4,30 @@ title: Configure exclusions
 sidebar_label: Configure exclusions
 ---
 
-Exclusions prevent certain file sizes or file names (defined using [regex](https://regexr.com/) patterns) from your data migrations. Exclusion templates are associated with a storage, allowing you to selectively ignore content during migration when that storage is used as the source.
+Exclusions prevent certain file sizes or file names (defined using [regex](https://regexr.com/) patterns) from being moved during your data migrations. Exclusion templates are associated with a storage, allowing you to selectively ignore content during migration when that storage is used as the source.
 
 Use the [UI](#configure-exclusions-with-the-ui) or the [CLI](#configure-exclusions-with-the-cli) to configure exclusions.
+
+## Default Exclusions
+
+When you create a new migration, three default exclusions are added to it. These can be removed from the migration, but not from the system or the templates list.
+
+These default exclusions are as follows:
+
+| Exclusion | Directory |
+|:---|:---|
+| Hive Staging directories | (/\|/.\*/).hive-staging.* |
+| Spark Staging directories | (/\|/.\*/).spark-staging-.* |
+| Spark Temporary directories | (/\|/.\*/)_temporary.* |
+
+These directories are used to store temporary files that are regularly altered during a migration. They are deleted automatically after a migration is complete, and are excluded by default to avoid errors.
 
 ## Configure exclusions with the UI
 
 Assign exclusions to new or existing migrations.
 
 :::note
-Default exclusions will automatically apply to certain storages depending on the platform. For example, ADLS storage types have a maximum individual file size limit of 4.55TiB.
+Default exclusions will automatically apply to certain storages depending on the platform. For example, ADLS storage types have a maximum individual file size limit of 4.55TiB, and any files larger will be automatically excluded.
 :::
 
 ### Add new exclusions
@@ -38,6 +52,10 @@ Once the exclusion is added and passed validation, it appears on the exclusion l
 
 :::note
 This will not remove the exclusion from an existing migration. See the [Remove exclusions from an existing migration](#remove-exclusions-from-an-existing-migration) section for guidance on how to do this.
+:::
+
+:::note
+You cannot remove [default exclusions](#default-exclusions) from the templates list, but you may remove them from an existing migration.
 :::
 
 ## Configure exclusions with the CLI
