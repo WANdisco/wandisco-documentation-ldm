@@ -52,3 +52,36 @@ Follow the command links to learn how to set the parameters and see examples.
 1. If you don't have auto-start enabled, manually start the migration:
 
    [`migration run`](./command-reference.md#migration-run)
+
+## Create a non-live migration
+
+A non-live migration is a migration that does not track client activity: if files are changed during the migration process, no pending regions will be created. There are two ways to create a non-live migration:
+
+1. Start a migration with a [non-live source file system](#create-a-non-live-source-file-system)
+1. Specify the [`scanOnly` flag](#specify-the-scanonly-flag-during-migration-creation) during migration creation
+
+:::note
+A non-live migration does not read events from the source file system, and does not write a marker file to the source file system. Once the scan of the source file system completes (to determine which files and directories are to be migrated), the migration will enter a `COMPLETED` [data migration state](./manage-migrations.md/#data-migration-states) and carry out no further scanning.
+:::
+
+### Create a non-live source file system
+
+LiveData Migrator will only perform *read* tasks on a non-live source, and will not check the source for modifications to data during transfer. Any migration that uses a non-live source will automatically become a non-live migration, and will have the `scanOnly` flag applied.
+
+To create a non-live source, add the `scanOnly` flag during source creation:
+
+```text="Code"
+filesystem add hdfs --source --scanOnly ...
+```
+
+:::note
+The account used to connect to a non-live source only requires read access. Write access is not necessary.
+:::
+
+### Specify the scanOnly flag during migration creation
+
+To create a non-live migration without creating a non-live source file system, simply add the `scanOnly` flag during migration creation:
+
+```text="Code"
+migration add --scanOnly ...
+```
