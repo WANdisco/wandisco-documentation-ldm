@@ -20,7 +20,7 @@ These default exclusions are as follows:
 | Spark Staging directories | (/\|/.\*/).spark-staging-.* |
 | Spark Temporary directories | (/\|/.\*/)_temporary.* |
 
-These directories are used by Hive or Spark respectively to stage files while they are being processed during a migration. They are automatically cleaned up by Hive or Spark after a migration is complete, and are excluded by default to avoid errors.
+These directories are used by Hive or Spark respectively to stage files while they are being processed during a migration. These are automatically deleted by Hive or Spark after use, and are excluded by default to avoid errors.
 
 ## Configure exclusions with the UI
 
