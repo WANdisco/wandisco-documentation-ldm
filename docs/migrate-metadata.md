@@ -4,7 +4,7 @@ title: Create a metadata migration (preview)
 sidebar_label: Create a metadata migration
 ---
 
-Migrate metadata from your source metastore/database to a target metastore/database using the `hive migration` command. Migrations will transfer existing metadata, as well as any subsequent changes made to the source metadata (in its scope), while HiveMigrator keeps working.
+Migrate metadata from your source metastore to a target metastore using the `hive migration` command. Migrations will transfer existing metadata, as well as any subsequent changes made to the source metadata (in its scope), while HiveMigrator keeps working.
 
 ## Create a metadata migration
 

@@ -1391,7 +1391,7 @@ hive agent add filesystem --filesystem-id myfilesystem --root-folder /var/lib/my
 
 ### `hive agent add glue`
 
-Add an [AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html) hive agent to connect to an [AWS-hosted database](https://docs.aws.amazon.com/whitepapers/latest/aws-overview/database.html) using the `hive agent add glue` command.
+Add an [AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/populate-data-catalog.html) hive agent to connect to an [AWS-hosted database](https://docs.aws.amazon.com/whitepapers/latest/aws-overview/database.html) using the `hive agent add glue` command.
 
 ```text title="Add AWS Glue agent"
 SYNOPSYS
@@ -1884,7 +1884,7 @@ hive rule show --name test_databases
 
 ### `hive migration add`
 
-Create a new hive migration to initiate metadata migration from your source database or metastore.
+Create a new hive migration to initiate metadata migration from your source metastore.
 
 :::info
 [Create hive rules](#hive-rule-addhive-rule-create) before initiating a hive migration to specify which databases and tables are migrated.
