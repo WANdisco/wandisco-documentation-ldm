@@ -5,10 +5,10 @@ const currentVersion = '1.8.3';
 module.exports = {
   title: 'LiveData Migrator',
   tagline: 'WANdisco LiveData Migrator Documentation',
-  url: 'https://wandisco.github.io/wandisco-documentation-ldm/',
+  url: 'https://docs.wandisco.com/live-data-migrator/',
   //url: 'http://localhost/',
-  baseUrl: '/wandisco-documentation-ldm/',
-  //baseUrl: '/',
+  //baseUrl: '/wandisco-documentation-ldm/',
+  baseUrl: process.env.NODE_ENV === 'development' ? '/live-data-migrator/' : '/',
   favicon: 'img/favicon.png',
   organizationName: 'wandisco', // Usually your GitHub org/user name.
   projectName: 'wandisco-documentation-ldm', // Usually your repo name.
@@ -50,7 +50,9 @@ module.exports = {
       contextualSearch: true,
 
       // Optional: Algolia search parameters
-      //searchParameters: {},
+      //searchParameters: {
+      //  facetFilters: []
+      //},
     },
     footer: {
       style: 'dark',
