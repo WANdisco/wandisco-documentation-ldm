@@ -1,6 +1,7 @@
 const versions = require('./versions.json');
 
 const currentVersion = '1.8.3';
+const baseUrl = process.env.NODE_ENV === 'development' ? '/live-data-migrator/' : '/';
 
 module.exports = {
   title: 'LiveData Migrator',
@@ -8,7 +9,7 @@ module.exports = {
   url: 'https://docs.wandisco.com/live-data-migrator/',
   //url: 'http://localhost/',
   //baseUrl: '/wandisco-documentation-ldm/',
-  baseUrl: process.env.NODE_ENV === 'development' ? '/live-data-migrator/' : '/',
+  baseUrl,
   favicon: 'img/favicon.png',
   organizationName: 'wandisco', // Usually your GitHub org/user name.
   projectName: 'wandisco-documentation-ldm', // Usually your repo name.
@@ -47,7 +48,7 @@ module.exports = {
       indexName: 'wandisco-live-data-migrator',
 
       // Optional: see doc section bellow
-      contextualSearch: true,
+      contextualSearch: false,
 
       // Optional: Algolia search parameters
       //searchParameters: {
