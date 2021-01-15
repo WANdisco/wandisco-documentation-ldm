@@ -4,7 +4,7 @@ title: Define metadata rules (preview)
 sidebar_label: Define metadata rules
 ---
 
-Once you have [connected your metastores and databases](./connect-metastores.md), define the metadata rules that determine the metadata you want to migrate.
+Once you have [connected your metastores](./connect-metastores.md), define the metadata rules that determine the metadata you want to migrate.
 
 ## Add hive rules
 
@@ -36,7 +36,7 @@ hive rule show --name DEFAULT
 }
 ```
 
-When [creating a metadata migration](./migrate-metadata.md), use the default rule to migrate all of your metastore/database content or define and use new rules to migrate a selection of databases and tables.
+When [creating a metadata migration](./migrate-metadata.md), use the default rule to migrate all of your metastore content or define and use new rules to migrate a selection of databases and tables.
 
 ## Configure existing hive rules
 
