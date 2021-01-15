@@ -200,6 +200,8 @@ OPTIONS
         --properties  string
                 Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
                 [Optional, default = <nothing>]
+
+
 ```
 
 #### Mandatory Parameters
@@ -361,6 +363,11 @@ OPTIONS
         --properties  string
                 Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
                 [Optional, default = <nothing>]
+
+        --scanOnly
+                Flags the filesystem as a non-live source file system, meaning it will not be checked for changes to data during a migration. Any migrations created with this filesystem as a source will automatically become non-live migrations.
+                [Optional, default = false]
+                [Requires --source]
 ```
 
 #### Mandatory Parameters
@@ -393,6 +400,7 @@ See the links below for guidance for common Hadoop distributions:
 * **`--source`** Provide this parameter to use the file system resource created as a source.  This is referenced in the UI when configuring the _Unknown source_.
 * **`--properties-files`** Reference a list of existing properties files that contain Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.  This is referenced in the UI as **Provide a path to files** under the _Additional Configuration_ option.
 * **`--properties`** Specify properties to use in a comma-separated key/value list. This is referenced in the UI as **Additional Configuration** under the _Additional Configuration_ option.
+* **`--scanOnly`** Flags the filesystem as a [non-live source file system](./create-migration.md/#create-a-non-live-source-file-system). *Only works with a source filesystem*.
 
 ##### Properties files are required for NameNode HA
 
@@ -1081,6 +1089,10 @@ OPTIONS
 
         --auto-start
                 [Optional, default = false]
+
+        --scanOnly
+                Flags the migration as a non-live migration. The migration will not check the source for modifications during data transfer.
+                [Optional, default = false]
 ```
 
 #### Mandatory Parameters
@@ -1099,6 +1111,7 @@ OPTIONS
      Every file is replaced, even if file size is identical on the target storage. This is referenced in the UI as **Overwrite**.
   1. **`com.wandisco.livemigrator2.migration.SkipIfSizeMatchActionPolicy`**  
      If the file size is identical between the source and target, the file is skipped. If it’s a different size, the whole file is replaced. This is referenced in the UI as **Skip if Size Match**.
+* **`--scanOnly`** Flags the migration as a [non-live migration](./create-migration.md/#create-a-non-live-migration).
 
 #### Example
 
