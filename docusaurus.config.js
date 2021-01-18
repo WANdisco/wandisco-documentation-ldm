@@ -5,9 +5,9 @@ const currentVersion = 'TBA';
 module.exports = {
   title: 'LiveData Migrator',
   tagline: 'WANdisco LiveData Migrator Documentation',
-  url: 'https://docs.wandisco.com/live-data-migrator/',
+  url: 'https://wandisco.github.io/wandisco-documentation-ldm/',
   //url: 'http://localhost/',
-  baseUrl: '/',
+  baseUrl: '/wandisco-documentation-ldm/',
   //baseUrl,
   favicon: 'img/favicon.png',
   organizationName: 'wandisco', // Usually your GitHub org/user name.
