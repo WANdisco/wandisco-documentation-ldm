@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://docs.wandisco.com/live-data-migrator/blog</id>
+    <id>https://wandisco.github.io/wandisco-documentation-ldm/blog</id>
     <title>LiveData Migrator Blog</title>
     <updated>2015-10-25T23:29:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://docs.wandisco.com/live-data-migrator/blog"/>
+    <link rel="alternate" href="https://wandisco.github.io/wandisco-documentation-ldm/blog"/>
     <subtitle>LiveData Migrator Blog</subtitle>
-    <icon>https://docs.wandisco.com/live-data-migrator/img/favicon.png</icon>
+    <icon>https://wandisco.github.io/wandisco-documentation-ldm/img/favicon.png</icon>
 </feed>
