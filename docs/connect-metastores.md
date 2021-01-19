@@ -20,7 +20,7 @@ Add hive agents to connect your source and target metastores.
 |:---|:---|
 | [`hive agent add azure`](./command-reference.md#hive-agent-add-azure) | Add a hive agent for an Azure SQL database server |
 | [`hive agent add filesystem`](./command-reference.md#hive-agent-add-filesystem) | Add a hive agent for a local filesystem |
-| [`hive agent add glue`](./command-reference.md#hive-agent-add-glue) | Add a hive agent for an AWS-hosted database server |
+| [`hive agent add glue`](./command-reference.md#hive-agent-add-glue) | Add a hive agent for an AWS Glue Data Catalog |
 | [`hive agent add hive`](./command-reference.md#hive-agent-add-hive) | Add a hive agent for a local or remote Apache Hive metastore |
 
 ## Configure existing hive agents
@@ -29,7 +29,7 @@ Add hive agents to connect your source and target metastores.
 |:---|:---|
 | [`hive agent configure azure`](./command-reference.md#hive-agent-configure-azure) | Change the configuration of an existing hive agent for the Azure SQL database server |
 | [`hive agent configure filesystem`](./command-reference.md#hive-agent-configure-filesystem) | Change the configuration of an existing hive agent for the local filesystem |
-| [`hive agent configure glue`](./command-reference.md#hive-agent-configure-glue) | Change the configuration of an existing hive agent for the AWS-hosted database server |
+| [`hive agent configure glue`](./command-reference.md#hive-agent-configure-glue) | Change the configuration of an existing hive agent for the AWS Glue Data Catalog |
 | [`hive agent configure hive`](./command-reference.md#hive-agent-configure-hive) | Change the configuration of an existing hive agent for the Apache Hive metastore |
 
 ## Manage hive agents
