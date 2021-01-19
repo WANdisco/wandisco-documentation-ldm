@@ -24,14 +24,6 @@ Do you have an older version already installed? If so, perform the steps in the 
    chmod +x livedata-migrator.sh && ./livedata-migrator.sh
    ```
 
-   If you're migrating from HDFS, install LiveData Migrator on an edge node in the Hadoop cluster using the HDFS superuser.
-
-   ```text title="Example for HDFS superuser"
-   su - hdfs
-
-   chmod +x livedata-migrator.sh && sudo ./livedata-migrator.sh
-   ```
-
 1. Check the service statuses with these commands:
 
    ```text
