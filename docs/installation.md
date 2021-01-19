@@ -20,14 +20,6 @@ Ready to install? Check the [prerequisites](./prereqs.md) and then follow these 
    chmod +x livedata-migrator.sh && ./livedata-migrator.sh
    ```
 
-   If you're migrating from HDFS, install LiveData Migrator on an edge node in the Hadoop cluster using the HDFS superuser.
-
-   ```text title="Example for HDFS superuser"
-   su - hdfs
-
-   chmod +x livedata-migrator.sh && sudo ./livedata-migrator.sh
-   ```
-
 1. Check the service statuses with these commands:
 
    ```text
