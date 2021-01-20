@@ -56,6 +56,6 @@ Follow the command links to learn how to set the parameters and see examples.
 
 ### Create a non-live migration
 
-It's possible to create a migration that does not track client activity: if files are changed during the migration process, they will not be re-scanned by LiveData Migrator.
+Create a non-live migration if you do not want LiveData Migrator to scan for changes to your data during a migration. These migrations do not require you to have write access to the source filesystem, nor do they require you to operate the migration as the `hdfs` user.
 
-For more information, see [create a non-live migration](./non-live-migration.md).
+To create a non-live migration, see [create a non-live migration](./non-live-migration.md).
