@@ -373,7 +373,7 @@ OPTIONS
 #### Mandatory Parameters
 
 * **`--file-system-id`** The identifier to give the new file system resource. This is referenced in the UI as **Storage Name**.
-* **`--fs.defaultFS`** A string that defines how LiveData Migrator accesses HDFS. This is referenced in the UI as **Default FS**.  
+* **`--default-fs`** A string that defines how LiveData Migrator accesses HDFS. This is referenced in the UI as **Default FS**.  
   It can be specified in a number of forms:
   1. As a single HDFS URI, such as `hdfs://192.168.1.10:8020` (using an IP address) or `hdfs://myhost.localdomain:8020` (using a hostname).
   1. As an HDFS URI that references a nameservice ID defined in the cluster properties, like `hdfs://mynameservice`, where there is a configuration property for the cluster that defines the value of the `dfs.nameservices` value to include that nameservice ID, like `mynameservice` and all required configuration properties for that nameservice, like `dfs.ha.namenodes.mynameservice`, `dfs.namenode.rpc-address.mynameservice.nn1`, and `dfs.namenode.http-address.mynameservice.nn1`, etc.
@@ -390,7 +390,7 @@ See the links below for guidance for common Hadoop distributions:
 
 * [CDH](https://docs.cloudera.com/documentation/enterprise/6/6.3/topics/cm_sg_kdc_def_domain_s2.html)
 * [CDP](https://docs.cloudera.com/cdp-private-cloud-base/7.1.5/security-kerberos-authentication/topics/cm-security-kerberos-authentication-kdc-cross-realm-trust.html)
-* [Red Hat](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system-level_authentication_guide/using_trusts)
+* [Red Hat](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system-level_authentication_guide/using_trusts) (Unmanaged)
 * [HDP](https://community.cloudera.com/t5/Community-Articles/Kerberos-cross-realm-trust-for-distcp/ta-p/245590)
 :::
 
@@ -439,11 +439,11 @@ If your Hadoop cluster has [NameNode HA enabled](https://hadoop.apache.org/docs/
 ##### HDFS as source
 
 ```text title="Example for source NameNode HA cluster"
-filesystem add hdfs --file-system-id mysource --source --fs.defaultFS hdfs://sourcenameservice --properties-files /etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml
+filesystem add hdfs --file-system-id mysource --source --default-fs hdfs://sourcenameservice --properties-files /etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml
 ```
 
 ```text title="Example for source NameNode HA cluster with Kerberos enabled"
-filesystem add hdfs --file-system-id mysource --source --fs.defaultFS hdfs://sourcenameservice --properties-files /etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml --kerberos-keytab /etc/security/keytabs/hdfs.headless.keytab --kerberos-principal hdfs@SOURCEREALM.COM
+filesystem add hdfs --file-system-id mysource --source --default-fs hdfs://sourcenameservice --properties-files /etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml --kerberos-keytab /etc/security/keytabs/hdfs.headless.keytab --kerberos-principal hdfs@SOURCEREALM.COM
 ```
 
 ##### HDFS as target
@@ -453,11 +453,11 @@ When specifying a HDFS filesystem as a target, the property files for the target
 :::
 
 ```text title="Example for target NameNode HA cluster with Kerberos enabled"
-filesystem add hdfs --file-system-id mytarget --fs.defaultFS hdfs://targetnameservice --properties-files /etc/targetClusterConfig/core-site.xml,/etc/targetClusterConfig/hdfs-site.xml --kerberos-keytab /etc/security/keytabs/hdfs.headless.keytab --kerberos-principal hdfs@SOURCEREALM.COM
+filesystem add hdfs --file-system-id mytarget --default-fs hdfs://targetnameservice --properties-files /etc/targetClusterConfig/core-site.xml,/etc/targetClusterConfig/hdfs-site.xml --kerberos-keytab /etc/security/keytabs/hdfs.headless.keytab --kerberos-principal hdfs@SOURCEREALM.COM
 ```
 
 ```text title="Example for target single NameNode cluster"
-filesystem add hdfs --file-system-id mytarget --fs.defaultFS hdfs://namenode.targetdomain:8020 --user hdfs
+filesystem add hdfs --file-system-id mytarget --default-fs hdfs://namenode.targetdomain:8020 --user hdfs
 ```
 
 ----
