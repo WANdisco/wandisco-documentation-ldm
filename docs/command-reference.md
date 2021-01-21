@@ -454,6 +454,75 @@ filesystem add hdfs --file-system-id mytarget --default-fs hdfs://namenode.targe
 
 ----
 
+### `filesystem add local`
+
+Add a Hadoop Compatible local filesystem as either a migration target or source using the `filesystem add local` command.
+
+```text title="Add a Local FileSystem via HCFS API."
+SYNOPSYS
+        filesystem add local [--file-system-id] string
+                                       [[--fs-root] string]
+                                       [--source]
+                                       [--scan-only]
+                                       [[--properties-files] list]
+                                       [[--properties] string]
+
+OPTIONS
+        --file-system-id  string
+                Name of the filesystem
+                [Mandatory]
+
+        --fs-root  string
+                Location in the local filesystem to chroot to
+                [Optional, default = <none>]
+
+        --source
+                Add this filesystem as a source for migrations
+                [Optional, default = false]
+
+        --scan-only
+                [Optional, default = false]
+
+        --properties-files  list
+                Load properties from these files
+                [Optional, default = <nothing>]
+
+        --properties  string
+                Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
+                [Optional, default = <nothing>]
+```
+
+#### Mandatory Parameters
+
+* **`--file-system-id`** The identifier to give the new file system resource. This is referenced in the UI as **Storage Name**.
+
+#### Optional Parameters
+
+* **`--fs-root`** The directory in the local filesystem to scan for data or send data to, depending on whether the filesystem is defined as a source or a target. Should be supplied using the full directory path from the root.
+* **`--source`** Provide this parameter to use the file system resource created as a source.  This is referenced in the UI when configuring the _Unknown source_.
+* **`--scan-only`** Provide this parameter to create a non-live source filesysytem for use in non-live migrations. Requires `--source`.
+* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
+* **`--properties`** Specify properties to use in a comma-separated key/value list.
+
+:::note
+  If no `fs-root` is specified, the file path will default to the root of your system.
+:::
+
+#### Examples
+
+##### Local filesystem as source
+
+```text
+filesystem add local --file-system-id mytarget --fs-root ./tmp --source
+```
+##### Local filesystem as a target
+
+```text
+filesystem add local --file-system-id mytarget --fs-root ./Users/username/destinationfolder/
+```
+
+----
+
 ### `filesystem add s3a`
 
 Add an S3 bucket as a target file system using the `filesystem add s3a` command. This method also supports IBM COS buckets.
@@ -890,9 +959,6 @@ OPTIONS
 
 * **`--file-system-id`** The identifier of the file system resource to update. This is referenced in the UI as **Storage Name**.
 
-
-
-
 #### Optional Parameters
 
 * **`--bucket-name`** The bucket name of a Google Cloud Storage account. This is referenced in the UI as **Bucket Name**.
@@ -1039,11 +1105,11 @@ If your Hadoop cluster has [NameNode HA enabled](https://hadoop.apache.org/docs/
 ##### HDFS as source
 
 ```text title="Example for source NameNode HA cluster"
-filesystem add hdfs --file-system-id mysource --source --default-fs hdfs://sourcenameservice --properties-files /etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml
+filesystem update hdfs --file-system-id mysource --source --default-fs hdfs://sourcenameservice --properties-files /etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml
 ```
 
 ```text title="Example for source NameNode HA cluster with Kerberos enabled"
-filesystem add hdfs --file-system-id mysource --source --default-fs hdfs://sourcenameservice --properties-files /etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml --kerberos-keytab /etc/security/keytabs/hdfs.headless.keytab --kerberos-principal hdfs@SOURCEREALM.COM
+filesystem update hdfs --file-system-id mysource --source --default-fs hdfs://sourcenameservice --properties-files /etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml --kerberos-keytab /etc/security/keytabs/hdfs.headless.keytab --kerberos-principal hdfs@SOURCEREALM.COM
 ```
 
 ##### HDFS as target
@@ -1053,12 +1119,177 @@ When specifying a HDFS filesystem as a target, the property files for the target
 :::
 
 ```text title="Example for target NameNode HA cluster with Kerberos enabled"
-filesystem add hdfs --file-system-id mytarget --default-fs hdfs://targetnameservice --properties-files /etc/targetClusterConfig/core-site.xml,/etc/targetClusterConfig/hdfs-site.xml --kerberos-keytab /etc/security/keytabs/hdfs.headless.keytab --kerberos-principal hdfs@SOURCEREALM.COM
+filesystem update hdfs --file-system-id mytarget --default-fs hdfs://targetnameservice --properties-files /etc/targetClusterConfig/core-site.xml,/etc/targetClusterConfig/hdfs-site.xml --kerberos-keytab /etc/security/keytabs/hdfs.headless.keytab --kerberos-principal hdfs@SOURCEREALM.COM
 ```
 
 ```text title="Example for target single NameNode cluster"
-filesystem add hdfs --file-system-id mytarget --default-fs hdfs://namenode.targetdomain:8020 --user hdfs
+filesystem update hdfs --file-system-id mytarget --default-fs hdfs://namenode.targetdomain:8020 --user hdfs
 ```
+
+----
+
+### `filesystem update local`
+
+Update a target or source local filesystem using the `filesystem update local` command.
+
+```text title="Update a Local FileSystem via HCFS API."
+SYNOPSYS
+        filesystem update local [--file-system-id] string
+                                       [[--fs-root] string]
+                                       [--source]
+                                       [--scan-only]
+                                       [[--properties-files] list]
+                                       [[--properties] string]
+
+OPTIONS
+        --file-system-id  string
+                Name of the filesystem
+                [Mandatory]
+
+        --fs-root  string
+                Location in the local filesystem to chroot to
+                [Optional, default = <none>]
+
+        --source
+                Add this filesystem as a source for migrations
+                [Optional, default = false]
+
+        --scan-only
+                [Optional, default = false]
+
+        --properties-files  list
+                Load properties from these files
+                [Optional, default = <nothing>]
+
+        --properties  string
+                Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
+                [Optional, default = <nothing>]
+```
+
+#### Mandatory Parameters
+
+* **`--file-system-id`** The identifier of the file system resource to update. This is referenced in the UI as **Storage Name**.
+
+#### Optional Parameters
+
+* **`--fs-root`** The directory in the local filesystem to scan for data or send data to, depending on whether the filesystem is defined as a source or a target. Should be supplied using the full directory path from the root.
+* **`--source`** Provide this parameter to use the file system resource created as a source.  This is referenced in the UI when configuring the _Unknown source_.
+* **`--scan-only`** Provide this parameter to create a non-live source filesysytem for use in non-live migrations. Requires `--source`.
+* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
+* **`--properties`** Specify properties to use in a comma-separated key/value list.
+
+#### Examples
+
+##### Local filesystem as source
+
+```text
+filesystem update local --file-system-id mytarget --fs-root ./tmp --source
+```
+##### Local filesystem as a target
+
+```text
+filesystem update local --file-system-id mytarget --fs-root ./Users/username/destinationfolder/
+```
+
+----
+
+### `filesystem update s3a`
+
+Update an S3 bucket target file system using the `filesystem update s3a` command. This method also supports IBM COS buckets.
+
+```text tile="Update an S3 file system"
+SYNOPSYS
+        filesystem update s3a [--file-system-id] string
+                           [--bucket-name] string
+                           [[--access-key] string]
+                           [[--secret-key] string]
+                           [--credentials-provider] string
+                           [[--properties-files] list]
+                           [[--properties] list]
+
+OPTIONS
+        --file-system-id  string
+
+                [Mandatory]
+
+        --bucket-name  string
+
+                [Optional, default = <none>]
+
+        --access-key  string
+
+                [Optional, default = <none>]
+
+        --secret-key  string
+
+                [Optional, default = <none>]
+
+        --credentials-provider  string
+
+                [Optional, default = <none>]
+
+        --properties-files  list
+                Load properties from these files
+                [Optional, default = <none>]
+
+        --properties  string
+                Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
+                [Optional, default = <none>]
+```
+
+#### Mandatory Parameters
+
+* **`--file-system-id`** The identifier for file system resource to update. This is referenced in the UI as **Storage Name**.
+
+#### Optional parameters
+
+* **`--bucket-name`** The name of your S3 bucket. This is referenced in the UI as **Bucket Name**.
+* **`--credentials-provider`** The Java class name of a credentials provider for authenticating with the S3 endpoint. This is referenced in the UI as **Credentials Provider**. This is not a required parameter when adding an IBM COS bucket through the UI.  
+  The Provider options available include:
+  * **`org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider`**
+
+    Use this provider to offer credentials as an access key and secret access key with the `--access-key` and `--secret-key` Parameters.
+
+  * **`com.amazonaws.auth.InstanceProfileCredentialsProvider`**
+
+    Use this provider when running LiveData Migrator on an EC2 instance that has [been assigned an IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) with policies that allow it to access the S3 bucket.
+
+  * **`com.amazonaws.auth.DefaultAWSCredentialsProviderChain`**
+
+    A commonly-used credentials provider chain that looks for credentials in this order:
+
+    * Environment Variables - `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, or `AWS_ACCESS_KEY` and `AWS_SECRET_KEY`.
+    * Java System Properties - `aws.accessKeyId` and `aws.secretKey`.
+    * Web Identity Token credentials from the environment or container.
+    * Credential profiles file at the default location (`~/.aws/credentials`) shared by all AWS SDKs and the AWS CLI.
+    * Credentials delivered through the Amazon EC2 container service if `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` environment variable is set and security manager has permission to access the variable.
+    * Instance profile credentials delivered through the Amazon EC2 metadata service.
+* **Endpoint** (UI & IBM COS only): This is required for an IBM COS bucket, if one was not already specified for the filesystem you are updating. IBM provide a list of available endpoints that can be found in their [public documentation](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-endpoints#endpoints-region).
+* **`--access-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the access key with this parameter. This is referenced in the UI as **Access Key**. This is a required parameter for an IBM COS bucket if one was not already specified in the filesystem you're updating.
+* **`--secret-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the secret key using this parameter. This is referenced in the UI as **Secret Key**. This is a required parameter for an IBM COS bucket if one was not already specified in the filesystem you're updating.
+* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
+* **`--properties`** Specify properties to use in a comma-separated key/value list.
+
+#### S3a Properties
+
+:::info
+When adding properties via the UI or API, for example to set a custom `fs.s3a.endpoint`, it is required to also set the following properties manually. They are added by default when using the CLI.
+:::
+
+* **`fs.s3a.impl`** (default `org.apache.hadoop.fs.s3a.S3AFileSystem`): The implementation class of the S3A Filesystem.
+* **`fs.AbstractFileSystem.s3a.impl`** (default `org.apache.hadoop.fs.s3a.S3A`): The implementation class of the S3A AbstractFileSystem.
+* **`fs.s3a.user.agent.prefix`** (default `WANdisco/LiveDataMigrator`): Sets a custom value that will be pre-pended to the User-Agent header sent in
+    HTTP requests to the S3 back-end by S3AFileSystem.
+* **`fs.s3a.impl.disable.cache`** (default `true`): Disables the S3 file system cache when set to 'true'.
+* **`fs.hadoop.tmp.dir`** (default `tmp`): The parent directory for other temporary directories.
+
+#### Example
+
+```text
+filesystem update s3a --file-system-id mytarget --bucket-name mybucket1 --credentials-provider org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider --access-key B6ZAI18Z3UIO002Y777A --secret-key OP87Chokisf4hsTP0Q5j95yI904lT7AaDBGJpp0D
+```
+
+----
 
 ## Exclusion Commands
 
