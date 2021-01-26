@@ -1098,6 +1098,11 @@ OPTIONS
 #### Mandatory Parameters
 
 * **`--path`** Defines the source file system directory that is the scope of the migration. All content (other than that excluded) will be migrated to the target. This is referenced in the UI as **Path for {source-filesystem}**.
+
+  :::note
+  ADLS Gen2 has a filesystem restriction of 60 segments. Make sure your path has less than 60 segments when defining the path string parameter.
+  :::
+
 * **`--target`** Specifies the name of the target file system resource to which migration will occur. This is referenced in the UI as **Target**.
 
 #### Optional Parameters
