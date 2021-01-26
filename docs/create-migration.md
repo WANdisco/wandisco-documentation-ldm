@@ -14,6 +14,11 @@ You will typically create multiple migrations so that you can select specific co
 
 1. Choose a source and target from one of your [storages](./configure-storage.md).
 1. Choose the Path to set the scope of the migration.
+
+    :::note
+    ADLS Gen2 has a filesystem restriction of 60 segments. If you are migrating to an ADLS Gen2 storage, your path must have less than 60 segments.
+    :::
+
 1. Enable the **Auto-start migration** option if you want to start the migration right away. (You can start it manually when [viewing it later](./manage-migrations.md#manage-migrations-with-the-ui) if you prefer.)
 1. [Apply any exclusions](#assign-exclusions-to-a-new-migration) to reduce the scope within this Path.
 1. Select the **Overwrite** or **Skip if Size Match** setting for the migration.  
@@ -53,35 +58,7 @@ Follow the command links to learn how to set the parameters and see examples.
 
    [`migration run`](./command-reference.md#migration-run)
 
-### Create a non-live migration
 
-A non-live migration is a migration that does not track client activity: if files are changed during the migration process, they will not be re-scanned by LiveData Migrator. There are two ways to create a non-live migration through the CLI:
+## Create a static migration
 
-1. Start a migration with a [non-live source file system](#create-a-non-live-source-file-system)
-1. Specify the [`scanOnly` flag](#specify-the-scanonly-flag-during-migration-creation) during migration creation
-
-:::note
-A non-live migration does not read events from the source file system, and does not write a [marker file](./configuration-ldm.md/#hdfs-marker-storage) to the source file system. Once the scan of the source file system completes (to determine which files and directories are to be migrated), the migration will enter a `COMPLETED` [data migration state](./manage-migrations.md/#data-migration-states) and carry out no further scanning.
-:::
-
-#### Create a non-live source file system
-
-LiveData Migrator will only perform *read* tasks on a non-live source, and will not check the source for modifications to data during transfer. Any migration that uses a non-live source will automatically become a non-live migration, and will have the `scanOnly` flag applied.
-
-To create a non-live source, add the `scanOnly` flag during source creation:
-
-```text="Code"
-filesystem add hdfs --source --scanOnly ...
-```
-
-:::note
-The account used to connect to a non-live source only requires read access. Write access is not necessary.
-:::
-
-#### Specify the scanOnly flag during migration creation
-
-To create a non-live migration without creating a non-live source file system, simply add the `scanOnly` flag during migration creation:
-
-```text="Code"
-migration add --scanOnly ...
-```
+[Create a static migration](./non-live-migration.md) if you do not want LiveData Migrator to scan for changes to your data during a migration. These migrations do not require you to have write access to the source filesystem, or operate the migration as the `hdfs` user.

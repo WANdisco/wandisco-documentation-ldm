@@ -456,6 +456,7 @@ filesystem add hdfs --file-system-id mytarget --default-fs hdfs://targetnameserv
 
 ```text title="Example for target single NameNode cluster"
 filesystem add hdfs --file-system-id mytarget --default-fs hdfs://namenode.targetdomain:8020 --user hdfs
+
 ```
 
 ----
@@ -525,6 +526,8 @@ filesystem add local --file-system-id mytarget --fs-root ./tmp --source
 
 ```text
 filesystem add local --file-system-id mytarget --fs-root ./Users/username/destinationfolder/
+=======
+
 ```
 
 ----
@@ -1266,6 +1269,11 @@ OPTIONS
 #### Mandatory Parameters
 
 * **`--path`** Defines the source file system directory that is the scope of the migration. All content (other than that excluded) will be migrated to the target. This is referenced in the UI as **Path for {source-filesystem}**.
+
+  :::note
+  ADLS Gen2 has a filesystem restriction of 60 segments. Make sure your path has less than 60 segments when defining the path string parameter.
+  :::
+
 * **`--target`** Specifies the name of the target file system resource to which migration will occur. This is referenced in the UI as **Target**.
 
 #### Optional Parameters

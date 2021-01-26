@@ -51,6 +51,10 @@ module.exports = {
             },
             {
               "type": "doc",
+              "id": "non-live-migration"
+            },
+            {
+              "type": "doc",
               "id": "configure-exclusions"
             },
 
