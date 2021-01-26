@@ -767,6 +767,10 @@ SYNOPSYS
 
 Update an existing Azure Data Lake Storage Gen 2 container migration target with a specified filesystem ID using the `filesystem update adls2 oauth` command. You will be prompted to optionally update the [service principal](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal) and [OAuth 2](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols) credentials.
 
+
+=======
+Any optional parameters supplied will update the corresponding details of the existing filesystem.
+
 Any optional parameters supplied will update the corresponding details of the existing filesystem. The parameters that can be changed are the same as the ones listed in the [`filesystem add adls2 oauth`](./command-reference.md#filesystem-add-adls2-oauth) section.
 
 All parameters are optional except `--file-system-id`, which specifies the file system you want to update.
