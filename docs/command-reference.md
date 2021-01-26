@@ -143,7 +143,7 @@ OPTIONS
 * **`--oauth2-client-secret`** The client secret (also known as [application secret](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#option-2-create-a-new-application-secret)) for the Azure service principal. This is referenced in the UI as **Secret**.
 * **`--oauth2-client-endpoint`** The [client endpoint](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols#endpoints) for the Azure service principal. This is referenced in the UI as **Endpoint**.  
 This will often take the form of `https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token` where `{tenant}` is the [directory ID](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#get-tenant-and-app-id-values-for-signing-in) for the Azure service principal. You can specify a custom URL if desired (such as a proxy endpoint that manually interfaces with Azure Active Directory).
-* **`--container.name`** The name of the container in the storage account to which content will be migrated. This is referenced in the UI as **Container Name**.
+* **`--container-name`** The name of the container in the storage account to which content will be migrated. This is referenced in the UI as **Container Name**.
 
 #### Optional Parameters
 
@@ -154,7 +154,7 @@ This will often take the form of `https://login.microsoftonline.com/{tenant}/oau
 #### Example
 
 ```text
-filesystem add adls2 oauth --file-system-id mytarget --storage-account-name myadls2 --oauth2-client-id b67f67ex-ampl-e2eb-bd6d-client9385id --oauth2-client-secret 2IPO8*secretk-9OPs8n*TexampleHJ= --oauth2-client-endpoint https://login.microsoftonline.com/78u098ex-ampl-e498-8bce-ndpoint5f2e5/oauth2/v2.0/token --container.name lm2target
+filesystem add adls2 oauth --file-system-id mytarget --storage-account-name myadls2 --oauth2-client-id b67f67ex-ampl-e2eb-bd6d-client9385id --oauth2-client-secret 2IPO8*secretk-9OPs8n*TexampleHJ= --oauth2-client-endpoint https://login.microsoftonline.com/78u098ex-ampl-e498-8bce-ndpoint5f2e5/oauth2/v2.0/token --container-name lm2target
 ```
 
 ----
@@ -206,8 +206,8 @@ OPTIONS
 
 * **`--file-system-id`** The identifier to give the new file system resource. This is referenced in the UI as **Storage Name**.
 * **`--storage-account-name`** The name of the ADLS Gen 2 storage account to target. This is referenced in the UI as **Account Name**.
-* **`--shared.key`** The [shared account key](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) to use as credentials to write to the storage account. This is referenced in the UI as **Access Key**.
-* **`--container.name`** The name of the container in the storage account to which content will be migrated. This is referenced in the UI as **Container Name**.
+* **`--shared-key`** The [shared account key](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) to use as credentials to write to the storage account. This is referenced in the UI as **Access Key**.
+* **`--container-name`** The name of the container in the storage account to which content will be migrated. This is referenced in the UI as **Container Name**.
 
 #### Optional Parameters
 
@@ -218,7 +218,7 @@ OPTIONS
 #### Example
 
 ```text
-filesystem add adls2 sharedKey --file-system-id mytarget --storage-account-name myadls2 --container.name lm2target --shared.key Yi8NxHGqoQ79DBGLVn+COK/sRDwbNqAEXAMPLEDaMxRkvXt2ijUtASHAREDj/vaS/NbzR5rtjEKEY31eIopUVA==
+filesystem add adls2 sharedKey --file-system-id mytarget --storage-account-name myadls2 --container-name lm2target --shared-key Yi8NxHGqoQ79DBGLVn+COK/sRDwbNqAEXAMPLEDaMxRkvXt2ijUtASHAREDj/vaS/NbzR5rtjEKEY31eIopUVA==
 ```
 
 ----
@@ -766,75 +766,14 @@ Update an existing Azure Data Lake Storage Gen 2 container migration target with
 
 Any optional parameters supplied will update the corresponding details of the existing filesystem.
 
-```text title="Update an ADLS2 FileSystem via HCFS API FileSystem With OAuth"
-SYNOPSYS
-        filesystem update adls2 oauth [--file-system-id] string
-                                   [--storage-account-name] string
-                                   [--oauth2-client-id] string
-                                   [--oauth2-client-secret] string
-                                   [--oauth2-client-endpoint] string
-                                   [--container-name] string
-                                   [--insecure]
-                                   [[--properties-files] list]
-                                   [[--properties] string]
+Any optional parameters supplied will update the corresponding details of the existing filesystem. The parameters that can be changed are the same as the ones listed in the [`filesystem add adls2 oauth`](./command-reference.md#filesystem-add-adls2-oauth) section.
 
-OPTIONS
-        --file-system-id  string
-
-                [Mandatory]
-
-        --storage-account-name  string
-
-                [Optional, default = <none>]
-
-        --oauth2-client-id  string
-
-                [Optional, default = <none>]
-
-        --oauth2-client-secret  string
-
-                [Optional, default = <none>]
-
-        --oauth2-client-endpoint  string
-
-                [Optional, default = <none>]
-
-        --container-name  string
-
-                [Optional, default = <none>]
-
-        --insecure
-                [Optional, default = false]
-
-        --properties-files  list
-                Load properties from this file
-                [Optional, default = <none>]
-
-        --properties  string
-                Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
-                [Optional, default = <nothing>]
-```
-
-#### Mandatory Parameters
-
-* **`--file-system-id`** The identifier of the existing file system resource to update. This is referenced in the UI as **Storage Name**.
-
-#### Optional Parameters
-
-* **`--storage-account-name`** The name of the ADLS Gen 2 storage account to target. This is referenced in the UI as **Account Name**.
-* **`--oauth2-client-id`** The client ID (also known as [application ID](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#get-tenant-and-app-id-values-for-signing-in)) for your Azure service principal. This is referenced in the UI as **Client ID**.
-* **`--oauth2-client-secret`** The client secret (also known as [application secret](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#option-2-create-a-new-application-secret)) for the Azure service principal. This is referenced in the UI as **Secret**.
-* **`--oauth2-client-endpoint`** The [client endpoint](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols#endpoints) for the Azure service principal. This is referenced in the UI as **Endpoint**.  
-This will often take the form of `https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token` where `{tenant}` is the [directory ID](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#get-tenant-and-app-id-values-for-signing-in) for the Azure service principal. You can specify a custom URL if desired (such as a proxy endpoint that manually interfaces with Azure Active Directory).
-* **`--container.name`** The name of the container in the storage account to which content will be migrated. This is referenced in the UI as **Container Name**.
-* **`--insecure`** When provided, LiveData Migrator will not use TLS to encrypt communication with ADLS Gen 2. This may improve throughput, but should only be used when you have other means of securing communication. This is referenced in the UI when **Use Secure Protocol** is unchecked.
-* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
-* **`--properties`** Specify properties to use in a comma-separated key/value list.
+All parameters are optional except `--file-system-id`, which specifies the file system you want to update.
 
 #### Example
 
 ```text
-filesystem update adls2 oauth --file-system-id mytarget --storage-account-name myadls2 --oauth2-client-id b67f67ex-ampl-e2eb-bd6d-client9385id --oauth2-client-secret 2IPO8*secretk-9OPs8n*TexampleHJ= --oauth2-client-endpoint https://login.microsoftonline.com/78u098ex-ampl-e498-8bce-ndpoint5f2e5/oauth2/v2.0/token --container.name lm2target
+filesystem update adls2 oauth --file-system-id mytarget --storage-account-name myadls2 --oauth2-client-id b67f67ex-ampl-e2eb-bd6d-client9385id --oauth2-client-secret 2IPO8*secretk-9OPs8n*TexampleHJ= --oauth2-client-endpoint https://login.microsoftonline.com/78u098ex-ampl-e498-8bce-ndpoint5f2e5/oauth2/v2.0/token --container-name lm2target
 ```
 
 ----
@@ -843,64 +782,14 @@ filesystem update adls2 oauth --file-system-id mytarget --storage-account-name m
 
 Update an existing Azure Data Lake Storage Gen 2 container migration target using the `filesystem update adls2 sharedKey` command. You will be prompted to optionally update the [secret key](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys).
 
-Any optional parameters supplied will update the corresponding details of the existing filesystem.
+Any optional parameters supplied will update the corresponding details of the existing filesystem. The parameters that can be changed are the same as the ones listed in the [`filesystem add adls2 sharedKey`](./command-reference.md#filesystem-add-adls2-sharedkey) section.
 
-```text title="Update an ADLS2 FileSystem via HCFS API FileSystem With Shared Key"
-SYNOPSYS
-        filesystem update adls2 sharedKey [--file-system-id] string
-                                       [--storage-account-name] string
-                                       [--shared-key] string
-                                       [--container-name] string
-                                       [--insecure]
-                                       [[--properties-files] list]
-                                       [[--properties] string]
-
-OPTIONS
-        --file-system-id  string
-
-                [Mandatory]
-
-        --storage-account-name  string
-
-                [Optional, default = <none>]
-
-        --shared-key  string
-
-                [Optional, default = <none>]
-
-        --container-name  string
-
-                [Optional, default = <none>]
-
-        --insecure
-                [Optional, default = false]
-
-        --properties-files  list
-                Load properties from these files
-                [Optional, default = <none>]
-
-        --properties  string
-                Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
-                [Optional, default = <none>]
-```
-
-#### Mandatory Parameters
-
-* **`--file-system-id`** The identifier of the existing file system resource to update. This is referenced in the UI as **Storage Name**.
-
-#### Optional Parameters
-
-* **`--storage-account-name`** The name of the ADLS Gen 2 storage account to target. This is referenced in the UI as **Account Name**.
-* **`--shared.key`** The [shared account key](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) to use as credentials to write to the storage account. This is referenced in the UI as **Access Key**.
-* **`--container.name`** The name of the container in the storage account to which content will be migrated. This is referenced in the UI as **Container Name**.
-* **`--insecure`** When provided, LiveData Migrator will not use TLS to encrypt communication with ADLS Gen 2. This may improve throughput, but should only be used when you have other means of securing communication. This is referenced in the UI when **Use Secure Protocol** is unchecked.
-* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
-* **`--properties`** Specify properties to use in a comma-separated key/value list.
+All parameters are optional except `--file-system-id`, which specifies the file system you want to update.
 
 #### Example
 
 ```text
-filesystem update adls2 sharedKey --file-system-id mytarget --storage-account-name myadls2 --container.name lm2target --shared.key Yi8NxHGqoQ79DBGLVn+COK/sRDwbNqAEXAMPLEDaMxRkvXt2ijUtASHAREDj/vaS/NbzR5rtjEKEY31eIopUVA==
+filesystem update adls2 sharedKey --file-system-id mytarget --storage-account-name myadls2 --container-name lm2target --shared-key Yi8NxHGqoQ79DBGLVn+COK/sRDwbNqAEXAMPLEDaMxRkvXt2ijUtASHAREDj/vaS/NbzR5rtjEKEY31eIopUVA==
 ```
 
 ----
@@ -909,83 +798,9 @@ filesystem update adls2 sharedKey --file-system-id mytarget --storage-account-na
 
 Update a Google Cloud Storage migration target using the `filesystem update gcs` command.
 
-Any optional parameters supplied will update the corresponding details of the existing filesystem.
+Any optional parameters supplied will update the corresponding details of the existing filesystem. The parameters that can be changed are the same as the ones listed in the [`filesystem add gcs`](./command-reference.md#filesystem-add-gcs) section.
 
-```text title="Update a Google Cloud Storage file system"
-SYNOPSYS
-        filesystem update gcs [--file-system-id] string
-                           [[--service-account-json-key-file] string]
-                           [[--service-account-p12-key-file] string]
-                           [[--service-account-json-key-file-server-location] string]
-                           [[--service-account-p12-key-file-server-location] string]
-                           [[--service-account-email] string]
-                           [--bucket-name] string
-                           [[--properties-files] list]
-                           [[--properties] string]
-
-OPTIONS
-        --file-system-id  string
-
-                [Mandatory]
-
-        --service-account-json-key-file  string
-
-                [Optional, default = <none>]
-
-        --service-account-p12-key-file  string
-
-                [Optional, default = <none>]
-
-        --service-account-json-key-file-server-location  string
-                Permanent location of the GCS KeyFile on the LiveData Migrator server
-                [Optional, default = <none>]
-
-        --service-account-p12-key-file-server-location  string
-                Permanent location of the GCS KeyFile on the LiveData Migrator server
-                [Optional, default = <none>]
-
-        --service-account-email  string
-                GCS Service Account Email
-                [Optional, default = <none>]
-
-        --bucket-name  string
-
-                [Optional, default = <none>]
-
-        --properties-files  list
-                Load properties from these files
-                [Optional, default = <nothing>]
-
-        --properties  string
-                Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
-                [Optional, default = <nothing>]
-```
-
-#### Mandatory Parameters
-
-* **`--file-system-id`** The identifier of the file system resource to update. This is referenced in the UI as **Storage Name**.
-
-#### Optional Parameters
-
-* **`--bucket-name`** The bucket name of a Google Cloud Storage account. This is referenced in the UI as **Bucket Name**.
-* **`--service-account-email`** The email address linked to your GCS service account. This is referenced in the UI as **Email address** and is required when selecting the **Upload P12 Key File** option.
-* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
-* **`--properties`** Specify properties to use in a comma-separated key/value list.
-
-#### Service account key parameters
-
-:::info
-Provide your service account key for the GCS bucket by choosing one of the parameters below.
-
-You can also upload the service account key directly when using the UI (this is not supported through the CLI).
-:::
-
-* **`--service-account-json-key-file-server-location`** The absolute filesystem path on the LiveData Migrator server of your service account key file in JSON format. You can either [create a GCS service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys) or [use an existing one](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#listing_service_account_keys).  
-This is referenced in the UI as **Key File** when the _Key File Options -> Provide a Path_ option is selected.
-* **`--service-account-p12-key-file-server-location`** The absolute filesystem path on the LiveData Migrator server of your service account key file in P12 format. You can either [create a GCS service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys) or [use an existing one](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#listing_service_account_keys).  
-This is referenced in the UI as **Key File** when the _Key File Options -> Provide a Path_ option is selected.
-* **`--service-account-json-key-file`** The absolute filesystem path on the host running the LiveData Migrator CLI of your service account key file in JSON format. Only use this parameter if you are running the LiveData Migrator CLI on a different host to your LiveData Migrator server.
-* **`--service-account-p12-key-file`** The absolute filesystem path on the host running the LiveData Migrator CLI of your service account key file in P12 format. Only use this parameter if you are running the LiveData Migrator CLI on a different host to your LiveData Migrator server.
+All parameters are optional except `--file-system-id`, which specifies the file system you want to update.
 
 #### Example
 
@@ -999,117 +814,9 @@ filesystem update gcs --file-system-id gcsAgent --bucket-name myGcsBucket --serv
 
 Update either a source or target Hadoop Distributed File System using the `filesystem update hdfs` command.
 
-```text title="Update a Hadoop Distributed File System"
-SYNOPSYS
-        filesystem update hdfs [--file-system-id] string
-                            [[--default-fs] string]
-                            [[--user] string]
-                            [[--kerberos-principal] string]
-                            [[--kerberos-keytab] string]
-                            [--source]
-                            [--scan-only]
-                            [[--properties-files] list]
-                            [[--properties] string]
+Any optional parameters supplied will update the corresponding details of the existing filesystem. The parameters that can be changed are the same as the ones listed in the [`filesystem add hdfs`](./command-reference.md#filesystem-add-hdfs) section.
 
-OPTIONS
-        --file-system-id  string
-                Name of the filesystem
-                [Mandatory]
-
-        --default-fs  string
-
-                [Optional, default = <none>]
-
-        --user  string
-                FileSystem username to perform migration actions as
-                [Optional, default = <none>]
-
-        --kerberos-principal  string
-                Kerberos principal to authenticate with and perform migration actions as
-                [Optional, default = <none>]
-
-        --kerberos-keytab  string
-                Kerberos keytab to use when authenticating the provided kerberos principal
-                [Optional, default = <none>]
-
-        --source        Add this filesystem as the source for migrations
-                [Optional, default = false]
-
-        --scan-only
-                [Optional, default = false]
-
-        --properties-files  list
-                Load properties from these files
-                [Optional, default = <none>]
-
-        --properties  string
-                Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
-                [Optional, default = <nothing>]
-```
-
-#### Mandatory Parameters
-
-* **`--file-system-id`** The identifier of the file system resource to update. This is referenced in the UI as **Storage Name**.
-
-#### Optional Parameters
-
-:::important Kerberos: Cross-realm authentication required between source and target HDFS
-[Cross-realm authentication](https://web.mit.edu/kerberos/krb5-1.5/krb5-1.5.4/doc/krb5-admin/Cross_002drealm-Authentication.html) is required in the following scenario:
-
-* The Migration will occur between a source and target HDFS.
-* Kerberos is enabled on both clusters.
-
-See the links below for guidance for common Hadoop distributions:
-
-* [CDH](https://docs.cloudera.com/documentation/enterprise/6/6.3/topics/cm_sg_kdc_def_domain_s2.html)
-* [CDP](https://docs.cloudera.com/cdp-private-cloud-base/7.1.5/security-kerberos-authentication/topics/cm-security-kerberos-authentication-kdc-cross-realm-trust.html)
-* [Red Hat](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system-level_authentication_guide/using_trusts) (Unmanaged)
-* [HDP](https://community.cloudera.com/t5/Community-Articles/Kerberos-cross-realm-trust-for-distcp/ta-p/245590)
-:::
-
-* **`--default-fs`** A string that defines how LiveData Migrator accesses HDFS. This is referenced in the UI as **Default FS**.  
-  It can be specified in a number of forms:
-  1. As a single HDFS URI, such as `hdfs://192.168.1.10:8020` (using an IP address) or `hdfs://myhost.localdomain:8020` (using a hostname).
-  1. As an HDFS URI that references a nameservice ID defined in the cluster properties, like `hdfs://mynameservice`, where there is a configuration property for the cluster that defines the value of the `dfs.nameservices` value to include that nameservice ID, like `mynameservice` and all required configuration properties for that nameservice, like `dfs.ha.namenodes.mynameservice`, `dfs.namenode.rpc-address.mynameservice.nn1`, and `dfs.namenode.http-address.mynameservice.nn1`, etc.
-* **`--user`** The name of the HDFS user to be used when performing operations against the file system. In environments where Kerberos is disabled, this user must be the HDFS super user, such as `hdfs`.
-* **`--kerberos-principal`** The Kerberos principal to authenticate with and perform migrations as. This principal should map to the [HDFS super user](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsPermissionsGuide.html#The_Super-User) using [auth_to_local](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SecureMode.html#Mapping_from_Kerberos_principals_to_OS_user_accounts) rules.
-* **`--kerberos-keytab`** The Kerberos keytab containing the principal defined for the `--kerberos-principal` parameter. This must be accessible to the local system user running the LiveData Migrator service (default is `hdfs`).
-* **`--source`** This parameter does not need to be specified when updating a source file system.
-* **`--scan-only`** This parameter does not need to be specified when updating a static file system.
-* **`--properties-files`** Reference a list of existing properties files that contain Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.  This is referenced in the UI as **Provide a path to files** under the _Additional Configuration_ option.
-* **`--properties`** Specify properties to use in a comma-separated key/value list. This is referenced in the UI as **Additional Configuration** under the _Additional Configuration_ option.
-
-##### Properties files are required for NameNode HA
-
-If your Hadoop cluster has [NameNode HA enabled](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HDFSHighAvailabilityWithQJM.html), you must provide the local filesystem path to the properties files that define the configuration for the nameservice ID.
-
-**Source HDFS filesystem**: These configuration files will likely be in a default location depending on the distribution of the Hadoop cluster.
-
-**Target HDFS filesystem**: Ensure that the target Hadoop cluster configuration is available on your LiveData Migrator host's local filesystem.
-
-* For the UI, use **Provide a path to files** under the _Additional Configuration_ option and define the directory containing the `core-site.xml` and `hdfs-site.xml` files.
-
-  ```text title="Example for path containing source cluster configuration"
-  /etc/hadoop/conf
-  ```
-
-  ```text title="Example for path containing target cluster configuration"
-  /etc/targetClusterConfig
-  ```
-
-  Alternatively, define the absolute filesystem paths to these files:
-
-  ```text title="Example for absolute paths to source cluster configuration files"
-  /etc/hadoop/conf/core-site.xml
-  /etc/hadoop/conf/hdfs-site.xml
-  ```
-
-  ```text title="Example for absolute paths to target cluster configuration files"
-  /etc/targetClusterConfig/core-site.xml
-  /etc/targetClusterConfig/hdfs-site.xml
-  ```
-
-* For the CLI/API, use the `--properties-files` parameter and define the absolute paths to the `core-site.xml` and `hdfs-site.xml` files (see the [Examples](#examples) section for CLI usage of this parameter).
+All parameters are optional except `--file-system-id`, which specifies the file system you want to update.
 
 #### Examples
 
@@ -1128,51 +835,9 @@ filesystem update hdfs --file-system-id mytarget --default-fs hdfs://sourcenames
 
 Update a target or source local filesystem using the `filesystem update local` command.
 
-```text title="Update a Local FileSystem via HCFS API."
-SYNOPSYS
-        filesystem update local [--file-system-id] string
-                                       [[--fs-root] string]
-                                       [--source]
-                                       [--scan-only]
-                                       [[--properties-files] list]
-                                       [[--properties] string]
+Any optional parameters supplied will update the corresponding details of the existing filesystem. The parameters that can be changed are the same as the ones listed in the [`filesystem add local`](./command-reference.md#filesystem-add-local) section.
 
-OPTIONS
-        --file-system-id  string
-                Name of the filesystem
-                [Mandatory]
-
-        --fs-root  string
-                Location in the local filesystem to chroot to
-                [Optional, default = <none>]
-
-        --source
-                Add this filesystem as a source for migrations
-                [Optional, default = false]
-
-        --scan-only
-                [Optional, default = false]
-
-        --properties-files  list
-                Load properties from these files
-                [Optional, default = <nothing>]
-
-        --properties  string
-                Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
-                [Optional, default = <nothing>]
-```
-
-#### Mandatory Parameters
-
-* **`--file-system-id`** The identifier of the filesystem resource to update. This is referenced in the UI as **Storage Name**.
-
-#### Optional Parameters
-
-* **`--fs-root`** The directory in the local filesystem to scan for data or send data to, depending on whether the filesystem is defined as a source or a target. Should be supplied using the full directory path from the root.
-* **`--source`** This parameter does not need to be specified when updating a source file system.
-* **`--scan-only`** This parameter does not need to be specified when updating a static file system.
-* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
-* **`--properties`** Specify properties to use in a comma-separated key/value list.
+All parameters are optional except `--file-system-id`, which specifies the file system you want to update.
 
 #### Example
 
@@ -1186,91 +851,9 @@ filesystem update local --file-system-id mytarget --fs-root ./tmp
 
 Update an S3 bucket target file system using the `filesystem update s3a` command. This method also supports IBM COS buckets.
 
-```text tile="Update an S3 file system"
-SYNOPSYS
-        filesystem update s3a [--file-system-id] string
-                           [--bucket-name] string
-                           [[--access-key] string]
-                           [[--secret-key] string]
-                           [--credentials-provider] string
-                           [[--properties-files] list]
-                           [[--properties] list]
+Any optional parameters supplied will update the corresponding details of the existing filesystem. The parameters that can be changed are the same as the ones listed in the [`filesystem add s3a`](./command-reference.md#filesystem-add-s3a) section.
 
-OPTIONS
-        --file-system-id  string
-
-                [Mandatory]
-
-        --bucket-name  string
-
-                [Optional, default = <none>]
-
-        --access-key  string
-
-                [Optional, default = <none>]
-
-        --secret-key  string
-
-                [Optional, default = <none>]
-
-        --credentials-provider  string
-
-                [Optional, default = <none>]
-
-        --properties-files  list
-                Load properties from these files
-                [Optional, default = <none>]
-
-        --properties  string
-                Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
-                [Optional, default = <none>]
-```
-
-#### Mandatory Parameters
-
-* **`--file-system-id`** The identifier for file system resource to update. This is referenced in the UI as **Storage Name**.
-
-#### Optional parameters
-
-* **`--bucket-name`** The name of your S3 bucket. This is referenced in the UI as **Bucket Name**.
-* **`--credentials-provider`** The Java class name of a credentials provider for authenticating with the S3 endpoint. This is referenced in the UI as **Credentials Provider**. This is not a required parameter when adding an IBM COS bucket through the UI.  
-  The Provider options available include:
-  * **`org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider`**
-
-    Use this provider to offer credentials as an access key and secret access key with the `--access-key` and `--secret-key` Parameters.
-
-  * **`com.amazonaws.auth.InstanceProfileCredentialsProvider`**
-
-    Use this provider when running LiveData Migrator on an EC2 instance that has [been assigned an IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) with policies that allow it to access the S3 bucket.
-
-  * **`com.amazonaws.auth.DefaultAWSCredentialsProviderChain`**
-
-    A commonly-used credentials provider chain that looks for credentials in this order:
-
-    * Environment Variables - `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, or `AWS_ACCESS_KEY` and `AWS_SECRET_KEY`.
-    * Java System Properties - `aws.accessKeyId` and `aws.secretKey`.
-    * Web Identity Token credentials from the environment or container.
-    * Credential profiles file at the default location (`~/.aws/credentials`) shared by all AWS SDKs and the AWS CLI.
-    * Credentials delivered through the Amazon EC2 container service if `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` environment variable is set and security manager has permission to access the variable.
-    * Instance profile credentials delivered through the Amazon EC2 metadata service.
-* **Endpoint** (UI & IBM COS only): This is required for an IBM COS bucket, if one was not already specified for the filesystem you are updating. IBM provide a list of available endpoints that can be found in their [public documentation](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-endpoints#endpoints-region).
-* **`--access-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the access key with this parameter. This is referenced in the UI as **Access Key**. This is a required parameter for an IBM COS bucket if one was not already specified in the filesystem you're updating.
-* **`--secret-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the secret key using this parameter. This is referenced in the UI as **Secret Key**. This is a required parameter for an IBM COS bucket if one was not already specified in the filesystem you're updating.
-* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
-* **`--properties`** Specify properties to use in a comma-separated key/value list.
-
-#### S3a Properties
-
-:::info
-When adding properties via the UI or API, for example to set a custom `fs.s3a.endpoint`, it is required to also set the following properties manually. They are added by default when using the CLI.
-:::
-
-* **`fs.s3a.impl`** (default `org.apache.hadoop.fs.s3a.S3AFileSystem`): The implementation class of the S3A Filesystem.
-* **`fs.AbstractFileSystem.s3a.impl`** (default `org.apache.hadoop.fs.s3a.S3A`): The implementation class of the S3A AbstractFileSystem.
-* **`fs.s3a.user.agent.prefix`** (default `WANdisco/LiveDataMigrator`): Sets a custom value that will be pre-pended to the User-Agent header sent in
-    HTTP requests to the S3 back-end by S3AFileSystem.
-* **`fs.s3a.impl.disable.cache`** (default `true`): Disables the S3 file system cache when set to 'true'.
-* **`fs.hadoop.tmp.dir`** (default `tmp`): The parent directory for other temporary directories.
+All parameters are optional except `--file-system-id`, which specifies the file system you want to update.
 
 #### Example
 
