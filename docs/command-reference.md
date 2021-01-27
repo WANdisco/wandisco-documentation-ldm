@@ -396,7 +396,7 @@ See the links below for guidance for common Hadoop distributions:
 * **`--kerberos-principal`** The Kerberos principal to authenticate with and perform migrations as. This principal should map to the [HDFS super user](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsPermissionsGuide.html#The_Super-User) using [auth_to_local](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SecureMode.html#Mapping_from_Kerberos_principals_to_OS_user_accounts) rules.
 * **`--kerberos-keytab`** The Kerberos keytab containing the principal defined for the `--kerberos-principal` parameter. This must be accessible to the local system user running the LiveData Migrator service (default is `hdfs`).
 * **`--source`** Provide this parameter to use the file system resource created as a source.  This is referenced in the UI when configuring the _Unknown source_.
-* **`--scan-only`** Provide this parameter to create a static source filesystem for use in [static migrations](./non-live-migration/md). Requires `--source`.
+* **`--scan-only`** Provide this parameter to create a static source filesystem for use in [static migrations](./non-live-migration.md). Requires `--source`.
 * **`--properties-files`** Reference a list of existing properties files that contain Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.  This is referenced in the UI as **Provide a path to files** under the _Additional Configuration_ option.
 * **`--properties`** Specify properties to use in a comma-separated key/value list. This is referenced in the UI as **Additional Configuration** under the _Additional Configuration_ option.
 
@@ -507,7 +507,7 @@ OPTIONS
 
 * **`--fs-root`** The directory in the local filesystem to scan for data or send data to, depending on whether the filesystem is defined as a source or a target. Should be supplied using the full directory path from the root.
 * **`--source`** Provide this parameter to use the file system resource created as a source.  This is referenced in the UI when configuring the _Unknown source_.
-* **`--scan-only`** Provide this parameter to create a static source filesytem for use in [static migrations](./non-live-migration/md). Requires `--source`.
+* **`--scan-only`** Provide this parameter to create a static source filesytem for use in [static migrations](./non-live-migration.md). Requires `--source`.
 * **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
