@@ -621,12 +621,38 @@ When adding properties via the UI or API, for example to set a custom `fs.s3a.en
     HTTP requests to the S3 back-end by S3AFileSystem.
 * **`fs.s3a.impl.disable.cache`** (default `true`): Disables the S3 file system cache when set to 'true'.
 * **`fs.hadoop.tmp.dir`** (default `tmp`): The parent directory for other temporary directories.
+* **`fs.s3a.fast.upload.buffer`** (default `disk`): Defines how the filesystem will [buffer the upload](#upload-buffering).
+* **`fs.s3a.fast.upload.active.blocks`** (default `8`): Defines how many blocks a single output stream can have uploading or queued at a given time.
+* **`fs.s3a.block.size`** (default `32M`): Defines the maximum size of blocks during file transfer. Use the suffix `K`, `M`, `G`, `T` or `P` to scale the value in Kilobytes, Megabytes, Gigabytes, Terabytes or Petabytes respectively.
+* **`fs.s3a.buffer.dir`** (default `tmp`): Defines the directory used by [disk buffering](#upload-buffering).
+
+You can additionally find a list of S3A properties in the [S3A documentation](https://hadoop.apache.org/docs/r3.2.1/hadoop-aws/tools/hadoop-aws/index.html).
 
 #### Example
 
 ```text
 filesystem add s3a --file-system-id mytarget --bucket-name mybucket1 --credentials-provider org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider --access-key B6ZAI18Z3UIO002Y777A --secret-key OP87Chokisf4hsTP0Q5j95yI904lT7AaDBGJpp0D
 ```
+
+#### Upload Buffering
+
+Migrations using an S3A target destination will buffer all uploads. By default, the buffering will occur on the local disk of system LiveData Migrator is running on, in the `/tmp` directory.
+
+LiveData Migrator will automatically delete the temporary buffering files once they are no longer needed.
+
+If you want to use a different type of buffering, you can change the property `fs.s3a.fast.upload.buffer`. The following values can be supplied:
+
+| Buffering Option | Details | Property Value |
+| -------- | -------- | -------- |
+| Array Buffer | Buffers the uploaded data in memory instead of on disk, using the Java heap. | `array` |
+| Byte Buffer | Buffers the uploaded data in memory instead of on disk, but does not use the Java heap. | `bytebuffer` |
+| Disk Buffering | The default option. Buffers the upload to disk. | `disk` |
+
+Both the `array` and `bytebuffer` options may lead to the consumption of large amounts of memory. Other properties (such as `fs.s3a.fast.upload.active.blocks`) may be used to fine-tune the migration to avoid issues.
+
+:::note
+  If you run out of disk space on which to buffer the migration, the migration will stall with a series of errors. To avoid this, ensure the file system containing the directory used for buffering (`/tmp` by default) has enough remaining space to facilitate the transfer.
+:::
 
 ----
 
