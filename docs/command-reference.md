@@ -574,8 +574,6 @@ Both the `array` and `bytebuffer` options may lead to the consumption of large a
   If you run out of disk space on which to buffer the migration, the migration will stall with a series of errors. To avoid this, ensure the file system containing the directory used for buffering (`/tmp` by default) has enough remaining space to facilitate the transfer.
 :::
 
-
-
 ----
 
 ### `filesystem auto-discover-source hdfs`
