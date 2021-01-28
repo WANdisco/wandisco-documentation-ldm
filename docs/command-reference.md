@@ -1464,10 +1464,14 @@ SYNOPSYS
 
 ### `hive agent add azure`
 
-Add an Azure hive agent to connect to an [Azure SQL](https://docs.microsoft.com/en-gb/azure/azure-sql/azure-sql-iaas-vs-paas-what-is-overview) database using the `hive agent add azure` command.
+Add a local or remote hive agent to connect to an [Azure SQL](https://docs.microsoft.com/en-gb/azure/azure-sql/azure-sql-iaas-vs-paas-what-is-overview) database using the `hive agent add azure` command.
 
-:::info
-The Azure hive agent requires a ADLS Gen2 storage account and container name, this is only for the purposes of generating the correct location for the database. The container will not be accessed by the Hive agent and no data will be written to the container.
+If your LiveData Migrator host can communicate directly with the Azure SQL database, then a local hive agent will be sufficient. Otherwise, consider using a remote hive agent.
+
+:::info remote deployments
+For a remote hive agent connection, specify a remote host (Azure VM, HDI cluster node) that will be used to communicate with the local LiveData Migrator server (constrained to a user-defined port).
+
+A small service will be deployed on this remote host so that the hive agent can migrate data to and/or from the Azure SQL database.
 :::
 
 ```text title="Add Azure SQL agent"
@@ -1489,11 +1493,19 @@ OPTIONS
 
         --database-user  string
                 Azure SQL database user
-                [Mandatory]
+                [Optional, default = <nothing>]
 
         --database-password  string
                 Azure SQL database password
+                [Optional, default = <nothing>]
+
+        --auth-method  azure-sqlauthentication-method
+                Azure SQL database connection authentication method (SQL_PASSWORD, AD_MSI, AD_INTEGRATED, AD_PASSWORD, ACCESS_TOKEN)
                 [Mandatory]
+
+        --client-id  string
+                Azure resource's clientId
+                [Optional, default = <nothing>]
 
         --storage-account  string
                 Azure storage account name
@@ -1514,16 +1526,97 @@ OPTIONS
         --insecure  boolean
                 use insecure connection to Azure
                 [Optional, default = <nothing>]
+
+        --host  string
+                host where remote hive agent will be deployed
+                [Optional, default = <nothing>]
+
+        --port  integer
+                port to use by remote hive agent
+                [Optional, default = <nothing>]
+
+        --autodeploy  boolean
+                automatically deploy remote agent. If specified, you must specify sshKey to connect.
+                [Optional, default = <none>]
+
+        --ssh-user  string
+                ssh user to use for authentication on remote host to perform automatic deployment
+                [Optional, default = <nothing>]
+
+        --ssh-key  file
+                ssh key to use for authentication on remote host to perform automatic deployment
+                [Optional, default = <nothing>]
+
+        --ssh-port  int
+                ssh port to use to perform automatic deployment
+                [Optional, default = 22]
+
+        --use-sudo      use sudo for privileged commands while performing remote installation
+                [Optional, default = false]
+
+        --ignore-host-checking  ignore strict host key checking for unknown hosts
+                [Optional, default = false]
 ```
 
 #### Mandatory Parameters
 
+:::info
+The Azure hive agent requires a ADLS Gen2 storage account and container name, this is only for the purposes of generating the correct location for the database. The container will not be accessed by the Hive agent and no data will be written to the container.
+:::
+
 * **`--db-server-name`** The Azure SQL database server name. Only the name given to the server is required, the `.database.windows.net` suffix should be omitted.
 * **`--database-name`** The Azure SQL database name.
-* **`--database-user`** The user name to access the database.
-* **`--database-password`** The user password to access the database.
 * **`--storage-account`** The name of the ADLS Gen 2 storage account.
 * **`--container-name`** The name of the container in the ADLS Gen2 storage account.
+
+#### Authentication Parameters
+
+Choose one of the authentication methods listed and include the additional parameters required for the chosen method.
+
+* **`--auth-method`** The authentication method to use to connect to the Azure SQL server.  
+  The following methods can be used:
+  * `SQL_PASSWORD` - Provide a username and password to access the database.
+  * `AD_MSI` - Use a system-assigned or user-assigned [managed identity](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types).
+
+##### Required Parameters for SQL_PASSWORD
+
+* **`--database-user`** The user name to access the database.
+* **`--database-password`** The user password to access the database.
+
+##### Required Parameters for AD_MSI
+
+To use this method, the following pre-requirements must be met:
+
+* LiveData Migrator or the remote Azure hive agent must be installed on an [Azure resource with the managed identity assigned to it](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/qs-configure-portal-windows-vm). The host must also have [Azure Active Directory authentication](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/login-using-aad) enabled.
+* Your Azure SQL server must be enabled for [Azure Active Directory authentication](https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-configure?tabs=azure-powershell).
+* You have [created a contained user in the Azure SQL database that is mapped to the Azure Active Directory resource](https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-configure?tabs=azure-powershell#create-contained-users-mapped-to-azure-ad-identities) (where LiveData Migrator or the remote Azure hive agent is installed).
+  * The username of the contained user will depend on whether you are using a system-assigned or user-assigned identity.
+
+    ```text title="Azure SQL database command for a system-assigned managed identity"
+    CREATE USER "<azure_resource_name>" FROM EXTERNAL PROVIDER;
+    ALTER ROLE db_owner ADD MEMBER "<azure_resource_name>";
+    ```
+
+    The `<azure_resource_name>` is the name of the Azure resource where LiveData Migrator or remote Azure hive agent is installed (for example: `myAzureVM`).
+
+    ```text title="Azure SQL database command for a user-assigned managed identity"
+    CREATE USER <managed_identity_name> FROM EXTERNAL PROVIDER;
+    ALTER ROLE db_owner ADD MEMBER <managed_identity_name>;
+    ```
+
+    The `<managed_identity_name>` is the name of the user-assigned managed identity (for example: `myManagedIdentity`).
+
+Once all pre-requirements are met, see the [system-assigned identity](#system-assigned-identity) or [user-assigned identity](#user-assigned-identity) parameters.
+
+###### System-assigned identity
+
+No other parameters are required for a system-managed identity.
+
+###### User-assigned identity
+
+The `--client-id` parameter must be specified:
+
+* **`--client-id`** The Client ID of your Azure managed identity.
 
 #### Optional Parameters
 
@@ -1532,10 +1625,58 @@ OPTIONS
 * **`--hdi-version`** The [HDI](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-component-versioning) version. This is relevant if you are intending to integrate your SQL server into a HDInsights cluster.
 * **`--insecure`** Define an insecure connection (SSL disabled) to the Azure SQL database server (default is `false`).
 
-#### Example
+#### Parameters for remote hive agents only
 
-```text
-hive agent add azure --name azureAgent --db-server-name mysqlserver --database-name mydb1 --database-user azureuser --database-password mypassword --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6
+* **`--host`** The host where the remote hive agent will be deployed.
+* **`--port`** The port for the remote hive agent to use on the remote host. Default is `5052`. This port is used to communicate with the local LiveData Migrator server.
+
+##### Parameters for automated deployment
+
+* **`--autodeploy`** The remote agent will be automatically deployed when this flag is used. If using this, the `--ssh-key` parameter must also be specified.
+* **`--ssh-user`** The SSH user to use for authentication on the remote host to perform automatic deployment (when using the `--autodeploy` parameter).
+* **`--ssh-key`** The absolute path to the SSH private key to use for authentication on the remote host to perform automatic deployment (when using the `--autodeploy` parameter).
+* **`--ssh-port`** The SSH port to use for authentication on the remote host to perform automatic deployment (when using the `--autodeploy` parameter). Default is port `22`.
+* **`--use-sudo`** All commands performed by the SSH user will use `sudo` on the remote host when performing automatic deployment (using the `--autodeploy` parameter).
+* **`--ignore-host-checking`** Ignore [strict host key checking](https://www.redhat.com/sysadmin/linux-knownhosts-failures) when performing the automatic deployment (using the `--autodeploy` parameter).
+
+##### Steps for manual deployment
+
+If you do not wish to use the `--autodeploy` function, follow these steps to deploy a remote hive agent for Azure SQL manually:
+
+1. Transfer the remote server installer to your remote host (Azure VM, HDI cluster node):
+
+   ```text title="Example of secure transfer from local to remote host"
+   scp /opt/wandisco/hivemigrator/hivemigrator-remote-server-installer.sh myRemoteHost:~
+   ```
+
+1. On your remote host, run the installer as root (or sudo) user in silent mode:
+
+   ```text
+   ./hivemigrator-remote-server-installer.sh -- --silent
+   ```
+
+1. On your remote host, start the remote server service:
+
+   ```text
+   service hivemigrator-remote-server start
+   ```
+
+1. On your local host, run the `hive agent add azure` command without using `--autodeploy` and its related parameters to configure your remote hive agent.
+
+   See the **Example for remote Azure SQL deployment - manual** example below for further guidance.
+
+#### Examples
+
+```text title="Example for local Azure SQL deployment with SQL username/password"
+hive agent add azure --name azureAgent --db-server-name mysqlserver --database-name mydb1 --auth-method SQL_PASSWORD --database-user azureuser --database-password mypassword --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6
+```
+
+```text title="Example for remote Azure SQL deployment with System-assigned managed identity - automated"
+hive agent add azure --name azureRemoteAgent --db-server-name mysqlserver --database-name mydb1 --auth-method AD_MSI --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6 --autodeploy --ssh-user root --ssh-key /root/.ssh/id_rsa --ssh-port 22 --host myRemoteHost.example.com --port 5052
+```
+
+```text title="Example for remote Azure SQL deployment with User-assigned managed identity - manual"
+hive agent add azure --name azureRemoteAgent --db-server-name mysqlserver --database-name mydb1 --auth-method AD_MSI --client-id b67f67ex-ampl-e2eb-bd6d-client9385id --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6 --host myRemoteHost.example.com --port 5052
 ```
 
 ----
