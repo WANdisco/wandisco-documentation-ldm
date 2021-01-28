@@ -30,11 +30,11 @@ Adding exclusions to an existing migration will change the future actions perfor
 
 ### Stop a migration
 
-When you start a migration, the "Start Migration" button will be replaced with a "Stop" button. Click it to stop the migration, suspending all current file transfer.
+When you start a migration, the "Start Migration" button will be replaced with a "Stop" button. Click it to stop the migration and suspend all current file transfer.
 
 ### Resume a migration
 
-When you stop a migration, the "Stop" button will be replaced with a "Resume" button. Click it to resume the migration. The migration will continue from where it left off.
+When you stop a migration, the "Stop" button will be replaced with a "Resume" button. Click it to resume the migration, which will continue from where it left off.
 
 ## Manage migrations with the CLI
 
