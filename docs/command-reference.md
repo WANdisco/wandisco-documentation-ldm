@@ -1390,9 +1390,7 @@ Get a text description of the overall status of migrations. Information is provi
 * Peak bandwidth observed over 300s interval.
 * Average file transfer rate per second over  10s, 60s, and 300s intervals.
 * Peak file transfer rate per second over a 300s interval.
-* List of live migrations with source path and migration id.
-* List of running migrations with source path and migration id.
-* List of non-running migrations source source path and migration id.
+* List of migrations, including static migrations, with source path and migration id with current progress, broken down by migration state: completed, live, stopped, running and ready.
 
 ```text title="Get migration status"
 NAME
@@ -1405,20 +1403,35 @@ SYNOPSYS
 #### Example
 
 ```text
-status
+WANdisco LiveMigrator >> status
 
-Total Migrations:  1
-Average Bandwidth: 0.00 Gb/s, 0.00 Gb/s, 0.00 Gb/s
-Peak Bandwidth:    0.00 Gb/s
-Average Files/s:   0, 0, 0
-Peak Files/s:      0
+Network             (10s)       (1m)       (30m)
+---------
+Average Throughput: 10.4 Gib/s  9.7 Gib/s  10.1 Gib/s
+Average Files/s:    425         412        403
 
-Live: 0
+11 Migrations                                     dd:hh:mm  dd:hh:mm
+-------------
+Complete: 1         Transferred         Excluded  Duration
+ /static1   5a93d5        67.1 GiB       2.3 GiB  00:12:34
 
-Running: 0
+Live:     3         Transferred         Excluded  Duration
+ /repl1     9088aa       143.2 GiB      17.3 GiB  00:00:34
+ /repl_psm1 a4a7e6       423.6 TiB       9.6 GiB  02:05:29
+ /repl5     ab140d       118.9 GiB       1.2 GiB  00:00:34
 
-Ready: 1
-     /repl1 5c7271676c8f858ad11011bfa155fc8e43b8fe32
+Running:  5         Transferred         Excluded  Duration  Remaining
+ /repl123   e3727c  30.3/45.2 GiB 67%    9.8 GiB  00:00:34  00:00:17
+ /repl2     88e4e7  26.2/32.4 GiB 81%    0.2 GiB  00:01:27  00:00:12
+ /repl3     372056   4.1/12.5 GiB 33%    1.1 GiB  00:00:25  00:01:05
+ /repl4     6bc813  10.6/81.7 TiB  8%   12.4 GiB  00:04:21  01:02:43
+ /replxyz   dc33cb   2.5/41.1 GiB  6%    6.5 GiB  01:00:12  07:34:23
+
+Ready:    2
+ /repl7     070910  543.2 GiB
+ /repltest  d05ca0  7.3 GiB
+
+WANdisco LiveMigrator >> status
 ```
 
 ## Bandwidth Policy Commands
