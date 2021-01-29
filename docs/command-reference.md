@@ -205,7 +205,7 @@ filesystem add gcs --file-system-id gcsAgent --bucket-name myGcsBucket --service
 
 Add a Hadoop Distributed File System as either a migration source or target using the `filesystem add hdfs` command.
 
-Creating an HDFS file system resource with this command will normally only be used when migrating to a target HDFS (rather than another storage service like ADLS Gen 2 or S3a). LiveData Migrator will attempt to auto-detect the *source* HDFS file system when started from the command line unless Kerberos is enabled on your source environment.
+Creating an HDFS resource with this command will normally only be used when migrating to a target HDFS (rather than another storage service like ADLS Gen 2 or S3a). LiveData Migrator will attempt to auto-detect the *source* HDFS when started from the command line unless Kerberos is enabled on your source environment.
 
 If Kerberos is enabled on your source environment, use the [`filesystem auto-discover-source hdfs`](#filesystem-auto-discover-source-hdfs) command to provide Kerberos credentials and auto-discover your source HDFS configuration.
 
