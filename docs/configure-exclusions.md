@@ -51,7 +51,7 @@ Once the exclusion is added and passed validation, it appears on the exclusion l
 1. Click the trash icon.
 
 :::note
-This will not remove the exclusion from an existing migration. See the [Remove exclusions from an existing migration](#remove-exclusions-from-an-existing-migration) section for guidance on how to do this.
+This will not remove the exclusion from an existing migration. See the [Remove exclusions from an existing migration](./manage-migrations.md#remove-exclusions-from-an-existing-migration) section for guidance on how to do this.
 :::
 
 :::note
