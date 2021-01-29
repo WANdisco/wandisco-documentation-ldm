@@ -8,11 +8,32 @@ This version of LiveData Migrator includes a **preview** of a feature that migra
 
 Ready to migrate metadata? First, connect to your metastores by adding Hive agents. Then, [define metadata rules](./define-metadata-rules.md) before [migrating metadata](./migrate-metadata.md).
 
-:::note
-Metadata migration functionality is only available when using the CLI. [Read the release notes](https://community.wandisco.com/s/article/WANdisco-LiveData-Migrator-Release-Notes-1-8-3) for more details about migrating metadata with LiveData Migrator.
-:::
+## Connect metastores with the UI
 
-## Add hive agents
+Connect to your metastores by adding agents and providing the required configuration to make a valid connection.
+
+### Add source agent
+
+Select your source storage from the Storage panel, and configure the source agent. The source agent can be any of the following distributions:
+
+* [Apache Hive](./command-reference.md#hive-agent-add-hive)
+* [AWS Glue Data Catalog](./command-reference.md#hive-agent-add-glue)
+* [Azure SQL](/command-reference.md#hive-agent-add-azure)
+
+
+
+### Add target agents
+
+Selecting to configure your _Target_ agent on the agent panel, see the links below for the configuration needed for each distribution:
+
+* [Azure SQL](/command-reference.md#hive-agent-add-azure)
+* [Local Filesystem](./command-reference.md#hive-agent-add-filesystem)
+* [AWS Glue Data Catalog](./command-reference.md#hive-agent-add-glue)
+* [Apache Hive](./command-reference.md#hive-agent-add-hive)
+
+## Connect metastores with the CLI
+
+### Add hive agents
 
 Add hive agents to connect your source and target metastores.
 
@@ -23,7 +44,7 @@ Add hive agents to connect your source and target metastores.
 | [`hive agent add glue`](./command-reference.md#hive-agent-add-glue) | Add a hive agent for an AWS Glue Data Catalog |
 | [`hive agent add hive`](./command-reference.md#hive-agent-add-hive) | Add a hive agent for a local or remote Apache Hive metastore |
 
-## Configure existing hive agents
+### Configure existing hive agents
 
 | Command | Action |
 |:---|:---|
@@ -32,7 +53,7 @@ Add hive agents to connect your source and target metastores.
 | [`hive agent configure glue`](./command-reference.md#hive-agent-configure-glue) | Change the configuration of an existing hive agent for the AWS Glue Data Catalog |
 | [`hive agent configure hive`](./command-reference.md#hive-agent-configure-hive) | Change the configuration of an existing hive agent for the Apache Hive metastore |
 
-## Manage hive agents
+### Manage hive agents
 
 | Command | Action |
 |:---|:---|
