@@ -1349,24 +1349,24 @@ SYNOPSYS
 The Azure hive agent requires a ADLS Gen2 storage account and container name, this is only for the purposes of generating the correct location for the metadata. The container will not be accessed by the agent and no data will be written to the container.
 :::
 
-* **`--db-server-name`** The Azure SQL database server name. Only the name given to the server is required, the `.database.windows.net` suffix should be omitted.
-* **`--database-name`** The Azure SQL database name.
-* **`--storage-account`** The name of the ADLS Gen 2 storage account.
-* **`--container-name`** The name of the container in the ADLS Gen2 storage account.
+* **`--db-server-name`** The Azure SQL database server name. Only the name given to the server is required, the `.database.windows.net` suffix should be omitted. This is referenced in the UI as **Azure SQL Server Name**.
+* **`--database-name`** The Azure SQL database name. This is referenced in the UI as **Azure SQL Database Name**.
+* **`--storage-account`** The name of the ADLS Gen 2 storage account. This is referenced in the UI as **ADLS Gen2 Storage Account Name**.
+* **`--container-name`** The name of the container in the ADLS Gen2 storage account. This is referenced in the UI as **ADLS Gen2 Container Name**.
 
 #### Authentication Parameters
 
 Choose one of the authentication methods listed and include the additional parameters required for the chosen method.
 
-* **`--auth-method`** The authentication method to use to connect to the Azure SQL server.  
+* **`--auth-method`** The authentication method to use to connect to the Azure SQL server. This is referenced in the UI as **Authentication Method**.  
   The following methods can be used:
-  * `SQL_PASSWORD` - Provide a username and password to access the database.
-  * `AD_MSI` - Use a system-assigned or user-assigned [managed identity](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types).
+  * `SQL_PASSWORD` - Provide a username and password to access the database. This is referenced in the UI as **SQL Password**.
+  * `AD_MSI` - Use a system-assigned or user-assigned [managed identity](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types). This is referenced in the UI as **Active Directory MSI**.
 
 ##### Required Parameters for SQL_PASSWORD
 
-* **`--database-user`** The user name to access the database.
-* **`--database-password`** The user password to access the database.
+* **`--database-user`** The user name to access the database. This is referenced in the UI as **Database Username**.
+* **`--database-password`** The user password to access the database. This is referenced in the UI as **Database Password**.
 
 ##### Required Parameters for AD_MSI
 
@@ -1401,14 +1401,14 @@ No other parameters are required for a system-managed identity.
 
 The `--client-id` parameter must be specified:
 
-* **`--client-id`** The Client ID of your Azure managed identity.
+* **`--client-id`** The Client ID of your Azure managed identity. This is referenced in the UI as **MSI Client ID**.
 
 #### Optional Parameters
 
-* **`--name`** The identifier to give to the new Hive agent.
-* **`--root-folder`** The root directory for the Azure database.
-* **`--hdi-version`** The [HDI](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-component-versioning) version. This is relevant if you are intending to integrate your SQL server into a HDInsights cluster.
-* **`--insecure`** Define an insecure connection (SSL disabled) to the Azure SQL database server (default is `false`).
+* **`--name`** The identifier to give to the new Hive agent. This is referenced in the UI as **Name**.
+* **`--root-folder`** The root directory for the Azure database. This is referenced in the UI as **Root Folder**.
+* **`--hdi-version`** The [HDI](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-component-versioning) version. This is relevant if you are intending to integrate your SQL server into a HDInsights cluster. This is referenced in the UI as **HDI Version**.
+* **`--insecure`** Define an insecure connection (SSL disabled) to the Azure SQL database server (default is `false`). This is referenced in the UI as **Use Secure Protocol**.
 
 #### Parameters for remote hive agents only
 
@@ -1517,15 +1517,15 @@ SYNOPSYS
 The Glue hive agent requires a URI for an S3 bucket, this is only for the purposes of generating the correct location for the metadata. No data will be written to the bucket.
 :::
 
-* **`--name`** The identifier to give to the new Hive agent.
-* **`--config-path`** The path to the directory containing the `glue-site.xml`.
-* **`--access-key`** The [AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
-* **`--secret-key`** The [AWS secret key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
+* **`--name`** The identifier to give to the new Hive agent. This is referenced in the UI as **Name**.
+* **`--config-path`** The path to the directory containing the `glue-site.xml`. This is referenced in the UI as **Advanced Settings -> Path**.
+* **`--access-key`** The [AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html). This is referenced in the UI as **Access Key**.
+* **`--secret-key`** The [AWS secret key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html). This is referenced in the UI as **Secret Key**.
 * **`--session-token`** The [AWS session token](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html). Only valid if using `SessionCredentialsProviderFactory` for the `--aws-catalog-credentials-provider-factory-class` parameter.
-* **`--glue-endpoint`** The [AWS Glue service endpoint](https://docs.aws.amazon.com/general/latest/gr/glue.html) for connections to the data catalog.
-* **`--aws-region`** The [AWS region](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) that your data catalog is located in (default is `us-east-1`).
-* **`--aws-catalog-credentials-provider-factory-class`** The [AWS catalog credentials provider factory class](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-specify-provider) (default is [DefaultAWSCredentialsProviderChain](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/index.html?com/amazonaws/auth/DefaultAWSCredentialsProviderChain.html)).
-* **`--default-fs`** The base URI of the filesystem to generate the locations within the database. This should be the URI for an S3 bucket that is accessible using the provided credentials (for example: `s3://test_bucket/`).
+* **`--glue-endpoint`** The [AWS Glue service endpoint](https://docs.aws.amazon.com/general/latest/gr/glue.html) for connections to the data catalog. This is referenced in the UI as **AWS Glue Service Endpoint**.
+* **`--aws-region`** The [AWS region](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) that your data catalog is located in (default is `us-east-1`). This is referenced in the UI as **AWS Region**.
+* **`--aws-catalog-credentials-provider-factory-class`** The [AWS catalog credentials provider factory class](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-specify-provider) (default is [DefaultAWSCredentialsProviderChain](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/index.html?com/amazonaws/auth/DefaultAWSCredentialsProviderChain.html)). This is referenced in the UI as **AWS Catalog Credentials Provider**.
+* **`--default-fs`** The base URI of the filesystem to generate the locations within the database. This should be the URI for an S3 bucket that is accessible using the provided credentials (for example: `s3://test_bucket/`). This is referenced in the UI as **Base URI of an S3 bucket**.
 
 #### Example
 
@@ -1559,15 +1559,14 @@ SYNOPSYS
                             [[--ssh-port] int]
                             [--use-sudo]
                             [--ignore-host-checking]
-
 ```
 
 #### Parameters for local or remote hive agents
 
-* **`--config-path`** The path to the directory containing the Hive configuration files (for example: `/etc/hive/conf`).
-* **`--kerberos-principal`** The Kerberos principal to use to access the Hive service (for example: `hive/_HOST@REALM.COM`). Not required if Kerberos is disabled.
-* **`--kerberos-keytab`** The path to the Kerberos keytab containing the principal to access the Hive service (for example: `/etc/security/keytabs/hive.service.keytab`). Not required if Kerberos is disabled.
-* **`--name`** The identifier to give to the new Hive agent.
+* **`--config-path`** The path to the directory containing the Hive configuration files (for example: `/etc/hive/conf`). This is referenced in the UI as **Override Default Hadoop Configuration Path**.
+* **`--kerberos-principal`** The Kerberos principal to use to access the Hive service (for example: `hive/_HOST@REALM.COM`). Not required if Kerberos is disabled. This is referenced in the UI as **Principal**.
+* **`--kerberos-keytab`** The path to the Kerberos keytab containing the principal to access the Hive service (for example: `/etc/security/keytabs/hive.service.keytab`). Not required if Kerberos is disabled. This is referenced in the UI as **Keytab**.
+* **`--name`** The identifier to give to the new Hive agent. This is referenced in the UI as **Name**.
 
 #### Parameters for remote hive agents only
 
