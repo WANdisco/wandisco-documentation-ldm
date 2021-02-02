@@ -6,19 +6,19 @@ sidebar_label: Define metadata rules
 
 Once you have [connected your metastores](./connect-metastores.md), define the metadata rules that determine the metadata you want to migrate.
 
+:::important
+Ensure that you have [migrated](./create-migration.md) the HCFS data for the databases and tables that you want to migrate.
+
+Both HCFS data and associated metadata are needed before successful queries can be run on migrated databases.
+:::
+
 ## Define metadata rules with the UI
 
-
+In the UI, metadata rules are defined when [creating a metadata migration](./migrate-metadata.md#create-a-metadata-migration-with-the-ui).
 
 ## Define metadata rules with the CLI
 
 ### Add hive rules
-
-:::important
-Ensure that you have [migrated](#migrate-data) the HCFS data for the databases and tables that you want to migrate.
-
-Both HCFS data and associated metadata are needed before successful queries can be run on migrated databases.
-:::
 
 Define which databases and tables you want to migrate by creating hive rules.
 

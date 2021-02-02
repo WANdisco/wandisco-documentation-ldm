@@ -10,26 +10,25 @@ Ready to migrate metadata? First, connect to your metastores by adding Hive agen
 
 ## Connect metastores with the UI
 
-Connect to your metastores by adding agents and providing the required configuration to make a valid connection.
-
 ### Add source agent
 
-Select your source storage from the Storage panel, and configure the source agent. The source agent can be any of the following distributions:
+LiveData Migrator will attempt to auto-discover and create a Hive agent for your source environment. Select your LiveData Migrator instance from the Storage panel and check whether an existing Hive agent is listed.
+
+If Kerberos is enabled on your cluster and HDFS is configured as your source storage, select to configure the existing Hive agent and provide the Kerberos credentials.
+
+Alternatively, add a new Hive agent. The source agent can be any of the following distributions:
 
 * [Apache Hive](./command-reference.md#hive-agent-add-hive)
 * [AWS Glue Data Catalog](./command-reference.md#hive-agent-add-glue)
 * [Azure SQL](/command-reference.md#hive-agent-add-azure)
-
-
 
 ### Add target agents
 
-Selecting to configure your _Target_ agent on the agent panel, see the links below for the configuration needed for each distribution:
+Select your LiveData Migrator instance from the Storage panel and add new Hive agents. LiveData Migrator supports target agents of the following distributions:
 
-* [Azure SQL](/command-reference.md#hive-agent-add-azure)
-* [Local Filesystem](./command-reference.md#hive-agent-add-filesystem)
-* [AWS Glue Data Catalog](./command-reference.md#hive-agent-add-glue)
 * [Apache Hive](./command-reference.md#hive-agent-add-hive)
+* [Azure SQL](/command-reference.md#hive-agent-add-azure)
+* [AWS Glue Data Catalog](./command-reference.md#hive-agent-add-glue)
 
 ## Connect metastores with the CLI
 

@@ -85,6 +85,10 @@ module.exports = {
               "type": "doc",
               "id": "migrate-metadata"
             },
+            {
+              "type": "doc",
+              "id": "manage-metadata-migrations"
+            },
           ]
         },
         {

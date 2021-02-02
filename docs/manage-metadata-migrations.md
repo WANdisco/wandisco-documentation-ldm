@@ -4,7 +4,31 @@ title: Manage metadata migrations (preview)
 sidebar_label: Manage metadata migrations
 ---
 
-Manage your metadata migrations with the following commands.
+Manage your metadata migrations with LiveData Migrator using either the [UI](#manage-metadata-migrations-with-the-ui) or [CLI](#manage-metadata-migrations-with-the-cli).
+
+## Manage metadata migrations with the UI
+
+The dashboard displays an overview of Hive migrations and their status, showing what pre-existing metadata has been moved and added since the migration started.
+
+Click **View migration** to see more detail.
+
+### Stop a Hive migration
+
+When you start a Hive migration, the **Start** button will be replaced with a **Stop** button. Click it to stop the migration and suspend all current file transfer.
+
+### Resume a Hive migration
+
+When you stop a migration, the **Stop** button will be replaced with a **Resume** button. Click it to resume the migration, which will continue from where it left off.
+
+### Delete a Hive migration
+
+:::note
+Hive migrations must be [stopped](#stop-a-hive-migration) before they can be deleted.
+:::
+
+When viewing a Hive migration, click on the **Details** panel. Select the option to **Delete** the Hive migration.
+
+## Manage metadata migrations with the CLI
 
 | Command | Action |
 |:---|:---|
