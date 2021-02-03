@@ -38,11 +38,6 @@ Use `source del` to delete information about a specific source file system by id
 ```text title="Delete a source"
 SYNOPSYS
         source del [--file-system-id] string
-
-OPTIONS
-        --file-system-id  string
-
-                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -64,10 +59,6 @@ Get information about the source file system configuration.
 ```text title="Show the source file system configuration"
 SYNOPSYS
         source fs show [--verbose]
-
-OPTIONS
-        --verbose
-                [Optional, default = false]
 ```
 
 #### Optional Parameters
@@ -97,42 +88,6 @@ SYNOPSYS
                                    [--insecure]
                                    [[--properties-files] list]
                                    [[--properties] string]
-
-OPTIONS
-        --file-system-id  string
-
-                [Mandatory]
-
-        --storage-account-name  string
-
-                [Mandatory]
-
-        --oauth2-client-id  string
-
-                [Mandatory]
-
-        --oauth2-client-secret  string
-
-                [Mandatory]
-
-        --oauth2-client-endpoint  string
-
-                [Mandatory]
-
-        --container-name  string
-
-                [Mandatory]
-
-        --insecure
-                [Optional, default = false]
-
-        --properties-files  list
-                Load properties from this file
-                [Optional, default = <none>]
-
-        --properties  string
-                Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
-                [Optional, default = <nothing>]
 ```
 
 #### Mandatory Parameters
@@ -172,34 +127,6 @@ SYNOPSYS
                                        [--insecure]
                                        [[--properties-files] list]
                                        [[--properties] string]
-
-OPTIONS
-        --file-system-id  string
-
-                [Mandatory]
-
-        --storage-account-name  string
-
-                [Mandatory]
-
-        --shared-key  string
-
-                [Mandatory]
-
-        --container-name  string
-
-                [Mandatory]
-
-        --insecure
-                [Optional, default = false]
-
-        --properties-files  list
-                Load properties from these files
-                [Optional, default = <nothing>]
-
-        --properties  string
-                Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
-                [Optional, default = <nothing>]
 ```
 
 #### Mandatory Parameters
@@ -238,43 +165,6 @@ SYNOPSYS
                            [--bucket-name] string
                            [[--properties-files] list]
                            [[--properties] string]
-
-OPTIONS
-        --file-system-id  string
-
-                [Mandatory]
-
-        --service-account-json-key-file  string
-
-                [Optional, default = <none>]
-
-        --service-account-p12-key-file  string
-
-                [Optional, default = <none>]
-
-        --service-account-json-key-file-server-location  string
-                Permanent location of the GCS KeyFile on the LiveData Migrator server
-                [Optional, default = <none>]
-
-        --service-account-p12-key-file-server-location  string
-                Permanent location of the GCS KeyFile on the LiveData Migrator server
-                [Optional, default = <none>]
-
-        --service-account-email  string
-                GCS Service Account Email
-                [Optional, default = <none>]
-
-        --bucket-name  string
-
-                [Mandatory]
-
-        --properties-files  list
-                Load properties from these files
-                [Optional, default = <nothing>]
-
-        --properties  string
-                Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
-                [Optional, default = <nothing>]
 ```
 
 #### Mandatory Parameters
@@ -330,42 +220,6 @@ SYNOPSYS
                             [--scan-only]
                             [[--properties-files] list]
                             [[--properties] string]
-
-OPTIONS
-        --file-system-id  string
-                Name of the filesystem
-                [Mandatory]
-
-        --default-fs  string
-
-                [Optional, default = <nothing>]
-
-        --user  string
-                FileSystem username to perform migration actions as
-                [Optional, default = <nothing>]
-
-        --kerberos-principal  string
-                Kerberos principal to authenticate with and perform migration actions as
-                [Optional, default = <none>]
-
-        --kerberos-keytab  string
-                Kerberos keytab to use when authenticating the provided kerberos principal
-                [Optional, default = <none>]
-
-        --source        
-                Add this filesystem as the source for migrations
-                [Optional, default = false]
-
-        --scan-only
-                [Optional, default = false]
-
-        --properties-files  list
-                Load properties from these files
-                [Optional, default = <nothing>]
-
-        --properties  string
-                Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
-                [Optional, default = <nothing>]
 ```
 
 #### Mandatory Parameters
@@ -456,7 +310,6 @@ filesystem add hdfs --file-system-id mytarget --default-fs hdfs://targetnameserv
 
 ```text title="Example for target single NameNode cluster"
 filesystem add hdfs --file-system-id mytarget --default-fs hdfs://namenode.targetdomain:8020 --user hdfs
-
 ```
 
 ----
@@ -473,30 +326,6 @@ SYNOPSYS
                                        [--scan-only]
                                        [[--properties-files] list]
                                        [[--properties] string]
-
-OPTIONS
-        --file-system-id  string
-                Name of the filesystem
-                [Mandatory]
-
-        --fs-root  string
-                Location in the local filesystem to chroot to
-                [Optional, default = <none>]
-
-        --source
-                Add this filesystem as a source for migrations
-                [Optional, default = false]
-
-        --scan-only
-                [Optional, default = false]
-
-        --properties-files  list
-                Load properties from these files
-                [Optional, default = <nothing>]
-
-        --properties  string
-                Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
-                [Optional, default = <nothing>]
 ```
 
 #### Mandatory Parameters
@@ -545,35 +374,6 @@ SYNOPSYS
                            [--credentials-provider] string
                            [[--properties-files] list]
                            [[--properties] list]
-
-OPTIONS
-        --file-system-id  string
-
-                [Mandatory]
-
-        --bucket-name  string
-
-                [Mandatory]
-
-        --access-key  string
-
-                [Optional, default = <none>]
-
-        --secret-key  string
-
-                [Optional, default = <none>]
-
-        --credentials-provider  string
-
-                [Optional, default = <none>]
-
-        --properties-files  list
-                Load properties from these files
-                [Optional, default = <none>]
-
-        --properties  string
-                Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
-                [Optional, default = <nothing>]
 ```
 
 #### Mandatory Parameters
@@ -666,15 +466,6 @@ You can also manually configure the source HDFS filesystem using the [`filesyste
 SYNOPSYS
         filesystem auto-discover-source hdfs [[--kerberos-principal] string]
                                              [[--kerberos-keytab] string]
-
-OPTIONS
-        --kerberos-principal  string
-                Kerberos principal to authenticate with and perform migration actions as
-                [Optional, default = <none>]
-
-        --kerberos-keytab  string
-                Kerberos keytab to use when authenticating the provided kerberos principal
-                [Optional, default = <none>]
 ```
 
 #### Kerberos parameters
@@ -711,11 +502,6 @@ Delete a specific file system resource by identifier. This leaves all migrated c
 ```text title="Delete a target"
 SYNOPSYS
         filesystem del [--file-system-id] string
-
-OPTIONS
-        --file-system-id  string
-
-                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -737,10 +523,6 @@ List defined file system resources.
 ```text title="List targets"
 SYNOPSYS
         filesystem list [--verbose]
-
-OPTIONS
-        --verbose
-                [Optional, default = false]
 ```
 
 #### Mandatory Parameters
@@ -756,14 +538,6 @@ View details for a file system resource.
 ```text title="Get target details"
 SYNOPSYS
         filesystem show [--file-system-id] string  [--verbose]
-
-OPTIONS
-        --file-system-id  string
-
-                [Mandatory]
-
-        --verbose
-                [Optional, default = false]
 ```
 
 #### Mandatory Parameters
@@ -909,19 +683,6 @@ SYNOPSYS
         exclusion add date [--exclusion-id] string
                            [--description] string
                            [--before-date] string
-
-OPTIONS
-        --exclusion-id  string
-
-                [Mandatory]
-
-        --description  string
-
-                [Mandatory]
-
-        --before-date  string
-                Expects the ISO format date-time, with an offset, e.g. "2011-12-03T10:15:30+01:00"
-                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -948,23 +709,6 @@ SYNOPSYS
                                 [--description] string
                                 [--value] long
                                 [--unit] string
-
-OPTIONS
-        --exclusion-id  string
-
-                [Mandatory]
-
-        --description  string
-
-                [Mandatory]
-
-        --value  long
-
-                [Mandatory]
-
-        --unit  string
-
-                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -991,19 +735,6 @@ SYNOPSYS
         exclusion add regex [--exclusion-id] string
                             [--description] string
                             [--regex] string
-
-OPTIONS
-        --exclusion-id  string
-
-                [Mandatory]
-
-        --description  string
-
-                [Mandatory]
-
-        --regex  string
-
-                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -1042,11 +773,6 @@ NAME
 
 SYNOPSYS
         exclusion del [--exclusion-id] string
-
-OPTIONS
-        --exclusion-id  string
-
-                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -1082,11 +808,6 @@ Get details for an individual exclusion policy by identifier.
 ```text title="Get details for a specific exclusion rule"
 SYNOPSYS
         exclusion show [--exclusion-id] string
-
-OPTIONS
-        --exclusion-id  string
-
-                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -1110,11 +831,6 @@ Stop a migration from transferring content to its target, placing it into the `S
 ```text title="Stop a migration"
 SYNOPSYS
         migration stop [--migration-id] string
-
-OPTIONS
-        --migration-id  string
-
-                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -1136,11 +852,6 @@ Resume a migration that you've stopped from transferring content to its target.
 ```text title="Resume a migration"
 SYNOPSYS
         migration resume [--migration-id] string
-
-OPTIONS
-        --migration-id  string
-
-                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -1162,11 +873,6 @@ Delete a stopped migration resource.
 ```text title="Delete a migration"
 SYNOPSYS
         migration del [--migration-id] string
-
-OPTIONS
-        --migration-id  string
-
-                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -1189,15 +895,6 @@ Associate an exclusion resource with a migration so that the exclusion policy ap
 SYNOPSYS
         migration exclusion add [--migration-id] string
                                 [--exclusion-id] string
-
-OPTIONS
-        --migration-id  string
-
-                [Mandatory]
-
-        --exclusion-id  string
-
-                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -1221,15 +918,6 @@ Remove an exclusion from association with a migration so that its policy no long
 SYNOPSYS
         migration exclusion del [--migration-id] string
                                 [--exclusion-id] string
-
-OPTIONS
-        --migration-id  string
-
-                [Mandatory]
-
-        --exclusion-id  string
-
-                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -1268,30 +956,6 @@ SYNOPSYS
                       [[--exclusions] string]
                       [[--action-policy] string]
                       [--auto-start]
-
-OPTIONS
-        --migration-id  string
-
-                [Optional, default = <nothing>]
-
-        --path  string
-
-                [Mandatory]
-
-        --target  string
-
-                [Mandatory]
-
-        --exclusions  string
-
-                [Optional, default = <none>]
-
-        --action-policy  string
-
-                [Optional, default = com.wandisco.livemigrator2.migration.OverwriteActionPolicy]
-
-        --auto-start
-                [Optional, default = false]
 ```
 
 #### Mandatory Parameters
@@ -1333,11 +997,6 @@ Start a migration that was created without the `--auto-start` parameter.
 ```text title="Start a migration"
 SYNOPSYS
         migration run [--migration-id] string
-
-OPTIONS
-        --migration-id  string
-
-                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -1362,11 +1021,6 @@ NAME
 
 SYNOPSYS
         migration show [--migration-id] string
-
-OPTIONS
-        --migration-id  string
-
-                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -1458,15 +1112,6 @@ If no policy is defined, the default policy is unlimited bandwidth.
 ```text title="Set the application bandwidth limit, in bytes per second"
 SYNOPSYS
         bandwidth policy set [--value] long  [--unit] string
-
-OPTIONS
-        --value  long
-
-                [Mandatory]
-
-        --unit  string
-
-                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -1516,85 +1161,6 @@ A small service will be deployed on this remote host so that the hive agent can 
 ```text title="Add Azure SQL agent"
 SYNOPSYS
         hive agent add azure [[--name] string]  [--db-server-name] string  [--database-name] string  [--database-user] string  [--database-password] string  [--storage-account] string  [--container-name] string  [[--root-folder] string]  [[--hdi-version] string]  [[--insecure] boolean]
-
-OPTIONS
-        --name  string
-                name of the agent
-                [Optional, default = <nothing>]
-
-        --db-server-name  string
-                Azure SQL database server name
-                [Mandatory]
-
-        --database-name  string
-                Azure SQL database name
-                [Mandatory]
-
-        --database-user  string
-                Azure SQL database user
-                [Optional, default = <nothing>]
-
-        --database-password  string
-                Azure SQL database password
-                [Optional, default = <nothing>]
-
-        --auth-method  azure-sqlauthentication-method
-                Azure SQL database connection authentication method (SQL_PASSWORD, AD_MSI, AD_INTEGRATED, AD_PASSWORD, ACCESS_TOKEN)
-                [Mandatory]
-
-        --client-id  string
-                Azure resource's clientId
-                [Optional, default = <nothing>]
-
-        --storage-account  string
-                Azure storage account name
-                [Mandatory]
-
-        --container-name  string
-                Azure storage account container name
-                [Mandatory]
-
-        --root-folder  string
-                Azure root folder
-                [Optional, default = <nothing>]
-
-        --hdi-version  string
-                Azure HDI version (3.6 or 4.0)
-                [Optional, default = <nothing>]
-
-        --insecure  boolean
-                use insecure connection to Azure
-                [Optional, default = <nothing>]
-
-        --host  string
-                host where remote hive agent will be deployed
-                [Optional, default = <nothing>]
-
-        --port  integer
-                port to use by remote hive agent
-                [Optional, default = <nothing>]
-
-        --autodeploy  boolean
-                automatically deploy remote agent. If specified, you must specify sshKey to connect.
-                [Optional, default = <none>]
-
-        --ssh-user  string
-                ssh user to use for authentication on remote host to perform automatic deployment
-                [Optional, default = <nothing>]
-
-        --ssh-key  file
-                ssh key to use for authentication on remote host to perform automatic deployment
-                [Optional, default = <nothing>]
-
-        --ssh-port  int
-                ssh port to use to perform automatic deployment
-                [Optional, default = 22]
-
-        --use-sudo      use sudo for privileged commands while performing remote installation
-                [Optional, default = false]
-
-        --ignore-host-checking  ignore strict host key checking for unknown hosts
-                [Optional, default = false]
 ```
 
 #### Mandatory Parameters
@@ -1727,19 +1293,6 @@ Add a filesystem hive agent to connect to your host's local filesystem using the
 ```text title="Add filesystem agent"
 SYNOPSYS
         hive agent add filesystem [--filesystem-id] string  [--root-folder] string  [[--name] string]
-
-OPTIONS
-        --filesystem-id  string
-                filesystem id to use by filesystem agent
-                [Mandatory]
-
-        --root-folder  string
-                path to use as root folder by filesystem agent
-                [Mandatory]
-
-        --name  string
-                name of the agent
-                [Optional, default = <nothing>]
 ```
 
 #### Mandatory Parameters
@@ -1766,43 +1319,6 @@ Add an [AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html) 
 ```text title="Add AWS Glue agent"
 SYNOPSYS
         hive agent add glue [[--name] string]  [[--config-path] string]  [[--access-key] string]  [[--secret-key] string]  [[--session-token] string]  [[--glue-endpoint] string]  [[--aws-region] string]  [[--aws-catalog-credentials-provider-factory-class] string]  [[--default-fs] string]
-
-OPTIONS
-        --name  string
-                name of the agent
-                [Optional, default = <nothing>]
-
-        --config-path  string
-                path to a directory containing glue-site.xml
-                [Optional, default = <nothing>]
-
-        --access-key  string
-                AWS access key. Valid for StaticCredentialsProviderFactory and SessionCredentialsProviderFactory.
-                [Optional, default = <nothing>]
-
-        --secret-key  string
-                AWS secret key. Valid for StaticCredentialsProviderFactory and SessionCredentialsProviderFactory.
-                [Optional, default = <nothing>]
-
-        --session-token  string
-                AWS session token. Valid only for SessionCredentialsProviderFactory
-                [Optional, default = <nothing>]
-
-        --glue-endpoint  string
-                AWS Glue endpoint
-                [Optional, default = <nothing>]
-
-        --aws-region  string
-                AWS region. Defaults to us-east-1
-                [Optional, default = <nothing>]
-
-        --aws-catalog-credentials-provider-factory-class  string
-                AWS catalog credentials provider factory class.
-                [Optional, default = <nothing>]
-
-        --default-fs  string
-                base URI of the filesystem to rewrite LOCATION strings into. I.e. s3://test_bucket/
-                [Optional, default = <nothing>]
 ```
 
 #### Optional Parameters
@@ -1839,51 +1355,6 @@ A small service will be deployed on this remote host so that the hive agent can 
 SYNOPSYS
         hive agent add hive [[--config-path] string]  [[--kerberos-principal] string]  [[--kerberos-keytab] string]  [[--name] string]  [[--host] string]  [[--port] integer]  [--autodeploy]  [[--ssh-user] string]  [[--ssh-key] file]  [[--ssh-port] int]  [--use-sudo]  [--ignore-host-checking]
 
-OPTIONS
-        --config-path  string
-                path to a directory containing hive configuration files
-                [Optional, default = <nothing>]
-
-        --kerberos-principal  string
-                kerberos principal to use
-                [Optional, default = <nothing>]
-
-        --kerberos-keytab  string
-                path to kerberos keytab file
-                [Optional, default = <nothing>]
-
-        --name  string
-                name of the agent
-                [Optional, default = <nothing>]
-
-        --host  string
-                host where remote hive agent will be deployed
-                [Optional, default = <nothing>]
-
-        --port  integer
-                port to use by remote hive agent
-                [Optional, default = <nothing>]
-
-        --autodeploy    automatically deploy remote agent. If specified, you must specify sshKey to connect.
-                [Optional, default = false]
-
-        --ssh-user  string
-                ssh user to use for authentication on remote host to perform automatic deployment
-                [Optional, default = <nothing>]
-
-        --ssh-key  file
-                ssh key to use for authentication on remote host to perform automatic deployment
-                [Optional, default = <nothing>]
-
-        --ssh-port  int
-                ssh port to use to perform automatic deployment
-                [Optional, default = 22]
-
-        --use-sudo      use sudo for privileged commands while performing remote installation
-                [Optional, default = false]
-
-        --ignore-host-checking  ignore strict host key checking for unknown hosts
-                [Optional, default = false]
 ```
 
 #### Parameters for local or remote hive agents
@@ -1960,11 +1431,6 @@ Check the configuration of an existing hive agent using `hive agent check`.
 ```text title="Check if agent configuration is valid & connectable"
 SYNOPSYS
         hive agent check [--name] string
-
-OPTIONS
-        --name  string
-                name of the agent
-                [Mandatory]
 ```
 
 #### Example
@@ -2046,11 +1512,6 @@ Delete the specified hive agent with `hive agent delete`.
 ```text title="Delete agent"
 SYNOPSYS
         hive agent delete [--name] string
-
-OPTIONS
-        --name  string
-                name of the agent
-                [Mandatory]
 ```
 
 #### Example
@@ -2068,10 +1529,6 @@ List configured hive agents with `hive agent list`.
 ```text title="List already added agents"
 SYNOPSYS
         hive agent list [--detailed]
-
-OPTIONS
-        --detailed
-                [Optional, default = false]
 ```
 
 #### Example
@@ -2089,11 +1546,6 @@ Show the configuration of a hive agent with `hive agent show`.
 ```text title="Show agent configuration"
 SYNOPSYS
         hive agent show [--name] string
-
-OPTIONS
-        --name  string
-                name of the agent
-                [Mandatory]
 ```
 
 #### Example
@@ -2134,19 +1586,6 @@ Specify these rules when [starting a new migration](#hive-migration-add) to cont
 ```text title="Add new hive migration rule"
 SYNOPSYS
         hive rule add [--database-pattern] string  [--table-pattern] string  [[--name] string]
-
-OPTIONS
-        --database-pattern  string
-                Pattern to match database name. For example db* would include all databases starting with 'db', like 'dbname1'.
-                [Mandatory]
-
-        --table-pattern  string
-                Pattern to match table name. For example table* would include all tables starting with 'table', like 'tablename1'.
-                [Mandatory]
-
-        --name  string
-                Rule name
-                [Optional, default = <nothing>]
 
 ALSO KNOWN AS
         hive rule create
@@ -2196,11 +1635,6 @@ Delete a hive rule.
 ```text title="Delete selected hive migration rule"
 SYNOPSYS
         hive rule delete [--name] string
-
-OPTIONS
-        --name  string
-                Rule name
-                [Mandatory]
 ```
 
 #### Example
@@ -2235,11 +1669,6 @@ Show details of a hive rule.
 ```text title="Show rule details"
 SYNOPSYS
         hive rule show [--name] string
-
-OPTIONS
-        --name  string
-                Rule name
-                [Mandatory]
 ```
 
 #### Example
@@ -2263,29 +1692,6 @@ Create a new hive migration to initiate metadata migration from your source meta
 ```text title="create new migration"
 SYNOPSYS
         hive migration add [--source] string  [--target] string  [[--rule-names] list]  [[--name] string]  [--auto-start]  [--once]
-
-OPTIONS
-        --source  string
-                name of agent which should be a source of migration
-                [Mandatory]
-
-        --target  string
-                name of agent which should be a target of migration
-                [Mandatory]
-
-        --rule-names  list
-                rule name or a list of rule names to match objects on a source & target for migration. List of rules can be specified separated by the comma (','). You can also use quotes if there are spaces around commas.
-                [Optional, default = <nothing>]
-
-        --name  string
-                migration name
-                [Optional, default = <nothing>]
-
-        --auto-start    immediately start created migration
-                [Optional, default = <nothing>]
-
-        --once  migration will be stopped after all matching objects are migrated
-                [Optional, default = <nothing>]
 ```
 
 #### Mandatory Parameters
@@ -2319,14 +1725,6 @@ A hive migration must be stopped state before it can be deleted, this can be ach
 ```text title="Delete migration from the list, migration should be stopped"
 SYNOPSYS
         hive migration delete [--name] string  [--force-stop]
-
-OPTIONS
-        --name  string
-                migration name
-                [Mandatory]
-
-        --force-stop    also stop migration if it's in progress. By default, migration should be stopped before delete.
-                [Optional, default = false]
 ```
 
 #### Example
@@ -2361,11 +1759,6 @@ Pause a hive migration or a list of hive migrations (comma-separated).
 ```text title="Pause migration from the list"
 SYNOPSYS
         hive migration pause [--names] list
-
-OPTIONS
-        --names  list
-                migration name. List of migrations can be specified separated by comma (','). You can also use quotes if there are spaces around commas.
-                [Mandatory]
 ```
 
 #### Example
@@ -2398,11 +1791,6 @@ Resume a paused hive migration or a list of paused hive migrations (comma-separa
 ```text title="Resume migration from the list"
 SYNOPSYS
         hive migration resume [--names] list
-
-OPTIONS
-        --names  list
-                migration name. List of migrations can be specified separated by comma (','). You can also use quotes if there are spaces around commas.
-                [Mandatory]
 ```
 
 #### Example
@@ -2435,11 +1823,6 @@ Display information about a hive migration.
 ```text title="Show info about specific migration"
 SYNOPSYS
         hive migration show [--name] string
-
-OPTIONS
-        --name  string
-                migration name
-                [Mandatory]
 ```
 
 #### Example
@@ -2461,14 +1844,6 @@ Specify the `--once` parameter to perform a one-time migration, and not continuo
 ```text title="Start migration"
 SYNOPSYS
         hive migration start [--names] list  [--once]
-
-OPTIONS
-        --names  list
-                migration name. List of migrations can be specified separated by comma (','). You can also use quotes if there are spaces around commas.
-                [Mandatory]
-
-        --once
-                [Optional, default = false]
 ```
 
 #### Example
@@ -2488,10 +1863,6 @@ Specify the `--once` parameter to perform a one-time migration, and not continuo
 ```text title="Start migration"
 SYNOPSYS
         hive migration start --all [--once]
-
-OPTIONS
-        --once
-                [Optional, default = false]
 ```
 
 #### Example
@@ -2509,11 +1880,6 @@ Show the status of a hive migration or a list of hive migrations (comma-separate
 ```text title="Show migration status"
 SYNOPSYS
         hive migration status [--names] list
-
-OPTIONS
-        --names  list
-                migration name. List of migrations can be speficied separated by comma (','). You can also use quotes if there are spaces around commas.
-                [Mandatory]
 ```
 
 #### Example
@@ -2546,11 +1912,6 @@ Stop a running hive migration or a list of running hive migrations (comma-separa
 ```text title="Stop running migration"
 SYNOPSYS
         hive migration stop [--names] list
-
-OPTIONS
-        --names  list
-                migration name. List of migrations can be speficied separated by comma (','). You can also use quotes if there are spaces around commas.
-                [Mandatory]
 ```
 
 #### Example
@@ -2585,10 +1946,6 @@ Show the details of the active license.
 ```text title="show used license"
 SYNOPSYS
         license show [--full]
-
-OPTIONS
-        --full  show license details
-                [Optional, default = false]
 ```
 
 ----
@@ -2600,11 +1957,6 @@ Upload a new license by submitting its location on the local filesystem.
 ```text title="upload license file"
 SYNOPSYS
         license upload [--path] string
-
-OPTIONS
-        --path  string
-                path to the license file in the local filesystem
-                [Mandatory]
 ```
 
 #### Example
@@ -2631,22 +1983,6 @@ SYNOPSYS
                              [--ssl]
                              [[--port] int]
                              [[--timeout] integer]
-
-OPTIONS
-        --host  string
-                host to connect to
-                [Mandatory]
-
-        --ssl   use ssl connection
-                [Optional, default = false]
-
-        --port  int
-                port of the service, either http or https, depending on the ssl flag
-                [Optional, default = 18080]
-
-        --timeout  integer
-                override default(5m) connection timeout in milliseconds
-                [Optional, default = <nothing>]
 ```
 
 #### Mandatory Parameters
@@ -2681,22 +2017,6 @@ SYNOPSYS
                              [--ssl]
                              [[--port] int]
                              [[--timeout] long]
-
-OPTIONS
-        --host  string
-                host to connect to
-                [Mandatory]
-
-        --ssl   use ssl connection
-                [Optional, default = false]
-
-        --port  int
-                host to connect to
-                [Optional, default = 6780]
-
-        --timeout  long
-                override default(5m) connection timeout in milliseconds
-                [Optional, default = <nothing>]
 ```
 
 #### Mandatory Parameters
@@ -2737,11 +2057,6 @@ Prints whatever text that you write to the console. This can be used to sanity c
 ```text title="Print message"
 SYNOPSYS
         echo [--message] string
-
-OPTIONS
-        --message  string
-
-                [Mandatory]
 ```
 
 ----
@@ -2772,10 +2087,6 @@ Use the `help` command to get details of all commands available from the action 
 SYNOPSYS
         help [[-C] string]
 
-OPTIONS
-        -C or --command  string
-                The command to obtain help for.
-                [Optional, default = <none>]
 ```
 
 #### Example
@@ -2801,11 +2112,6 @@ Entering `history --file <filename>` will save up to 500 most recently entered c
 ```text title="Display or save the history of previously run commands"
 SYNOPSYS
         history [[--file] file]
-
-OPTIONS
-        --file  file
-                A file to save history to.
-                [Optional, default = <none>]
 ```
 
 #### Optional Parameters
@@ -2821,10 +2127,6 @@ Load and execute commands from a text file using the `script --file <filename>` 
 ```text title="Read and execute commands from a file"
 SYNOPSYS
         script [--file] file
-
-OPTIONS
-        --file  file
-                [Mandatory]
 ```
 
 #### Mandatory Parameters
