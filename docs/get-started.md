@@ -29,7 +29,7 @@ You can use LiveData Migrator's command line interface (CLI) to create and manag
 Run the following command to log in to the LiveData Migrator CLI:
 
 ```bash
-livedata-migrator --host=localhost
+livedata-migrator
 ```
 
 The command prompt will then load and automatically connect to the LiveData Migrator services located on your host.
