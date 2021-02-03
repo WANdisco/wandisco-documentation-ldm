@@ -4,7 +4,7 @@ title: Create a metadata migration (preview)
 sidebar_label: Create a metadata migration
 ---
 
- Migrations will transfer existing metadata, as well as any subsequent changes made to the source metadata (in its scope), while HiveMigrator keeps working.
+Migrations will transfer existing metadata, as well as any subsequent changes made to the source metadata (in its scope), while HiveMigrator keeps working.
 
 ## Create a metadata migration with the UI
 
@@ -23,6 +23,8 @@ Both HCFS data and associated metadata are needed before successful queries can 
 4. Create a database pattern and a table pattern using [regex](https://regex101.com/) that will match the databases and tables you want to migrate.
 
    For example, using `test*` for the database pattern will match any database with "test" at the beginning of its name, such as `test01`, `test02`, `test03`.
+
+5. Click **Create** to start the metadata migration with the parameters provided.
 
 ## Create a metadata migration with the CLI
 

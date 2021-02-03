@@ -12,13 +12,21 @@ The dashboard displays an overview of Hive migrations and their status, showing 
 
 Click **View migration** to see more detail.
 
-### Stop a Hive migration
+### Pause a Hive migration
 
-When you start a Hive migration, the **Start** button will be replaced with a **Stop** button. Click it to stop the migration and suspend all current file transfer.
+When you start a Hive migration, the **Pause** button will be become available. Click it to pause the migration and suspend all current file transfer.
+
+Paused migrations can be [resumed](#resume-a-hive-migration) at any time.
 
 ### Resume a Hive migration
 
-When you stop a migration, the **Stop** button will be replaced with a **Resume** button. Click it to resume the migration, which will continue from where it left off.
+When you pause a migration, the **Pause** button will be replaced with a **Resume** button. Click it to resume the migration, which will continue from where it left off.
+
+### Stop a Hive migration
+
+When you start a Hive migration, the **Start** button will be replaced with a **Stop** button. Click it to stop the migration and suspend all current file transfer indefinitely.
+
+A stopped Hive migration cannot be resumed.
 
 ### Delete a Hive migration
 
