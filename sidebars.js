@@ -53,10 +53,6 @@ module.exports = {
               "type": "doc",
               "id": "configure-exclusions"
             },
-            {
-              "type": "doc",
-              "id": "configuration-data-migrations"
-            },
 
             {
               "type": "doc",
@@ -110,6 +106,10 @@ module.exports = {
             {
               "type": "doc",
               "id": "configuration-ui"
+            },
+            {
+              "type": "doc",
+              "id": "configuration-data-migrations"
             },
             {
               "type": "doc",

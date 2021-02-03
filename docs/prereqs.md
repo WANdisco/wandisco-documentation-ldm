@@ -31,9 +31,9 @@ Ready to start? Check the prerequisites and then follow these steps to get ready
 * **200 GB** (SSD-backed volumes) (minimum **100 GB**)
 * **2 Gbps** minimum network. Your network bandwidth must be able to cope with transferring data and ongoing changes from your source storage.
 
-## Commercial Use Configuration
+## Production Use Configuration
 
-When using LiveData Migrator with moderate to larger-sized data loads, it's recommended you consider configuring [Data Migration properties](./configuration-data-migrations) to ensure smooth operation. 
+We recommended you configure [Data Migration properties](./configuration-data-migrations) on your Hadoop Distributed File System to ensure smooth operation.
 
 ## Next Steps
 
