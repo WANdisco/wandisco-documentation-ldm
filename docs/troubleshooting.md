@@ -9,6 +9,8 @@ This article details issues that you may face when installing and using LiveData
 
 Please ensure you have read the [Prerequisites](./prereqs.md) as you may experience problems if you miss any of these requirements.
 
+We recommend making use of logs when troubleshooting LiveData Migrator. See [Log Commands](./command-reference.md#log-commands) for information on how to enable logging across various levels. Logs for each component of LiveData Migrator are stored in the `/var/log/wandisco/` directory within the LiveData Migrator installation directory, with a directory for each component, such as `/var/log/wandisco/ui` for the LiveData UI.
+
 ## Insufficient container permissions with an ADLS2 target filesystem when using OAuth2 authentication
 
 
