@@ -34,7 +34,7 @@ A stopped Hive migration cannot be resumed.
 Hive migrations must be [stopped](#stop-a-hive-migration) before they can be deleted.
 :::
 
-When viewing a Hive migration, click on the **Details** panel. Select the option to **Delete** the Hive migration.
+When viewing a Hive migration, click on the **Settings** panel. Select the option to **Delete** the Hive migration.
 
 ## Manage metadata migrations with the CLI
 
