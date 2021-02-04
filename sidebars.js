@@ -113,6 +113,10 @@ module.exports = {
             },
             {
               "type": "doc",
+              "id": "configuration-data-migrations"
+            },
+            {
+              "type": "doc",
               "id": "configuration-metadata"
             }
           ]
