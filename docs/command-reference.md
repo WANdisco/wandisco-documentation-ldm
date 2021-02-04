@@ -820,6 +820,115 @@ SYNOPSYS
 exclusion show --exclusion-id 100mbfiles
 ```
 
+## Path Mapping Commands
+
+----
+
+### `path mapping add`
+
+Create a path mapping that allows you to define separate target path for a specific target filesystem. These will be automatically applied to a new migration.
+
+:::note
+Path mappings cannot be applied to existing migrations. Delete and recreate a migration if you want a path mapping to apply.
+:::
+
+```text title="Create a new path mapping"
+SYNOPSYS
+        path mapping add [[--path-mapping-id] string]
+                         [--source-path] string
+                         [--target] string
+                         [--target-path] string
+                         [--description] string
+```
+
+#### Mandatory Parameters
+
+* **`--source-path`** The path on the source filesystem.
+* **`--target`** The target filesystem id (value defined for the `--file-system-id` parameter).
+* **`--target-path`** The path for the target filesystem.
+* **`--description`** Description of the path mapping enclosed in quotes (`"text"`).
+
+#### Optional Parameters
+
+* **`--path-mapping-id`** An identifier for this path mapping. An identifier will be auto-generated if one is not provided.
+
+#### Example
+
+```text title="Example for HDP to HDI - default Hive warehouse directory"
+path mapping add --path-mapping-id hdp-hdi --source-path /apps/hive/warehouse --target mytarget --target-path /hive/warehouse --description "HDP to HDI - Hive warehouse directory"
+```
+
+----
+
+### `path mapping del`
+
+Delete a path mapping.
+
+:::note
+Deleting a path mapping will not affect any existing migrations that have the path mapping applied. Delete and recreate a migration if you no longer want a previous path mapping to apply.
+:::
+
+```text title="Delete a path mapping"
+SYNOPSYS
+        path mapping del [--path-mapping-id] string
+```
+
+#### Mandatory Parameters
+
+* **`--path-mapping-id`** The identifier of the path mapping.
+
+#### Example
+
+```text
+path mapping del --path-mapping-id hdp-hdi
+```
+
+----
+
+### `path mapping list`
+
+List all path mappings.
+
+```text title="List all path mappings"
+SYNOPSYS
+        path mapping list [[--target] string]
+```
+
+#### Optional Parameters
+
+* **`--target`** List path mappings for the specified target filesystem id.
+
+#### Examples
+
+```text title="Example for listing all path mappings"
+path mapping list --target hdp-hdi
+```
+
+```text title="Example for listing path mappings for a specific target"
+path mapping list --target hdp-hdi
+```
+
+----
+
+### `path mapping show`
+
+Show details of a specified path mapping.
+
+```text title="Get path mapping details"
+SYNOPSYS
+        path mapping show [--path-mapping-id] string
+```
+
+#### Optional Parameters
+
+* **`--path-mapping-id`** The identifier of the path mapping.
+
+#### Example
+
+```text
+path mapping show --path-mapping-id hdp-hdi
+```
+
 ## Migration Commands
 
 ----

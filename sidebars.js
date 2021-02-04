@@ -47,6 +47,10 @@ module.exports = {
             },
             {
               "type": "doc",
+              "id": "create-path-mappings"
+            },
+            {
+              "type": "doc",
               "id": "create-migration"
             },
             {
