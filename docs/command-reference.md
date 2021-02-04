@@ -1054,9 +1054,13 @@ SYNOPSYS
         status
 ```
 
+### Optional Parameters
+
+* **`--transfers`** Displays overall performance information about data transfers across the last 10 seconds, 1 minute and 30 minutes.
+
 #### Example
 
-```text
+```text title="Status"
 WANdisco LiveMigrator >> status
 
 Network             (10s)       (1m)       (30m)
@@ -1086,6 +1090,30 @@ Ready:    2
  /repltest  d05ca0  7.3 GiB
 
 WANdisco LiveMigrator >> status
+```
+
+```text title="Status with --transfers"
+WANdisco LiveMigrator >> status --transfers
+
+Files (10s) (1m) (30m)
+
+Average Migrated/s: 362 158 4781
+< 1 KB 14 27 3761
+< 1 MB 151 82 0
+< 1 GB 27 1 2
+< 1 PB 0 0 0
+< 1 EB 0 0 0
+
+Peak Migrated/s: 505 161 8712
+< 1 KB 125 48 7761
+< 1 MB 251 95 4
+< 1 GB 29 7 3
+< 1 PB 0 0 0
+< 1 EB 0 0 0
+
+Average Scanned/s: 550 561 467
+Average Rescanned/s: 24 45 56
+Average Excluded/s: 7 7 6
 ```
 
 ## Bandwidth Policy Commands
