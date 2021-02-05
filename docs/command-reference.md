@@ -351,12 +351,11 @@ SYNOPSYS
 ```text
 filesystem add local --file-system-id mytarget --fs-root ./tmp --source
 ```
+
 ##### Local filesystem as a target
 
 ```text
 filesystem add local --file-system-id mytarget --fs-root ./Users/username/destinationfolder/
-=======
-
 ```
 
 ----
