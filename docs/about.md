@@ -8,7 +8,7 @@ LiveData Migrator _migrates changing data_ at scale from HDFS to your choice of 
 
 The latest version of LiveData Migrator includes a **preview** of functionality that you can use to migrate metadata. See the [Migrate metadata](./connect-metastores.md) section for instructions on how to use it.
 
-Read the release notes (link TBA) to get the latest information about the current version of LiveData Migrator.
+[Read the release notes](https://community.wandisco.com/s/article/Release-Notes-WANdisco-LiveData-Migrator-Release-Notes-1-10) to get the latest information about the current version of LiveData Migrator.
 
 :::note
 If you are using a previous version of LiveData Migrator, use the numbered dropdown at the top right of this page to get the right docs for you.
