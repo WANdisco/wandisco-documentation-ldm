@@ -1,6 +1,6 @@
 const versions = require('./versions.json');
 
-const currentVersion = '1.10.0';
+const currentVersion = '1.11.0';
 
 //const baseUrl = process.env.NODE_ENV === 'development' ? '/live-data-migrator/' : '/';
 
