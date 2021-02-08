@@ -826,7 +826,7 @@ exclusion show --exclusion-id 100mbfiles
 
 ### `path mapping add`
 
-Create a path mapping that allows you to define separate target path for a specific target filesystem. These will be automatically applied to a new migration.
+Create a path mapping that allows you to define a separate target path for a specific target filesystem. These will be automatically applied to a new migration.
 
 :::note
 Path mappings cannot be applied to existing migrations. Delete and recreate a migration if you want a path mapping to apply.
