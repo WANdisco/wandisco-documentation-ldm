@@ -131,10 +131,30 @@ LiveData Migrator will poll the Hadoop cluster for NameNode events using the [HD
 | `hdfs.inotify.poll.period` | The length of time in milliseconds between each event listener poll. <br/>**Default value**: `10` <br/>**Allowed values**: An integer value |
 | `hdfs.inotify.sleep.period` | The length of time in milliseconds for delaying the event listener poll after 10 consecutive retry failures. <br/>**Default value**: `10` <br/>**Allowed values**: An integer value |
 
-## HDFS Marker Storage
+## HDFS marker storage
 
 LiveData Migrator uses marker files to manage the migration of files on paths. By default, these are stored in the HDFS user's home directory if possible. If this is not possible, they will be stored in the root directory of the migration on the source filesystem. To configure another directory to store marker files in, alter the following property:
 
 | Name | Details |
 | --- | --- |
 | `hdfs.fs.marker.dir` | The directory in which marker files are stored. <br />**Default value**: (none) <br /> **Allowed values:** The full path to a directory in which database files will be managed. It must be writable by the user running LiveData Migrator (typically `hdfs`.)|
+
+## Proxy Auto-Config (PAC) file support
+
+LiveData Migrator allows the use of a [PAC](https://en.wikipedia.org/wiki/Proxy_auto-config) file so that traffic can be routed through HTTP proxies ([examples of PAC files](https://developer.mozilla.org/en-US/docs/Web/HTTP/Proxy_servers_and_tunneling/Proxy_Auto-Configuration_PAC_file#example_1)).
+
+| Name | Details |
+| --- | --- |
+| `lm.proxy.pac` | Path to the PAC file on the local filesystem. <br/>**Default value**: (none) <br/>**Allowed values**: A path that includes the file URI prefix (example: `file:///tmp/proxy.pac`). |
+
+:::important
+PAC files for LiveData Migrator must contain an explicit clause that will return `"DIRECT"` for `"localhost"`.
+
+```text title="Example of a PAC file"
+function FindProxyForURL(url, host) {
+    if (dnsDomainIs(host, "localhost"))
+        return "DIRECT";
+}
+```
+
+:::
