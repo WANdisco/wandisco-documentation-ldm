@@ -37,6 +37,20 @@ Use the [`path mapping create`](./command-reference.md#path-mapping-create) comm
 | [`path mapping list`](./command-reference.md#path-mapping-list) | List all path mappings or list path mappings for a specific filesystem |
 | [`path mapping show`](./command-reference.md#path-mapping-show) | Show details of a specified path mapping |
 
+## Path mapping limitation
+
+Paths on the source filesystem will not be migrated if they conflict with target paths that are created by the path mapping rules.
+
+An example would be if you had a path mapping rule such as below:
+
+| Source path | Target path |
+|---|---|
+| `/repl/folder/old` | `/repl/folder/old/archive` |
+
+In this case, if a new directory is created on the source `/repl/folder/old/newdir`, it is migrated to the target as `/repl/folder/old/archive/newdir`.
+
+However, if the following directory is created on the source `/repl/folder/old/archive`, this would not be migrated as it conflicts with the path mapping rule.
+
 ## Next Steps
 
 Once you have defined any path mappings and [exclusions](./configure-exclusions.md), you're ready to [migrate data](./create-migration.md).
