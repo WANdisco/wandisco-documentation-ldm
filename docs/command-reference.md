@@ -1188,7 +1188,16 @@ A small service will be deployed on this remote host so that the hive agent can 
 
 ```text title="Add Azure SQL agent"
 SYNOPSYS
-        hive agent add azure [[--name] string]  [--db-server-name] string  [--database-name] string  [--database-user] string  [--database-password] string  [--storage-account] string  [--container-name] string  [[--root-folder] string]  [[--hdi-version] string]  [[--insecure] boolean]
+        hive agent add azure [[--name] string]
+                             [--db-server-name] string
+                             [--database-name] string
+                             [--database-user] string
+                             [--database-password] string
+                             [--storage-account] string
+                             [--container-name] string
+                             [[--root-folder] string]
+                             [[--hdi-version] string]
+                             [[--insecure] boolean]
 ```
 
 #### Mandatory Parameters
@@ -1320,7 +1329,9 @@ Add a filesystem hive agent to connect to your host's local filesystem using the
 
 ```text title="Add filesystem agent"
 SYNOPSYS
-        hive agent add filesystem [--filesystem-id] string  [--root-folder] string  [[--name] string]
+        hive agent add filesystem [--filesystem-id] string
+                                  [--root-folder] string
+                                  [[--name] string]
 ```
 
 #### Mandatory Parameters
@@ -1346,7 +1357,15 @@ Add an [AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html) 
 
 ```text title="Add AWS Glue agent"
 SYNOPSYS
-        hive agent add glue [[--name] string]  [[--config-path] string]  [[--access-key] string]  [[--secret-key] string]  [[--session-token] string]  [[--glue-endpoint] string]  [[--aws-region] string]  [[--aws-catalog-credentials-provider-factory-class] string]  [[--default-fs] string]
+        hive agent add glue [[--name] string]
+                            [[--config-path] string]
+                            [[--access-key] string]
+                            [[--secret-key] string]
+                            [[--session-token] string]
+                            [[--glue-endpoint] string]
+                            [[--aws-region] string]
+                            [[--aws-catalog-credentials-provider-factory-class] string]
+                            [[--default-fs] string]
 ```
 
 #### Optional Parameters
@@ -1381,7 +1400,18 @@ A small service will be deployed on this remote host so that the hive agent can 
 
 ```text title="Add local or remote hive agent"
 SYNOPSYS
-        hive agent add hive [[--config-path] string]  [[--kerberos-principal] string]  [[--kerberos-keytab] string]  [[--name] string]  [[--host] string]  [[--port] integer]  [--autodeploy]  [[--ssh-user] string]  [[--ssh-key] file]  [[--ssh-port] int]  [--use-sudo]  [--ignore-host-checking]
+        hive agent add hive [[--config-path] string]
+                            [[--kerberos-principal] string]
+                            [[--kerberos-keytab] string]
+                            [[--name] string]
+                            [[--host] string]
+                            [[--port] integer]
+                            [--autodeploy]
+                            [[--ssh-user] string]
+                            [[--ssh-key] file]
+                            [[--ssh-port] int]
+                            [--use-sudo]
+                            [--ignore-host-checking]
 
 ```
 

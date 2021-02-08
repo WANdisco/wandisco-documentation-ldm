@@ -52,9 +52,7 @@ Once the exclusion is added and passed validation, it appears on the exclusion l
 
 :::note
 This will not remove the exclusion from an existing migration. See the [Remove exclusions from an existing migration](./manage-migrations.md#remove-exclusions-from-an-existing-migration) section for guidance on how to do this.
-:::
 
-:::note
 You cannot remove [default exclusions](#default-exclusions) from the templates list, but you may remove them from an existing migration.
 :::
 
