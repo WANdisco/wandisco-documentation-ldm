@@ -4,17 +4,13 @@ title: Command Reference
 sidebar_label: Command Reference
 ---
 
-Looking to learn more about LiveData Migrator commands? This reference page includes a comprehensive description of each command available from the LiveData Migrator CLI.
+Find a comprehensive description of each command available from the LiveData Migrator action prompt here. Review the [LiveData Migrator Operation](./operation-cli.md) guide for information on how to use the commands to perform migration.
 
-Each command description includes the information available from the `help` command. Tab-completion will also give you guidance when entering commands on the available options and help auto-complete the needed values.
+Each command description below includes the information available from the action prompt using the `help` command. Tab-completion will also give you guidance when entering commands on the available options and help auto-complete the needed values.
 
-:::tip
-You can also find information about UI configuration items here. Look for them in their equivalent CLI mandatory and optional parameters.
+:::info
+Should you need clarification on any configuration items shown in the UI, you will also find them here (located with the equivalent CLI mandatory and optional parameters).
 :::
-
-## Built-in commands
-
-The built-in commands are always available in a LiveData Migrator command line interactive session. They are unrelated to migration resources and operation (other than `exit`/`quit`), but help you to interact with LiveData Migrator and automate processing through scripts for the action prompt.
 
 ## Source Commands
 
@@ -38,6 +34,11 @@ Use `source del` to delete information about a specific source file system by id
 ```text title="Delete a source"
 SYNOPSYS
         source del [--file-system-id] string
+
+OPTIONS
+        --file-system-id  string
+
+                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -59,6 +60,10 @@ Get information about the source file system configuration.
 ```text title="Show the source file system configuration"
 SYNOPSYS
         source fs show [--verbose]
+
+OPTIONS
+        --verbose
+                [Optional, default = false]
 ```
 
 #### Optional Parameters
@@ -88,6 +93,42 @@ SYNOPSYS
                                    [--insecure]
                                    [[--properties-files] list]
                                    [[--properties] string]
+
+OPTIONS
+        --file-system-id  string
+
+                [Mandatory]
+
+        --storage-account-name  string
+
+                [Mandatory]
+
+        --oauth2-client-id  string
+
+                [Mandatory]
+
+        --oauth2-client-secret  string
+
+                [Mandatory]
+
+        --oauth2-client-endpoint  string
+
+                [Mandatory]
+
+        --container-name  string
+
+                [Mandatory]
+
+        --insecure
+                [Optional, default = false]
+
+        --properties-files  list
+                Load properties from this file
+                [Optional, default = <none>]
+
+        --properties  string
+                Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
+                [Optional, default = <nothing>]
 ```
 
 #### Mandatory Parameters
@@ -98,7 +139,7 @@ SYNOPSYS
 * **`--oauth2-client-secret`** The client secret (also known as [application secret](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#option-2-create-a-new-application-secret)) for the Azure service principal. This is referenced in the UI as **Secret**.
 * **`--oauth2-client-endpoint`** The [client endpoint](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols#endpoints) for the Azure service principal. This is referenced in the UI as **Endpoint**.  
 This will often take the form of `https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token` where `{tenant}` is the [directory ID](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#get-tenant-and-app-id-values-for-signing-in) for the Azure service principal. You can specify a custom URL if desired (such as a proxy endpoint that manually interfaces with Azure Active Directory).
-* **`--container-name`** The name of the container in the storage account to which content will be migrated. This is referenced in the UI as **Container Name**.
+* **`--container.name`** The name of the container in the storage account to which content will be migrated. This is referenced in the UI as **Container Name**.
 
 #### Optional Parameters
 
@@ -109,7 +150,7 @@ This will often take the form of `https://login.microsoftonline.com/{tenant}/oau
 #### Example
 
 ```text
-filesystem add adls2 oauth --file-system-id mytarget --storage-account-name myadls2 --oauth2-client-id b67f67ex-ampl-e2eb-bd6d-client9385id --oauth2-client-secret 2IPO8*secretk-9OPs8n*TexampleHJ= --oauth2-client-endpoint https://login.microsoftonline.com/78u098ex-ampl-e498-8bce-ndpoint5f2e5/oauth2/v2.0/token --container-name lm2target
+filesystem add adls2 oauth --file-system-id mytarget --storage-account-name myadls2 --oauth2-client-id b67f67ex-ampl-e2eb-bd6d-client9385id --oauth2-client-secret 2IPO8*secretk-9OPs8n*TexampleHJ= --oauth2-client-endpoint https://login.microsoftonline.com/78u098ex-ampl-e498-8bce-ndpoint5f2e5/oauth2/v2.0/token --container.name lm2target
 ```
 
 ----
@@ -127,14 +168,42 @@ SYNOPSYS
                                        [--insecure]
                                        [[--properties-files] list]
                                        [[--properties] string]
+
+OPTIONS
+        --file-system-id  string
+
+                [Mandatory]
+
+        --storage-account-name  string
+
+                [Mandatory]
+
+        --shared-key  string
+
+                [Mandatory]
+
+        --container-name  string
+
+                [Mandatory]
+
+        --insecure
+                [Optional, default = false]
+
+        --properties-files  list
+                Load properties from these files
+                [Optional, default = <nothing>]
+
+        --properties  string
+                Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
+                [Optional, default = <nothing>]
 ```
 
 #### Mandatory Parameters
 
 * **`--file-system-id`** The identifier to give the new file system resource. This is referenced in the UI as **Storage Name**.
 * **`--storage-account-name`** The name of the ADLS Gen 2 storage account to target. This is referenced in the UI as **Account Name**.
-* **`--shared-key`** The [shared account key](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) to use as credentials to write to the storage account. This is referenced in the UI as **Access Key**.
-* **`--container-name`** The name of the container in the storage account to which content will be migrated. This is referenced in the UI as **Container Name**.
+* **`--shared.key`** The [shared account key](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) to use as credentials to write to the storage account. This is referenced in the UI as **Access Key**.
+* **`--container.name`** The name of the container in the storage account to which content will be migrated. This is referenced in the UI as **Container Name**.
 
 #### Optional Parameters
 
@@ -145,7 +214,7 @@ SYNOPSYS
 #### Example
 
 ```text
-filesystem add adls2 sharedKey --file-system-id mytarget --storage-account-name myadls2 --container-name lm2target --shared-key Yi8NxHGqoQ79DBGLVn+COK/sRDwbNqAEXAMPLEDaMxRkvXt2ijUtASHAREDj/vaS/NbzR5rtjEKEY31eIopUVA==
+filesystem add adls2 sharedKey --file-system-id mytarget --storage-account-name myadls2 --container.name lm2target --shared.key Yi8NxHGqoQ79DBGLVn+COK/sRDwbNqAEXAMPLEDaMxRkvXt2ijUtASHAREDj/vaS/NbzR5rtjEKEY31eIopUVA==
 ```
 
 ----
@@ -165,6 +234,43 @@ SYNOPSYS
                            [--bucket-name] string
                            [[--properties-files] list]
                            [[--properties] string]
+
+OPTIONS
+        --file-system-id  string
+
+                [Mandatory]
+
+        --service-account-json-key-file  string
+
+                [Optional, default = <none>]
+
+        --service-account-p12-key-file  string
+
+                [Optional, default = <none>]
+
+        --service-account-json-key-file-server-location  string
+                Permanent location of the GCS KeyFile on the LiveData Migrator server
+                [Optional, default = <none>]
+
+        --service-account-p12-key-file-server-location  string
+                Permanent location of the GCS KeyFile on the LiveData Migrator server
+                [Optional, default = <none>]
+
+        --service-account-email  string
+                GCS Service Account Email
+                [Optional, default = <none>]
+
+        --bucket-name  string
+
+                [Mandatory]
+
+        --properties-files  list
+                Load properties from these files
+                [Optional, default = <nothing>]
+
+        --properties  string
+                Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
+                [Optional, default = <nothing>]
 ```
 
 #### Mandatory Parameters
@@ -217,145 +323,84 @@ SYNOPSYS
                             [[--kerberos-principal] string]
                             [[--kerberos-keytab] string]
                             [--source]
-                            [--scan-only]
                             [[--properties-files] list]
                             [[--properties] string]
+
+OPTIONS
+        --file-system-id  string
+                Name of the filesystem
+                [Mandatory]
+
+        --default-fs  string
+
+                [Optional, default = <nothing>]
+
+        --user  string
+                FileSystem username to perform migration actions as
+                [Optional, default = <nothing>]
+
+        --kerberos-principal  string
+                Kerberos principal to authenticate with and perform migration actions as
+                [Optional, default = <none>]
+
+        --kerberos-keytab  string
+                Kerberos keytab to use when authenticating the provided kerberos principal
+                [Optional, default = <none>]
+
+        --source        Add this filesystem as the source for migrations
+                [Optional, default = false]
+
+        --properties-files  list
+                Load properties from these files
+                [Optional, default = <nothing>]
+
+        --properties  string
+                Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
+                [Optional, default = <nothing>]
 ```
 
 #### Mandatory Parameters
 
 * **`--file-system-id`** The identifier to give the new file system resource. This is referenced in the UI as **Storage Name**.
-* **`--default-fs`** A string that defines how LiveData Migrator accesses HDFS. This is referenced in the UI as **Default FS**.  
+* **`--fs.defaultFS`** A string that defines how LiveData Migrator accesses HDFS. This is referenced in the UI as **Default FS**.  
   It can be specified in a number of forms:
   1. As a single HDFS URI, such as `hdfs://192.168.1.10:8020` (using an IP address) or `hdfs://myhost.localdomain:8020` (using a hostname).
+  1. As a comma-separated list of HDFS URIs, like `hdfs://nn1.localdomain:8020,hdfs://nn2.localdomain:8020` to allow for integration with HA-enabled Hadoop environments.
   1. As an HDFS URI that references a nameservice ID defined in the cluster properties, like `hdfs://mynameservice`, where there is a configuration property for the cluster that defines the value of the `dfs.nameservices` value to include that nameservice ID, like `mynameservice` and all required configuration properties for that nameservice, like `dfs.ha.namenodes.mynameservice`, `dfs.namenode.rpc-address.mynameservice.nn1`, and `dfs.namenode.http-address.mynameservice.nn1`, etc.
 
 #### Optional Parameters
-
-:::important Kerberos: Cross-realm authentication required between source and target HDFS
-[Cross-realm authentication](https://web.mit.edu/kerberos/krb5-1.5/krb5-1.5.4/doc/krb5-admin/Cross_002drealm-Authentication.html) is required in the following scenario:
-
-* Migration will occur between a source and target HDFS.
-* Kerberos is enabled on both clusters.
-
-See the links below for guidance for common Hadoop distributions:
-
-* [CDH](https://docs.cloudera.com/documentation/enterprise/6/6.3/topics/cm_sg_kdc_def_domain_s2.html)
-* [CDP](https://docs.cloudera.com/cdp-private-cloud-base/7.1.5/security-kerberos-authentication/topics/cm-security-kerberos-authentication-kdc-cross-realm-trust.html)
-* [Red Hat](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system-level_authentication_guide/using_trusts) (Unmanaged)
-* [HDP](https://community.cloudera.com/t5/Community-Articles/Kerberos-cross-realm-trust-for-distcp/ta-p/245590)
-:::
 
 * **`--user`** The name of the HDFS user to be used when performing operations against the file system. In environments where Kerberos is disabled, this user must be the HDFS super user, such as `hdfs`.
 * **`--kerberos-principal`** The Kerberos principal to authenticate with and perform migrations as. This principal should map to the [HDFS super user](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsPermissionsGuide.html#The_Super-User) using [auth_to_local](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SecureMode.html#Mapping_from_Kerberos_principals_to_OS_user_accounts) rules.
 * **`--kerberos-keytab`** The Kerberos keytab containing the principal defined for the `--kerberos-principal` parameter. This must be accessible to the local system user running the LiveData Migrator service (default is `hdfs`).
 * **`--source`** Provide this parameter to use the file system resource created as a source.  This is referenced in the UI when configuring the _Unknown source_.
-* **`--scan-only`** Provide this parameter to create a static source filesystem for use in [static migrations](./non-live-migration.md). Requires `--source`.
-* **`--properties-files`** Reference a list of existing properties files that contain Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.  This is referenced in the UI as **Provide a path to files** under the _Additional Configuration_ option.
-* **`--properties`** Specify properties to use in a comma-separated key/value list. This is referenced in the UI as **Additional Configuration** under the _Additional Configuration_ option.
-
-##### Properties files are required for NameNode HA
-
-If your Hadoop cluster has [NameNode HA enabled](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HDFSHighAvailabilityWithQJM.html), you must provide the local filesystem path to the properties files that define the configuration for the nameservice ID.
-
-**Source HDFS filesystem**: These configuration files will likely be in a default location depending on the distribution of the Hadoop cluster.
-
-**Target HDFS filesystem**: Ensure that the target Hadoop cluster configuration is available on your LiveData Migrator host's local filesystem.
-
-* For the UI, use **Provide a path to files** under the _Additional Configuration_ option and define the directory containing the `core-site.xml` and `hdfs-site.xml` files.
-
-  ```text title="Example for path containing source cluster configuration"
-  /etc/hadoop/conf
-  ```
-
-  ```text title="Example for path containing target cluster configuration"
-  /etc/targetClusterConfig
-  ```
-
-  Alternatively, define the absolute filesystem paths to these files:
-
-  ```text title="Example for absolute paths to source cluster configuration files"
-  /etc/hadoop/conf/core-site.xml
-  /etc/hadoop/conf/hdfs-site.xml
-  ```
-
-  ```text title="Example for absolute paths to target cluster configuration files"
-  /etc/targetClusterConfig/core-site.xml
-  /etc/targetClusterConfig/hdfs-site.xml
-  ```
-
-* For the CLI/API, use the `--properties-files` parameter and define the absolute paths to the `core-site.xml` and `hdfs-site.xml` files (see the [Examples](#examples) section for CLI usage of this parameter).
+* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
+* **`--properties`** Specify properties to use in a comma-separated key/value list.
 
 #### Examples
 
 ##### HDFS as source
 
 ```text title="Example for source NameNode HA cluster"
-filesystem add hdfs --file-system-id mysource --source --default-fs hdfs://sourcenameservice --properties-files /etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml
+filesystem add hdfs --file-system-id mysource --source --fs.defaultFS hdfs://sourcenameservice --properties-files /etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml
 ```
 
 ```text title="Example for source NameNode HA cluster with Kerberos enabled"
-filesystem add hdfs --file-system-id mysource --source --default-fs hdfs://sourcenameservice --properties-files /etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml --kerberos-keytab /etc/security/keytabs/hdfs.headless.keytab --kerberos-principal hdfs@SOURCEREALM.COM
+filesystem add hdfs --file-system-id mysource --source --fs.defaultFS hdfs://sourcenameservice --properties-files /etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml --kerberos-keytab /etc/security/keytabs/hdfs.headless.keytab --kerberos-principal hdfs@SOURCEREALM.COM
 ```
 
 ##### HDFS as target
 
 :::note
-When specifying a HDFS filesystem as a target, the property files for the target cluster must exist on the local filesystem and be accessible to the LiveData Migrator system user.
+When specifying a HDFS filesystem as a target, the property files (and Kerberos keytab) for the target cluster must exist on the local filesystem and be accessible to the LiveData Migrator system user.
 :::
 
 ```text title="Example for target NameNode HA cluster with Kerberos enabled"
-filesystem add hdfs --file-system-id mytarget --default-fs hdfs://targetnameservice --properties-files /etc/targetClusterConfig/core-site.xml,/etc/targetClusterConfig/hdfs-site.xml --kerberos-keytab /etc/security/keytabs/hdfs.headless.keytab --kerberos-principal hdfs@SOURCEREALM.COM
+filesystem add hdfs --file-system-id mytarget --fs.defaultFS hdfs://targetnameservice --properties-files /etc/targetClusterConfig/core-site.xml,/etc/targetClusterConfig/hdfs-site.xml --kerberos-keytab /etc/targetClusterKeytabs/hdfs.headless.keytab --kerberos-principal hdfs@TARGETREALM.COM
 ```
 
 ```text title="Example for target single NameNode cluster"
-filesystem add hdfs --file-system-id mytarget --default-fs hdfs://namenode.targetdomain:8020 --user hdfs
-```
-
-----
-
-### `filesystem add local`
-
-Add a Hadoop Compatible local filesystem as either a migration target or source using the `filesystem add local` command.
-
-```text title="Add a Local FileSystem via HCFS API."
-SYNOPSYS
-        filesystem add local [--file-system-id] string
-                                       [[--fs-root] string]
-                                       [--source]
-                                       [--scan-only]
-                                       [[--properties-files] list]
-                                       [[--properties] string]
-```
-
-#### Mandatory Parameters
-
-* **`--file-system-id`** The identifier to give the new file system resource. This is referenced in the UI as **Storage Name**.
-
-#### Optional Parameters
-
-* **`--fs-root`** The directory in the local filesystem to scan for data or send data to, depending on whether the filesystem is defined as a source or a target. Should be supplied using the full directory path from the root.
-* **`--source`** Provide this parameter to use the file system resource created as a source.  This is referenced in the UI when configuring the _Unknown source_.
-* **`--scan-only`** Provide this parameter to create a static source filesytem for use in [static migrations](./non-live-migration.md). Requires `--source`.
-* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
-* **`--properties`** Specify properties to use in a comma-separated key/value list.
-
-:::note
-  If no `fs-root` is specified, the file path will default to the root of your system.
-:::
-
-#### Examples
-
-##### Local filesystem as source
-
-```text
-filesystem add local --file-system-id mytarget --fs-root ./tmp --source
-```
-
-##### Local filesystem as a target
-
-```text
-filesystem add local --file-system-id mytarget --fs-root ./Users/username/destinationfolder/
+filesystem add hdfs --file-system-id mytarget --fs.defaultFS hdfs://namenode.targetdomain:8020 --user hdfs
 ```
 
 ----
@@ -373,6 +418,35 @@ SYNOPSYS
                            [--credentials-provider] string
                            [[--properties-files] list]
                            [[--properties] list]
+
+OPTIONS
+        --file-system-id  string
+
+                [Mandatory]
+
+        --bucket-name  string
+
+                [Mandatory]
+
+        --access-key  string
+
+                [Optional, default = <none>]
+
+        --secret-key  string
+
+                [Optional, default = <none>]
+
+        --credentials-provider  string
+
+                [Optional, default = <none>]
+
+        --properties-files  list
+                Load properties from these files
+                [Optional, default = <none>]
+
+        --properties  string
+                Override properties in comma separated key/value string e.g. --properties property-one=value-one,\"property-two=value-one,value-two\"
+                [Optional, default = <nothing>]
 ```
 
 #### Mandatory Parameters
@@ -420,38 +494,12 @@ When adding properties via the UI or API, for example to set a custom `fs.s3a.en
     HTTP requests to the S3 back-end by S3AFileSystem.
 * **`fs.s3a.impl.disable.cache`** (default `true`): Disables the S3 file system cache when set to 'true'.
 * **`fs.hadoop.tmp.dir`** (default `tmp`): The parent directory for other temporary directories.
-* **`fs.s3a.fast.upload.buffer`** (default `disk`): Defines how the filesystem will [buffer the upload](#upload-buffering).
-* **`fs.s3a.fast.upload.active.blocks`** (default `8`): Defines how many blocks a single output stream can have uploading or queued at a given time.
-* **`fs.s3a.block.size`** (default `32M`): Defines the maximum size of blocks during file transfer. Use the suffix `K`, `M`, `G`, `T` or `P` to scale the value in Kilobytes, Megabytes, Gigabytes, Terabytes or Petabytes respectively.
-* **`fs.s3a.buffer.dir`** (default `tmp`): Defines the directory used by [disk buffering](#upload-buffering).
-
-You can additionally find a list of S3A properties in the [S3A documentation](https://hadoop.apache.org/docs/r3.2.1/hadoop-aws/tools/hadoop-aws/index.html).
 
 #### Example
 
 ```text
 filesystem add s3a --file-system-id mytarget --bucket-name mybucket1 --credentials-provider org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider --access-key B6ZAI18Z3UIO002Y777A --secret-key OP87Chokisf4hsTP0Q5j95yI904lT7AaDBGJpp0D
 ```
-
-#### Upload Buffering
-
-Migrations using an S3A target destination will buffer all uploads. By default, the buffering will occur on the local disk of system LiveData Migrator is running on, in the `/tmp` directory.
-
-LiveData Migrator will automatically delete the temporary buffering files once they are no longer needed.
-
-If you want to use a different type of buffering, you can change the property `fs.s3a.fast.upload.buffer`. The following values can be supplied:
-
-| Buffering Option | Details | Property Value |
-| -------- | -------- | -------- |
-| Array Buffer | Buffers the uploaded data in memory instead of on disk, using the Java heap. | `array` |
-| Byte Buffer | Buffers the uploaded data in memory instead of on disk, but does not use the Java heap. | `bytebuffer` |
-| Disk Buffering | The default option. Buffers the upload to disk. | `disk` |
-
-Both the `array` and `bytebuffer` options may lead to the consumption of large amounts of memory. Other properties (such as `fs.s3a.fast.upload.active.blocks`) may be used to fine-tune the migration to avoid issues.
-
-:::note
-  If you run out of disk space on which to buffer the migration, the migration will stall with a series of errors. To avoid this, ensure the file system containing the directory used for buffering (`/tmp` by default) has enough remaining space to facilitate the transfer.
-:::
 
 ----
 
@@ -465,6 +513,15 @@ You can also manually configure the source HDFS filesystem using the [`filesyste
 SYNOPSYS
         filesystem auto-discover-source hdfs [[--kerberos-principal] string]
                                              [[--kerberos-keytab] string]
+
+OPTIONS
+        --kerberos-principal  string
+                Kerberos principal to authenticate with and perform migration actions as
+                [Optional, default = <none>]
+
+        --kerberos-keytab  string
+                Kerberos keytab to use when authenticating the provided kerberos principal
+                [Optional, default = <none>]
 ```
 
 #### Kerberos parameters
@@ -501,6 +558,11 @@ Delete a specific file system resource by identifier. This leaves all migrated c
 ```text title="Delete a target"
 SYNOPSYS
         filesystem del [--file-system-id] string
+
+OPTIONS
+        --file-system-id  string
+
+                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -522,6 +584,10 @@ List defined file system resources.
 ```text title="List targets"
 SYNOPSYS
         filesystem list [--verbose]
+
+OPTIONS
+        --verbose
+                [Optional, default = false]
 ```
 
 #### Mandatory Parameters
@@ -537,6 +603,14 @@ View details for a file system resource.
 ```text title="Get target details"
 SYNOPSYS
         filesystem show [--file-system-id] string  [--verbose]
+
+OPTIONS
+        --file-system-id  string
+
+                [Mandatory]
+
+        --verbose
+                [Optional, default = false]
 ```
 
 #### Mandatory Parameters
@@ -560,113 +634,6 @@ SYNOPSYS
         filesystem types
 ```
 
-----
-
-### `filesystem update adls2 oauth`
-
-Update an existing Azure Data Lake Storage Gen 2 container migration target with a specified filesystem ID using the `filesystem update adls2 oauth` command. You will be prompted to optionally update the [service principal](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal) and [OAuth 2](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols) credentials.
-
-
-=======
-Any optional parameters supplied will update the corresponding details of the existing filesystem.
-
-Any optional parameters supplied will update the corresponding details of the existing filesystem. The parameters that can be changed are the same as the ones listed in the [`filesystem add adls2 oauth`](./command-reference.md#filesystem-add-adls2-oauth) section.
-
-All parameters are optional except `--file-system-id`, which specifies the file system you want to update.
-
-#### Example
-
-```text
-filesystem update adls2 oauth --file-system-id mytarget --storage-account-name myadls2 --oauth2-client-id b67f67ex-ampl-e2eb-bd6d-client9385id --oauth2-client-secret 2IPO8*secretk-9OPs8n*TexampleHJ= --oauth2-client-endpoint https://login.microsoftonline.com/78u098ex-ampl-e498-8bce-ndpoint5f2e5/oauth2/v2.0/token --container-name lm2target
-```
-
-----
-
-### `filesystem update adls2 sharedKey`
-
-Update an existing Azure Data Lake Storage Gen 2 container migration target using the `filesystem update adls2 sharedKey` command. You will be prompted to optionally update the [secret key](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys).
-
-Any optional parameters supplied will update the corresponding details of the existing filesystem. The parameters that can be changed are the same as the ones listed in the [`filesystem add adls2 sharedKey`](./command-reference.md#filesystem-add-adls2-sharedkey) section.
-
-All parameters are optional except `--file-system-id`, which specifies the file system you want to update.
-
-#### Example
-
-```text
-filesystem update adls2 sharedKey --file-system-id mytarget --storage-account-name myadls2 --container-name lm2target --shared-key Yi8NxHGqoQ79DBGLVn+COK/sRDwbNqAEXAMPLEDaMxRkvXt2ijUtASHAREDj/vaS/NbzR5rtjEKEY31eIopUVA==
-```
-
-----
-
-### `filesystem update gcs`
-
-Update a Google Cloud Storage migration target using the `filesystem update gcs` command.
-
-Any optional parameters supplied will update the corresponding details of the existing filesystem. The parameters that can be changed are the same as the ones listed in the [`filesystem add gcs`](./command-reference.md#filesystem-add-gcs) section.
-
-All parameters are optional except `--file-system-id`, which specifies the file system you want to update.
-
-#### Example
-
-```text
-filesystem update gcs --file-system-id gcsAgent --bucket-name myGcsBucket --service-account-p12-key-file-server-location /user/hdfs/targetStorage/myAccountKey.p12 --service-account-email user@mydomain.com
-```
-
-----
-
-### `filesystem update hdfs`
-
-Update either a source or target Hadoop Distributed File System using the `filesystem update hdfs` command.
-
-Any optional parameters supplied will update the corresponding details of the existing filesystem. The parameters that can be changed are the same as the ones listed in the [`filesystem add hdfs`](./command-reference.md#filesystem-add-hdfs) section.
-
-All parameters are optional except `--file-system-id`, which specifies the file system you want to update.
-
-#### Examples
-
-```text title="Example for source NameNode HA cluster"
-filesystem update hdfs --file-system-id mysource --default-fs hdfs://sourcenameservice --properties-files /etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml
-```
-
-```text title="Example for source NameNode HA cluster with Kerberos enabled"
-filesystem update hdfs --file-system-id mytarget --default-fs hdfs://sourcenameservice --properties-files /etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml --kerberos-keytab /etc/security/keytabs/hdfs.headless.keytab --kerberos-principal hdfs@SOURCEREALM.COM
-```
-
-
-----
-
-### `filesystem update local`
-
-Update a target or source local filesystem using the `filesystem update local` command.
-
-Any optional parameters supplied will update the corresponding details of the existing filesystem. The parameters that can be changed are the same as the ones listed in the [`filesystem add local`](./command-reference.md#filesystem-add-local) section.
-
-All parameters are optional except `--file-system-id`, which specifies the file system you want to update.
-
-#### Example
-
-```text
-filesystem update local --file-system-id mytarget --fs-root ./tmp
-```
-
-----
-
-### `filesystem update s3a`
-
-Update an S3 bucket target file system using the `filesystem update s3a` command. This method also supports IBM COS buckets.
-
-Any optional parameters supplied will update the corresponding details of the existing filesystem. The parameters that can be changed are the same as the ones listed in the [`filesystem add s3a`](./command-reference.md#filesystem-add-s3a) section.
-
-All parameters are optional except `--file-system-id`, which specifies the file system you want to update.
-
-#### Example
-
-```text
-filesystem update s3a --file-system-id mytarget --bucket-name mybucket1 --credentials-provider org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider --access-key B6ZAI18Z3UIO002Y777A --secret-key OP87Chokisf4hsTP0Q5j95yI904lT7AaDBGJpp0D
-```
-
-----
-
 ## Exclusion Commands
 
 ----
@@ -682,6 +649,19 @@ SYNOPSYS
         exclusion add date [--exclusion-id] string
                            [--description] string
                            [--before-date] string
+
+OPTIONS
+        --exclusion-id  string
+
+                [Mandatory]
+
+        --description  string
+
+                [Mandatory]
+
+        --before-date  string
+                Expects the ISO format date-time, with an offset, e.g. "2011-12-03T10:15:30+01:00"
+                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -708,6 +688,23 @@ SYNOPSYS
                                 [--description] string
                                 [--value] long
                                 [--unit] string
+
+OPTIONS
+        --exclusion-id  string
+
+                [Mandatory]
+
+        --description  string
+
+                [Mandatory]
+
+        --value  long
+
+                [Mandatory]
+
+        --unit  string
+
+                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -734,6 +731,19 @@ SYNOPSYS
         exclusion add regex [--exclusion-id] string
                             [--description] string
                             [--regex] string
+
+OPTIONS
+        --exclusion-id  string
+
+                [Mandatory]
+
+        --description  string
+
+                [Mandatory]
+
+        --regex  string
+
+                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -772,6 +782,11 @@ NAME
 
 SYNOPSYS
         exclusion del [--exclusion-id] string
+
+OPTIONS
+        --exclusion-id  string
+
+                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -807,6 +822,11 @@ Get details for an individual exclusion policy by identifier.
 ```text title="Get details for a specific exclusion rule"
 SYNOPSYS
         exclusion show [--exclusion-id] string
+
+OPTIONS
+        --exclusion-id  string
+
+                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -830,6 +850,11 @@ Stop a migration from transferring content to its target, placing it into the `S
 ```text title="Stop a migration"
 SYNOPSYS
         migration stop [--migration-id] string
+
+OPTIONS
+        --migration-id  string
+
+                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -851,6 +876,11 @@ Resume a migration that you've stopped from transferring content to its target.
 ```text title="Resume a migration"
 SYNOPSYS
         migration resume [--migration-id] string
+
+OPTIONS
+        --migration-id  string
+
+                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -872,6 +902,11 @@ Delete a stopped migration resource.
 ```text title="Delete a migration"
 SYNOPSYS
         migration del [--migration-id] string
+
+OPTIONS
+        --migration-id  string
+
+                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -894,6 +929,15 @@ Associate an exclusion resource with a migration so that the exclusion policy ap
 SYNOPSYS
         migration exclusion add [--migration-id] string
                                 [--exclusion-id] string
+
+OPTIONS
+        --migration-id  string
+
+                [Mandatory]
+
+        --exclusion-id  string
+
+                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -917,6 +961,15 @@ Remove an exclusion from association with a migration so that its policy no long
 SYNOPSYS
         migration exclusion del [--migration-id] string
                                 [--exclusion-id] string
+
+OPTIONS
+        --migration-id  string
+
+                [Mandatory]
+
+        --exclusion-id  string
+
+                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -955,16 +1008,35 @@ SYNOPSYS
                       [[--exclusions] string]
                       [[--action-policy] string]
                       [--auto-start]
+
+OPTIONS
+        --migration-id  string
+
+                [Optional, default = <nothing>]
+
+        --path  string
+
+                [Mandatory]
+
+        --target  string
+
+                [Mandatory]
+
+        --exclusions  string
+
+                [Optional, default = <none>]
+
+        --action-policy  string
+
+                [Optional, default = com.wandisco.livemigrator2.migration.OverwriteActionPolicy]
+
+        --auto-start
+                [Optional, default = false]
 ```
 
 #### Mandatory Parameters
 
 * **`--path`** Defines the source file system directory that is the scope of the migration. All content (other than that excluded) will be migrated to the target. This is referenced in the UI as **Path for {source-filesystem}**.
-
-  :::note
-  ADLS Gen2 has a filesystem restriction of 60 segments. Make sure your path has less than 60 segments when defining the path string parameter.
-  :::
-
 * **`--target`** Specifies the name of the target file system resource to which migration will occur. This is referenced in the UI as **Target**.
 
 #### Optional Parameters
@@ -996,6 +1068,11 @@ Start a migration that was created without the `--auto-start` parameter.
 ```text title="Start a migration"
 SYNOPSYS
         migration run [--migration-id] string
+
+OPTIONS
+        --migration-id  string
+
+                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -1020,6 +1097,11 @@ NAME
 
 SYNOPSYS
         migration show [--migration-id] string
+
+OPTIONS
+        --migration-id  string
+
+                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -1043,7 +1125,9 @@ Get a text description of the overall status of migrations. Information is provi
 * Peak bandwidth observed over 300s interval.
 * Average file transfer rate per second over  10s, 60s, and 300s intervals.
 * Peak file transfer rate per second over a 300s interval.
-* List of migrations, including static migrations, with source path and migration id with current progress, broken down by migration state: completed, live, stopped, running and ready.
+* List of live migrations with source path and migration id.
+* List of running migrations with source path and migration id.
+* List of non-running migrations source source path and migration id.
 
 ```text title="Get migration status"
 NAME
@@ -1053,67 +1137,23 @@ SYNOPSYS
         status
 ```
 
-### Optional Parameters
-
-* **`--transfers`** Displays overall performance information about data transfers across the last 10 seconds, 1 minute and 30 minute intervals.
-* **`--diagnostics`** Returns additional information about your LiveData Migrator instance and its migrations, useful for troubleshooting.
-
 #### Example
 
-```text title="Status"
-WANdisco LiveMigrator >> status
+```text
+status
 
-Network             (10s)       (1m)       (30m)
----------
-Average Throughput: 10.4 Gib/s  9.7 Gib/s  10.1 Gib/s
-Average Files/s:    425         412        403
+Total Migrations:  1
+Average Bandwidth: 0.00 Gb/s, 0.00 Gb/s, 0.00 Gb/s
+Peak Bandwidth:    0.00 Gb/s
+Average Files/s:   0, 0, 0
+Peak Files/s:      0
 
-11 Migrations                                     dd:hh:mm  dd:hh:mm
--------------
-Complete: 1         Transferred         Excluded  Duration
- /static1   5a93d5        67.1 GiB       2.3 GiB  00:12:34
+Live: 0
 
-Live:     3         Transferred         Excluded  Duration
- /repl1     9088aa       143.2 GiB      17.3 GiB  00:00:34
- /repl_psm1 a4a7e6       423.6 TiB       9.6 GiB  02:05:29
- /repl5     ab140d       118.9 GiB       1.2 GiB  00:00:34
+Running: 0
 
-Running:  5         Transferred         Excluded  Duration  Remaining
- /repl123   e3727c  30.3/45.2 GiB 67%    9.8 GiB  00:00:34  00:00:17
- /repl2     88e4e7  26.2/32.4 GiB 81%    0.2 GiB  00:01:27  00:00:12
- /repl3     372056   4.1/12.5 GiB 33%    1.1 GiB  00:00:25  00:01:05
- /repl4     6bc813  10.6/81.7 TiB  8%   12.4 GiB  00:04:21  01:02:43
- /replxyz   dc33cb   2.5/41.1 GiB  6%    6.5 GiB  01:00:12  07:34:23
-
-Ready:    2
- /repl7     070910  543.2 GiB
- /repltest  d05ca0  7.3 GiB
-
-WANdisco LiveMigrator >> status
-```
-
-```text title="Status with --transfers"
-WANdisco LiveMigrator >> status --transfers
-
-Files (10s) (1m) (30m)
-
-Average Migrated/s: 362 158 4781
-< 1 KB 14 27 3761
-< 1 MB 151 82 0
-< 1 GB 27 1 2
-< 1 PB 0 0 0
-< 1 EB 0 0 0
-
-Peak Migrated/s: 505 161 8712
-< 1 KB 125 48 7761
-< 1 MB 251 95 4
-< 1 GB 29 7 3
-< 1 PB 0 0 0
-< 1 EB 0 0 0
-
-Average Scanned/s: 550 561 467
-Average Rescanned/s: 24 45 56
-Average Excluded/s: 7 7 6
+Ready: 1
+     /repl1 5c7271676c8f858ad11011bfa155fc8e43b8fe32
 ```
 
 ## Bandwidth Policy Commands
@@ -1140,6 +1180,15 @@ If no policy is defined, the default policy is unlimited bandwidth.
 ```text title="Set the application bandwidth limit, in bytes per second"
 SYNOPSYS
         bandwidth policy set [--value] long  [--unit] string
+
+OPTIONS
+        --value  long
+
+                [Mandatory]
+
+        --unit  string
+
+                [Mandatory]
 ```
 
 #### Mandatory Parameters
@@ -1176,89 +1225,66 @@ SYNOPSYS
 
 ### `hive agent add azure`
 
-Add a local or remote hive agent to connect to an [Azure SQL](https://docs.microsoft.com/en-gb/azure/azure-sql/azure-sql-iaas-vs-paas-what-is-overview) database using the `hive agent add azure` command.
-
-If your LiveData Migrator host can communicate directly with the Azure SQL database, then a local hive agent will be sufficient. Otherwise, consider using a remote hive agent.
-
-:::info remote deployments
-For a remote hive agent connection, specify a remote host (Azure VM, HDI cluster node) that will be used to communicate with the local LiveData Migrator server (constrained to a user-defined port).
-
-A small service will be deployed on this remote host so that the hive agent can migrate data to and/or from the Azure SQL database.
-:::
-
-```text title="Add Azure SQL agent"
-SYNOPSYS
-        hive agent add azure [[--name] string]
-                             [--db-server-name] string
-                             [--database-name] string
-                             [--database-user] string
-                             [--database-password] string
-                             [--storage-account] string
-                             [--container-name] string
-                             [[--root-folder] string]
-                             [[--hdi-version] string]
-                             [[--insecure] boolean]
-```
-
-#### Mandatory Parameters
+Add an Azure hive agent to connect to an [Azure SQL](https://docs.microsoft.com/en-gb/azure/azure-sql/azure-sql-iaas-vs-paas-what-is-overview) database using the `hive agent add azure` command.
 
 :::info
 The Azure hive agent requires a ADLS Gen2 storage account and container name, this is only for the purposes of generating the correct location for the database. The container will not be accessed by the Hive agent and no data will be written to the container.
 :::
 
+```text title="Add Azure SQL agent"
+SYNOPSYS
+        hive agent add azure [[--name] string]  [--db-server-name] string  [--database-name] string  [--database-user] string  [--database-password] string  [--storage-account] string  [--container-name] string  [[--root-folder] string]  [[--hdi-version] string]  [[--insecure] boolean]
+
+OPTIONS
+        --name  string
+                name of the agent
+                [Optional, default = <nothing>]
+
+        --db-server-name  string
+                Azure SQL database server name
+                [Mandatory]
+
+        --database-name  string
+                Azure SQL database name
+                [Mandatory]
+
+        --database-user  string
+                Azure SQL database user
+                [Mandatory]
+
+        --database-password  string
+                Azure SQL database password
+                [Mandatory]
+
+        --storage-account  string
+                Azure storage account name
+                [Mandatory]
+
+        --container-name  string
+                Azure storage account container name
+                [Mandatory]
+
+        --root-folder  string
+                Azure root folder
+                [Optional, default = <nothing>]
+
+        --hdi-version  string
+                Azure HDI version (3.6 or 4.0)
+                [Optional, default = <nothing>]
+
+        --insecure  boolean
+                use insecure connection to Azure
+                [Optional, default = <nothing>]
+```
+
+#### Mandatory Parameters
+
 * **`--db-server-name`** The Azure SQL database server name. Only the name given to the server is required, the `.database.windows.net` suffix should be omitted.
 * **`--database-name`** The Azure SQL database name.
-* **`--storage-account`** The name of the ADLS Gen 2 storage account.
-* **`--container-name`** The name of the container in the ADLS Gen2 storage account.
-
-#### Authentication Parameters
-
-Choose one of the authentication methods listed and include the additional parameters required for the chosen method.
-
-* **`--auth-method`** The authentication method to use to connect to the Azure SQL server.  
-  The following methods can be used:
-  * `SQL_PASSWORD` - Provide a username and password to access the database.
-  * `AD_MSI` - Use a system-assigned or user-assigned [managed identity](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types).
-
-##### Required Parameters for SQL_PASSWORD
-
 * **`--database-user`** The user name to access the database.
 * **`--database-password`** The user password to access the database.
-
-##### Required Parameters for AD_MSI
-
-To use this method, the following pre-requirements must be met:
-
-* LiveData Migrator or the remote Azure hive agent must be installed on an [Azure resource with the managed identity assigned to it](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/qs-configure-portal-windows-vm). The host must also have [Azure Active Directory authentication](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/login-using-aad) enabled.
-* Your Azure SQL server must be enabled for [Azure Active Directory authentication](https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-configure?tabs=azure-powershell).
-* You have [created a contained user in the Azure SQL database that is mapped to the Azure Active Directory resource](https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-configure?tabs=azure-powershell#create-contained-users-mapped-to-azure-ad-identities) (where LiveData Migrator or the remote Azure hive agent is installed).
-  * The username of the contained user will depend on whether you are using a system-assigned or user-assigned identity.
-
-    ```text title="Azure SQL database command for a system-assigned managed identity"
-    CREATE USER "<azure_resource_name>" FROM EXTERNAL PROVIDER;
-    ALTER ROLE db_owner ADD MEMBER "<azure_resource_name>";
-    ```
-
-    The `<azure_resource_name>` is the name of the Azure resource where LiveData Migrator or remote Azure hive agent is installed (for example: `myAzureVM`).
-
-    ```text title="Azure SQL database command for a user-assigned managed identity"
-    CREATE USER <managed_identity_name> FROM EXTERNAL PROVIDER;
-    ALTER ROLE db_owner ADD MEMBER <managed_identity_name>;
-    ```
-
-    The `<managed_identity_name>` is the name of the user-assigned managed identity (for example: `myManagedIdentity`).
-
-Once all pre-requirements are met, see the [system-assigned identity](#system-assigned-identity) or [user-assigned identity](#user-assigned-identity) parameters.
-
-###### System-assigned identity
-
-No other parameters are required for a system-managed identity.
-
-###### User-assigned identity
-
-The `--client-id` parameter must be specified:
-
-* **`--client-id`** The Client ID of your Azure managed identity.
+* **`--storage-account`** The name of the ADLS Gen 2 storage account.
+* **`--container-name`** The name of the container in the ADLS Gen2 storage account.
 
 #### Optional Parameters
 
@@ -1267,58 +1293,10 @@ The `--client-id` parameter must be specified:
 * **`--hdi-version`** The [HDI](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-component-versioning) version. This is relevant if you are intending to integrate your SQL server into a HDInsights cluster.
 * **`--insecure`** Define an insecure connection (SSL disabled) to the Azure SQL database server (default is `false`).
 
-#### Parameters for remote hive agents only
+#### Example
 
-* **`--host`** The host where the remote hive agent will be deployed.
-* **`--port`** The port for the remote hive agent to use on the remote host. Default is `5052`. This port is used to communicate with the local LiveData Migrator server.
-
-##### Parameters for automated deployment
-
-* **`--autodeploy`** The remote agent will be automatically deployed when this flag is used. If using this, the `--ssh-key` parameter must also be specified.
-* **`--ssh-user`** The SSH user to use for authentication on the remote host to perform automatic deployment (when using the `--autodeploy` parameter).
-* **`--ssh-key`** The absolute path to the SSH private key to use for authentication on the remote host to perform automatic deployment (when using the `--autodeploy` parameter).
-* **`--ssh-port`** The SSH port to use for authentication on the remote host to perform automatic deployment (when using the `--autodeploy` parameter). Default is port `22`.
-* **`--use-sudo`** All commands performed by the SSH user will use `sudo` on the remote host when performing automatic deployment (using the `--autodeploy` parameter).
-* **`--ignore-host-checking`** Ignore [strict host key checking](https://www.redhat.com/sysadmin/linux-knownhosts-failures) when performing the automatic deployment (using the `--autodeploy` parameter).
-
-##### Steps for manual deployment
-
-If you do not wish to use the `--autodeploy` function, follow these steps to deploy a remote hive agent for Azure SQL manually:
-
-1. Transfer the remote server installer to your remote host (Azure VM, HDI cluster node):
-
-   ```text title="Example of secure transfer from local to remote host"
-   scp /opt/wandisco/hivemigrator/hivemigrator-remote-server-installer.sh myRemoteHost:~
-   ```
-
-1. On your remote host, run the installer as root (or sudo) user in silent mode:
-
-   ```text
-   ./hivemigrator-remote-server-installer.sh -- --silent
-   ```
-
-1. On your remote host, start the remote server service:
-
-   ```text
-   service hivemigrator-remote-server start
-   ```
-
-1. On your local host, run the `hive agent add azure` command without using `--autodeploy` and its related parameters to configure your remote hive agent.
-
-   See the **Example for remote Azure SQL deployment - manual** example below for further guidance.
-
-#### Examples
-
-```text title="Example for local Azure SQL deployment with SQL username/password"
-hive agent add azure --name azureAgent --db-server-name mysqlserver --database-name mydb1 --auth-method SQL_PASSWORD --database-user azureuser --database-password mypassword --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6
-```
-
-```text title="Example for remote Azure SQL deployment with System-assigned managed identity - automated"
-hive agent add azure --name azureRemoteAgent --db-server-name mysqlserver --database-name mydb1 --auth-method AD_MSI --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6 --autodeploy --ssh-user root --ssh-key /root/.ssh/id_rsa --ssh-port 22 --host myRemoteHost.example.com --port 5052
-```
-
-```text title="Example for remote Azure SQL deployment with User-assigned managed identity - manual"
-hive agent add azure --name azureRemoteAgent --db-server-name mysqlserver --database-name mydb1 --auth-method AD_MSI --client-id b67f67ex-ampl-e2eb-bd6d-client9385id --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6 --host myRemoteHost.example.com --port 5052
+```text
+hive agent add azure --name azureAgent --db-server-name mysqlserver --database-name mydb1 --database-user azureuser --database-password mypassword --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6
 ```
 
 ----
@@ -1329,9 +1307,20 @@ Add a filesystem hive agent to connect to your host's local filesystem using the
 
 ```text title="Add filesystem agent"
 SYNOPSYS
-        hive agent add filesystem [--filesystem-id] string
-                                  [--root-folder] string
-                                  [[--name] string]
+        hive agent add filesystem [--filesystem-id] string  [--root-folder] string  [[--name] string]
+
+OPTIONS
+        --filesystem-id  string
+                filesystem id to use by filesystem agent
+                [Mandatory]
+
+        --root-folder  string
+                path to use as root folder by filesystem agent
+                [Mandatory]
+
+        --name  string
+                name of the agent
+                [Optional, default = <nothing>]
 ```
 
 #### Mandatory Parameters
@@ -1353,19 +1342,48 @@ hive agent add filesystem --filesystem-id myfilesystem --root-folder /var/lib/my
 
 ### `hive agent add glue`
 
-Add an [AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html) hive agent to connect to an [AWS Glue data catalog](https://docs.aws.amazon.com/glue/latest/dg/populate-data-catalog.html) using the `hive agent add glue` command.
+Add an [AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html) hive agent to connect to an [AWS-hosted database](https://docs.aws.amazon.com/whitepapers/latest/aws-overview/database.html) using the `hive agent add glue` command.
 
 ```text title="Add AWS Glue agent"
 SYNOPSYS
-        hive agent add glue [[--name] string]
-                            [[--config-path] string]
-                            [[--access-key] string]
-                            [[--secret-key] string]
-                            [[--session-token] string]
-                            [[--glue-endpoint] string]
-                            [[--aws-region] string]
-                            [[--aws-catalog-credentials-provider-factory-class] string]
-                            [[--default-fs] string]
+        hive agent add glue [[--name] string]  [[--config-path] string]  [[--access-key] string]  [[--secret-key] string]  [[--session-token] string]  [[--glue-endpoint] string]  [[--aws-region] string]  [[--aws-catalog-credentials-provider-factory-class] string]  [[--default-fs] string]
+
+OPTIONS
+        --name  string
+                name of the agent
+                [Optional, default = <nothing>]
+
+        --config-path  string
+                path to a directory containing glue-site.xml
+                [Optional, default = <nothing>]
+
+        --access-key  string
+                AWS access key. Valid for StaticCredentialsProviderFactory and SessionCredentialsProviderFactory.
+                [Optional, default = <nothing>]
+
+        --secret-key  string
+                AWS secret key. Valid for StaticCredentialsProviderFactory and SessionCredentialsProviderFactory.
+                [Optional, default = <nothing>]
+
+        --session-token  string
+                AWS session token. Valid only for SessionCredentialsProviderFactory
+                [Optional, default = <nothing>]
+
+        --glue-endpoint  string
+                AWS Glue endpoint
+                [Optional, default = <nothing>]
+
+        --aws-region  string
+                AWS region. Defaults to us-east-1
+                [Optional, default = <nothing>]
+
+        --aws-catalog-credentials-provider-factory-class  string
+                AWS catalog credentials provider factory class.
+                [Optional, default = <nothing>]
+
+        --default-fs  string
+                base URI of the filesystem to rewrite LOCATION strings into. I.e. s3:///test_bucket/
+                [Optional, default = <nothing>]
 ```
 
 #### Optional Parameters
@@ -1378,19 +1396,19 @@ SYNOPSYS
 * **`--glue-endpoint`** The [AWS Glue endpoint](https://docs.aws.amazon.com/glue/latest/dg/console-connections.html?icmpid=docs_glue_console) for connections to databases.
 * **`--aws-region`** The [AWS region](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) that your database is located in (default is `us-east-1`).
 * **`--aws-catalog-credentials-provider-factory-class`** The [AWS catalog credentials provider factory class](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-specify-provider) (default is [DefaultAWSCredentialsProviderChain](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/index.html?com/amazonaws/auth/DefaultAWSCredentialsProviderChain.html)).
-* **`--default-fs`** The base URI of the filesystem to generate the locations within the database (for example: `s3://test_bucket/`).
+* **`--default-fs`** The base URI of the filesystem to generate the locations within the database (for example: `s3:///test_bucket/`).
 
 #### Example
 
 ```text
-hive agent add glue --name glueAgent --access-key ACCESS6HCFPAQIVZTKEY --secret-key SECRET1vTMuqKOIuhET0HAI78UIPfSRjcswTKEY --aws-region eu-west-1 --default-fs s3://test_bucket/
+hive agent add glue --name glueAgent --access-key ACCESS6HCFPAQIVZTKEY --secret-key SECRET1vTMuqKOIuhET0HAI78UIPfSRjcswTKEY --aws-region eu-west-1 --default-fs s3:///test_bucket/
 ```
 
 ### `hive agent add hive`
 
 Add a hive agent to connect to a local or remote [Apache Hive](https://cwiki.apache.org/confluence/display/Hive/Home) metastore using the `hive agent add hive` command.
 
-Before deploying an agent, see our recommendations section on [enabling the Hive metastore event listener](./configuration-metadata.md#enable-hive-metastore-event-listener) for Apache Hive environments.
+Before deploying an agent, see our recommendations section on [enabling the Hive metastore event listener](./configuration.md#enable-hive-metastore-event-listener) for Apache Hive environments.
 
 :::info remote deployments
 When connecting to a remote Apache Hive metastore, specify a host on the remote cluster that will be used to communicate with the local LiveData Migrator server (constrained to a user-defined port).
@@ -1400,19 +1418,53 @@ A small service will be deployed on this remote host so that the hive agent can 
 
 ```text title="Add local or remote hive agent"
 SYNOPSYS
-        hive agent add hive [[--config-path] string]
-                            [[--kerberos-principal] string]
-                            [[--kerberos-keytab] string]
-                            [[--name] string]
-                            [[--host] string]
-                            [[--port] integer]
-                            [--autodeploy]
-                            [[--ssh-user] string]
-                            [[--ssh-key] file]
-                            [[--ssh-port] int]
-                            [--use-sudo]
-                            [--ignore-host-checking]
+        hive agent add hive [[--config-path] string]  [[--kerberos-principal] string]  [[--kerberos-keytab] string]  [[--name] string]  [[--host] string]  [[--port] integer]  [--autodeploy]  [[--ssh-user] string]  [[--ssh-key] file]  [[--ssh-port] int]  [--use-sudo]  [--ignore-host-checking]
 
+OPTIONS
+        --config-path  string
+                path to a directory containing hive configuration files
+                [Optional, default = <nothing>]
+
+        --kerberos-principal  string
+                kerberos principal to use
+                [Optional, default = <nothing>]
+
+        --kerberos-keytab  string
+                path to kerberos keytab file
+                [Optional, default = <nothing>]
+
+        --name  string
+                name of the agent
+                [Optional, default = <nothing>]
+
+        --host  string
+                host where remote hive agent will be deployed
+                [Optional, default = <nothing>]
+
+        --port  integer
+                port to use by remote hive agent
+                [Optional, default = <nothing>]
+
+        --autodeploy    automatically deploy remote agent. If specified, you must specify sshKey to connect.
+                [Optional, default = false]
+
+        --ssh-user  string
+                ssh user to use for authentication on remote host to perform automatic deployment
+                [Optional, default = <nothing>]
+
+        --ssh-key  file
+                ssh key to use for authentication on remote host to perform automatic deployment
+                [Optional, default = <nothing>]
+
+        --ssh-port  int
+                ssh port to use to perform automatic deployment
+                [Optional, default = 22]
+
+        --use-sudo      use sudo for privileged commands while performing remote installation
+                [Optional, default = false]
+
+        --ignore-host-checking  ignore strict host key checking for unknown hosts
+                [Optional, default = false]
 ```
 
 #### Parameters for local or remote hive agents
@@ -1489,6 +1541,11 @@ Check the configuration of an existing hive agent using `hive agent check`.
 ```text title="Check if agent configuration is valid & connectable"
 SYNOPSYS
         hive agent check [--name] string
+
+OPTIONS
+        --name  string
+                name of the agent
+                [Mandatory]
 ```
 
 #### Example
@@ -1570,6 +1627,11 @@ Delete the specified hive agent with `hive agent delete`.
 ```text title="Delete agent"
 SYNOPSYS
         hive agent delete [--name] string
+
+OPTIONS
+        --name  string
+                name of the agent
+                [Mandatory]
 ```
 
 #### Example
@@ -1587,6 +1649,10 @@ List configured hive agents with `hive agent list`.
 ```text title="List already added agents"
 SYNOPSYS
         hive agent list [--detailed]
+
+OPTIONS
+        --detailed
+                [Optional, default = false]
 ```
 
 #### Example
@@ -1604,6 +1670,11 @@ Show the configuration of a hive agent with `hive agent show`.
 ```text title="Show agent configuration"
 SYNOPSYS
         hive agent show [--name] string
+
+OPTIONS
+        --name  string
+                name of the agent
+                [Mandatory]
 ```
 
 #### Example
@@ -1644,6 +1715,19 @@ Specify these rules when [starting a new migration](#hive-migration-add) to cont
 ```text title="Add new hive migration rule"
 SYNOPSYS
         hive rule add [--database-pattern] string  [--table-pattern] string  [[--name] string]
+
+OPTIONS
+        --database-pattern  string
+                Pattern to match database name. For example db* would include all databases starting with 'db', like 'dbname1'.
+                [Mandatory]
+
+        --table-pattern  string
+                Pattern to match table name. For example table* would include all tables starting with 'table', like 'tablename1'.
+                [Mandatory]
+
+        --name  string
+                Rule name
+                [Optional, default = <nothing>]
 
 ALSO KNOWN AS
         hive rule create
@@ -1693,6 +1777,11 @@ Delete a hive rule.
 ```text title="Delete selected hive migration rule"
 SYNOPSYS
         hive rule delete [--name] string
+
+OPTIONS
+        --name  string
+                Rule name
+                [Mandatory]
 ```
 
 #### Example
@@ -1727,6 +1816,11 @@ Show details of a hive rule.
 ```text title="Show rule details"
 SYNOPSYS
         hive rule show [--name] string
+
+OPTIONS
+        --name  string
+                Rule name
+                [Mandatory]
 ```
 
 #### Example
@@ -1741,7 +1835,7 @@ hive rule show --name test_databases
 
 ### `hive migration add`
 
-Create a new hive migration to initiate metadata migration from your source metastore.
+Create a new hive migration to initiate metadata migration from your source database or metastore.
 
 :::info
 [Create hive rules](#hive-rule-addhive-rule-create) before initiating a hive migration to specify which databases and tables are migrated.
@@ -1750,6 +1844,29 @@ Create a new hive migration to initiate metadata migration from your source meta
 ```text title="create new migration"
 SYNOPSYS
         hive migration add [--source] string  [--target] string  [[--rule-names] list]  [[--name] string]  [--auto-start]  [--once]
+
+OPTIONS
+        --source  string
+                name of agent which should be a source of migration
+                [Mandatory]
+
+        --target  string
+                name of agent which should be a target of migration
+                [Mandatory]
+
+        --rule-names  list
+                rule name or a list of rule names to match objects on a source & target for migration. List of rules can be specified separated by the comma (','). You can also use quotes if there are spaces around commas.
+                [Optional, default = <nothing>]
+
+        --name  string
+                migration name
+                [Optional, default = <nothing>]
+
+        --auto-start    immediately start created migration
+                [Optional, default = <nothing>]
+
+        --once  migration will be stopped after all matching objects are migrated
+                [Optional, default = <nothing>]
 ```
 
 #### Mandatory Parameters
@@ -1783,6 +1900,14 @@ A hive migration must be stopped state before it can be deleted, this can be ach
 ```text title="Delete migration from the list, migration should be stopped"
 SYNOPSYS
         hive migration delete [--name] string  [--force-stop]
+
+OPTIONS
+        --name  string
+                migration name
+                [Mandatory]
+
+        --force-stop    also stop migration if it's in progress. By default, migration should be stopped before delete.
+                [Optional, default = false]
 ```
 
 #### Example
@@ -1817,6 +1942,11 @@ Pause a hive migration or a list of hive migrations (comma-separated).
 ```text title="Pause migration from the list"
 SYNOPSYS
         hive migration pause [--names] list
+
+OPTIONS
+        --names  list
+                migration name. List of migrations can be specified separated by comma (','). You can also use quotes if there are spaces around commas.
+                [Mandatory]
 ```
 
 #### Example
@@ -1849,6 +1979,11 @@ Resume a paused hive migration or a list of paused hive migrations (comma-separa
 ```text title="Resume migration from the list"
 SYNOPSYS
         hive migration resume [--names] list
+
+OPTIONS
+        --names  list
+                migration name. List of migrations can be specified separated by comma (','). You can also use quotes if there are spaces around commas.
+                [Mandatory]
 ```
 
 #### Example
@@ -1881,6 +2016,11 @@ Display information about a hive migration.
 ```text title="Show info about specific migration"
 SYNOPSYS
         hive migration show [--name] string
+
+OPTIONS
+        --name  string
+                migration name
+                [Mandatory]
 ```
 
 #### Example
@@ -1902,6 +2042,14 @@ Specify the `--once` parameter to perform a one-time migration, and not continuo
 ```text title="Start migration"
 SYNOPSYS
         hive migration start [--names] list  [--once]
+
+OPTIONS
+        --names  list
+                migration name. List of migrations can be specified separated by comma (','). You can also use quotes if there are spaces around commas.
+                [Mandatory]
+
+        --once
+                [Optional, default = false]
 ```
 
 #### Example
@@ -1921,6 +2069,10 @@ Specify the `--once` parameter to perform a one-time migration, and not continuo
 ```text title="Start migration"
 SYNOPSYS
         hive migration start --all [--once]
+
+OPTIONS
+        --once
+                [Optional, default = false]
 ```
 
 #### Example
@@ -1938,6 +2090,11 @@ Show the status of a hive migration or a list of hive migrations (comma-separate
 ```text title="Show migration status"
 SYNOPSYS
         hive migration status [--names] list
+
+OPTIONS
+        --names  list
+                migration name. List of migrations can be speficied separated by comma (','). You can also use quotes if there are spaces around commas.
+                [Mandatory]
 ```
 
 #### Example
@@ -1970,6 +2127,11 @@ Stop a running hive migration or a list of running hive migrations (comma-separa
 ```text title="Stop running migration"
 SYNOPSYS
         hive migration stop [--names] list
+
+OPTIONS
+        --names  list
+                migration name. List of migrations can be speficied separated by comma (','). You can also use quotes if there are spaces around commas.
+                [Mandatory]
 ```
 
 #### Example
@@ -2004,6 +2166,10 @@ Show the details of the active license.
 ```text title="show used license"
 SYNOPSYS
         license show [--full]
+
+OPTIONS
+        --full  show license details
+                [Optional, default = false]
 ```
 
 ----
@@ -2015,6 +2181,11 @@ Upload a new license by submitting its location on the local filesystem.
 ```text title="upload license file"
 SYNOPSYS
         license upload [--path] string
+
+OPTIONS
+        --path  string
+                path to the license file in the local filesystem
+                [Mandatory]
 ```
 
 #### Example
@@ -2032,7 +2203,7 @@ license upload --path /user/hdfs/license.key
 Connect to the LiveData Migrator service on your LiveData Migrator host with this command.
 
 :::note
-This is a manual method of connecting to the LiveData Migrator service as the `livedata-migrator` command (shown in [CLI - Log in](./get-started.md)) will attempt to establish this connection automatically.
+This is a manual method of connecting to the LiveData Migrator service as the `livedata-migrator --host=localhost` command (shown in the [CLI - Log in](./operation-cli.md#log-in) section) will attempt to establish this connection automatically.
 :::
 
 ```text title="connect livemigrator"
@@ -2041,6 +2212,22 @@ SYNOPSYS
                              [--ssl]
                              [[--port] int]
                              [[--timeout] integer]
+
+OPTIONS
+        --host  string
+                host to connect to
+                [Mandatory]
+
+        --ssl   use ssl connection
+                [Optional, default = false]
+
+        --port  int
+                port of the service, either http or https, depending on the ssl flag
+                [Optional, default = 18080]
+
+        --timeout  integer
+                override default(5m) connection timeout in milliseconds
+                [Optional, default = <nothing>]
 ```
 
 #### Mandatory Parameters
@@ -2049,7 +2236,7 @@ SYNOPSYS
 
 #### Optional Parameters
 
-* **`--ssl`** Specify this parameter if you want to establish an SSL connection to LiveData Migrator. Enable [Server SSL](./configuration-ldm.md#server-ssl) on the LiveData Migrator service before using this parameter.
+* **`--ssl`** Specify this parameter if you want to establish an SSL connection to LiveData Migrator. Enable [Server SSL](./configuration.md#server-ssl) on the LiveData Migrator service before using this parameter.
 * **`--port`** The LiveData Migrator port to connect on (default is `18080`).
 * **`--timeout`** Define the connection timeout in milliseconds. Set this parameter to override the default connection timeout of 5 minutes (300000ms).
 
@@ -2066,7 +2253,7 @@ connect livemigrator --host localhost --port 18080
 Connect to the HiveMigrator service on your LiveData Migrator host with this command.
 
 :::note
-This is a manual method of connecting to the HiveMigrator service as the `livedata-migrator` command (shown in [CLI - Log in](./get-started.md) section) will attempt to establish this connection automatically.
+This is a manual method of connecting to the HiveMigrator service as the `livedata-migrator --host=localhost` command (shown in the [CLI - Log in](./operation-cli.md#log-in) section) will attempt to establish this connection automatically.
 :::
 
 ```text title="connect hivemigrator"
@@ -2075,6 +2262,22 @@ SYNOPSYS
                              [--ssl]
                              [[--port] int]
                              [[--timeout] long]
+
+OPTIONS
+        --host  string
+                host to connect to
+                [Mandatory]
+
+        --ssl   use ssl connection
+                [Optional, default = false]
+
+        --port  int
+                host to connect to
+                [Optional, default = 6780]
+
+        --timeout  long
+                override default(5m) connection timeout in milliseconds
+                [Optional, default = <nothing>]
 ```
 
 #### Mandatory Parameters
@@ -2115,6 +2318,11 @@ Prints whatever text that you write to the console. This can be used to sanity c
 ```text title="Print message"
 SYNOPSYS
         echo [--message] string
+
+OPTIONS
+        --message  string
+
+                [Mandatory]
 ```
 
 ----
@@ -2145,6 +2353,10 @@ Use the `help` command to get details of all commands available from the action 
 SYNOPSYS
         help [[-C] string]
 
+OPTIONS
+        -C or --command  string
+                The command to obtain help for.
+                [Optional, default = <none>]
 ```
 
 #### Example
@@ -2170,6 +2382,11 @@ Entering `history --file <filename>` will save up to 500 most recently entered c
 ```text title="Display or save the history of previously run commands"
 SYNOPSYS
         history [[--file] file]
+
+OPTIONS
+        --file  file
+                A file to save history to.
+                [Optional, default = <none>]
 ```
 
 #### Optional Parameters
@@ -2185,6 +2402,10 @@ Load and execute commands from a text file using the `script --file <filename>` 
 ```text title="Read and execute commands from a file"
 SYNOPSYS
         script [--file] file
+
+OPTIONS
+        --file  file
+                [Mandatory]
 ```
 
 #### Mandatory Parameters

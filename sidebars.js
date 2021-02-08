@@ -27,9 +27,9 @@ module.exports = {
               "id": "license"
             },
             {
-             "type": "doc",
-             "id": "uninstall"
-           }
+              "type": "doc",
+              "id": "uninstall"
+            }
           ]
         },
         {
@@ -48,6 +48,10 @@ module.exports = {
             {
               "type": "doc",
               "id": "create-migration"
+            },
+            {
+              "type": "doc",
+              "id": "non-live-migration"
             },
             {
               "type": "doc",
