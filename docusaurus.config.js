@@ -7,9 +7,8 @@ const currentVersion = '1.10.0';
 module.exports = {
   title: 'LiveData Migrator',
   tagline: 'WANdisco LiveData Migrator Documentation',
-  url: 'https://wandisco.github.io/wandisco-documentation-ldm/',
-  //url: 'http://localhost/',
-  baseUrl: '/wandisco-documentation-ldm/',
+  url: 'https://docs.wandisco.com',
+  baseUrl: '/live-data-migrator/',
   //baseUrl,
   favicon: 'img/favicon.png',
   organizationName: 'wandisco', // Usually your GitHub org/user name.
@@ -44,18 +43,18 @@ module.exports = {
         },
       ],
     },
-//    algolia: {
-//      apiKey: '113b7a18a22b690636954bfeced8c1ad',
-//      indexName: 'wandisco-live-data-migrator',
+    algolia: {
+      apiKey: '113b7a18a22b690636954bfeced8c1ad',
+      indexName: 'wandisco-live-data-migrator',
 
       // Optional: see doc section bellow
-//      contextualSearch: false,
+      contextualSearch: false,
 
       // Optional: Algolia search parameters
       //searchParameters: {
       //  facetFilters: []
       //},
-//    },
+    },
     footer: {
       style: 'dark',
       copyright: `Copyright © ${new Date().getFullYear()} WANdisco Inc.`,
