@@ -30,7 +30,7 @@ Upload your new license in the License panel of the UI. This panel displays curr
 1. Log in to the LiveData Migrator CLI.
 
   ```bash
-  livedata-migrator --host=localhost
+  livedata-migrator
   ```
 
 1. Use the [`license show`](./command-reference.md#license-show) command to see details of your current LiveData Migrator license.
