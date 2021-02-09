@@ -2,15 +2,24 @@ const versions = require('./versions.json');
 
 const currentVersion = '1.11.0';
 
-//const baseUrl = process.env.NODE_ENV === 'development' ? '/live-data-migrator/' : '/';
+const site_urls = {
+  wandisco: {
+    url: 'https://docs.wandisco.com',
+    baseUrl: '/live-data-migrator/',
+  },
+  github: {
+    url: 'https://wandisco.github.io',
+    baseUrl: '/wandisco-documentation-ldm/',
+  }
+}
+
+const { url = "http://localhost", baseUrl = "/" } = site_urls[process.env.WAND_BUILD];
 
 module.exports = {
   title: 'LiveData Migrator',
   tagline: 'WANdisco LiveData Migrator Documentation',
-  url: 'https://wandisco.github.io/wandisco-documentation-ldm/',
-  //url: 'http://localhost/',
-  baseUrl: '/wandisco-documentation-ldm/',
-  //baseUrl,
+  url,
+  baseUrl,
   favicon: 'img/favicon.png',
   organizationName: 'wandisco', // Usually your GitHub org/user name.
   projectName: 'wandisco-documentation-ldm', // Usually your repo name.
@@ -44,18 +53,18 @@ module.exports = {
         },
       ],
     },
-//    algolia: {
-//      apiKey: '113b7a18a22b690636954bfeced8c1ad',
-//      indexName: 'wandisco-live-data-migrator',
+    algolia: {
+      apiKey: '113b7a18a22b690636954bfeced8c1ad',
+      indexName: 'wandisco-live-data-migrator',
 
       // Optional: see doc section bellow
-//      contextualSearch: false,
+      contextualSearch: false,
 
       // Optional: Algolia search parameters
-      //searchParameters: {
-      //  facetFilters: []
-      //},
-//    },
+      searchParameters: {
+        facetFilters: [`tags:${process.env.WAND_BUILD}`]
+      },
+    },
     footer: {
       style: 'dark',
       copyright: `Copyright © ${new Date().getFullYear()} WANdisco Inc.`,
