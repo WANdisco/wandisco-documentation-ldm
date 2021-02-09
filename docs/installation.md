@@ -59,7 +59,6 @@ Group=myuser
 ```
 
 Once you've finished making changes, save the file and restart the corresponding process.
-:::
 
 ## Next Steps
 
