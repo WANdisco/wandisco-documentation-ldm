@@ -1,0 +1,149 @@
+{
+  "version-1.11.0/someSidebar": [
+    {
+      "collapsed": true,
+      "type": "category",
+      "label": "LiveData Migrator",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-1.11.0/about"
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Installation",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-1.11.0/prereqs"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.11.0/installation"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.11.0/license"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.11.0/uninstall"
+            }
+          ]
+        },
+        {
+          "type": "doc",
+          "id": "version-1.11.0/get-started"
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Migrate data",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-1.11.0/configure-storage"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.11.0/create-migration"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.11.0/non-live-migration"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.11.0/configure-exclusions"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.11.0/manage-migrations"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.11.0/manage-bandwidth"
+            }
+          ]
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Migrate metadata",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-1.11.0/connect-metastores"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.11.0/define-metadata-rules"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.11.0/migrate-metadata"
+            }
+          ]
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Common use cases",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-1.11.0/uc-on-prem-hadoop-hdi"
+            }
+          ]
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Configuration",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-1.11.0/configuration-ldm"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.11.0/configuration-ui"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.11.0/configuration-data-migrations"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.11.0/configuration-metadata"
+            }
+          ]
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Reference",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-1.11.0/command-reference"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.11.0/api-reference"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.11.0/jar"
+            }
+          ]
+        },
+        {
+          "type": "doc",
+          "id": "version-1.11.0/troubleshooting"
+        }
+      ]
+    }
+  ]
+}
