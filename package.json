@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "docusaurus start",
-    "build": "docusaurus build",
+    "start": "WAND_BUILD='github' docusaurus start",
+    "build": "WAND_BUILD='wandisco' docusaurus build",
     "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy",
+    "deploy": "WAND_BUILD='github' docusaurus deploy",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve"
   },
