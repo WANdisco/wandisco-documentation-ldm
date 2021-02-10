@@ -108,26 +108,26 @@ Although present when invoking the `help` command, Local Filesystem functionalit
 | [`filesystem show`](./command-reference.md#filesystem-show) | Get target file system details |
 | [`filesystem types`](./command-reference.md#filesystem-types) | List the types of target file systems available |
 
-## Configure static storage
+## Configure storage for One-time migrations
 
-A static storage is a filesystem that is not tracked by LiveData Migrator for changes during a migration. Migrations created from a static storage will become [static migrations](./non-live-migration.md) by default.
+It's possible to create a source filesystem that is not tracked by LiveData Migrator for changes during a migration. Migrations created from this type of source will become [One-time migrations](./non-live-migration.md) by default. Note that it is not necessary to create a file storage of this type to create a one-time migration.
 
-### Create a static storage with the UI
+### Create storage for One-time migrations with the UI
 
-To create a static storage, uncheck the **Migrate Live Events** box when you configure the storage. When creating a migration from the UI from a static storage, the UI will uncheck the **live migration** option and prevent it from being enabled.
+To create a source filesystem for a one-time migration, uncheck the **Migrate Live Events** box when you configure the storage. When creating a migration from the UI from the storage created, the UI will uncheck the **live migration** option and prevent it from being enabled.
 
-### Create a static storage with the CLI
+### Create storage for One-time migrations with the CLI
 
-LiveData Migrator will only perform *read* tasks on a static storage. It will not check the source storage for modifications to data during transfer. Any migration that uses a static source storage will automatically become a static migration, and will have the `scanOnly` flag applied.
+LiveData Migrator will only perform *read* tasks on a source filesystem created for One-time migrations. It will not check the source storage for modifications to data during transfer. Any migration that uses the source storage will automatically become a one-time migration, and will have the `scanOnly` flag applied.
 
-To create a static storage, add the `scanOnly` flag during source creation:
+To create a source for one-time migrations, add the `scanOnly` flag during source creation:
 
 ```text="Code"
 filesystem add hdfs --source --scanOnly ...
 ```
 
 :::note
-The account used to connect to a static source storage only requires read access. Write access is not necessary.
+The account used to connect to a source storage intended for one-time migrations only requires read access. Write access is not necessary.
 :::
 
 ## Next Steps
