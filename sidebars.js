@@ -118,6 +118,10 @@ module.exports = {
             {
               "type": "doc",
               "id": "configuration-metadata"
+            },
+            {
+              "type": "doc",
+              "id": "configure-system-users"
             }
           ]
         },
