@@ -24,6 +24,19 @@ Do you have an older version already installed? If so, perform the steps in the 
    chmod +x livedata-migrator.sh && ./livedata-migrator.sh
    ```
 
+   :::important Known Issue
+   On CentOS 6, start the `livedata-migrator` and `livedata-ui` services manually using the following commands:
+
+   ```text
+   initctl start livedata-migrator
+   ```
+
+   ```text
+   initctl start livedata-ui
+   ```
+
+   :::
+
 1. Check the service statuses with these commands:
 
    ```text
