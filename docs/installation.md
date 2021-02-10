@@ -51,27 +51,12 @@ Do you have an older version already installed? If so, perform the steps in the 
    service livedata-ui status
    ```
 
-### Default system user
+## Default system users
 
-The default system user assigned to the livedata-migrator and livedata-ui services is 'hdfs', whereas the default system user for hivemigrator is 'hive'. To run these services as a different user, update the `USERNAME` and `GROUPNAME` environment variables stored in `/etc/wandisco/livedata-migrator/vars.env`, `/etc/wandisco/ui/vars.env` or `/etc/wandisco/hivemigrator/vars.env` respectively.
+The default system user for the LiveData Migrator and LiveData UI services is `hdfs`, and the default system user for the HiveMigrator service is `hive`.
 
-If you're running a `systemd`-based operating system, create an override service file. To do so, run one of the following commands depending on which service you want to update:
+[Configure system users](./configure-system-users.md) if you want to change these defaults.
 
-| Component | Command |
-| -------- | -------- |
-| LiveData Migrator | `systemctl edit livedata-migrator` |
-| LiveData UI | `systemctl edit livedata-ui` |
-| Hive Migrator | `systemctl edit hivemigrator` |
-
-In the text editor that opens automatically, override the `User` and `Group` variables with your preferred user:
-
-```text="Example"
-[Service]
-User=myuser
-Group=myuser
-```
-
-Once you've finished making changes, save the file and restart the corresponding process.
 
 ## Next Steps
 
