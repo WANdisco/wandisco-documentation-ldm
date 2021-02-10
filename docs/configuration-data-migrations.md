@@ -1,7 +1,7 @@
 ---
 id: configuration-data-migrations
 title: Configuring Data Migrations
-sidebar_label: Data Migrations
+sidebar_label: Data migrations
 ---
 
 We recommend you make the following configuration changes to your HDFS cluster environment to prepare for data migrations.
