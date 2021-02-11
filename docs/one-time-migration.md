@@ -1,7 +1,7 @@
 ---
-id: non-live-migration
-title: Create a One-time migration
-sidebar_label: Create a One-time migration
+id: one-time-migration
+title: Create a one-time migration
+sidebar_label: Create a one-time migration
 ---
 
 One-time migrations do not track activity in your data during a migration. If you create a one-time migration, LiveData Migrator will not scan your source storage for updates to the data as the migration progresses.

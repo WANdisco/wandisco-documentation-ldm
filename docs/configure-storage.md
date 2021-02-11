@@ -108,17 +108,17 @@ Although present when invoking the `help` command, Local Filesystem functionalit
 | [`filesystem show`](./command-reference.md#filesystem-show) | Get target file system details |
 | [`filesystem types`](./command-reference.md#filesystem-types) | List the types of target file systems available |
 
-## Configure storage for One-time migrations
+## Configure storage for one-time migrations
 
-It's possible to create a source filesystem that is not tracked by LiveData Migrator for changes during a migration. Migrations created from this type of source will become [One-time migrations](./non-live-migration.md) by default. Note that it is not necessary to create a file storage of this type to create a one-time migration.
+It's possible to create a source filesystem that is not tracked by LiveData Migrator for changes during a migration. Migrations created from this type of source will become [one-time migrations](./one-time-migration.md) by default. Note that it is not necessary to create a file storage of this type to create a one-time migration.
 
-### Create storage for One-time migrations with the UI
+### Create storage for one-time migrations with the UI
 
 To create a source filesystem for a one-time migration, uncheck the **Migrate Live Events** box when you configure the storage. When creating a migration from the UI from the storage created, the UI will uncheck the **live migration** option and prevent it from being enabled.
 
-### Create storage for One-time migrations with the CLI
+### Create storage for one-time migrations with the CLI
 
-LiveData Migrator will only perform *read* tasks on a source filesystem created for One-time migrations. It will not check the source storage for modifications to data during transfer. Any migration that uses the source storage will automatically become a one-time migration, and will have the `scanOnly` flag applied.
+LiveData Migrator will only perform *read* tasks on a source filesystem created for one-time migrations. It will not check the source storage for modifications to data during transfer. Any migration that uses the source storage will automatically become a one-time migration, and will have the `scanOnly` flag applied.
 
 To create a source for one-time migrations, add the `scanOnly` flag during source creation:
 
