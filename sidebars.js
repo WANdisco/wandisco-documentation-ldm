@@ -51,7 +51,7 @@ module.exports = {
             },
             {
               "type": "doc",
-              "id": "non-live-migration"
+              "id": "one-time-migration"
             },
             {
               "type": "doc",
