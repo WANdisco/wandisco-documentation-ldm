@@ -51,7 +51,7 @@ module.exports = {
             },
             {
               "type": "doc",
-              "id": "non-live-migration"
+              "id": "one-time-migration"
             },
             {
               "type": "doc",
@@ -118,10 +118,6 @@ module.exports = {
             {
               "type": "doc",
               "id": "configuration-metadata"
-            },
-            {
-              "type": "doc",
-              "id": "configure-system-users"
             }
           ]
         },

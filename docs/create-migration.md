@@ -59,6 +59,6 @@ Follow the command links to learn how to set the parameters and see examples.
    [`migration run`](./command-reference.md#migration-run)
 
 
-## Create a static migration
+## Create a one-time migration
 
-[Create a static migration](./non-live-migration.md) if you do not want LiveData Migrator to scan for changes to your data during a migration. These migrations do not require you to have write access to the source filesystem, or operate the migration as the `hdfs` user.
+[Create a one-time migration](./one-time-migration.md) if you do not want LiveData Migrator to scan for changes to your data during a migration. These migrations do not require you to have write access to the source filesystem, or operate the migration as the `hdfs` user.
