@@ -26,7 +26,6 @@ Ensure that all [prerequisites](./prereqs.md#prerequisites) are met for the sour
 For your target environment, ensure the following prerequisites are met:
 
 * Your HDInsights cluster is using [ADLS Gen2](https://docs.microsoft.com/en-us/azure/hdinsight/overview-data-lake-storage-gen2) as its primary storage type.
-* (Recommended) [Check that your default Hive warehouse directory is configured the same as your source on-premises Hadoop cluster](./configuration-ui.md#default-hive-metastore-warehouse-directory).
 * If using a [default metastore](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-use-external-metadata-stores#default-metastore), SSH access to an edge node on the HDInsights cluster.  
   The edge node requires the following:
   * HDFS and Hive client libraries installed.
@@ -56,6 +55,12 @@ Configure your ADLS Gen2 storage container as your target filesystem. The method
 
 * Using a [service principal](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal) and [OAuth 2](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols) credentials: [`filesystem add adls2 oauth`](./command-reference.md#filesystem-add-adls2-oauth)
 * Using [access key](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) credentials: [`filesystem add adls2 sharedKey`](./command-reference.md#filesystem-add-adls2-sharedkey)
+
+## Create path mapping for default Hive warehouse directory
+
+[Create a path mapping](./create-path-mappings.md) to ensure that data for managed Hive databases and tables are migrated to the [default Hive warehouse directory](https://cwiki.apache.org/confluence/display/Hive/Configuration+Properties#ConfigurationProperties-hive.metastore.warehouse.dir) for HDInsight clusters.
+
+This lets you start using your source data and metadata on your HDInsights cluster immediately after migration, as it will be referenced correctly by your target metastore.
 
 ## Configure for metadata migrations
 
