@@ -134,4 +134,4 @@ The account used to connect to a static source storage only requires read access
 
 Once you have your source and target storage configured, you're ready to [migrate data](./create-migration.md). If you want migrate data to a different path on your target filesystem, [create path mappings](./create-path-mappings.md) first.
 
-If you want to exclude specific file sizes or file names from your data migrations, [define exclusions](./configure-exclusions.md) as well.
+If you want to exclude specific file sizes or file names from your data migrations, [define exclusions](./configure-exclusions.md).

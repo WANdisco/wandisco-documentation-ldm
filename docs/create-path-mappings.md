@@ -4,24 +4,24 @@ title: Create path mappings
 sidebar_label: Create path mappings
 ---
 
-Create path mappings when you want your target filesystem to store the migrated data in a different path to that of your source filesystem.
+Create path mappings when you want to define a alternative target path for a specific target filesystem.
 
 ## Why use path mapping?
 
 When path mapping is not used, the source path on your source filesystem will be created on your target filesystem. This may not always be suitable for the purposes of your migration.
 
-The example below presents a common use-case, the default [Hive metastore warehouse directory](https://cwiki.apache.org/confluence/display/Hive/Configuration+Properties#ConfigurationProperties-hive.metastore.warehouse.dir) for Hortonworks is `/apps/hive/warehouse` whereas for Azure HDInsight it is `/hive/warehouse`.
+The following example shows a common use-case where the default [Hive metastore warehouse directory](https://cwiki.apache.org/confluence/display/Hive/Configuration+Properties#ConfigurationProperties-hive.metastore.warehouse.dir) for Hortonworks is `/apps/hive/warehouse`, and the default for Azure HDInsight is `/hive/warehouse`.
 
 | Example for Hortonworks to HDInsight | Source path | Target path |
 |---|---|---|
 | Without path mapping | `/apps/hive/warehouse` | `/apps/hive/warehouse` |
 | With path mapping | `/apps/hive/warehouse` | `/hive/warehouse` |
 
-Using path mapping will allow any migrated data (relating to managed Hive databases and tables) to be stored in the equivalent default location on the target.
+Using path mapping enables any migrated data (relating to managed Hive databases and tables) to be stored in the equivalent default location on the target.
 
 ## Create a path mapping with the UI
 
-Path mapping is not yet available through the UI, it will be available in a forthcoming release.
+Placeholder
 
 ## Create a path mapping with the CLI
 

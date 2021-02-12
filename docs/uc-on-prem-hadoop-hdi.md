@@ -60,7 +60,7 @@ Configure your ADLS Gen2 storage container as your target filesystem. The method
 
 [Create a path mapping](./create-path-mappings.md) to ensure that data for managed Hive databases and tables are migrated to the [default Hive warehouse directory](https://cwiki.apache.org/confluence/display/Hive/Configuration+Properties#ConfigurationProperties-hive.metastore.warehouse.dir) for HDInsight clusters.
 
-Doing so will allow you to start using your source data and metadata on your HDInsights cluster immediately after migration, as it will be referenced correctly by your target metastore.
+This lets you start using your source data and metadata on your HDInsights cluster immediately after migration, as it will be referenced correctly by your target metastore.
 
 ## Configure for metadata migrations
 
