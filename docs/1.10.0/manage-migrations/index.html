@@ -7,16 +7,16 @@
 <link rel="alternate" type="application/rss+xml" href="/wandisco-documentation-ldm/blog/rss.xml" title="LiveData Migrator Blog RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/wandisco-documentation-ldm/blog/atom.xml" title="LiveData Migrator Blog Atom Feed">
 <link rel="search" type="application/opensearchdescription+xml" title="LiveData Migrator" href="/wandisco-documentation-ldm/opensearch.xml"><title data-react-helmet="true">Manage migrations | LiveData Migrator</title><meta data-react-helmet="true" name="twitter:card" content="summary_large_image"><meta data-react-helmet="true" name="docsearch:language" content="en"><meta data-react-helmet="true" name="docsearch:version" content="1.10.0"><meta data-react-helmet="true" name="docsearch:docusaurus_tag" content="docs-default-1.10.0"><meta data-react-helmet="true" property="og:title" content="Manage migrations | LiveData Migrator"><meta data-react-helmet="true" name="description" content="Manage your migrations with LiveData Migrator using either the UI or CLI."><meta data-react-helmet="true" property="og:description" content="Manage your migrations with LiveData Migrator using either the UI or CLI."><meta data-react-helmet="true" property="og:url" content="https://wandisco.github.io/wandisco-documentation-ldm/docs/1.10.0/manage-migrations"><link data-react-helmet="true" rel="shortcut icon" href="/wandisco-documentation-ldm/img/favicon.png"><link data-react-helmet="true" rel="preconnect" href="https://BH4D9OD16A-dsn.algolia.net" crossorigin="anonymous"><link data-react-helmet="true" rel="canonical" href="https://wandisco.github.io/wandisco-documentation-ldm/docs/1.10.0/manage-migrations"><link rel="stylesheet" href="/wandisco-documentation-ldm/styles.428b9bba.css">
-<link rel="preload" href="/wandisco-documentation-ldm/styles.ad91dd42.js" as="script">
-<link rel="preload" href="/wandisco-documentation-ldm/runtime~main.654e4113.js" as="script">
-<link rel="preload" href="/wandisco-documentation-ldm/main.4f24344f.js" as="script">
-<link rel="preload" href="/wandisco-documentation-ldm/1.066b518a.js" as="script">
-<link rel="preload" href="/wandisco-documentation-ldm/2.86724f00.js" as="script">
-<link rel="preload" href="/wandisco-documentation-ldm/88.3eba2830.js" as="script">
-<link rel="preload" href="/wandisco-documentation-ldm/91.d19eab97.js" as="script">
+<link rel="preload" href="/wandisco-documentation-ldm/styles.d21285dd.js" as="script">
+<link rel="preload" href="/wandisco-documentation-ldm/runtime~main.82d6db01.js" as="script">
+<link rel="preload" href="/wandisco-documentation-ldm/main.e198519c.js" as="script">
+<link rel="preload" href="/wandisco-documentation-ldm/1.e2553f0c.js" as="script">
+<link rel="preload" href="/wandisco-documentation-ldm/2.cc6b678e.js" as="script">
+<link rel="preload" href="/wandisco-documentation-ldm/89.5c35c9c8.js" as="script">
+<link rel="preload" href="/wandisco-documentation-ldm/92.a2172524.js" as="script">
 <link rel="preload" href="/wandisco-documentation-ldm/bc9ea6b5.9ed80dd7.js" as="script">
-<link rel="preload" href="/wandisco-documentation-ldm/17896441.ffdbbfad.js" as="script">
-<link rel="preload" href="/wandisco-documentation-ldm/03bad63f.71c269aa.js" as="script">
+<link rel="preload" href="/wandisco-documentation-ldm/17896441.41ec42a2.js" as="script">
+<link rel="preload" href="/wandisco-documentation-ldm/03bad63f.11915c36.js" as="script">
 </head>
 <body>
 <script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){var t=null;try{t=localStorage.getItem("theme")}catch(t){}return t}();t(null!==e?e:"light")}()</script><div id="__docusaurus">
@@ -30,15 +30,15 @@
 : A <em>paused</em> migration has been instructed to pause transfer, and is not transferring content or making other changes to the target.</p><p><code>ABORTED</code>
 : An <em>aborted</em> migration will not make any changes to the target and cannot be run again.</p><p><code>COMPLETED</code>
 : A <em>completed</em> migration has scanned through all source content and finished transferring all applicable data to the target filesystem, and has ignored any updates to the source data.</p></div></article><div class="margin-vert--lg"><nav class="pagination-nav" aria-label="Blog list page navigation"><div class="pagination-nav__item"><a class="pagination-nav__link" href="/wandisco-documentation-ldm/docs/1.10.0/configure-exclusions"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">« Configure exclusions</div></a></div><div class="pagination-nav__item pagination-nav__item--next"><a class="pagination-nav__link" href="/wandisco-documentation-ldm/docs/1.10.0/manage-bandwidth"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Define your bandwidth policy »</div></a></div></nav></div></div></div><div class="col col--3"><div class="tableOfContents_2xL- thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#manage-migrations-with-the-ui" class="table-of-contents__link">Manage migrations with the UI</a><ul><li><a href="#assign-exclusions-to-an-existing-migration" class="table-of-contents__link">Assign exclusions to an existing migration</a></li><li><a href="#remove-exclusions-from-an-existing-migration" class="table-of-contents__link">Remove exclusions from an existing migration</a></li><li><a href="#stop-a-migration" class="table-of-contents__link">Stop a migration</a></li><li><a href="#resume-a-migration" class="table-of-contents__link">Resume a migration</a></li></ul></li><li><a href="#manage-migrations-with-the-cli" class="table-of-contents__link">Manage migrations with the CLI</a><ul><li><a href="#data-migration-states" class="table-of-contents__link">Data migration states</a></li></ul></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2021 WANdisco Inc.</div></div></div></footer></div>
-<script src="/wandisco-documentation-ldm/styles.ad91dd42.js"></script>
-<script src="/wandisco-documentation-ldm/runtime~main.654e4113.js"></script>
-<script src="/wandisco-documentation-ldm/main.4f24344f.js"></script>
-<script src="/wandisco-documentation-ldm/1.066b518a.js"></script>
-<script src="/wandisco-documentation-ldm/2.86724f00.js"></script>
-<script src="/wandisco-documentation-ldm/88.3eba2830.js"></script>
-<script src="/wandisco-documentation-ldm/91.d19eab97.js"></script>
+<script src="/wandisco-documentation-ldm/styles.d21285dd.js"></script>
+<script src="/wandisco-documentation-ldm/runtime~main.82d6db01.js"></script>
+<script src="/wandisco-documentation-ldm/main.e198519c.js"></script>
+<script src="/wandisco-documentation-ldm/1.e2553f0c.js"></script>
+<script src="/wandisco-documentation-ldm/2.cc6b678e.js"></script>
+<script src="/wandisco-documentation-ldm/89.5c35c9c8.js"></script>
+<script src="/wandisco-documentation-ldm/92.a2172524.js"></script>
 <script src="/wandisco-documentation-ldm/bc9ea6b5.9ed80dd7.js"></script>
-<script src="/wandisco-documentation-ldm/17896441.ffdbbfad.js"></script>
-<script src="/wandisco-documentation-ldm/03bad63f.71c269aa.js"></script>
+<script src="/wandisco-documentation-ldm/17896441.41ec42a2.js"></script>
+<script src="/wandisco-documentation-ldm/03bad63f.11915c36.js"></script>
 </body>
 </html>
