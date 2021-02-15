@@ -86,7 +86,3 @@ The following directories are used for the LiveData UI:
 | `/etc/wandisco/ui` | Configuration files |
 | `/opt/wandisco/ui` | Operation files |
 | `/var/run/wandisco/ui` | UI runtime state |
-
-## Path mapping
-
-You can create path mappings through the UI that let you define an alternative target path for a specific target filesystem. You can find path mappings under the "Path Mapping" tab within Configuration.

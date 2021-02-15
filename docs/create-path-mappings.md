@@ -21,7 +21,25 @@ Using path mapping enables any migrated data (relating to managed Hive databases
 
 ## Create a path mapping with the UI
 
-Placeholder
+You can create path mappings through the UI. You can find path mappings under the "Path Mapping" tab within Configuration.
+
+### Add a path mapping
+
+To add a path mapping, click the "Add new path" button in the top right of the interface.
+
+Fill in the form that appears with the following details:
+
+  <details pending me getting the ui to actually work please god in heaven send aid>
+
+Your new path mapping will be listed in the path mappings tab.
+
+### Remove a path mapping
+
+To delete a path mapping, locate the path mapping you want to remove in the list and click the delete icon to the right of it, depicted by a trash can.
+
+:::note
+When a path mapping is deleted, any migrations using the path mapping will not be affected. They will continue to function as if the path mapping were still in place.
+:::
 
 ## Create a path mapping with the CLI
 
