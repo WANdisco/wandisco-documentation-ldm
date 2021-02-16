@@ -26,10 +26,16 @@ Use the Storage panel to:
 ### Configure source storage
 
 :::info
-The source file system is normally detected on startup. It will not be detected automatically if Kerberos is enabled or your Hadoop configuration does not contain the information needed to connect to the Hadoop file system.
+By default, LiveData Migrator will normally detect the HDFS source filesystem on startup. It will not be detected automatically if Kerberos is enabled or your Hadoop configuration does not contain the information needed to connect to the Hadoop file system.
 :::
 
-If Kerberos is enabled, on the Storage panel, select to configure your _Unknown source_ and provide your source HDFS configuration:
+
+
+#### Source HDFS configuration
+
+
+
+If Kerberos is enabled, on the Storage panel, select to configure your _Unknown source_ and provide either a local source or source HDFS configuration:
 
 * **File System ID** - Provide a name for your source storage.
 * **Default FS** - Provide the `fs.defaultFS` value from your HDFS configuration.
@@ -39,6 +45,14 @@ If Kerberos is enabled, on the Storage panel, select to configure your _Unknown 
 * Additional Configuration
   * **Provide a path to files** - Provide the directory or directories containing your HDFS configuration (such as the `core-site.xml` and `hdfs-site.xml`) on your LiveData Migrator host's local filesystem.
   * **Additional Configuration** (Optional) - Override properties or specify additional properties by adding Key/Value pairs.
+
+#### Local filesystem source configuration
+
+
+
+
+
+
 
 ### Add target storages
 
