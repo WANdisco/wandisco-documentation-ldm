@@ -21,17 +21,26 @@ Using path mapping enables any migrated data (relating to managed Hive databases
 
 ## Create a path mapping with the UI
 
-You can create path mappings through the UI. You can find path mappings under the "Path Mapping" tab within Configuration.
+You can create path mappings through the UI. To access path mappings:
+
+* Clicking on the LiveData Migrator hostname under your "Products" list in the dashboard.
+* Under the "Configuration" menu, select "Path Mappings"
+
+Here, you will see a list of your existing path mappings, if any.
 
 ### Add a path mapping
 
-To add a path mapping, click the "Add new path" button in the top right of the interface.
+To add a path mapping, click the "Add New Path" button in the top right of the interface.
 
-Fill in the form that appears with the following details:
+In the form that appears, provide the following details:
 
-  <details pending me getting the ui to actually work please god in heaven send aid>
+* **Name:** A reference name for your path mapping.
+* **Source Filesystem:** The file system source. Selectable via a drop-down menu.
+* **Path for <Source_Filesystem_Name>:** The directory path on the source file system to map from. Appears only after selecting a source filesystem.
+* **Target Filesystem:** The target file system to map to in migrations. Selectable via a drop-down menu.
+* **Path for <Target_Filesystem_Name>:** The directory path on the target file system to map to. Appears only after selecting a target filesystem.
 
-Your new path mapping will be listed in the path mappings tab.
+Click "Add" once you've provided all necessary information to create your new path mapping. It will be listed in the path mappings tab.
 
 ### Remove a path mapping
 
