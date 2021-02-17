@@ -25,12 +25,6 @@ Use the Storage panel to:
 
 ### Configure source storage
 
-By default, LiveData Migrator will normally detect the HDFS source filesystem (if available) on startup. It will not be detected automatically if Kerberos is enabled or your Hadoop configuration does not contain the information needed to connect to the Hadoop file system.
-
-If the automatic detection does not work, try configuring the HDFS source automatically.
-
-If you want to manually configure a source for LiveData Migrator to use, you must first delete any existing source and add your own.
-
 You can can add a new source by performing one of the below actions:
 
 * Configure the _Unknown source_ on the LiveData Migrator dashboard
@@ -41,6 +35,14 @@ You can create a source of one of the following two types:
 
 * **HDFS**
 * **Local filesystem**
+
+:::info
+By default, LiveData Migrator will normally detect the HDFS source filesystem (if available) on startup. It will not be detected automatically if Kerberos is enabled or your Hadoop configuration does not contain the information needed to connect to the Hadoop file system.
+
+If the automatic detection does not work, [configure the HDFS source filesystem manually](#source-hdfs-configuration).
+
+If you want to manually configure a source for LiveData Migrator to use, you must first delete any existing source and add your own.
+:::
 
 :::note
 If you have deleted the automatically discovered HDFS source but want to restore it, you can run `service livedata-migrator restart`. Upon restarting, LiveData Migrator will automatically attempt to discover the HDFS source again.
