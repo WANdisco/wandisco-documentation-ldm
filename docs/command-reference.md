@@ -424,6 +424,9 @@ When adding properties via the UI or API, for example to set a custom `fs.s3a.en
 * **`fs.s3a.fast.upload.active.blocks`** (default `8`): Defines how many blocks a single output stream can have uploading or queued at a given time.
 * **`fs.s3a.block.size`** (default `32M`): Defines the maximum size of blocks during file transfer. Use the suffix `K`, `M`, `G`, `T` or `P` to scale the value in Kilobytes, Megabytes, Gigabytes, Terabytes or Petabytes respectively.
 * **`fs.s3a.buffer.dir`** (default `tmp`): Defines the directory used by [disk buffering](#upload-buffering).
+* **`fs.s3a.connection.maximum`** (default `120`) Defines the maximum number of simultaneous connections to the S3 filesystem.
+* **`fs.s3a.threads.max`** (default `100`): Defines the maximum number of concurrent active (part)uploads, which each use a thread from the threadpool.
+* **`fs.s3a.max.total.tasks`** (default `60`): Defines the number of uploads allowed to exist in the queue before blocking additional uploads.
 
 You can additionally find a list of S3A properties in the [S3A documentation](https://hadoop.apache.org/docs/r3.2.1/hadoop-aws/tools/hadoop-aws/index.html).
 
