@@ -414,10 +414,10 @@ SYNOPSYS
 When adding properties via the UI or API, for example to set a custom `fs.s3a.endpoint`, it is required to also set the following properties manually. They are added by default when using the CLI.
 :::
 
-* **`fs.s3a.impl`** (default `org.apache.hadoop.fs.s3a.S3AFileSystem`): The implementation class of the S3A Filesystem.
-* **`fs.AbstractFileSystem.s3a.impl`** (default `org.apache.hadoop.fs.s3a.S3A`): The implementation class of the S3A AbstractFileSystem.
+* **`fs.s3a.impl`** (default `org.apache.hadoop.fs.s3a.S3AFileSystem`): The implementation class of the S3a Filesystem.
+* **`fs.AbstractFileSystem.s3a.impl`** (default `org.apache.hadoop.fs.s3a.S3A`): The implementation class of the S3a AbstractFileSystem.
 * **`fs.s3a.user.agent.prefix`** (default `WANdisco/LiveDataMigrator`): Sets a custom value that will be pre-pended to the User-Agent header sent in
-    HTTP requests to the S3 back-end by S3AFileSystem.
+    HTTP requests to the S3 back-end by S3aFileSystem.
 * **`fs.s3a.impl.disable.cache`** (default `true`): Disables the S3 file system cache when set to 'true'.
 * **`fs.hadoop.tmp.dir`** (default `tmp`): The parent directory for other temporary directories.
 * **`fs.s3a.fast.upload.buffer`** (default `disk`): Defines how the filesystem will [buffer the upload](#upload-buffering).
@@ -428,7 +428,7 @@ When adding properties via the UI or API, for example to set a custom `fs.s3a.en
 * **`fs.s3a.threads.max`** (default `100`): Defines the total number of threads to make available in the filesystem for data uploads or any other queued filesystem operation.
 * **`fs.s3a.max.total.tasks`** (default `60`): Defines the number of operations which can be queued for execution at a time.
 
-You can additionally find a list of S3A properties in the [S3A documentation](https://hadoop.apache.org/docs/r3.2.1/hadoop-aws/tools/hadoop-aws/index.html).
+You can additionally find a list of S3a properties in the [S3a documentation](https://hadoop.apache.org/docs/r3.2.1/hadoop-aws/tools/hadoop-aws/index.html).
 
 #### Example
 
