@@ -740,7 +740,7 @@ SYNOPSYS
 
 * **`--exclusion-id`** The identifier for the exclusion policy. This is referenced in the UI as **Name**.
 * **`--description`** A user-friendly description for the policy. This is referenced in the UI as **Description**.
-* **`--regex`** A regular expression in a syntax similar to that used by Perl. This is referenced in the UI as **Regex**.
+* **`--regex`** A regular expression in a syntax of either [Java PCRE](https://regexr.com/) or [Automata](https://www.javatpoint.com/theory-of-automata) type. This is referenced in the UI as **Regex**.
 
 #### Example
 
@@ -1791,8 +1791,8 @@ ALSO KNOWN AS
 
 #### Mandatory Parameters
 
-* **`--database-pattern`** Specify a [regex](https://regex101.com/) pattern that will match the database names you want to migrate.
-* **`--table-pattern`** Specify a [regex](https://regex101.com/) pattern that will match the table names you want to migrate.
+* **`--database-pattern`** Specify a [Hive DDL](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-Show) pattern that will match the database names you want to migrate.
+* **`--table-pattern`** Specify a [Hive DDL](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-Show) pattern that will match the table names you want to migrate.
 
 :::tip
 You can use a single asterisk (`*`) if you want to match all databases and/or all tables within the metastore/database.
