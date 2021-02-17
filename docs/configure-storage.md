@@ -25,19 +25,33 @@ Use the Storage panel to:
 
 ### Configure source storage
 
-:::info
-By default, LiveData Migrator will normally detect the HDFS source filesystem on startup. It will not be detected automatically if Kerberos is enabled or your Hadoop configuration does not contain the information needed to connect to the Hadoop file system.
+By default, LiveData Migrator will normally detect the HDFS source filesystem (if available) on startup. It will not be detected automatically if Kerberos is enabled or your Hadoop configuration does not contain the information needed to connect to the Hadoop file system.
+
+If the automatic detection does not work, try configuring the HDFS source automatically.
+
+If you want to manually configure a source for LiveData Migrator to use, you must first delete any existing source and add your own.
+
+You can can add a new source by performing one of the below actions:
+
+* Configure the _Unknown source_ on the LiveData Migrator dashboard
+* Click the add prompt under "Products" on the LiveData Migrator dashboard
+* Click the add source prompt under the LiveData Migrator overview page
+
+You can create a source of one of the following two types:
+
+* **HDFS**
+* **Local filesystem**
+
+:::note
+If you have deleted the automatically discovered HDFS source but want to restore it, you can run `service livedata-migrator restart`. Upon restarting, LiveData Migrator will automatically attempt to discover the HDFS source again.
 :::
-
-
 
 #### Source HDFS configuration
 
+If Kerberos is enabled, provide the following details:
 
-
-If Kerberos is enabled, on the Storage panel, select to configure your _Unknown source_ and provide either a local source or source HDFS configuration:
-
-* **File System ID** - Provide a name for your source storage.
+* **Filesystem Name** - Provide a name for your source storage.
+* **Filesystem Type** - The type of filesystem source. Choose _HDFS_.
 * **Default FS** - Provide the `fs.defaultFS` value from your HDFS configuration.
 * Kerberos Configuration
   * **Kerberos Principal** - Provide a principal that will map to the [HDFS super user](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsPermissionsGuide.html#The_Super-User) using [auth_to_local](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SecureMode.html#Mapping_from_Kerberos_principals_to_OS_user_accounts) rules.
@@ -48,11 +62,11 @@ If Kerberos is enabled, on the Storage panel, select to configure your _Unknown 
 
 #### Local filesystem source configuration
 
+To configure a local filesystem source for use with LiveData Migrator, provide the following details:
 
-
-
-
-
+* **Filesystem Name** - Provide a name for your source storage.
+* **Filesystem Type** - The type of filesystem source. Choose _Local Filesystem_.
+* **Mount Point** - The directory within the local filesystem to use as the source storage. You can migrate any data contained within the Mount Point directory.
 
 ### Add target storages
 
