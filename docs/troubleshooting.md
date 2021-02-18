@@ -66,8 +66,8 @@ notifications.pending.region.clear.percent=50
 
 When adding the `--rule-names` parameter to the end of a `migration add` command, auto-completion will not suggest the parameter name. For example:
 
-```text="Example"
-WANdisco LiveData Migrator >> hive migration add --name test --source sourceAgent --target testGlue --ru
+```text title="Example"
+WANdisco LiveData Migrator >> hive migration add --name test --source sourceAgent --target testGlue --rule-names
 ```
 
 To work around this, either:
