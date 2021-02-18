@@ -1914,7 +1914,7 @@ hive migration add --source sourceAgent --target remoteAgent --rule-names test_d
 ```
 
 :::note
-Auto-completion of the `--rule-names` parameter will not work correctly if it is added at the end of the migration parameters. See the [troubleshooting guide](./troubleshooting.md#rule-names) for workarounds.
+Auto-completion of the `--rule-names` parameter will not work correctly if it is added at the end of the hive migration parameters. See the [troubleshooting guide](./troubleshooting.md#rule-names) for workarounds.
 :::
 
 ----

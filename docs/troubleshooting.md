@@ -64,7 +64,7 @@ notifications.pending.region.clear.percent=50
 
 ### Rule names parameter does not autocomplete in the CLI
 
-When adding the `--rule-names` parameter to the end of a `migration add` command, auto-completion will not suggest the parameter name. For example:
+When adding the `--rule-names` parameter to the end of a `hive migration add` command, auto-completion will not suggest the parameter name. For example:
 
 ```text title="Example"
 WANdisco LiveData Migrator >> hive migration add --name test --source sourceAgent --target testGlue --rule-names
