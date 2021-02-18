@@ -20,7 +20,7 @@ Both HCFS data and associated metadata are needed before successful queries can 
 
 3. Choose a [source](./connect-metastores.md#add-source-agent) and [target](./connect-metastores.md#add-target-agents) agent.
 
-4. Create a database pattern and a table pattern using [regex](https://regex101.com/) that will match the databases and tables you want to migrate.
+4. Create a database pattern and a table pattern based upon [Hive DDL](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-Show) that will match the databases and tables you want to migrate.
 
    For example, using `test*` for the database pattern will match any database with "test" at the beginning of its name, such as `test01`, `test02`, `test03`.
 
