@@ -1913,6 +1913,10 @@ SYNOPSYS
 hive migration add --source sourceAgent --target remoteAgent --rule-names test_dbs,user_dbs --name hive_migration --auto-start
 ```
 
+:::note
+Auto-completion of the `--rule-names` parameter will not work correctly if it is added at the end of the hive migration parameters. See the [troubleshooting guide](./troubleshooting.md#rule-names) for workarounds.
+:::
+
 ----
 
 ### `hive migration delete`
