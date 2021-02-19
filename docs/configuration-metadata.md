@@ -34,11 +34,11 @@ When deploying a [hive agent for Apache Hive](./command-reference.md#hive-agent-
    As such, all running metadata migrations should be stopped and started.
 
    ```text title="Stop all metadata migrations through the CLI"
-   hive migration stop --all
+   hive migration stop all
    ```
 
    ```text title="Start all metadata migrations through the CLI"
-   hive migration start --all
+   hive migration start all
    ```
 
    Any new migrations will auto-detect the presence of the listener straight away.

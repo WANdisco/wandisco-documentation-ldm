@@ -203,9 +203,9 @@ filesystem add gcs --file-system-id gcsAgent --bucket-name myGcsBucket --service
 
 ### `filesystem add hdfs`
 
-Add a Hadoop Distributed File System as either a migration source or target using the `filesystem add hdfs` command.
+Add a Hadoop Distributed File System (HDFS) as either a migration source or target using the `filesystem add hdfs` command.
 
-Creating an HDFS file system resource with this command will normally only be used when migrating to a target HDFS (rather than another storage service like ADLS Gen 2 or S3a). LiveData Migrator will attempt to auto-detect the *source* HDFS file system when started from the command line unless Kerberos is enabled on your source environment.
+Creating a HDFS resource with this command will normally only be used when migrating to a target HDFS storage (rather than another storage service like ADLS Gen 2 or S3a). LiveData Migrator will attempt to auto-detect the *source* HDFS when started from the command line unless Kerberos is enabled on your source environment.
 
 If Kerberos is enabled on your source environment, use the [`filesystem auto-discover-source hdfs`](#filesystem-auto-discover-source-hdfs) command to provide Kerberos credentials and auto-discover your source HDFS configuration.
 
@@ -401,7 +401,7 @@ SYNOPSYS
     * Instance profile credentials delivered through the Amazon EC2 metadata service.
 * **Endpoint** (UI & IBM COS only): This is required when adding an IBM COS bucket. IBM provide a list of available endpoints that can be found in their [public documentation](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-endpoints#endpoints-region).
 
-<h4 id="s3a-optional-parameters">Optional parameters</h4>
+#### S3a optional parameters
 
 * **`--access-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the access key with this parameter. This is referenced in the UI as **Access Key**. This is a required parameter when adding an IBM COS bucket.
 * **`--secret-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the secret key using this parameter. This is referenced in the UI as **Secret Key**. This is a required parameter when adding an IBM COS bucket.
@@ -1341,32 +1341,54 @@ SYNOPSYS
                              [[--root-folder] string]
                              [[--hdi-version] string]
                              [[--insecure] boolean]
+                             [[--host] string]
+                             [[--port] integer]
+                             [[--autodeploy] boolean]
+                             [[--ssh-user] string]
+                             [[--ssh-key] file]
+                             [[--ssh-port] int]
+                             [--use-sudo]
+                             [--ignore-host-checking]
+                             [[--file-system-id] string]
+                             [[--default-fs-override] string]
 ```
 
 #### Mandatory Parameters
 
 :::info
-The Azure hive agent requires a ADLS Gen2 storage account and container name, this is only for the purposes of generating the correct location for the database. The container will not be accessed by the Hive agent and no data will be written to the container.
+The Azure hive agent requires a ADLS Gen2 storage account and container name, this is only for the purposes of generating the correct location for the metadata. The agent will not access the container and data will not be written to it.
 :::
 
-* **`--db-server-name`** The Azure SQL database server name. Only the name given to the server is required, the `.database.windows.net` suffix should be omitted.
-* **`--database-name`** The Azure SQL database name.
-* **`--storage-account`** The name of the ADLS Gen 2 storage account.
-* **`--container-name`** The name of the container in the ADLS Gen2 storage account.
+* **`--db-server-name`** The Azure SQL Database Server name. Only the name given to the server is required, the `.database.windows.net` suffix should be omitted. This is referenced in the UI as **Azure SQL Server Name**.
+* **`--database-name`** The Azure SQL database name. This is referenced in the UI as **Azure SQL Database Name**.
+* **`--storage-account`** The name of the ADLS Gen 2 storage account. This is referenced in the UI as **ADLS Gen2 Storage Account Name**.
+* **`--container-name`** The name of the container in the ADLS Gen2 storage account. This is referenced in the UI as **ADLS Gen2 Container Name**.
+
+Additionally, use only one of the following parameters:
+
+* **`--file-system-id`** The name of the filesystem that will be associated with this agent (for example: `myadls2storage`). This will ensure any [path mappings](./create-path-mappings.md) are correctly linked between the filesystem and the agent. This is referenced in the UI as **Filesystem**.
+* **`--default-fs-override`** Provide an override for the default filesystem URI instead of a filesystem name (for example: `abfss://mycontainer@mystorageaccount.dfs.core.windows.net`). This is referenced in the UI as **DefaultFS Override**.
+
+#### Optional Parameters
+
+* **`--name`** The identifier to give to the new Hive agent. This is referenced in the UI as **Name**.
+* **`--root-folder`** The root directory for the Azure metastore, this is used if you're intending to [integrate the Azure SQL Database with a HDI cluster](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-use-external-metadata-stores#custom-metastore). This is referenced in the UI as **Root Folder**.
+* **`--hdi-version`** The [HDI](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-component-versioning) version. This is relevant if you are intending to integrate your SQL server into a HDInsights cluster. This is referenced in the UI as **HDI Version**.
+* **`--insecure`** Define an insecure connection (SSL disabled) to the Azure SQL database server (default is `false`). This is referenced in the UI as **Use Secure Protocol**.
 
 #### Authentication Parameters
 
 Choose one of the authentication methods listed and include the additional parameters required for the chosen method.
 
-* **`--auth-method`** The authentication method to use to connect to the Azure SQL server.  
+* **`--auth-method`** The authentication method to use to connect to the Azure SQL server. This is referenced in the UI as **Authentication Method**.  
   The following methods can be used:
-  * `SQL_PASSWORD` - Provide a username and password to access the database.
-  * `AD_MSI` - Use a system-assigned or user-assigned [managed identity](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types).
+  * `SQL_PASSWORD` - Provide a username and password to access the database. This is referenced in the UI as **SQL Password**.
+  * `AD_MSI` - Use a system-assigned or user-assigned [managed identity](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types). This is referenced in the UI as **Active Directory MSI**.
 
 ##### Required Parameters for SQL_PASSWORD
 
-* **`--database-user`** The user name to access the database.
-* **`--database-password`** The user password to access the database.
+* **`--database-user`** The user name to access the database. This is referenced in the UI as **Database Username**.
+* **`--database-password`** The user password to access the database. This is referenced in the UI as **Database Password**.
 
 ##### Required Parameters for AD_MSI
 
@@ -1401,14 +1423,7 @@ No other parameters are required for a system-managed identity.
 
 The `--client-id` parameter must be specified:
 
-* **`--client-id`** The Client ID of your Azure managed identity.
-
-#### Optional Parameters
-
-* **`--name`** The identifier to give to the new Hive agent.
-* **`--root-folder`** The root directory for the Azure database.
-* **`--hdi-version`** The [HDI](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-component-versioning) version. This is relevant if you are intending to integrate your SQL server into a HDInsights cluster.
-* **`--insecure`** Define an insecure connection (SSL disabled) to the Azure SQL database server (default is `false`).
+* **`--client-id`** The Client ID of your Azure managed identity. This is referenced in the UI as **MSI Client ID**.
 
 #### Parameters for remote hive agents only
 
@@ -1453,15 +1468,15 @@ If you do not wish to use the `--autodeploy` function, follow these steps to dep
 #### Examples
 
 ```text title="Example for local Azure SQL deployment with SQL username/password"
-hive agent add azure --name azureAgent --db-server-name mysqlserver --database-name mydb1 --auth-method SQL_PASSWORD --database-user azureuser --database-password mypassword --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6
+hive agent add azure --name azureAgent --db-server-name mysqlserver --database-name mydb1 --auth-method SQL_PASSWORD --database-user azureuser --database-password mypassword --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6 --file-system-id myadls2storage
 ```
 
 ```text title="Example for remote Azure SQL deployment with System-assigned managed identity - automated"
-hive agent add azure --name azureRemoteAgent --db-server-name mysqlserver --database-name mydb1 --auth-method AD_MSI --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6 --autodeploy --ssh-user root --ssh-key /root/.ssh/id_rsa --ssh-port 22 --host myRemoteHost.example.com --port 5052
+hive agent add azure --name azureRemoteAgent --db-server-name mysqlserver --database-name mydb1 --auth-method AD_MSI --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6 --file-system-id myadls2storage --autodeploy --ssh-user root --ssh-key /root/.ssh/id_rsa --ssh-port 22 --host myRemoteHost.example.com --port 5052
 ```
 
 ```text title="Example for remote Azure SQL deployment with User-assigned managed identity - manual"
-hive agent add azure --name azureRemoteAgent --db-server-name mysqlserver --database-name mydb1 --auth-method AD_MSI --client-id b67f67ex-ampl-e2eb-bd6d-client9385id --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6 --host myRemoteHost.example.com --port 5052
+hive agent add azure --name azureRemoteAgent --db-server-name mysqlserver --database-name mydb1 --auth-method AD_MSI --client-id b67f67ex-ampl-e2eb-bd6d-client9385id --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6 --file-system-id myadls2storage --host myRemoteHost.example.com --port 5052
 ```
 
 ----
@@ -1498,35 +1513,83 @@ hive agent add filesystem --filesystem-id myfilesystem --root-folder /var/lib/my
 
 Add an [AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html) hive agent to connect to an [AWS Glue data catalog](https://docs.aws.amazon.com/glue/latest/dg/populate-data-catalog.html) using the `hive agent add glue` command.
 
+:::info remote deployments
+For a remote hive agent connection, specify a remote host (EC2 instance) that will be used to communicate with the local LiveData Migrator server (constrained to a user-defined port).
+
+A small service will be deployed on this remote host so that the hive agent can migrate data to and/or from the AWS Glue Data Catalog.
+:::
+
 ```text title="Add AWS Glue agent"
 SYNOPSYS
         hive agent add glue [[--name] string]
-                            [[--config-path] string]
                             [[--access-key] string]
                             [[--secret-key] string]
-                            [[--session-token] string]
                             [[--glue-endpoint] string]
                             [[--aws-region] string]
-                            [[--aws-catalog-credentials-provider-factory-class] string]
-                            [[--default-fs] string]
+                            [[--credentials-provider] string]
+                            [[--file-system-id] string]
+                            [[--default-fs-override] string]
+                            [[--host] string]
+                            [[--port] integer]
 ```
 
-#### Optional Parameters
+#### Glue Parameters
 
-* **`--name`** The identifier to give to the new Hive agent.
-* **`--config-path`** The path to the directory containing the `glue-site.xml`.
-* **`--access-key`** The [AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
-* **`--secret-key`** The [AWS secret key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
-* **`--session-token`** The [AWS session token](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html). Only valid if using `SessionCredentialsProviderFactory` for the `--aws-catalog-credentials-provider-factory-class` parameter.
-* **`--glue-endpoint`** The [AWS Glue endpoint](https://docs.aws.amazon.com/glue/latest/dg/console-connections.html?icmpid=docs_glue_console) for connections to databases.
-* **`--aws-region`** The [AWS region](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) that your database is located in (default is `us-east-1`).
-* **`--aws-catalog-credentials-provider-factory-class`** The [AWS catalog credentials provider factory class](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-specify-provider) (default is [DefaultAWSCredentialsProviderChain](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/index.html?com/amazonaws/auth/DefaultAWSCredentialsProviderChain.html)).
-* **`--default-fs`** The base URI of the filesystem to generate the locations within the database (for example: `s3://test_bucket/`).
+:::info
+The Glue hive agent requires a URI for an S3 bucket, this is only for the purposes of generating the correct location for the metadata. No data will be written to the bucket.
+:::
+
+* **`--name`** The identifier to give to the new Hive agent. This is referenced in the UI as **Name**.
+* **`--access-key`** The [AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html). This is referenced in the UI as **Access Key**.
+* **`--secret-key`** The [AWS secret key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html). This is referenced in the UI as **Secret Key**.
+* **`--glue-endpoint`** The [AWS Glue service endpoint](https://docs.aws.amazon.com/general/latest/gr/glue.html) for connections to the data catalog. This is referenced in the UI as **AWS Glue Service Endpoint**.
+* **`--aws-region`** The [AWS region](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) that your data catalog is located in (default is `us-east-1`). This is referenced in the UI as **AWS Region**.
+* **`--credentials-provider`** The [AWS catalog credentials provider factory class](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-specify-provider) (default is [DefaultAWSCredentialsProviderChain](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/index.html?com/amazonaws/auth/DefaultAWSCredentialsProviderChain.html)). This is referenced in the UI as **AWS Catalog Credentials Provider**.
+
+Additionally, use only one of the following parameters:
+
+* **`--file-system-id`** The name of the filesystem that will be associated with this agent (for example: `mys3bucket`). This will ensure any [path mappings](./create-path-mappings.md) are correctly linked between the filesystem and the agent. This is referenced in the UI as **Filesystem**.
+* **`--default-fs-override`** Provide an override for the default filesystem URI instead of a filesystem name (for example: `s3a://mybucket/`). This is referenced in the UI as **DefaultFS Override**.
+
+#### Parameters for remote hive agents only
+
+* **`--host`** The host where the remote hive agent will be deployed.
+* **`--port`** The port for the remote hive agent to use on the remote host. Default is `5052`. This port is used to communicate with the local LiveData Migrator server.
+
+##### Steps for remote agent deployment
+
+Follow these steps to deploy a remote hive agent for AWS Glue:
+
+1. Transfer the remote server installer to your remote host (EC2 instance):
+
+   ```text title="Example of secure transfer from local to remote host"
+   scp /opt/wandisco/hivemigrator/hivemigrator-remote-server-installer.sh myRemoteHost:~
+   ```
+
+1. On your remote host, run the installer as root (or sudo) user in silent mode:
+
+   ```text
+   ./hivemigrator-remote-server-installer.sh -- --silent
+   ```
+
+1. On your remote host, start the remote server service:
+
+   ```text
+   service hivemigrator-remote-server start
+   ```
+
+1. On your local host, run the `hive agent add glue` command to configure your remote hive agent.
+
+   See the **Example for remote AWS Glue agent** example below for further guidance.
 
 #### Example
 
-```text
-hive agent add glue --name glueAgent --access-key ACCESS6HCFPAQIVZTKEY --secret-key SECRET1vTMuqKOIuhET0HAI78UIPfSRjcswTKEY --aws-region eu-west-1 --default-fs s3://test_bucket/
+```text title="Example for local AWS Glue agent"
+hive agent add glue --name glueAgent --access-key ACCESS6HCFPAQIVZTKEY --secret-key SECRET1vTMuqKOIuhET0HAI78UIPfSRjcswTKEY --glue-endpoint glue.eu-west-1.amazonaws.com --aws-region eu-west-1 --file-system-id mys3bucket
+```
+
+```text title="Example for remote AWS Glue agent"
+hive agent add glue --name glueAgent --access-key ACCESS6HCFPAQIVZTKEY --secret-key SECRET1vTMuqKOIuhET0HAI78UIPfSRjcswTKEY --glue-endpoint glue.eu-west-1.amazonaws.com --aws-region eu-west-1 --file-system-id mys3bucket --host myRemoteHost.example.com --port 5052
 ```
 
 ### `hive agent add hive`
@@ -1555,15 +1618,24 @@ SYNOPSYS
                             [[--ssh-port] int]
                             [--use-sudo]
                             [--ignore-host-checking]
-
+                            [[--file-system-id] string]
+                            [[--default-fs-override] string]
 ```
 
-#### Parameters for local or remote hive agents
+#### Mandatory Parameters
 
-* **`--config-path`** The path to the directory containing the Hive configuration files (for example: `/etc/hive/conf`).
-* **`--kerberos-principal`** The Kerberos principal to use to access the Hive service (for example: `hive/_HOST@REALM.COM`). Not required if Kerberos is disabled.
-* **`--kerberos-keytab`** The path to the Kerberos keytab containing the principal to access the Hive service (for example: `/etc/security/keytabs/hive.service.keytab`). Not required if Kerberos is disabled.
-* **`--name`** The identifier to give to the new Hive agent.
+* **`--kerberos-principal`** _Not required if Kerberos is disabled._ The Kerberos principal to use to access the Hive service (for example: `hive/myhost.example.com@REALM.COM`). This is referenced in the UI as **Principal**.
+* **`--kerberos-keytab`** _Not required if Kerberos is disabled._ The path to the Kerberos keytab containing the principal to access the Hive service (for example: `/etc/security/keytabs/hive.service.keytab`). This is referenced in the UI as **Keytab**.
+* **`--name`** The identifier to give to the new Hive agent. This is referenced in the UI as **Name**.
+
+Additionally, use only one of the following parameters:
+
+* **`--file-system-id`** The name of the filesystem that will be associated with this agent (for example: `myhdfs`). This will ensure any [path mappings](./create-path-mappings.md) are correctly linked between the filesystem and the agent. This is referenced in the UI as **Filesystem**.
+* **`--default-fs-override`** Provide an override for the default filesystem URI instead of a filesystem name (for example: `hdfs://nameservice01`). This is referenced in the UI as **DefaultFS Override**.
+
+#### Optional Parameters
+
+* **`--config-path`** The path to the directory containing the Hive configuration files (for example: `/etc/hive/conf`). If not specified, LiveData Migrator will use the default location for the cluster distribution. This is referenced in the UI as **Override Default Hadoop Configuration Path**.
 
 #### Parameters for remote hive agents only
 
@@ -1608,15 +1680,15 @@ If you do not wish to use the `--autodeploy` function, follow these steps to dep
 #### Examples
 
 ```text title="Example for local Apache Hive deployment"
-hive agent add hive --name sourceAgent --kerberos-keytab /etc/security/keytabs/hive.service.keytab --kerberos-principal hive/_HOST@LOCALREALM.COM
+hive agent add hive --name sourceAgent --kerberos-keytab /etc/security/keytabs/hive.service.keytab --kerberos-principal hive/_HOST@LOCALREALM.COM --file-system-id mysourcehdfs
 ```
 
 ```text title="Example for remote Apache Hive deployment - automated"
-hive agent add hive --name targetautoAgent --autodeploy --ssh-user root --ssh-key /root/.ssh/id_rsa --ssh-port 22 --host myRemoteHost.example.com --port 5052 --kerberos-keytab /etc/security/keytabs/hive.service.keytab --kerberos-principal hive/_HOST@REMOTEREALM.COM --config-path /etc/hive/conf
+hive agent add hive --name targetautoAgent --autodeploy --ssh-user root --ssh-key /root/.ssh/id_rsa --ssh-port 22 --host myRemoteHost.example.com --port 5052 --kerberos-keytab /etc/security/keytabs/hive.service.keytab --kerberos-principal hive/_HOST@REMOTEREALM.COM --config-path /etc/hive/conf --file-system-id mytargethdfs
 ```
 
 ```text title="Example for remote Apache Hive deployment - manual"
-hive agent add hive --name targetmanualAgent --host myRemoteHost.example.com --port 5052 --kerberos-keytab /etc/security/keytabs/hive.service.keytab --kerberos-principal hive/_HOST@REMOTEREALM.COM --config-path /etc/hive/conf
+hive agent add hive --name targetmanualAgent --host myRemoteHost.example.com --port 5052 --kerberos-keytab /etc/security/keytabs/hive.service.keytab --kerberos-principal hive/_HOST@REMOTEREALM.COM --config-path /etc/hive/conf --file-system-id mytargethdfs
 ```
 
 :::note
@@ -1786,7 +1858,9 @@ Specify these rules when [starting a new migration](#hive-migration-add) to cont
 
 ```text title="Add new hive migration rule"
 SYNOPSYS
-        hive rule add [--database-pattern] string  [--table-pattern] string  [[--name] string]
+        hive rule add [--database-pattern] string
+                      [--table-pattern] string
+                      [[--name] string]
 
 ALSO KNOWN AS
         hive rule create
@@ -1892,7 +1966,12 @@ Create a new hive migration to initiate metadata migration from your source meta
 
 ```text title="create new migration"
 SYNOPSYS
-        hive migration add [--source] string  [--target] string  [[--rule-names] list]  [[--name] string]  [--auto-start]  [--once]
+        hive migration add [--source] string
+                           [--target] string
+                           [[--rule-names] list]
+                           [[--name] string]
+                           [--auto-start]
+                           [--once]
 ```
 
 #### Mandatory Parameters
@@ -1972,19 +2051,19 @@ SYNOPSYS
 hive migration pause --names hive_migration1,hive_migration2
 ```
 
-### `hive migration pause --all`
+### `hive migration pause all`
 
 Pause all hive migrations.
 
 ```text title="Pause all migrations"
 SYNOPSYS
-        hive migration pause --all
+        hive migration pause all
 ```
 
 #### Example
 
 ```text
-hive migration pause --all
+hive migration pause all
 ```
 
 ----
@@ -2004,19 +2083,19 @@ SYNOPSYS
 hive migration resume --names hive_migration1,hive_migration2
 ```
 
-### `hive migration resume --all`
+### `hive migration resume all`
 
 Resume all hive migrations.
 
 ```text title="Resume all migrations"
 SYNOPSYS
-        hive migration resume --all
+        hive migration resume all
 ```
 
 #### Example
 
 ```text
-hive migration resume --all
+hive migration resume all
 ```
 
 ----
@@ -2057,7 +2136,7 @@ SYNOPSYS
 hive migration start --names hive_migration1,hive_migration2
 ```
 
-### `hive migration start --all`
+### `hive migration start all`
 
 Start all hive migrations.
 
@@ -2067,13 +2146,13 @@ Specify the `--once` parameter to perform a one-time migration, and not continuo
 
 ```text title="Start migration"
 SYNOPSYS
-        hive migration start --all [--once]
+        hive migration start all [--once]
 ```
 
 #### Example
 
 ```text
-hive migration start --all --once
+hive migration start all --once
 ```
 
 ----
@@ -2093,19 +2172,19 @@ SYNOPSYS
 hive migration status --names hive_migration1,hive_migration2
 ```
 
-### `hive migration status --all`
+### `hive migration status all`
 
 Show the status of all hive migrations.
 
 ```text title="Start migration"
 SYNOPSYS
-        hive migration status --all
+        hive migration status all
 ```
 
 #### Example
 
 ```text
-hive migration status --all
+hive migration status all
 ```
 
 ----
@@ -2125,19 +2204,19 @@ SYNOPSYS
 hive migration stop --names hive_migration1,hive_migration2
 ```
 
-### `hive migration stop --all`
+### `hive migration stop all`
 
 Stop all running hive migrations.
 
 ```text title="Stop all running migrations"
 SYNOPSYS
-        hive migration stop --all
+        hive migration stop all
 ```
 
 #### Example
 
 ```text
-hive migration stop --all
+hive migration stop all
 ```
 
 ## License Commands
