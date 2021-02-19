@@ -92,11 +92,11 @@ Although present when invoking the `help` command, Local Filesystem functionalit
 
 | Command | Action |
 |:---|:---|
-| [`filesystem add adls2 oauth`](./command-reference.md#filesystem-add-adls2-oauth) | Add an ADLS Gen 2 file system resource using a service principal and oauth credentials |
-| [`filesystem add adls2 sharedKey`](./command-reference.md#filesystem-add-adls2-sharedkey) | Add an ADLS Gen 2 file system resource using access key credentials |
-| [`filesystem add gcs`](./command-reference.md#filesystem-add-gcs) | Add an Google Cloud Storage file system resource |
+| [`filesystem add adls2 oauth`](./command-reference.md#filesystem-add-adls2-oauth) | Add an ADLS Gen 2 filesystem resource using a service principal and oauth credentials |
+| [`filesystem add adls2 sharedKey`](./command-reference.md#filesystem-add-adls2-sharedkey) | Add an ADLS Gen 2 filesystem resource using access key credentials |
+| [`filesystem add gcs`](./command-reference.md#filesystem-add-gcs) | Add a Google Cloud Storage filesystem resource |
 | [`filesystem add hdfs`](./command-reference.md#filesystem-add-hdfs) | Add an HDFS resource |
-| [`filesystem add s3a`](./command-reference.md#filesystem-add-s3a) | Add an S3 file system resource (choose this when using IBM COS) |
+| [`filesystem add s3a`](./command-reference.md#filesystem-add-s3a) | Add an S3 filesystem resource (choose this when using IBM COS) |
 
 ### Manage file systems
 

@@ -203,9 +203,9 @@ filesystem add gcs --file-system-id gcsAgent --bucket-name myGcsBucket --service
 
 ### `filesystem add hdfs`
 
-Add a Hadoop Distributed File System as either a migration source or target using the `filesystem add hdfs` command.
+Add a Hadoop Distributed File System (HDFS) as either a migration source or target using the `filesystem add hdfs` command.
 
-Creating an HDFS resource with this command will normally only be used when migrating to a target HDFS (rather than another storage service like ADLS Gen 2 or S3a). LiveData Migrator will attempt to auto-detect the *source* HDFS when started from the command line unless Kerberos is enabled on your source environment.
+Creating a HDFS resource with this command will normally only be used when migrating to a target HDFS storage (rather than another storage service like ADLS Gen 2 or S3a). LiveData Migrator will attempt to auto-detect the *source* HDFS when started from the command line unless Kerberos is enabled on your source environment.
 
 If Kerberos is enabled on your source environment, use the [`filesystem auto-discover-source hdfs`](#filesystem-auto-discover-source-hdfs) command to provide Kerberos credentials and auto-discover your source HDFS configuration.
 
@@ -1356,7 +1356,7 @@ SYNOPSYS
 #### Mandatory Parameters
 
 :::info
-The Azure hive agent requires a ADLS Gen2 storage account and container name, this is only for the purposes of generating the correct location for the metadata. The container will not be accessed by the agent and no data will be written to the container.
+The Azure hive agent requires a ADLS Gen2 storage account and container name, this is only for the purposes of generating the correct location for the metadata. The agent will not access the container and data will not be written to it.
 :::
 
 * **`--db-server-name`** The Azure SQL Database Server name. Only the name given to the server is required, the `.database.windows.net` suffix should be omitted. This is referenced in the UI as **Azure SQL Server Name**.
