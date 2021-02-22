@@ -1167,10 +1167,12 @@ SYNOPSYS
         status
 ```
 
-### Optional Parameters
+#### Optional Parameters
 
 * **`--transfers`** Displays overall performance information about data transfers across the last 10 seconds, 1 minute and 30 minute intervals.
 * **`--diagnostics`** Returns additional information about your LiveData Migrator instance and its migrations, useful for troubleshooting.
+* **`--migrations`** Displays information about each running migration.
+* **`--network`** Displays file transfer throughput in Gib/s during the last 10 seconds, 1 minute and 30 minutes.
 
 #### Example
 
