@@ -1559,7 +1559,7 @@ Additionally, use only one of the following parameters:
 
 #### Glue Optional Parameters
 
-* **`--glue-catalog-id`** Provide the AWS Account ID that be used to access the Data Catalog. This is used if the Data Catalog is owned by a different account to that provided through the credentials provider and [cross-account access has been granted](https://docs.aws.amazon.com/glue/latest/dg/cross-account-access.html).
+* **`--glue-catalog-id`** Provide the AWS Account ID that be used to access the Data Catalog. This is used if the Data Catalog is owned by a different account to the one provided by the credentials provider and [cross-account access has been granted](https://docs.aws.amazon.com/glue/latest/dg/cross-account-access.html).
 * **`--glue-max-retries`** The maximum number of retries the Glue client will perform after an error.
 * **`--glue-max-connections`** The maximum number of parallel connections the Glue client will allocate.
 * **`--glue-max-socket-timeout`** The maximum time the Glue client will allow for an established connection to timeout.
