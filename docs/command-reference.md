@@ -1526,7 +1526,12 @@ SYNOPSYS
                             [[--secret-key] string]
                             [[--glue-endpoint] string]
                             [[--aws-region] string]
+                            [[--glue-catalog-id] string]
                             [[--credentials-provider] string]
+                            [[--glue-max-retries] integer]
+                            [[--glue-max-connections] integer]
+                            [[--glue-max-socket-timeout] integer]
+                            [[--glue-connection-timeout] integer]
                             [[--file-system-id] string]
                             [[--default-fs-override] string]
                             [[--host] string]
@@ -1535,21 +1540,30 @@ SYNOPSYS
 
 #### Glue Parameters
 
-:::info
-The Glue hive agent requires a URI for an S3 bucket, this is only for the purposes of generating the correct location for the metadata. No data will be written to the bucket.
-:::
-
 * **`--name`** The identifier to give to the new Hive agent. This is referenced in the UI as **Name**.
-* **`--access-key`** The [AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html). This is referenced in the UI as **Access Key**.
-* **`--secret-key`** The [AWS secret key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html). This is referenced in the UI as **Secret Key**.
 * **`--glue-endpoint`** The [AWS Glue service endpoint](https://docs.aws.amazon.com/general/latest/gr/glue.html) for connections to the data catalog. This is referenced in the UI as **AWS Glue Service Endpoint**.
 * **`--aws-region`** The [AWS region](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) that your data catalog is located in (default is `us-east-1`). This is referenced in the UI as **AWS Region**.
-* **`--credentials-provider`** The [AWS catalog credentials provider factory class](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-specify-provider) (default is [DefaultAWSCredentialsProviderChain](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/index.html?com/amazonaws/auth/DefaultAWSCredentialsProviderChain.html)). This is referenced in the UI as **AWS Catalog Credentials Provider**.
 
 Additionally, use only one of the following parameters:
 
 * **`--file-system-id`** The name of the filesystem that will be associated with this agent (for example: `mys3bucket`). This will ensure any [path mappings](./create-path-mappings.md) are correctly linked between the filesystem and the agent. This is referenced in the UI as **Filesystem**.
 * **`--default-fs-override`** Provide an override for the default filesystem URI instead of a filesystem name (for example: `s3a://mybucket/`). This is referenced in the UI as **DefaultFS Override**.
+
+#### Glue Credential Parameters
+
+* **`--credentials-provider`** The [AWS catalog credentials provider factory class](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-specify-provider). This is referenced in the UI as **AWS Catalog Credentials Provider**.  
+  * If this parameter is not provided, the default is [DefaultAWSCredentialsProviderChain](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/index.html?com/amazonaws/auth/DefaultAWSCredentialsProviderChain.html)).
+  * If the `--access-key` and `--secret-key` parameters are provided, the credentials provider will automatically default to [StaticCredentialsProviderFactory](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/index.html?com/amazonaws/auth/AWSStaticCredentialsProvider.html).
+* **`--access-key`** The [AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html). This is referenced in the UI as **Access Key**.
+* **`--secret-key`** The [AWS secret key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html). This is referenced in the UI as **Secret Key**.
+
+#### Glue Optional Parameters
+
+* **`--glue-catalog-id`** Provide the AWS Account ID that be used to access the Data Catalog. This is used if the Data Catalog is owned by a different account to that provided through the credentials provider and [cross-account access has been granted](https://docs.aws.amazon.com/glue/latest/dg/cross-account-access.html).
+* **`--glue-max-retries`** The maximum number of retries the Glue client will perform after an error.
+* **`--glue-max-connections`** The maximum number of parallel connections the Glue client will allocate.
+* **`--glue-max-socket-timeout`** The maximum time the Glue client will allow for an established connection to timeout.
+* **`--glue-connection-timeout`** The maximum time the Glue client will allow to establish a connection.
 
 #### Parameters for remote hive agents only
 
