@@ -1,7 +1,7 @@
 ---
 id: configuration-data-migrations
 title: Configuring Data Migrations
-sidebar_label: Data Migrations
+sidebar_label: Data migrations
 ---
 
 We recommend you make the following configuration changes to your HDFS cluster environment to prepare for data migrations.
@@ -27,5 +27,5 @@ This value determines how many namespace transactions will trigger a checkpoint 
 The default value for this is `1,000,000`, but we recommend increasing it to `10,000,000` for production use.
 
 :::note
-After configuring DFS properties, you must restart all cluster services that rely on HDFS configuration for their function (including the HDFS service) for the changes to apply.
+After configuring HDFS properties, you must restart all cluster services that rely on HDFS configuration for their function (including the HDFS service) for the changes to apply.
 :::
