@@ -2235,6 +2235,165 @@ SYNOPSYS
 hive migration stop all
 ```
 
+## Hive Show Commands
+
+----
+
+### `hive show conf`
+
+Show the value of a configuration property from a specific agent.
+
+```text title="Returns a description of the specified hive configuration property."
+SYNOPSYS
+        hive show conf [--parameter] string  [[--agent-name] string]
+```
+
+#### Hive Show Conf Parameters
+
+* **`--agent-name`** The name of the agent.
+* **`--parameter`** The configuration parameter/property that you want to show the value of.
+
+#### Example
+
+```text title="Example when sourceAgent is an Apache Hive agent"
+hive show conf --agent-name sourceAgent --parameter hive.metastore.uris
+```
+
+----
+
+### `hive show database`
+
+Show details about a database from a specified agent.
+
+```text title="Show detailed information about a given database and agent (or sourceAgent if not set)."
+SYNOPSYS
+        hive show database [--database] string  [[--agent-name] string]
+```
+
+#### Hive Show Database Parameters
+
+* **`--agent-name`** The name of the agent.
+* **`--database`** The database name. If not specified, the default will be `default`.
+
+#### Example
+
+```text
+hive show database --agent-name sourceAgent --database mydb01
+```
+
+----
+
+### `hive show databases`
+
+Show a list of databases from a specified agent.
+
+```text title="Get databases list from a given agent or sourceAgent if agent is not set."
+SYNOPSYS
+        hive show databases [[--like] string]  [[--agent-name] string]
+```
+
+#### Hive Show Databases Parameters
+
+* **`--agent-name`** The name of the agent.
+* **`--like`** The [Hive DDL](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-Show) pattern to use to match the database names (for example: `testdb*` will match any database name that begins with "testdb").
+
+#### Example
+
+```text
+hive show database --agent-name sourceAgent --like testdb*
+```
+
+----
+
+### `hive show indexes`
+
+Show a list of indexes for a database/table from a specified agent.
+
+```text title="Get indexes list for a given database/table and agent (or sourceAgent if not set)."
+SYNOPSYS
+        hive show indexes [--database] string  [--table] string  [[--agent-name] string]
+```
+
+#### Hive Show Indexes Parameters
+
+* **`--agent-name`** The name of the agent.
+* **`--database`** The database name.
+* **`--table`** The table name.
+
+#### Example
+
+```text
+hive show indexes --agent-name sourceAgent --database mydb01 --table mytbl01
+```
+
+----
+
+### `hive show partitions`
+
+Show a list of partitions for a database/table from a specified agent.
+
+```text title="Get partitions list for a given database/table and agent (or sourceAgent if not set)."
+SYNOPSYS
+        hive show partitions [--database] string  [--table] string  [[--agent-name] string]
+```
+
+#### Hive Show Partitions Parameters
+
+* **`--agent-name`** The name of the agent.
+* **`--database`** The database name.
+* **`--table`** The table name.
+
+#### Example
+
+```text
+hive show partitions --agent-name sourceAgent --database mydb01 --table mytbl01
+```
+
+----
+
+### `hive show table`
+
+Show details about a table from a specified agent.
+
+```text title="Show detailed information about a given table using the given agent (or sourceAgent if not set)."
+SYNOPSYS
+        hive show table [--database] string  [--table] string  [[--agent-name] string]
+```
+
+#### Hive Show Table Parameters
+
+* **`--agent-name`** The name of the agent.
+* **`--database`** The database name where the table is located.
+* **`--table`** The table name.
+
+#### Example
+
+```text
+hive show table --agent-name sourceAgent --database mydb01 --table mytbl01
+```
+
+----
+
+### `hive show tables`
+
+Show a list of tables for a database from a specified agent.
+
+```text title="Get tables list for a given database (default if not set ) and agent (sourceAgent if not set)."
+SYNOPSYS
+        hive show tables [[--like] string]  [[--database] string]  [[--agent-name] string]
+```
+
+#### Hive Show Tables Parameters
+
+* **`--agent-name`** The name of the agent.
+* **`--like`** The [Hive DDL](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-Show) pattern to use to match the table names (for example: `testtbl*` will match any table name that begins with "testtbl").
+
+#### Example
+
+```text
+hive show tables --agent-name sourceAgent --database mydb01 --like testtbl*
+```
+
 ## License Commands
 
 ----
