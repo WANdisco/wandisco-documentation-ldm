@@ -42,17 +42,17 @@ Before uninstalling LiveData Migrator, stop all active migrations of data and/or
 
 1. Remove all LiveData Migrator components:
 
-   ```text title="Red Hat/CentOS"
-   yum remove -y hivemigrator.noarch livedata-migrator.noarch livedata-migrator-cli.noarch livedata-ui.noarch
-   ```
+  ```text title="Red Hat/CentOS"
+  yum remove -y hivemigrator.noarch hivemigrator-azure-hdi.noarch livedata-migrator.noarch livedata-migrator-cli.noarch livedata-ui.noarch
+  ```
 
-   ```text title="Ubuntu"
-   apt-get purge -y hivemigrator livedata-migrator livedata-migrator-cli livedata-ui
-   ```
+  ```text title="Ubuntu"
+  apt-get purge -y hivemigrator hivemigrator-azure-hdi livedata-migrator livedata-migrator-cli livedata-ui
+  ```
 
-   ```text title="SUSE 12"
-   zypper remove -y hivemigrator livedata-migrator livedata-ui && rpm -e livedata-migrator-cli
-   ```
+  ```text title="SUSE 12"
+  zypper remove -y hivemigrator hivemigrator-azure-hdi livedata-migrator livedata-ui && rpm -e livedata-migrator-cli
+  ```
 
 1. Delete all related directories:
 
