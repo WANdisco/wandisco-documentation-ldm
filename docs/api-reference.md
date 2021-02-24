@@ -17,7 +17,7 @@ This version will reflect exactly the API exposed from your instance of LiveData
 
 [![LiveData Migrator Swagger Documentation](/img/swagger.png)](http://localhost:18080/ldm-api.html)
 
-## Metadata migrations (preview)
+## Metadata migrations
 
 Commands related to metadata migrations (such as `hive agent`, `hive rule`, `hive migration`) are serviced through a different REST API port.
 

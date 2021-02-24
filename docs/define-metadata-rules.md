@@ -1,6 +1,6 @@
 ---
 id: define-metadata-rules
-title: Define metadata rules (preview)
+title: Define metadata rules
 sidebar_label: Define metadata rules
 ---
 

@@ -1,6 +1,6 @@
 ---
 id: configuration-metadata
-title: Configuring your environment for metadata migrations (preview)
+title: Configuring your environment for metadata migrations
 sidebar_label: Metadata migrations
 ---
 

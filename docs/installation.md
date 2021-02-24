@@ -4,7 +4,7 @@ title: Install LiveData Migrator
 sidebar_label: Install LiveData Migrator
 ---
 
-Ready to install? Check the [prerequisites](./prereqs.md) and then follow these steps to get up and running with LiveData Migrator. The latest version of LiveData Migrator includes a preview of functionality that you can use to migrate metadata.
+Ready to install? Check the [prerequisites](./prereqs.md) and then follow these steps to get up and running with LiveData Migrator. The latest version of LiveData Migrator includes functionality that you can use to migrate metadata.
 
 :::note
 Do you have an older version already installed? If so, perform the steps in the [Uninstall a previous release](./uninstall.md) page first.
