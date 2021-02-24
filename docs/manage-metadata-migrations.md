@@ -1,6 +1,6 @@
 ---
 id: manage-metadata-migrations
-title: Manage metadata migrations (preview)
+title: Manage metadata migrations
 sidebar_label: Manage metadata migrations
 ---
 

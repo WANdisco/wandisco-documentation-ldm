@@ -1,6 +1,6 @@
 ---
 id: migrate-metadata
-title: Create a metadata migration (preview)
+title: Create a metadata migration
 sidebar_label: Create a metadata migration
 ---
 
