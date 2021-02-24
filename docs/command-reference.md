@@ -2248,7 +2248,7 @@ SYNOPSYS
         hive show conf [--parameter] string  [[--agent-name] string]
 ```
 
-#### Hive Show Conf Parameters
+#### Hive show conf parameters
 
 * **`--agent-name`** The name of the agent.
 * **`--parameter`** The configuration parameter/property that you want to show the value of.
@@ -2270,7 +2270,7 @@ SYNOPSYS
         hive show database [--database] string  [[--agent-name] string]
 ```
 
-#### Hive Show Database Parameters
+#### Hive show database parameters
 
 * **`--agent-name`** The name of the agent.
 * **`--database`** The database name. If not specified, the default will be `default`.
@@ -2292,7 +2292,7 @@ SYNOPSYS
         hive show databases [[--like] string]  [[--agent-name] string]
 ```
 
-#### Hive Show Databases Parameters
+#### Hive show databases parameters
 
 * **`--agent-name`** The name of the agent.
 * **`--like`** The [Hive DDL](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-Show) pattern to use to match the database names (for example: `testdb*` will match any database name that begins with "testdb").
@@ -2314,7 +2314,7 @@ SYNOPSYS
         hive show indexes [--database] string  [--table] string  [[--agent-name] string]
 ```
 
-#### Hive Show Indexes Parameters
+#### Hive show indexes parameters
 
 * **`--agent-name`** The name of the agent.
 * **`--database`** The database name.
@@ -2337,7 +2337,7 @@ SYNOPSYS
         hive show partitions [--database] string  [--table] string  [[--agent-name] string]
 ```
 
-#### Hive Show Partitions Parameters
+#### Hive show partitions parameters
 
 * **`--agent-name`** The name of the agent.
 * **`--database`** The database name.
@@ -2360,7 +2360,7 @@ SYNOPSYS
         hive show table [--database] string  [--table] string  [[--agent-name] string]
 ```
 
-#### Hive Show Table Parameters
+#### Hive show table parameters
 
 * **`--agent-name`** The name of the agent.
 * **`--database`** The database name where the table is located.
@@ -2383,7 +2383,7 @@ SYNOPSYS
         hive show tables [[--like] string]  [[--database] string]  [[--agent-name] string]
 ```
 
-#### Hive Show Tables Parameters
+#### Hive show tables parameters
 
 * **`--agent-name`** The name of the agent.
 * **`--like`** The [Hive DDL](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-Show) pattern to use to match the table names (for example: `testtbl*` will match any table name that begins with "testtbl").

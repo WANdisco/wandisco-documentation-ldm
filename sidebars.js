@@ -1,7 +1,7 @@
 module.exports = {
   "someSidebar": [
     {
-      "collapsed": true,
+      "collapsed": false,
       "type": "category",
       "label": "LiveData Migrator",
       "items": [
@@ -10,7 +10,7 @@ module.exports = {
           "id": "about"
         },
         {
-          "collapsed": true,
+          "collapsed": false,
           "type": "category",
           "label": "Installation",
           "items": [
@@ -92,6 +92,10 @@ module.exports = {
             {
               "type": "doc",
               "id": "manage-metadata-migrations"
+            },
+            {
+              "type": "doc",
+              "id": "view-metadata"
             },
           ]
         },
