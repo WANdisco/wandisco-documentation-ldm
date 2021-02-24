@@ -34,7 +34,7 @@ Before uninstalling LiveData Migrator, stop all active migrations of data and/or
 
 ## Uninstall any remote agents
 
-If you have deployed any remote agents (for a target metastore connection), log in to the hosts for the remote agents and uninstall them using the following commands:
+If you have deployed any remote agents (for target metastore connections), log in to the hosts for the remote agents and uninstall them using the following commands:
 
 1. Stop the service:
 
