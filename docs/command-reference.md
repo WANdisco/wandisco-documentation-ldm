@@ -1515,6 +1515,8 @@ hive agent add filesystem --filesystem-id myfilesystem --root-folder /var/lib/my
 
 Add an [AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html) hive agent to connect to an [AWS Glue data catalog](https://docs.aws.amazon.com/glue/latest/dg/populate-data-catalog.html) using the `hive agent add glue` command.
 
+If your LiveData Migrator host can communicate directly with the AWS Glue Data Catalog, then a local hive agent will be sufficient. Otherwise, consider using a remote hive agent.
+
 :::info remote deployments
 For a remote hive agent connection, specify a remote host (EC2 instance) that will be used to communicate with the local LiveData Migrator server (constrained to a user-defined port).
 
