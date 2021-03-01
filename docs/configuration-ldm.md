@@ -107,7 +107,7 @@ Secure access to the LiveData Migrator [REST API](./api-reference.md) through co
 | --- | --- |
 | `security.type` | The method of securing access to the REST API<br/><br/>**Default value**: `off`<br/>**Allowed values**: `off`, `basic` |
 | `security.basic.user` | The username that needs to be provided by a REST client to gain access to a secured REST API, e.g. `admin`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any string that defines a username (no whitespace) |
-| `security.basic.password` | A bcrypt-encrypted representation of the password that needs to be provided using HTTP basic authentication to access the REST API when LiveData Migrator is configured for `basic` security, e.g. `{bcrypt}$2a$10$kXzfqwiiCY/ZW9e9BboNmuIbe5xe2kNjdk1YNUxmsCaQ7PlBLCe4W`<br/><br/>**Default value**: (none)<br/>**Allowed values**: A valid bcrypt-encrypted string |
+| `security.basic.password` | A [bcrypt-encrypted](https://bcrypt-generator.com/) representation of the password that needs to be provided using HTTP basic authentication to access the REST API when LiveData Migrator is configured for `basic` security, e.g. `$2y$12$yOcvS7C0DHFRi4eeUuFh4u5hMUuSwfEHYt1JyOsfLgV7sjghw5zGm`<br/><br/>**Default value**: (none)<br/>**Allowed values**: A valid bcrypt-encrypted string |
 
 ## File system defaults
 
