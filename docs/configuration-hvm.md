@@ -21,9 +21,22 @@ Follow these steps to enable basic authentication for the HiveMigrator REST API:
        enabled: true
    ```
 
-1. In the same file, add two new lines for the `username` and `password` key values.
+1. [If basic authentication is enabled on the LiveData Migrator REST API](./configuration-ldm.md#security), add the password to the `/etc/wandisco/hivemigrator/application.yaml` file in plain text.
 
-   They need to be top level parameters (like `storagePath` and `liveDataMigratorPort`). The password value needs to be encrypted using a [bcrypt generator](https://www.browserling.com/tools/bcrypt).
+   Add the `lm2Password` key as a top level parameter:
+
+   ```text title="Example"
+   storagePath: /opt/wandisco/hivemigrator/hivemigrator.db
+   liveDataMigratorPort: 18080
+
+   lm2Password: "password"
+   ```
+
+   If the LiveData Migrator credentials and the HiveMigrator credentials (defined in the next step) are the same, you will only need to authenticate once when [connecting through the CLI](#connecting-to-hivemigrator-with-basic-authentication).
+
+1. In the same file, add the `username` and `password` key values as top level parameters (like `storagePath` and `liveDataMigratorPort`).
+
+   The password value needs to be encrypted using a [bcrypt generator](https://www.browserling.com/tools/bcrypt).
 
    :::important bcrypt password must have a 2a hash prefix
    HiveMigrator only supports "2a" hash prefixes for encrypted passwords. Ensure to use a [bcrypt generator](https://www.browserling.com/tools/bcrypt) that provides a "2a" prefix at the beginning of the encrypted password.
@@ -36,18 +49,7 @@ Follow these steps to enable basic authentication for the HiveMigrator REST API:
    liveDataMigratorPort: 18080
 
    username: "admin"
-   password: "$2a$10$GAlPCvug.i9q4Y6CYalxP.nsAWlGKcfDf9IBsbyWWDfwsv14GRjnS"
-   ```
-
-1. [If basic authentication has been enabled on the LiveData Migrator REST API](./configuration-ldm.md#security), the password needs to be added to the `/etc/wandisco/hivemigrator/application.yaml` file.
-
-   Add the `lm2Password` key as a top level parameter. The value for this needs to be provided in plain text.
-
-   ```text title="Example"
-   username: "admin"
-   password: "$2a$10$GAlPCvug.i9q4Y6CYalxP.nsAWlGKcfDf9IBsbyWWDfwsv14GRjnS"
-
-   lm2Password: "password"
+   password: "$2a$10$mQXFoGAdLryWcZLjSP31Q.5cSgtoCPO3ernnsK4F6/gva8lyn1qgu"
    ```
 
 1. Restart the HiveMigrator service to enable the new configuration:
@@ -61,6 +63,10 @@ Follow these steps to enable basic authentication for the HiveMigrator REST API:
    :::
 
 ### Connecting to HiveMigrator with basic authentication
+
+:::note
+[If basic authentication is enabled on the LiveData Migrator REST API](./configuration-ldm.md#security), and the HiveMigrator credentials are the same as LiveData Migrator credentials, this step will not be required as the CLI will automatically connect to HiveMigrator.
+:::
 
 When basic authentication is enabled, provide the username and password when prompted to connect to HiveMigrator through the CLI:
 

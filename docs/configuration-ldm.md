@@ -93,7 +93,7 @@ Secure access to the LiveData Migrator [REST API](./api-reference.md) through co
 | --- | --- |
 | `security.type` | The method of securing access to the REST API<br/><br/>**Default value**: `off`<br/>**Allowed values**: `off`, `basic` |
 | `security.basic.user` | The username that needs to be provided by a REST client to gain access to a secured REST API, e.g. `admin`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any string that defines a username (no whitespace) |
-| `security.basic.password` | A [bcrypt-encrypted](https://bcrypt-generator.com/) representation of the password that needs to be provided using HTTP basic authentication to access the REST API when LiveData Migrator is configured for `basic` security, for example: `{bcrypt}$2y$12$yOcvS7C0DHFRi4eeUuFh4u5hMUuSwfEHYt1JyOsfLgV7sjghw5zGm`<br/><br/>**Default value**: (none)<br/>**Allowed values**: A valid bcrypt-encrypted string |
+| `security.basic.password` | A [bcrypt-encrypted](https://www.browserling.com/tools/bcrypt) representation of the password that needs to be provided using HTTP basic authentication to access the REST API when LiveData Migrator is configured for `basic` security, for example: `{bcrypt}$2a$10$mQXFoGAdLryWcZLjSP31Q.5cSgtoCPO3ernnsK4F6/gva8lyn1qgu`<br/><br/>**Default value**: (none)<br/>**Allowed values**: A valid bcrypt-encrypted string |
 
 :::note
 The `security.basic.password` value must include the `{bcrypt}` prefix before the encrypted password string.
