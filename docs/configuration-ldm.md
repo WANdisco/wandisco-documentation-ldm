@@ -8,6 +8,12 @@ Find details here for the configuration properties of LiveData Migrator. Propert
 
 `/etc/wandisco/livedata-migrator/application.properties`
 
+Restart the LiveData Migrator service when adding new properties or changing existing values:
+
+```text
+service livedata-migrator restart
+```
+
 ## General configuration
 
 These configuration properties are used to adjust general items of operation.
@@ -16,30 +22,10 @@ These configuration properties are used to adjust general items of operation.
 | --- | --- |
 | `spring.jackson.serialization.INDENT_OUTPUT` | Whether to apply indentation to JSON output from command results<br/><br/>**Default value**: `true`<br/>**Allowed values**: `true`, `false` |
 | `springdoc.swagger-ui.path` | The path at which clients can access the Swagger documentation for the LiveData Migrator REST API<br/><br/>**Default value**: `/ldm-api.html`<br/>**Allowed values**: Any valid file path |
-| `pull.threads` | The size of the thread pool that is used for executing activities related to notifications of changes in an HDFS environment<br/><br/>**Default value**: `50`<br/>**Allowed values**: An integer value between `1` and `10000` |
+| `pull.threads` | The size of the thread pool that is used for executing activities related to notifications of changes in an HDFS environment<br/><br/>**Default value**: `100`<br/>**Allowed values**: An integer value between `1` and `10000` |
 | `engine.threads` | The size of the thread pool used to perform migration of content from the source file system to targets<br/><br/>**Default value**: `1000`<br/>**Allowed values**: An integer value between `1` and `10000` |
 | `persisted.store` | Reserved for future use <br/><br/>**Default value**: `true` |
 | `server.port` | The TCP port used to listen for clients interacting with the [REST API](./api-reference.md)<br/><br/>**Default value**: `18080`<br/>**Allowed values**: An integer value between `1024` and `65535` |
-| `shell.history.filePath` | Location of the record of commands issued at the action prompt<br/><br/>**Default value**: `~/.livemigrator_history`<br/>**Allowed values**: The full path to a valid filename in a directory that is writable by the user running LiveData Migrator (typically `hdfs`.) |
-| `cli.enabled` | Whether the action prompt interface will be made available from the LiveData Migrator instance<br/><br/>**Default value**: `false`<br/>**Allowed values**: `true`, `false` |
-| `spring.shell.interactive.enabled` | Whether the console session with the action prompt is interactive or non-interactive, affecting prompt output, command completion and other interactive features<br/><br/>**Default value**: `${cli.enabled}`<br/>**Allowed values**: `true`, `false` |
-
-## SSH access
-
-These configuration properties govern whether and how access to LiveData Migrator is provided using the [SSH protocol](https://en.wikipedia.org/wiki/Secure_Shell). You can manage LiveData Migrator by enabling SSH access to the console interface (as an alternative to the [CLI connection method](./get-started.md#log-in-to-the-livedata-migrator-cli)).
-
-| Name | Details |
-| --- | --- |
-| `ssh.shell.enable` | Whether LiveData Migrator will accept connections from an SSH client to provide access to the action prompt. Setting this to false will prevent access via SSH from any client.<br/><br/>**Default value**: `false`<br/>**Allowed values**: `true`, `false` |
-| `ssh.shell.prompt.local.enable` | Whether LiveData Migrator will allow local access via SSH to the action prompt. Setting this to `false` will prevent access from local clients.<br/><br/>**Default value**: `${cli.enabled}`<br/>**Allowed values**: `true`, `false` |
-| `ssh.shell.prompt.text` | This is the text content presented as the action prompt. You can override it to provide instance-specific text.<br/><br/>**Default value**: `WANdisco LiveMigrator >>\u0020`<br/>**Allowed values**: Any text string |
-| `ssh.shell.prompt.color` | The color used for the action prompt. <br/><br/>**Default value**: `white`<br/>**Allowed values**: One of the color names `black`, `white`, `red`,`yellow`, `green`, `blue`.
-| `ssh.shell.authentication` | Defines the authentication mechanism used by LiveData Migrator for SSH access. `simple` denotes authentication provided by the username and password defined in the `ssh.shell.user` and `ssh.shell.password` configuration properties, while `security` denotes authentication using a private key that matches one of the public keys in the file specified with the `ssh.shell.authorized-public-keys-file` configuration property.<br/><br/>**Default value**: `simple`<br/>**Allowed values**: `simple`, `security` |
-| `ssh.shell.user` | The username that an SSH client must provide when LiveData Migrator is configured for simple authentication.<br/><br/>**Default value**: `user`<br/>**Allowed values**: Any string that defines a username (no whitespace) |
-| `ssh.shell.password` | The password that an SSH client must provide when LiveData Migrator is configured to use simple authentication.<br/><br/>**Default value**: `password`<br/>**Allowed values**: Any string |
-| `ssh.shell.port` | The TCP port on which LiveData Migrator will listen for new SSH connections<br/><br/>**Default value**: `2222`<br/>**Allowed values**: An integer value between `1024` and `65535` |
-| `ssh.shell.historyFile` | The full path to the file in which the record of commands issued to the action prompt will be recorded<br/><br/>**Default value**: `${java.io.tmpdir}/.livedatamigrator_history_ssh`<br/>**Allowed values**: The full path to a valid filename in a directory that is writable by the user running LiveData Migrator (typically `hdfs`.)
-| `ssh.shell.authorized-public-keys-file` | The file containing public keys against which client credentials will be matched to authorize access to the console over SSH when LiveData Migrator is configured for `security` authentication<br/><br/>**Default value**: `samples/public-keys-sample`<br/>**Allowed values**: The full path to a file that contains one line entry per public key, in the same format used by `sshd`. |
 
 ## Logging
 
@@ -51,9 +37,9 @@ Configure how LiveData Migrator logs requests made against the [REST API](./api-
 | `logbook.format.style` | The logging style applied to HTTP activity records<br/><br/>**Default value**: `http`<br/>**Allowed values**: `http`, `curl` |
 | `logbook.write.max-body-size` | The maximum number of bytes from an HTTP request or response body to include in a log entry<br/><br/>**Default value**: `1024`<br/>**Allowed values**: Any integer between `1` and `2147483647` |
 | `logbook.exclude` | A comma-separated list of patterns that match URIs for which HTTP activity should not be logged<br/><br/>**Default value**: `/v3/api-docs/**,/swagger-ui/**`<br/>**Allowed values**: Any valid comma-separated list of patterns |
-| `logbook.obfuscate.parameters` | A comma-separated list of HTTP parameters that should not be recorded in log entries, e.g. `access_token,password`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any valid comma-separated list of HTTP parameter names |
-| `logbook.obfuscate.headers` | A comma-separated list of HTTP headers that should not be recorded in log entries, e.g. `authorization,x-auth-password,x-auth-token,X-Secret`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any valid comma-separated list of HTTP headers |
-| `obfuscate.json.properties` | A comma-separated list of JSON request properties by name that should not be recorded in log entries, e.g. `foo,bar`<br/><br/>**Default value**: `${hdfs.fs.type.masked.properties},${adls2.fs.type.masked.properties},${s3a.fs.type.masked.properties},${gcs.fs.type.masked.properties}`<br/>**Allowed values**: Any valid comma-separated list of property names |
+| `logbook.obfuscate.parameters` | A comma-separated list of HTTP parameters that should not be recorded in log entries, for example: `access_token,password`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any valid comma-separated list of HTTP parameter names |
+| `logbook.obfuscate.headers` | A comma-separated list of HTTP headers that should not be recorded in log entries, for example: `authorization,x-auth-password,x-auth-token,X-Secret`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any valid comma-separated list of HTTP headers |
+| `obfuscate.json.properties` | A comma-separated list of JSON request properties by name that should not be recorded in log entries, for example: `foo,bar`<br/><br/>**Default value**: `${hdfs.fs.type.masked.properties},${adls2.fs.type.masked.properties},${s3a.fs.type.masked.properties},${gcs.fs.type.masked.properties}`<br/>**Allowed values**: Any valid comma-separated list of property names |
 
 ## Server SSL
 
@@ -107,7 +93,7 @@ Secure access to the LiveData Migrator [REST API](./api-reference.md) through co
 | --- | --- |
 | `security.type` | The method of securing access to the REST API<br/><br/>**Default value**: `off`<br/>**Allowed values**: `off`, `basic` |
 | `security.basic.user` | The username that needs to be provided by a REST client to gain access to a secured REST API, e.g. `admin`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any string that defines a username (no whitespace) |
-| `security.basic.password` | A [bcrypt-encrypted](https://bcrypt-generator.com/) representation of the password that needs to be provided using HTTP basic authentication to access the REST API when LiveData Migrator is configured for `basic` security, e.g. `$2y$12$yOcvS7C0DHFRi4eeUuFh4u5hMUuSwfEHYt1JyOsfLgV7sjghw5zGm`<br/><br/>**Default value**: (none)<br/>**Allowed values**: A valid bcrypt-encrypted string |
+| `security.basic.password` | A [bcrypt-encrypted](https://bcrypt-generator.com/) representation of the password that needs to be provided using HTTP basic authentication to access the REST API when LiveData Migrator is configured for `basic` security, for example: `$2y$12$yOcvS7C0DHFRi4eeUuFh4u5hMUuSwfEHYt1JyOsfLgV7sjghw5zGm`<br/><br/>**Default value**: (none)<br/>**Allowed values**: A valid bcrypt-encrypted string |
 
 ## File system defaults
 
@@ -158,3 +144,15 @@ function FindProxyForURL(url, host) {
 ```
 
 :::
+
+## Directory structure
+
+The following directories are used for the LiveData Migrator core package:
+
+| Location | Content |
+|---|---|
+| `/var/log/wandisco/livedata-migrator` | Logs |
+| `/etc/wandisco/livedata-migrator` | Configuration files |
+| `/opt/wandisco/livedata-migrator` | Java archive files |
+| `/opt/wandisco/livedata-migrator/db` | LiveData Migrator runtime state |
+| `/var/run/livedata-migrator` | Runtime files |

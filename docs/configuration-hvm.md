@@ -21,7 +21,7 @@ Follow these steps to enable basic authentication for the HiveMigrator REST API:
        enabled: true
    ```
 
-1. In the `/etc/wandisco/hivemigrator/application.yaml` file, add two new lines for the `username` and `password` key values.
+1. In the same file, add two new lines for the `username` and `password` key values.
 
    They need to be top level parameters (like `storagePath` and `liveDataMigratorPort`). The password value needs to be encrypted using a [bcrypt generator](https://bcrypt-generator.com/).
 
@@ -50,8 +50,17 @@ Follow these steps to enable basic authentication for the HiveMigrator REST API:
    service hivemigrator restart
    ```
 
-   :::info
-   Enabling or disabling basic authentication of the HiveMigrator REST API will always require a restart of HiveMigrator service.
-
-   However, the username and password values can be changed without having to restart the service to make them active.
+   :::tip
+   The username and password values can be changed without having to restart the HiveMigrator service. They will become active once you have saved the file.
    :::
+
+## Directory structure
+
+The following directories are used for HiveMigrator:
+
+| Location | Content |
+|---|---|
+| `/var/log/wandisco/hivemigrator` | Logs |
+| `/etc/wandisco/hivemigrator` | Configuration files |
+| `/opt/wandisco/hivemigrator` | Java archive files |
+| `/var/run/hivemigrator` | Runtime files |
