@@ -1345,6 +1345,7 @@ SYNOPSYS
                              [[--insecure] boolean]
                              [[--host] string]
                              [[--port] integer]
+                             [--no-ssl]
                              [[--autodeploy] boolean]
                              [[--ssh-user] string]
                              [[--ssh-key] file]
@@ -1430,7 +1431,8 @@ The `--client-id` parameter must be specified:
 #### Parameters for remote hive agents only
 
 * **`--host`** The host where the remote hive agent will be deployed.
-* **`--port`** The port for the remote hive agent to use on the remote host. Default is `5052`. This port is used to communicate with the local LiveData Migrator server.
+* **`--port`** The port for the remote hive agent to use on the remote host. This port is used to communicate with the local LiveData Migrator server.
+* **`--no-ssl`** [TLS/SSL encryption and certificate authentication](./configuration-hvm.md#tlsssl-certificates) is enabled by default between LiveData Migrator and the remote agent. Use this parameter to disable it.
 
 ##### Parameters for automated deployment
 
@@ -1540,6 +1542,7 @@ SYNOPSYS
                             [[--default-fs-override] string]
                             [[--host] string]
                             [[--port] integer]
+                            [--no-ssl]
 ```
 
 #### Glue Parameters
@@ -1572,7 +1575,8 @@ Additionally, use only one of the following parameters:
 #### Parameters for remote hive agents only
 
 * **`--host`** The host where the remote hive agent will be deployed.
-* **`--port`** The port for the remote hive agent to use on the remote host. Default is `5052`. This port is used to communicate with the local LiveData Migrator server.
+* **`--port`** The port for the remote hive agent to use on the remote host. This port is used to communicate with the local LiveData Migrator server.
+* **`--no-ssl`** [TLS/SSL encryption and certificate authentication](./configuration-hvm.md#tlsssl-certificates) is enabled by default between LiveData Migrator and the remote agent. Use this parameter to disable it.
 
 ##### Steps for remote agent deployment
 
@@ -1630,6 +1634,7 @@ SYNOPSYS
                             [[--name] string]
                             [[--host] string]
                             [[--port] integer]
+                            [--no-ssl]
                             [--autodeploy]
                             [[--ssh-user] string]
                             [[--ssh-key] file]
@@ -1658,7 +1663,8 @@ Additionally, use only one of the following parameters:
 #### Parameters for remote hive agents only
 
 * **`--host`** The host where the remote hive agent will be deployed.
-* **`--port`** The port for the remote hive agent to use on the remote host. Default is `5052`. This port is used to communicate with the local LiveData Migrator server.
+* **`--port`** The port for the remote hive agent to use on the remote host. This port is used to communicate with the local LiveData Migrator server.
+* **`--no-ssl`** [TLS/SSL encryption and certificate authentication](./configuration-hvm.md#tlsssl-certificates) is enabled by default between LiveData Migrator and the remote agent. Use this parameter to disable it.
 
 ##### Parameters for automated deployment
 

@@ -79,6 +79,68 @@ Connected to hivemigrator v1.2.1-428 on http://localhost:6780.
 
 The username and password will also be required when accessing the HiveMigrator REST API directly.
 
+## TLS/SSL certificates
+
+When deploying a remote agent (for example: [Azure SQL](./command-reference.md#hive-agent-add-azure) or [AWS Glue](./command-reference.md#hive-agent-add-glue)), a TLS/SSL connection will be established by default between HiveMigrator and the remote agent.
+
+Certificates (and keys) are automatically generated for this connection for both HiveMigrator and the remote agent. These are placed in the following directories:
+
+```text title="HiveMigrator"
+/etc/wandisco/hivemigrator/client-key.pem
+/etc/wandisco/hivemigrator/client-cert.pem
+/etc/wandisco/hivemigrator/ca-cert.pem
+/etc/wandisco/hivemigrator/ca-key.pem
+/etc/wandisco/hivemigrator/ca-cert.srl
+```
+
+```text title="Remote agent"
+/etc/wandisco/hivemigrator-remote-server/server-key.pem
+/etc/wandisco/hivemigrator-remote-server/server-cert.pem
+/etc/wandisco/hivemigrator-remote-server/ca-cert.pem
+```
+
+You can [generate new certificates](#generate-new-certificates) at any time or [upload your own](#upload-your-own-certificates).
+
+### Generate new certificates
+
+:::important
+You must generate new certificates for both the HiveMigrator and all remote agents that are connected.
+
+Generating certificates for just one of these components will break existing connections.
+:::
+
+Generate new certificates and keys by using the following [HiveMigrator REST API](./api-reference.md#metadata-migrations) endpoints:
+
+```text title="HiveMigrator"
+POST ​/config​/certificates​/generate
+```
+
+```text title="Remote agent"
+POST ​/agents/{name}/certificates/generate
+```
+
+The remote agent service will be automatically restarted when new certificates are generated using this method. The HiveMigrator service does not require a restart to start using new certificates.
+
+### Upload your own certificates
+
+:::important
+Ensure to upload correct certificates and keys for both the HiveMigrator and all remote agents that are connected.
+
+Existing connections will break if trust is not established between HiveMigrator and remote agent certificates.
+:::
+
+Upload certificates and keys by using the following [HiveMigrator REST API](./api-reference.md#metadata-migrations) endpoints:
+
+```text title="HiveMigrator"
+POST ​/config​/certificates​/upload
+```
+
+```text title="Remote agent"
+POST ​/agents/{name}/certificates/upload
+```
+
+The remote agent service will be automatically restarted when new certificates are uploaded using this method. The HiveMigrator service does not require a restart to start using new certificates.
+
 ## Directory structure
 
 The following directories are used for HiveMigrator:
