@@ -8,7 +8,13 @@ The HiveMigrator service is responsible for communication between agents and mig
 
 Find details here for configuring the HiveMigrator service.
 
-## Basic authentication
+## Security
+
+### Basic authentication
+
+:::important
+When basic authentication is enabled on HiveMigrator, [update the LiveData UI with the credentials to maintain functionality](./configuration-ui.md#hivemigrator).
+:::
 
 Follow these steps to enable basic authentication for the HiveMigrator REST API:
 
@@ -60,7 +66,7 @@ Follow these steps to enable basic authentication for the HiveMigrator REST API:
    The username and password values can be changed without having to restart the HiveMigrator service. They will become active once you have saved the file.
    :::
 
-### Connecting to HiveMigrator with basic authentication
+#### Connecting to HiveMigrator with basic authentication
 
 :::note
 Follow these steps if you have used different credentials for [LiveData Migrator](./configuration-ldm.md#security) and HiveMigrator, or if basic authentication is not enabled on LiveData Migrator.
@@ -126,7 +132,7 @@ The remote agent service will automatically restart when new certificates are ge
 :::important
 Make sure the correct certificates and keys are uploaded for HiveMigrator and all remote agents that are connected.
 
-Existing connections will break if trusted certificates are not used for HiveMigrator and remote agents.
+Existing connections will break if the trust relationship is not established between HiveMigrator and remote agents.
 :::
 
 Upload certificates and keys by using the following [HiveMigrator REST API](./api-reference.md#metadata-migrations) endpoints:

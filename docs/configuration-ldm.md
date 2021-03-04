@@ -41,7 +41,51 @@ Configure how LiveData Migrator logs requests made against the [REST API](./api-
 | `logbook.obfuscate.headers` | A comma-separated list of HTTP headers that should not be recorded in log entries, for example: `authorization,x-auth-password,x-auth-token,X-Secret`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any valid comma-separated list of HTTP headers |
 | `obfuscate.json.properties` | A comma-separated list of JSON request properties by name that should not be recorded in log entries, for example: `foo,bar`<br/><br/>**Default value**: `${hdfs.fs.type.masked.properties},${adls2.fs.type.masked.properties},${s3a.fs.type.masked.properties},${gcs.fs.type.masked.properties}`<br/>**Allowed values**: Any valid comma-separated list of property names |
 
-## Server SSL
+## State
+
+LiveData Migrator uses an internally-managed database to record state during operation called the Prevayler.
+
+| Name | Details |
+| --- | --- |
+| `prevayler.databaseLocation` | The directory in which LiveData Migrator will write files to manage state<br/><br/>**Default value**: `${install.dir}/db`<br/>**Allowed values**: The full path to a directory in which database files will be managed. It must be writable by the user running LiveData Migrator (typically `hdfs`.) |
+| `prevayler.persistent` | Whether LiveData Migrator will persist state to disk in files<br/><br/>**Default value**: `true`<br/>**Allowed values**: `true`, `false` |
+| `prevayler.force` | Whether the database performs a sync operation to ensure content is written to persistent storage on each write activity<br/><br/>**Default value**: `true`<br/>**Allowed values**: `true`, `false` |
+| `prevayler.bufferedJournal` | Whether buffered journal I/O is used for the database<br/><br/>**Default value**: `true`<br/>**Allowed values**: `true`, `false` |
+| `prevayler.mirrored` | Whether actions tracked in-memory by the database are mirrored to disk on every modification. The alternative is for operation to periodically flush to disk and flush on shutdown.<br/><br/>**Default value**: `true`<br/>**Allowed values**: `true`, `false` |
+
+## Security
+
+Secure access to the LiveData Migrator [REST API](./api-reference.md) through configuration. Choose between no security or HTTP basic security.
+
+| Name | Details |
+| --- | --- |
+| `security.type` | The method of securing access to the REST API.<br/><br/>**Default value**: `off`<br/>**Allowed values**: `off`, `basic` |
+
+### Basic authentication
+
+:::important
+When basic authentication is enabled on LiveData Migrator, [update the LiveData UI with the credentials to maintain functionality](./configuration-ui.md#livedata-migrator).
+:::
+
+| Name | Details |
+| --- | --- |
+| `security.basic.user` | Required when `security.type=basic`. <br/>The username that needs to be provided by a REST client to gain access to a secured REST API, for example: `admin`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any string that defines a username (no whitespace) |
+| `security.basic.password` | Required when `security.type=basic`. <br/>A [bcrypt-encrypted](https://www.browserling.com/tools/bcrypt) representation of the password that needs to be provided using HTTP basic authentication to access the REST API, for example:<br/>`{bcrypt}$2a$10$mQXFoGAdLryWcZLjSP31Q.5cSgtoCPO3ernnsK4F6/gva8lyn1qgu`<br/><br/>The `{bcrypt}` prefix must be included before the encrypted password string as shown in the example above.<br/><br/>**Default value**: (none)<br/>**Allowed values**: A valid bcrypt-encrypted string |
+
+#### Connecting to LiveData Migrator with basic authentication
+
+When basic authentication is enabled, provide the username and password when prompted to connect to LiveData Migrator through the CLI:
+
+```text title="Example"
+  connect livemigrator localhost: trying to connect...
+Username: admin
+Password: ********
+connected
+```
+
+The username and password will also be required when accessing the LiveData Migrator REST API directly.
+
+## TLS/SSL
 
 To enable SSL on the LiveData Migrator REST API (HTTPS), modify the following `server.ssl.*` properties.
 
@@ -72,45 +116,6 @@ keytool -genkey -alias livedata-migrator -storetype PKCS12 -keyalg RSA -keysize 
 
 See the [keytool documentation](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html) for further information on the parameters used.
 :::
-
-## State
-
-LiveData Migrator uses an internally-managed database to record state during operation called the Prevayler.
-
-| Name | Details |
-| --- | --- |
-| `prevayler.databaseLocation` | The directory in which LiveData Migrator will write files to manage state<br/><br/>**Default value**: `${install.dir}/db`<br/>**Allowed values**: The full path to a directory in which database files will be managed. It must be writable by the user running LiveData Migrator (typically `hdfs`.) |
-| `prevayler.persistent` | Whether LiveData Migrator will persist state to disk in files<br/><br/>**Default value**: `true`<br/>**Allowed values**: `true`, `false` |
-| `prevayler.force` | Whether the database performs a sync operation to ensure content is written to persistent storage on each write activity<br/><br/>**Default value**: `true`<br/>**Allowed values**: `true`, `false` |
-| `prevayler.bufferedJournal` | Whether buffered journal I/O is used for the database<br/><br/>**Default value**: `true`<br/>**Allowed values**: `true`, `false` |
-| `prevayler.mirrored` | Whether actions tracked in-memory by the database are mirrored to disk on every modification. The alternative is for operation to periodically flush to disk and flush on shutdown.<br/><br/>**Default value**: `true`<br/>**Allowed values**: `true`, `false` |
-
-## Security
-
-Secure access to the LiveData Migrator [REST API](./api-reference.md) through configuration. Choose between no security or HTTP basic security.
-
-| Name | Details |
-| --- | --- |
-| `security.type` | The method of securing access to the REST API<br/><br/>**Default value**: `off`<br/>**Allowed values**: `off`, `basic` |
-| `security.basic.user` | The username that needs to be provided by a REST client to gain access to a secured REST API, e.g. `admin`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any string that defines a username (no whitespace) |
-| `security.basic.password` | A [bcrypt-encrypted](https://www.browserling.com/tools/bcrypt) representation of the password that needs to be provided using HTTP basic authentication to access the REST API when LiveData Migrator is configured for `basic` security, for example: `{bcrypt}$2a$10$mQXFoGAdLryWcZLjSP31Q.5cSgtoCPO3ernnsK4F6/gva8lyn1qgu`<br/><br/>**Default value**: (none)<br/>**Allowed values**: A valid bcrypt-encrypted string |
-
-:::note
-The `security.basic.password` value must include the `{bcrypt}` prefix before the encrypted password string.
-:::
-
-### Connecting to LiveData Migrator with basic authentication
-
-When basic authentication is enabled, provide the username and password when prompted to connect to LiveData Migrator through the CLI:
-
-```text title="Example"
-  connect livemigrator localhost: trying to connect...
-Username: admin
-Password: ********
-connected
-```
-
-The username and password will also be required when accessing the LiveData Migrator REST API directly.
 
 ## File system defaults
 
