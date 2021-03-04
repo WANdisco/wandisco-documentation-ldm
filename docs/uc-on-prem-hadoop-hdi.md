@@ -29,7 +29,7 @@ For your target environment, ensure the following prerequisites are met:
 * If using a [default metastore](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-use-external-metadata-stores#default-metastore), SSH access to an edge node on the HDInsights cluster.  
   The edge node requires the following:
   * HDFS and Hive client libraries installed.
-  * Port 5052 open for outbound connections to communicate with the LiveData Migrator service on the on-premises Hadoop edge node.
+  * A chosen port open for outbound connections (for example: 5552) to communicate with the LiveData Migrator service on the on-premises Hadoop edge node.
 
 ## Configure for data migrations
 

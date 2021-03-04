@@ -1476,11 +1476,11 @@ hive agent add azure --name azureAgent --db-server-name mysqlserver --database-n
 ```
 
 ```text title="Example for remote Azure SQL deployment with System-assigned managed identity - automated"
-hive agent add azure --name azureRemoteAgent --db-server-name mysqlserver --database-name mydb1 --auth-method AD_MSI --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6 --file-system-id myadls2storage --autodeploy --ssh-user root --ssh-key /root/.ssh/id_rsa --ssh-port 22 --host myRemoteHost.example.com --port 5052
+hive agent add azure --name azureRemoteAgent --db-server-name mysqlserver --database-name mydb1 --auth-method AD_MSI --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6 --file-system-id myadls2storage --autodeploy --ssh-user root --ssh-key /root/.ssh/id_rsa --ssh-port 22 --host myRemoteHost.example.com --port 5552
 ```
 
 ```text title="Example for remote Azure SQL deployment with User-assigned managed identity - manual"
-hive agent add azure --name azureRemoteAgent --db-server-name mysqlserver --database-name mydb1 --auth-method AD_MSI --client-id b67f67ex-ampl-e2eb-bd6d-client9385id --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6 --file-system-id myadls2storage --host myRemoteHost.example.com --port 5052
+hive agent add azure --name azureRemoteAgent --db-server-name mysqlserver --database-name mydb1 --auth-method AD_MSI --client-id b67f67ex-ampl-e2eb-bd6d-client9385id --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6 --file-system-id myadls2storage --host myRemoteHost.example.com --port 5552
 ```
 
 ----
@@ -1611,7 +1611,7 @@ hive agent add glue --name glueAgent --access-key ACCESS6HCFPAQIVZTKEY --secret-
 ```
 
 ```text title="Example for remote AWS Glue agent"
-hive agent add glue --name glueAgent --access-key ACCESS6HCFPAQIVZTKEY --secret-key SECRET1vTMuqKOIuhET0HAI78UIPfSRjcswTKEY --glue-endpoint glue.eu-west-1.amazonaws.com --aws-region eu-west-1 --file-system-id mys3bucket --host myRemoteHost.example.com --port 5052
+hive agent add glue --name glueAgent --access-key ACCESS6HCFPAQIVZTKEY --secret-key SECRET1vTMuqKOIuhET0HAI78UIPfSRjcswTKEY --glue-endpoint glue.eu-west-1.amazonaws.com --aws-region eu-west-1 --file-system-id mys3bucket --host myRemoteHost.example.com --port 5552
 ```
 
 ### `hive agent add hive`
@@ -1708,11 +1708,11 @@ hive agent add hive --name sourceAgent --kerberos-keytab /etc/security/keytabs/h
 ```
 
 ```text title="Example for remote Apache Hive deployment - automated"
-hive agent add hive --name targetautoAgent --autodeploy --ssh-user root --ssh-key /root/.ssh/id_rsa --ssh-port 22 --host myRemoteHost.example.com --port 5052 --kerberos-keytab /etc/security/keytabs/hive.service.keytab --kerberos-principal hive/_HOST@REMOTEREALM.COM --config-path /etc/hive/conf --file-system-id mytargethdfs
+hive agent add hive --name targetautoAgent --autodeploy --ssh-user root --ssh-key /root/.ssh/id_rsa --ssh-port 22 --host myRemoteHost.example.com --port 5552 --kerberos-keytab /etc/security/keytabs/hive.service.keytab --kerberos-principal hive/_HOST@REMOTEREALM.COM --config-path /etc/hive/conf --file-system-id mytargethdfs
 ```
 
 ```text title="Example for remote Apache Hive deployment - manual"
-hive agent add hive --name targetmanualAgent --host myRemoteHost.example.com --port 5052 --kerberos-keytab /etc/security/keytabs/hive.service.keytab --kerberos-principal hive/_HOST@REMOTEREALM.COM --config-path /etc/hive/conf --file-system-id mytargethdfs
+hive agent add hive --name targetmanualAgent --host myRemoteHost.example.com --port 5552 --kerberos-keytab /etc/security/keytabs/hive.service.keytab --kerberos-principal hive/_HOST@REMOTEREALM.COM --config-path /etc/hive/conf --file-system-id mytargethdfs
 ```
 
 :::note
