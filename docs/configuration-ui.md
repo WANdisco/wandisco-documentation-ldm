@@ -8,15 +8,10 @@ Find details here for the configuration properties of LiveData Migrator UI. Prop
 
 `/etc/wandisco/ui/application-prod.properties`
 
-Below is an example `application-prod.properties` file, which overrides any application defaults.
+Restart the LiveData UI service when adding new properties or changing existing values:
 
 ```text
-#Updated Application Properties
-#Thu Nov 05 14:40:38 UTC 2020
-application.hiveMigrator.servers=localhost\:6780
-spring.datasource.password=ENC(xxx)
-logging.output.path=/var/log/wandisco/ui
-application.liveMigratorV2.servers=localhost\:18080
+service livedata-ui restart
 ```
 
 ## General configuration
@@ -27,7 +22,7 @@ Configure how the UI is run overall.
 | --- | --- |
 | `server.port` | Set the port on which the UI will be available. This is overridden by the `server.ssl.port` when SSL is enabled.<br/><br/>**Default value**: `8081`<br/>**Allowed values**: An integer value between `1024` and `65535` |
 
-### Logging
+## Logging
 
 Configure how the UI logs information about its state or user interactions.
 
@@ -35,7 +30,7 @@ Configure how the UI logs information about its state or user interactions.
 | --- | --- |
 | `logging.output.path` | The output path for all logging.<br/><br/>**Default value**: `/var/log/wandisco/ui`<br/>**Allowed values**: The full path to a valid directory that is writable by the user running the UI (typically `hdfs`.)  |
 
-### Security
+## Security
 
 Configure how the UI uses SSL, which is disabled by default.
 
@@ -61,23 +56,6 @@ See the [Oracle documentation](https://docs.oracle.com/cd/E19906-01/820-4916/gey
 
 ## Directory structure
 
-The following directories are used for the LiveData Migrator core package:
-
-| Location | Content |
-|---|---|
-| `/var/log/wandisco/livedata-migrator` | Logs |
-| `/etc/wandisco/livedata-migrator` | Configuration files |
-| `/opt/wandisco/livedata-migrator` | Java archive files |
-| `/opt/wandisco/livedata-migrator/db` | LiveData Migrator runtime state |
-
-The following directories are used for HiveMigrator:
-
-| Location | Content |
-|---|---|
-| `/var/log/wandisco/hivemigrator` | Logs |
-| `/etc/wandisco/hivemigrator` | Configuration files |
-| `/opt/wandisco/hivemigrator` | Java archive files |
-
 The following directories are used for the LiveData UI:
 
 | Location | Content |
@@ -85,4 +63,4 @@ The following directories are used for the LiveData UI:
 | `/var/log/wandisco/ui` | Logs |
 | `/etc/wandisco/ui` | Configuration files |
 | `/opt/wandisco/ui` | Operation files |
-| `/var/run/wandisco/ui` | UI runtime state |
+| `/var/run/livedata-ui` | Runtime files |

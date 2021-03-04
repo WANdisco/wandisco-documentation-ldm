@@ -1345,6 +1345,7 @@ SYNOPSYS
                              [[--insecure] boolean]
                              [[--host] string]
                              [[--port] integer]
+                             [--no-ssl]
                              [[--autodeploy] boolean]
                              [[--ssh-user] string]
                              [[--ssh-key] file]
@@ -1430,7 +1431,8 @@ The `--client-id` parameter must be specified:
 #### Parameters for remote hive agents only
 
 * **`--host`** The host where the remote hive agent will be deployed.
-* **`--port`** The port for the remote hive agent to use on the remote host. Default is `5052`. This port is used to communicate with the local LiveData Migrator server.
+* **`--port`** The port for the remote hive agent to use on the remote host. This port is used to communicate with the local LiveData Migrator server.
+* **`--no-ssl`** [TLS/SSL encryption and certificate authentication](./configuration-hvm.md#tlsssl-certificates) is enabled by default between LiveData Migrator and the remote agent. Use this parameter to disable it.
 
 ##### Parameters for automated deployment
 
@@ -1474,11 +1476,11 @@ hive agent add azure --name azureAgent --db-server-name mysqlserver --database-n
 ```
 
 ```text title="Example for remote Azure SQL deployment with System-assigned managed identity - automated"
-hive agent add azure --name azureRemoteAgent --db-server-name mysqlserver --database-name mydb1 --auth-method AD_MSI --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6 --file-system-id myadls2storage --autodeploy --ssh-user root --ssh-key /root/.ssh/id_rsa --ssh-port 22 --host myRemoteHost.example.com --port 5052
+hive agent add azure --name azureRemoteAgent --db-server-name mysqlserver --database-name mydb1 --auth-method AD_MSI --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6 --file-system-id myadls2storage --autodeploy --ssh-user root --ssh-key /root/.ssh/id_rsa --ssh-port 22 --host myRemoteHost.example.com --port 5552
 ```
 
 ```text title="Example for remote Azure SQL deployment with User-assigned managed identity - manual"
-hive agent add azure --name azureRemoteAgent --db-server-name mysqlserver --database-name mydb1 --auth-method AD_MSI --client-id b67f67ex-ampl-e2eb-bd6d-client9385id --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6 --file-system-id myadls2storage --host myRemoteHost.example.com --port 5052
+hive agent add azure --name azureRemoteAgent --db-server-name mysqlserver --database-name mydb1 --auth-method AD_MSI --client-id b67f67ex-ampl-e2eb-bd6d-client9385id --storage-account myadls2 --container-name mycontainer --root-folder /hive/warehouse --hdi-version 3.6 --file-system-id myadls2storage --host myRemoteHost.example.com --port 5552
 ```
 
 ----
@@ -1540,6 +1542,7 @@ SYNOPSYS
                             [[--default-fs-override] string]
                             [[--host] string]
                             [[--port] integer]
+                            [--no-ssl]
 ```
 
 #### Glue Parameters
@@ -1572,7 +1575,8 @@ Additionally, use only one of the following parameters:
 #### Parameters for remote hive agents only
 
 * **`--host`** The host where the remote hive agent will be deployed.
-* **`--port`** The port for the remote hive agent to use on the remote host. Default is `5052`. This port is used to communicate with the local LiveData Migrator server.
+* **`--port`** The port for the remote hive agent to use on the remote host. This port is used to communicate with the local LiveData Migrator server.
+* **`--no-ssl`** [TLS/SSL encryption and certificate authentication](./configuration-hvm.md#tlsssl-certificates) is enabled by default between LiveData Migrator and the remote agent. Use this parameter to disable it.
 
 ##### Steps for remote agent deployment
 
@@ -1607,7 +1611,7 @@ hive agent add glue --name glueAgent --access-key ACCESS6HCFPAQIVZTKEY --secret-
 ```
 
 ```text title="Example for remote AWS Glue agent"
-hive agent add glue --name glueAgent --access-key ACCESS6HCFPAQIVZTKEY --secret-key SECRET1vTMuqKOIuhET0HAI78UIPfSRjcswTKEY --glue-endpoint glue.eu-west-1.amazonaws.com --aws-region eu-west-1 --file-system-id mys3bucket --host myRemoteHost.example.com --port 5052
+hive agent add glue --name glueAgent --access-key ACCESS6HCFPAQIVZTKEY --secret-key SECRET1vTMuqKOIuhET0HAI78UIPfSRjcswTKEY --glue-endpoint glue.eu-west-1.amazonaws.com --aws-region eu-west-1 --file-system-id mys3bucket --host myRemoteHost.example.com --port 5552
 ```
 
 ### `hive agent add hive`
@@ -1630,6 +1634,7 @@ SYNOPSYS
                             [[--name] string]
                             [[--host] string]
                             [[--port] integer]
+                            [--no-ssl]
                             [--autodeploy]
                             [[--ssh-user] string]
                             [[--ssh-key] file]
@@ -1658,7 +1663,8 @@ Additionally, use only one of the following parameters:
 #### Parameters for remote hive agents only
 
 * **`--host`** The host where the remote hive agent will be deployed.
-* **`--port`** The port for the remote hive agent to use on the remote host. Default is `5052`. This port is used to communicate with the local LiveData Migrator server.
+* **`--port`** The port for the remote hive agent to use on the remote host. This port is used to communicate with the local LiveData Migrator server.
+* **`--no-ssl`** [TLS/SSL encryption and certificate authentication](./configuration-hvm.md#tlsssl-certificates) is enabled by default between LiveData Migrator and the remote agent. Use this parameter to disable it.
 
 ##### Parameters for automated deployment
 
@@ -1702,11 +1708,11 @@ hive agent add hive --name sourceAgent --kerberos-keytab /etc/security/keytabs/h
 ```
 
 ```text title="Example for remote Apache Hive deployment - automated"
-hive agent add hive --name targetautoAgent --autodeploy --ssh-user root --ssh-key /root/.ssh/id_rsa --ssh-port 22 --host myRemoteHost.example.com --port 5052 --kerberos-keytab /etc/security/keytabs/hive.service.keytab --kerberos-principal hive/_HOST@REMOTEREALM.COM --config-path /etc/hive/conf --file-system-id mytargethdfs
+hive agent add hive --name targetautoAgent --autodeploy --ssh-user root --ssh-key /root/.ssh/id_rsa --ssh-port 22 --host myRemoteHost.example.com --port 5552 --kerberos-keytab /etc/security/keytabs/hive.service.keytab --kerberos-principal hive/_HOST@REMOTEREALM.COM --config-path /etc/hive/conf --file-system-id mytargethdfs
 ```
 
 ```text title="Example for remote Apache Hive deployment - manual"
-hive agent add hive --name targetmanualAgent --host myRemoteHost.example.com --port 5052 --kerberos-keytab /etc/security/keytabs/hive.service.keytab --kerberos-principal hive/_HOST@REMOTEREALM.COM --config-path /etc/hive/conf --file-system-id mytargethdfs
+hive agent add hive --name targetmanualAgent --host myRemoteHost.example.com --port 5552 --kerberos-keytab /etc/security/keytabs/hive.service.keytab --kerberos-principal hive/_HOST@REMOTEREALM.COM --config-path /etc/hive/conf --file-system-id mytargethdfs
 ```
 
 :::note

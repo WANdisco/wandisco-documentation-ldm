@@ -121,6 +121,10 @@ module.exports = {
             },
             {
               "type": "doc",
+              "id": "configuration-hvm"
+            },
+            {
+              "type": "doc",
               "id": "configuration-ui"
             },
             {
