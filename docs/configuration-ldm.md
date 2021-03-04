@@ -41,38 +41,6 @@ Configure how LiveData Migrator logs requests made against the [REST API](./api-
 | `logbook.obfuscate.headers` | A comma-separated list of HTTP headers that should not be recorded in log entries, for example: `authorization,x-auth-password,x-auth-token,X-Secret`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any valid comma-separated list of HTTP headers |
 | `obfuscate.json.properties` | A comma-separated list of JSON request properties by name that should not be recorded in log entries, for example: `foo,bar`<br/><br/>**Default value**: `${hdfs.fs.type.masked.properties},${adls2.fs.type.masked.properties},${s3a.fs.type.masked.properties},${gcs.fs.type.masked.properties}`<br/>**Allowed values**: Any valid comma-separated list of property names |
 
-## Server SSL
-
-To enable SSL on the LiveData Migrator REST API (HTTPS), modify the following `server.ssl.*` properties.
-
-:::note
-If HTTPS is enabled on the REST API, plain HTTP requests from the CLI to the REST API will fail.
-
-```text title="Example error"
-Bad Request
-This combination of host and port requires TLS.
-```
-
-:::
-
-| Name | Details |
-| --- | --- |
-| `server.ssl.key-store` | Path or classpath to the Java keystore. <br/>**Default value**: (none) <br/>**Allowed values**: File system path or classpath (example:`/path/to/keystore.p12`, `classpath:keystore.p12`). |
-| `server.ssl.key-store-password` | The Java keystore password. <br/>**Default value**: (none) <br/>**Allowed values**: Any text string. |
-| `server.ssl.key-store-type` | The Java keystore type. <br/>**Default value**: (none) <br/>**Allowed values**: [Keystore types](https://docs.oracle.com/javase/8/docs/technotes/guides/security/StandardNames.html#KeyStore) |
-| `server.ssl.key-alias` | The alias for the server certificate entry. <br/>**Default value**: (none) <br/>**Allowed values**: Any text string. |
-| `server.ssl.ciphers` | The ciphers suite enforce the security by deactivating some old and deprecated SSL ciphers, this list was tested against [SSL Labs](https://www.ssllabs.com/ssltest/). <br/><br/> **Default value**: (none but list provided below) <br/><br/>`TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,TLS_DHE_RSA_WITH_AES_256_GCM_SHA384 ,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA,TLS_RSA_WITH_CAMELLIA_128_CBC_SHA` |
-
-:::tip
-The example command below will generate a server certificate and place it inside a new Java keystore named `keystore.p12`:
-
-```text
-keytool -genkey -alias livedata-migrator -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 365
-```
-
-See the [keytool documentation](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html) for further information on the parameters used.
-:::
-
 ## State
 
 LiveData Migrator uses an internally-managed database to record state during operation called the Prevayler.
@@ -91,15 +59,20 @@ Secure access to the LiveData Migrator [REST API](./api-reference.md) through co
 
 | Name | Details |
 | --- | --- |
-| `security.type` | The method of securing access to the REST API<br/><br/>**Default value**: `off`<br/>**Allowed values**: `off`, `basic` |
-| `security.basic.user` | The username that needs to be provided by a REST client to gain access to a secured REST API, e.g. `admin`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any string that defines a username (no whitespace) |
-| `security.basic.password` | A [bcrypt-encrypted](https://www.browserling.com/tools/bcrypt) representation of the password that needs to be provided using HTTP basic authentication to access the REST API when LiveData Migrator is configured for `basic` security, for example: `{bcrypt}$2a$10$mQXFoGAdLryWcZLjSP31Q.5cSgtoCPO3ernnsK4F6/gva8lyn1qgu`<br/><br/>**Default value**: (none)<br/>**Allowed values**: A valid bcrypt-encrypted string |
+| `security.type` | The method of securing access to the REST API.<br/><br/>**Default value**: `off`<br/>**Allowed values**: `off`, `basic` |
 
-:::note
-The `security.basic.password` value must include the `{bcrypt}` prefix before the encrypted password string.
+### Basic authentication
+
+:::important
+When basic authentication is enabled on LiveData Migrator, [update the LiveData UI with the credentials to maintain functionality](./configuration-ui.md#livedata-migrator).
 :::
 
-### Connecting to LiveData Migrator with basic authentication
+| Name | Details |
+| --- | --- |
+| `security.basic.user` | Required when `security.type=basic`. <br/>The username that needs to be provided by a REST client to gain access to a secured REST API, for example: `admin`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any string that defines a username (no whitespace) |
+| `security.basic.password` | Required when `security.type=basic`. <br/>A [bcrypt-encrypted](https://www.browserling.com/tools/bcrypt) representation of the password that needs to be provided using HTTP basic authentication to access the REST API, for example:<br/>`{bcrypt}$2a$10$mQXFoGAdLryWcZLjSP31Q.5cSgtoCPO3ernnsK4F6/gva8lyn1qgu`<br/><br/>The `{bcrypt}` prefix must be included before the encrypted password string as shown in the example above.<br/><br/>**Default value**: (none)<br/>**Allowed values**: A valid bcrypt-encrypted string |
+
+#### Connecting to LiveData Migrator with basic authentication
 
 When basic authentication is enabled, provide the username and password when prompted to connect to LiveData Migrator through the CLI:
 
@@ -111,6 +84,38 @@ connected
 ```
 
 The username and password will also be required when accessing the LiveData Migrator REST API directly.
+
+## TLS/SSL
+
+To enable SSL on the LiveData Migrator REST API (HTTPS), modify the following `server.ssl.*` properties.
+
+:::note
+If HTTPS is enabled on the REST API, plain HTTP requests from the CLI to the REST API will fail.
+
+```text title="Example error"
+Bad Request
+This combination of host and port requires TLS.
+```
+
+:::
+
+| Name | Details |
+| --- | --- |
+| `server.ssl.key-store` | Path or classpath to the Java keystore. <br/>**Default value**: (none) <br/>**Allowed values**: File system path or classpath (example:`/path/to/keystore.p12`, `classpath:keystore.p12`) |
+| `server.ssl.key-store-password` | The Java keystore password. <br/>**Default value**: (none) <br/>**Allowed values**: Any text string |
+| `server.ssl.key-store-type` | The Java keystore type. <br/>**Default value**: (none) <br/>**Allowed values**: [Keystore types](https://docs.oracle.com/javase/8/docs/technotes/guides/security/StandardNames.html#KeyStore) |
+| `server.ssl.key-alias` | The alias for the server certificate entry. <br/>**Default value**: (none) <br/>**Allowed values**: Any text string. |
+| `server.ssl.ciphers` | The ciphers suite enforce the security by deactivating some old and deprecated SSL ciphers, this list was tested against [SSL Labs](https://www.ssllabs.com/ssltest/). <br/><br/> **Default value**: (none but list provided below) <br/><br/>`TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,TLS_DHE_RSA_WITH_AES_256_GCM_SHA384 ,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA,TLS_RSA_WITH_CAMELLIA_128_CBC_SHA` |
+
+:::tip
+The example command below will generate a server certificate and place it inside a new Java keystore named `keystore.p12`:
+
+```text
+keytool -genkey -alias livedata-migrator -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 365
+```
+
+See the [keytool documentation](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html) for further information on the parameters used.
+:::
 
 ## File system defaults
 

@@ -32,7 +32,57 @@ Configure how the UI logs information about its state or user interactions.
 
 ## Security
 
-Configure how the UI uses SSL, which is disabled by default.
+### Basic authentication
+
+If basic authentication is enabled on [LiveData Migrator](./configuration-ldm.md#basic-authentication) or [HiveMigrator](./configuration-hvm.md#basic-authentication) (or both), additional steps are required to maintain LiveData UI functionality.
+
+#### LiveData Migrator
+
+Follow the steps below to configure the LiveData UI to work with LiveData Migrator basic authentication:
+
+1. On the LiveData UI host, run the following command:
+
+   ```text
+   livedata-ui encryptor
+   ```
+
+1. Select the `Setup LDM Basic Auth` option when the menu appears.
+
+1. Enter the `username` and `password` values in plain text that were defined for the `security.basic.user` and `security.basic.password` properties in the `application.properties` file.
+
+1. Select the `Exit` option once complete.
+
+1. Restart the LiveData UI to make the changes active:
+
+   ```text "Example"
+   service livedata-ui restart
+   ```
+
+#### HiveMigrator
+
+Follow the steps below to configure the LiveData UI to work with HiveMigrator basic authentication:
+
+1. On the LiveData UI host, run the following command:
+
+   ```text
+   livedata-ui encryptor
+   ```
+
+1. Select the `Setup HVM Basic Auth` option when the menu appears.
+
+1. Enter the `username` and `password` values in plain text that were defined for the `username` and `password` key values in the `application.yaml` file.
+
+1. Select the `Exit` option once complete.
+
+1. Restart the LiveData UI to make the changes active:
+
+   ```text "Example"
+   service livedata-ui restart
+   ```
+
+## TLS/SSL
+
+Configure how the UI uses TLS/SSL, which is disabled by default.
 
 | Name | Details |
 | --- | --- |
