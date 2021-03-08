@@ -69,7 +69,7 @@ When basic authentication is enabled on LiveData Migrator, [update the LiveData 
 
 | Name | Details |
 | --- | --- |
-| `security.basic.user` | Required when `security.type=basic`. <br/>The username that needs to be provided by a REST client to gain access to a secured REST API, for example: `admin`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any string that defines a username (no whitespace) |
+| `security.basic.user` | Required when `security.type=basic`. <br/>The username that needs to be provided by a REST client to gain access to a secured REST API, for example: `admin`<br/><br/>[If basic authentication is enabled or will be enabled on the HiveMigrator REST API](./configuration-hvm.md#basic-authentication), use the same username for LiveData Migrator and HiveMigrator.<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any string that defines a username (no whitespace) |
 | `security.basic.password` | Required when `security.type=basic`. <br/>A [bcrypt-encrypted](https://www.browserling.com/tools/bcrypt) representation of the password that needs to be provided using HTTP basic authentication to access the REST API, for example:<br/>`{bcrypt}$2a$10$mQXFoGAdLryWcZLjSP31Q.5cSgtoCPO3ernnsK4F6/gva8lyn1qgu`<br/><br/>The `{bcrypt}` prefix must be included before the encrypted password string as shown in the example above.<br/><br/>**Default value**: (none)<br/>**Allowed values**: A valid bcrypt-encrypted string |
 
 #### Connecting to LiveData Migrator with basic authentication

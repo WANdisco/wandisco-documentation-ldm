@@ -16,7 +16,7 @@ Find details here for configuring the HiveMigrator service.
 When basic authentication is enabled on HiveMigrator, [update the LiveData UI with the credentials to maintain functionality](./configuration-ui.md#hivemigrator).
 :::
 
-Follow these steps to enable basic authentication for the HiveMigrator REST API:
+Follow these steps to enable basic authentication on the HiveMigrator REST API:
 
 1. Edit the `/etc/wandisco/hivemigrator/application.yaml` file to enable authentication:
 
@@ -40,7 +40,9 @@ Follow these steps to enable basic authentication for the HiveMigrator REST API:
 
    If the LiveData Migrator credentials and the HiveMigrator credentials (defined in the next step) are the same, you will only need to authenticate once when [connecting through the CLI](#connecting-to-hivemigrator-with-basic-authentication).
 
-1. In the same file, add the `username` and `password` key values as top level parameters (like `storagePath` and `liveDataMigratorPort`).
+1. In the same file, add the `username` and `password` key values as top level parameters.
+
+   [If basic authentication is enabled on the LiveData Migrator REST API](./configuration-ldm.md#security), use the same username for HiveMigrator and LiveData Migrator.
 
    The password value needs to be encrypted using a [bcrypt generator](https://www.browserling.com/tools/bcrypt).
 
