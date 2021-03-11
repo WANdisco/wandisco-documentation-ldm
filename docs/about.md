@@ -8,7 +8,7 @@ LiveData Migrator _migrates changing data_ at scale from HDFS to your choice of 
 
 LiveData Migrator can also migrate metadata between source and target metastores. Supported metastore types include [Apache Hive](https://cwiki.apache.org/confluence/display/Hive/Home), [AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/populate-data-catalog.html), and [Azure SQL](https://docs.microsoft.com/en-us/azure/azure-sql/database/sql-database-paas-overview). See the [Migrate metadata](./connect-metastores.md) section for instructions on how to use this feature.
 
-[Read the release notes](https://community.wandisco.com/s/article/Release-Notes-WANdisco-LiveData-Migrator-Release-Notes-1-10) to get the latest information about the current version of LiveData Migrator.
+[Read the release notes](https://community.wandisco.com/s/article/Release-Notes-WANdisco-LiveData-Migrator-Release-Notes-1-11) to get the latest information about the current version of LiveData Migrator.
 
 :::note
 If you are using a previous version of LiveData Migrator, use the numbered dropdown at the top right of this page to get the right docs for you.
