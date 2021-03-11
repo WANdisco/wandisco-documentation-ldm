@@ -2176,7 +2176,7 @@ SYNOPSYS
 
 ```
 
-For longer commands, you can use backslashes (\) to indicate continuation, or use quotation marks (") to enclose the full command. When using quotation marks, you can press Tab on your keyboard to make LiveData Migrator automatically suggest the remainder of your typed command.
+For longer commands, you can use backslashes (&#92;) to indicate continuation, or use quotation marks (") to enclose the full command. When using quotation marks, you can press Tab on your keyboard to make LiveData Migrator automatically suggest the remainder of your typed command.
 
 See the examples below for reference.
 
