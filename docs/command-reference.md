@@ -2176,17 +2176,43 @@ SYNOPSYS
 
 ```
 
+For longer commands, you can use backslashes (`\`) to indicate continuation, or use quotation marks (`"`) to enclose the full command. When using quotation marks, you can press Tab on your keyboard to make LiveData Migrator automatically suggest the remainder of your typed command.
+
+See the examples below for reference.
+
 #### Example
 
 ```text
-help migration\ list
+help connect
 
 NAME
-        migration list - List running and active migrations.
+	connect - Connect to LiveData Migrator and HiveMigrator.
 
 SYNOPSYS
-        migration list
+	connect [[--host] string]  [--ssl]  [[--lm2port] int]  [[--hvm-port] int]  [[--timeout] integer]  [[--user] string]  
 ```
+
+```text title="Use of backslashes"
+help hive\ migration\ add
+
+NAME
+	hive migration add - Create new migration.
+
+SYNOPSYS
+	hive migration add [--source] string  [--target] string  [[--name] string]  [--auto-start]  [--once]  [--rule-names] list  
+```
+
+```text title="Use of quotation marks"
+help "filesystem add local"
+
+NAME
+	filesystem add local - Add a Local filesystem via HCFS API.
+
+SYNOPSYS
+	filesystem add local [--file-system-id] string  [[--fs-root] string]  [--source]  [--scan-only]  [[--properties-files] list]  [[--properties] string]  
+
+```
+
 
 ----
 
