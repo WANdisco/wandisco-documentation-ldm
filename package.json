@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "docusaurus": "docusaurus",
+    "docusaurus": "WAND_BUILD='github' docusaurus",
     "start": "WAND_BUILD='github' docusaurus start",
     "build": "WAND_BUILD='wandisco' docusaurus build",
     "swizzle": "docusaurus swizzle",
