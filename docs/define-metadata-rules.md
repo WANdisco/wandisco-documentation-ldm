@@ -22,22 +22,6 @@ Create a database pattern and a table pattern using [regex](https://regex101.com
 |:---|:---|
 | [`hive rule add`,`hive rule create`](./command-reference.md#hive-rule-addhive-rule-create) | Create a hive rule that can be used for a migration |
 
-### Default metadata rule
-
-A default hive rule is created during installation named `DEFAULT`. This has a simple "include all" pattern for databases and for tables:
-
-```text
-hive rule show --name DEFAULT
-
-{
-  "name": "DEFAULT",
-  "dbNamePattern": "*",
-  "tableNamePattern": "*"
-}
-```
-
-When [creating a metadata migration](./migrate-metadata.md), use the default rule to migrate all of your metastore content or define and use new rules to migrate a selection of databases and tables.
-
 ## Configure existing hive rules
 
 | Command | Action |
