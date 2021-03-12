@@ -26,41 +26,11 @@ Before uninstalling LiveData Migrator, stop all active migrations of data and/or
   migration stop --migration-id <migration-id>
   ```
 
-* To stop metadata migrations, run the [stop metadata migration](./command-reference.md#hive-migration-stop-all) command:
+* To stop metadata migrations, run the [stop metadata migration](./command-reference.md#hive-migration-stop---all) command:
 
   ```text title="Example"
-  hive migration stop all
+  hive migration stop --all
   ```
-
-## Uninstall any remote agents
-
-If you have deployed any remote agents (for target metastore connections), log in to the hosts for the remote agents and uninstall them using the following commands:
-
-1. Stop the service:
-
-   ```text
-   service hivemigrator-remote-server stop
-   ```
-
-1. Remove the remote server package:
-
-   ```text title="Red Hat/CentOS"
-   yum remove -y hivemigrator-remote-server.noarch
-   ```
-
-   ```text title="Ubuntu"
-   apt-get purge -y hivemigrator-remote-server
-   ```
-
-   ```text title="SUSE 12"
-   zypper remove -y hivemigrator-remote-server
-   ```
-
-1. Delete all related directories:
-
-   ```text
-   rm -rf /etc/wandisco/hivemigrator-remote-server /var/run/hivemigrator-remote-server
-   ```
 
 ## Uninstall LiveData Migrator
 
@@ -73,21 +43,21 @@ If you have deployed any remote agents (for target metastore connections), log i
 1. Remove all LiveData Migrator components:
 
    ```text title="Red Hat/CentOS"
-   yum remove -y hivemigrator.noarch hivemigrator-azure-hdi.noarch livedata-migrator.noarch livedata-migrator-cli.noarch livedata-ui.noarch
+   yum remove -y hivemigrator.noarch livedata-migrator.noarch livedata-migrator-cli.noarch livedata-ui.noarch
    ```
 
    ```text title="Ubuntu"
-   apt-get purge -y hivemigrator hivemigrator-azure-hdi livedata-migrator livedata-migrator-cli livedata-ui
+   apt-get purge -y hivemigrator livedata-migrator livedata-migrator-cli livedata-ui
    ```
 
    ```text title="SUSE 12"
-   zypper remove -y hivemigrator hivemigrator-azure-hdi livedata-migrator livedata-ui && rpm -e livedata-migrator-cli
+   zypper remove -y hivemigrator livedata-migrator livedata-ui && rpm -e livedata-migrator-cli
    ```
 
 1. Delete all related directories:
 
    ```text
-   rm -rf /etc/wandisco/ui /etc/wandisco/hivemigrator /var/run/hivemigrator /var/run/livedata-migrator /var/run/livedata-ui
+   rm -rf /etc/wandisco /opt/wandisco /var/log/wandisco /var/run/wandisco
    ```
 
 ## Next Steps
