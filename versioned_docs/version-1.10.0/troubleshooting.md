@@ -61,16 +61,3 @@ And the following setting determines the low watermark percentage:
 ```text title="Example"
 notifications.pending.region.clear.percent=50
 ```
-
-### Rule names parameter does not autocomplete in the CLI
-
-When adding the `--rule-names` parameter to the end of a `hive migration add` command, auto-completion will not suggest the parameter name. For example:
-
-```text title="Example"
-WANdisco LiveData Migrator >> hive migration add --name test --source sourceAgent --target testGlue --rule-names
-```
-
-To work around this, either:
-
-* Use the `--rule-names` parameter earlier in the command. For example: `WANdisco LiveData Migrator >> hive migration add --name test --rule-names`
-* Use the Tab key twice in the CLI when attempting to autocomplete the parameter, and select `--rule-names` with the left and right arrow keys.

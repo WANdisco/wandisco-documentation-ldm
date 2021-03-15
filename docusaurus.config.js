@@ -1,6 +1,6 @@
 const versions = require('./versions.json');
 
-const currentVersion = '1.10.0';
+const currentVersion = '1.11.0';
 
 const site_urls = {
   wandisco: {
@@ -58,7 +58,7 @@ module.exports = {
       indexName: 'wandisco-live-data-migrator',
 
       // Optional: see doc section bellow
-      contextualSearch: false,
+      contextualSearch: true,
 
       // Optional: Algolia search parameters
       searchParameters: {

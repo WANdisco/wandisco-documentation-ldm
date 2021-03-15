@@ -8,12 +8,6 @@ Find details here for the configuration properties of LiveData Migrator. Propert
 
 `/etc/wandisco/livedata-migrator/application.properties`
 
-Restart the LiveData Migrator service when adding new properties or changing existing values:
-
-```text
-service livedata-migrator restart
-```
-
 ## General configuration
 
 These configuration properties are used to adjust general items of operation.
@@ -22,10 +16,30 @@ These configuration properties are used to adjust general items of operation.
 | --- | --- |
 | `spring.jackson.serialization.INDENT_OUTPUT` | Whether to apply indentation to JSON output from command results<br/><br/>**Default value**: `true`<br/>**Allowed values**: `true`, `false` |
 | `springdoc.swagger-ui.path` | The path at which clients can access the Swagger documentation for the LiveData Migrator REST API<br/><br/>**Default value**: `/ldm-api.html`<br/>**Allowed values**: Any valid file path |
-| `pull.threads` | The size of the thread pool that is used for executing activities related to notifications of changes in an HDFS environment<br/><br/>**Default value**: `100`<br/>**Allowed values**: An integer value between `1` and `10000` |
+| `pull.threads` | The size of the thread pool that is used for executing activities related to notifications of changes in an HDFS environment<br/><br/>**Default value**: `50`<br/>**Allowed values**: An integer value between `1` and `10000` |
 | `engine.threads` | The size of the thread pool used to perform migration of content from the source file system to targets<br/><br/>**Default value**: `1000`<br/>**Allowed values**: An integer value between `1` and `10000` |
 | `persisted.store` | Reserved for future use <br/><br/>**Default value**: `true` |
 | `server.port` | The TCP port used to listen for clients interacting with the [REST API](./api-reference.md)<br/><br/>**Default value**: `18080`<br/>**Allowed values**: An integer value between `1024` and `65535` |
+| `shell.history.filePath` | Location of the record of commands issued at the action prompt<br/><br/>**Default value**: `~/.livemigrator_history`<br/>**Allowed values**: The full path to a valid filename in a directory that is writable by the user running LiveData Migrator (typically `hdfs`.) |
+| `cli.enabled` | Whether the action prompt interface will be made available from the LiveData Migrator instance<br/><br/>**Default value**: `false`<br/>**Allowed values**: `true`, `false` |
+| `spring.shell.interactive.enabled` | Whether the console session with the action prompt is interactive or non-interactive, affecting prompt output, command completion and other interactive features<br/><br/>**Default value**: `${cli.enabled}`<br/>**Allowed values**: `true`, `false` |
+
+## SSH access
+
+These configuration properties govern whether and how access to LiveData Migrator is provided using the [SSH protocol](https://en.wikipedia.org/wiki/Secure_Shell). You can manage LiveData Migrator by enabling SSH access to the console interface (as an alternative to the [CLI connection method](./get-started.md#log-in-to-the-livedata-migrator-cli)).
+
+| Name | Details |
+| --- | --- |
+| `ssh.shell.enable` | Whether LiveData Migrator will accept connections from an SSH client to provide access to the action prompt. Setting this to false will prevent access via SSH from any client.<br/><br/>**Default value**: `false`<br/>**Allowed values**: `true`, `false` |
+| `ssh.shell.prompt.local.enable` | Whether LiveData Migrator will allow local access via SSH to the action prompt. Setting this to `false` will prevent access from local clients.<br/><br/>**Default value**: `${cli.enabled}`<br/>**Allowed values**: `true`, `false` |
+| `ssh.shell.prompt.text` | This is the text content presented as the action prompt. You can override it to provide instance-specific text.<br/><br/>**Default value**: `WANdisco LiveMigrator >>\u0020`<br/>**Allowed values**: Any text string |
+| `ssh.shell.prompt.color` | The color used for the action prompt. <br/><br/>**Default value**: `white`<br/>**Allowed values**: One of the color names `black`, `white`, `red`,`yellow`, `green`, `blue`.
+| `ssh.shell.authentication` | Defines the authentication mechanism used by LiveData Migrator for SSH access. `simple` denotes authentication provided by the username and password defined in the `ssh.shell.user` and `ssh.shell.password` configuration properties, while `security` denotes authentication using a private key that matches one of the public keys in the file specified with the `ssh.shell.authorized-public-keys-file` configuration property.<br/><br/>**Default value**: `simple`<br/>**Allowed values**: `simple`, `security` |
+| `ssh.shell.user` | The username that an SSH client must provide when LiveData Migrator is configured for simple authentication.<br/><br/>**Default value**: `user`<br/>**Allowed values**: Any string that defines a username (no whitespace) |
+| `ssh.shell.password` | The password that an SSH client must provide when LiveData Migrator is configured to use simple authentication.<br/><br/>**Default value**: `password`<br/>**Allowed values**: Any string |
+| `ssh.shell.port` | The TCP port on which LiveData Migrator will listen for new SSH connections<br/><br/>**Default value**: `2222`<br/>**Allowed values**: An integer value between `1024` and `65535` |
+| `ssh.shell.historyFile` | The full path to the file in which the record of commands issued to the action prompt will be recorded<br/><br/>**Default value**: `${java.io.tmpdir}/.livedatamigrator_history_ssh`<br/>**Allowed values**: The full path to a valid filename in a directory that is writable by the user running LiveData Migrator (typically `hdfs`.)
+| `ssh.shell.authorized-public-keys-file` | The file containing public keys against which client credentials will be matched to authorize access to the console over SSH when LiveData Migrator is configured for `security` authentication<br/><br/>**Default value**: `samples/public-keys-sample`<br/>**Allowed values**: The full path to a file that contains one line entry per public key, in the same format used by `sshd`. |
 
 ## Logging
 
@@ -37,9 +51,41 @@ Configure how LiveData Migrator logs requests made against the [REST API](./api-
 | `logbook.format.style` | The logging style applied to HTTP activity records<br/><br/>**Default value**: `http`<br/>**Allowed values**: `http`, `curl` |
 | `logbook.write.max-body-size` | The maximum number of bytes from an HTTP request or response body to include in a log entry<br/><br/>**Default value**: `1024`<br/>**Allowed values**: Any integer between `1` and `2147483647` |
 | `logbook.exclude` | A comma-separated list of patterns that match URIs for which HTTP activity should not be logged<br/><br/>**Default value**: `/v3/api-docs/**,/swagger-ui/**`<br/>**Allowed values**: Any valid comma-separated list of patterns |
-| `logbook.obfuscate.parameters` | A comma-separated list of HTTP parameters that should not be recorded in log entries, for example: `access_token,password`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any valid comma-separated list of HTTP parameter names |
-| `logbook.obfuscate.headers` | A comma-separated list of HTTP headers that should not be recorded in log entries, for example: `authorization,x-auth-password,x-auth-token,X-Secret`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any valid comma-separated list of HTTP headers |
-| `obfuscate.json.properties` | A comma-separated list of JSON request properties by name that should not be recorded in log entries, for example: `foo,bar`<br/><br/>**Default value**: `${hdfs.fs.type.masked.properties},${adls2.fs.type.masked.properties},${s3a.fs.type.masked.properties},${gcs.fs.type.masked.properties}`<br/>**Allowed values**: Any valid comma-separated list of property names |
+| `logbook.obfuscate.parameters` | A comma-separated list of HTTP parameters that should not be recorded in log entries, e.g. `access_token,password`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any valid comma-separated list of HTTP parameter names |
+| `logbook.obfuscate.headers` | A comma-separated list of HTTP headers that should not be recorded in log entries, e.g. `authorization,x-auth-password,x-auth-token,X-Secret`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any valid comma-separated list of HTTP headers |
+| `obfuscate.json.properties` | A comma-separated list of JSON request properties by name that should not be recorded in log entries, e.g. `foo,bar`<br/><br/>**Default value**: `${hdfs.fs.type.masked.properties},${adls2.fs.type.masked.properties},${s3a.fs.type.masked.properties},${gcs.fs.type.masked.properties}`<br/>**Allowed values**: Any valid comma-separated list of property names |
+
+## Server SSL
+
+To enable SSL on the LiveData Migrator REST API (HTTPS), modify the following `server.ssl.*` properties.
+
+:::note
+If HTTPS is enabled on the REST API, plain HTTP requests from the CLI to the REST API will fail.
+
+```text title="Example error"
+Bad Request
+This combination of host and port requires TLS.
+```
+
+:::
+
+| Name | Details |
+| --- | --- |
+| `server.ssl.key-store` | Path or classpath to the Java keystore. <br/>**Default value**: (none) <br/>**Allowed values**: File system path or classpath (example:`/path/to/keystore.p12`, `classpath:keystore.p12`). |
+| `server.ssl.key-store-password` | The Java keystore password. <br/>**Default value**: (none) <br/>**Allowed values**: Any text string. |
+| `server.ssl.key-store-type` | The Java keystore type. <br/>**Default value**: (none) <br/>**Allowed values**: [Keystore types](https://docs.oracle.com/javase/8/docs/technotes/guides/security/StandardNames.html#KeyStore) |
+| `server.ssl.key-alias` | The alias for the server certificate entry. <br/>**Default value**: (none) <br/>**Allowed values**: Any text string. |
+| `server.ssl.ciphers` | The ciphers suite enforce the security by deactivating some old and deprecated SSL ciphers, this list was tested against [SSL Labs](https://www.ssllabs.com/ssltest/). <br/><br/> **Default value**: (none but list provided below) <br/><br/>`TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,TLS_DHE_RSA_WITH_AES_256_GCM_SHA384 ,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA,TLS_RSA_WITH_CAMELLIA_128_CBC_SHA` |
+
+:::tip
+The example command below will generate a server certificate and place it inside a new Java keystore named `keystore.p12`:
+
+```text
+keytool -genkey -alias livedata-migrator -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 365
+```
+
+See the [keytool documentation](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html) for further information on the parameters used.
+:::
 
 ## State
 
@@ -59,63 +105,9 @@ Secure access to the LiveData Migrator [REST API](./api-reference.md) through co
 
 | Name | Details |
 | --- | --- |
-| `security.type` | The method of securing access to the REST API.<br/><br/>**Default value**: `off`<br/>**Allowed values**: `off`, `basic` |
-
-### Basic authentication
-
-:::important
-When basic authentication is enabled on LiveData Migrator, [update the LiveData UI with the credentials to maintain functionality](./configuration-ui.md#livedata-migrator).
-:::
-
-| Name | Details |
-| --- | --- |
-| `security.basic.user` | Required when `security.type=basic`. <br/>The username that needs to be provided by a REST client to gain access to a secured REST API, for example: `admin`<br/><br/>[If basic authentication is enabled or will be enabled on the HiveMigrator REST API](./configuration-hvm.md#basic-authentication), use the same username for LiveData Migrator and HiveMigrator.<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any string that defines a username (no whitespace) |
-| `security.basic.password` | Required when `security.type=basic`. <br/>A [bcrypt-encrypted](https://www.browserling.com/tools/bcrypt) representation of the password that needs to be provided using HTTP basic authentication to access the REST API, for example:<br/>`{bcrypt}$2a$10$mQXFoGAdLryWcZLjSP31Q.5cSgtoCPO3ernnsK4F6/gva8lyn1qgu`<br/><br/>The `{bcrypt}` prefix must be included before the encrypted password string as shown in the example above.<br/><br/>**Default value**: (none)<br/>**Allowed values**: A valid bcrypt-encrypted string |
-
-#### Connecting to LiveData Migrator with basic authentication
-
-When basic authentication is enabled, provide the username and password when prompted to connect to LiveData Migrator through the CLI:
-
-```text title="Example"
-  connect livemigrator localhost: trying to connect...
-Username: admin
-Password: ********
-connected
-```
-
-The username and password will also be required when accessing the LiveData Migrator REST API directly.
-
-## TLS/SSL
-
-To enable SSL on the LiveData Migrator REST API (HTTPS), modify the following `server.ssl.*` properties.
-
-:::note
-If HTTPS is enabled on the REST API, plain HTTP requests from the CLI to the REST API will fail.
-
-```text title="Example error"
-Bad Request
-This combination of host and port requires TLS.
-```
-
-:::
-
-| Name | Details |
-| --- | --- |
-| `server.ssl.key-store` | Path or classpath to the Java keystore. <br/>**Default value**: (none) <br/>**Allowed values**: File system path or classpath (example:`/path/to/keystore.p12`, `classpath:keystore.p12`) |
-| `server.ssl.key-store-password` | The Java keystore password. <br/>**Default value**: (none) <br/>**Allowed values**: Any text string |
-| `server.ssl.key-store-type` | The Java keystore type. <br/>**Default value**: (none) <br/>**Allowed values**: [Keystore types](https://docs.oracle.com/javase/8/docs/technotes/guides/security/StandardNames.html#KeyStore) |
-| `server.ssl.key-alias` | The alias for the server certificate entry. <br/>**Default value**: (none) <br/>**Allowed values**: Any text string. |
-| `server.ssl.ciphers` | The ciphers suite enforce the security by deactivating some old and deprecated SSL ciphers, this list was tested against [SSL Labs](https://www.ssllabs.com/ssltest/). <br/><br/> **Default value**: (none but list provided below) <br/><br/>`TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,TLS_DHE_RSA_WITH_AES_256_GCM_SHA384 ,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_RSA_WITH_CAMELLIA_256_CBC_SHA,TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA,TLS_RSA_WITH_CAMELLIA_128_CBC_SHA` |
-
-:::tip
-The example command below will generate a server certificate and place it inside a new Java keystore named `keystore.p12`:
-
-```text
-keytool -genkey -alias livedata-migrator -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 365
-```
-
-See the [keytool documentation](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html) for further information on the parameters used.
-:::
+| `security.type` | The method of securing access to the REST API<br/><br/>**Default value**: `off`<br/>**Allowed values**: `off`, `basic` |
+| `security.basic.user` | The username that needs to be provided by a REST client to gain access to a secured REST API, e.g. `admin`<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any string that defines a username (no whitespace) |
+| `security.basic.password` | A bcrypt-encrypted representation of the password that needs to be provided using HTTP basic authentication to access the REST API when LiveData Migrator is configured for `basic` security, e.g. `{bcrypt}$2a$10$kXzfqwiiCY/ZW9e9BboNmuIbe5xe2kNjdk1YNUxmsCaQ7PlBLCe4W`<br/><br/>**Default value**: (none)<br/>**Allowed values**: A valid bcrypt-encrypted string |
 
 ## File system defaults
 
@@ -166,15 +158,3 @@ function FindProxyForURL(url, host) {
 ```
 
 :::
-
-## Directory structure
-
-The following directories are used for the LiveData Migrator core package:
-
-| Location | Content |
-|---|---|
-| `/var/log/wandisco/livedata-migrator` | Logs |
-| `/etc/wandisco/livedata-migrator` | Configuration files |
-| `/opt/wandisco/livedata-migrator` | Java archive files |
-| `/opt/wandisco/livedata-migrator/db` | LiveData Migrator runtime state |
-| `/var/run/livedata-migrator` | Runtime files |

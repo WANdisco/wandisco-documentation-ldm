@@ -1,6 +1,6 @@
 ---
 id: configuration-metadata
-title: Configuring your environment for metadata migrations
+title: Configuring your environment for metadata migrations (preview)
 sidebar_label: Metadata migrations
 ---
 
@@ -34,11 +34,11 @@ When deploying a [hive agent for Apache Hive](./command-reference.md#hive-agent-
    As such, all running metadata migrations should be stopped and started.
 
    ```text title="Stop all metadata migrations through the CLI"
-   hive migration stop all
+   hive migration stop --all
    ```
 
    ```text title="Start all metadata migrations through the CLI"
-   hive migration start all
+   hive migration start --all
    ```
 
    Any new migrations will auto-detect the presence of the listener straight away.
@@ -68,3 +68,13 @@ When deploying a [hive agent for Apache Hive](./command-reference.md#hive-agent-
    ```
 
    The description should state `"Listening to events..."`.
+
+## Default Hive metastore warehouse directory
+
+When deploying a hive agent for a HDInsights cluster (which can either be [Azure SQL](./command-reference.md#hive-agent-add-azure) or remote [Apache Hive](./command-reference.md#hive-agent-add-hive)), the default hive warehouse directory will be as follows:
+
+`hive.metastore.warehouse.dir=/hive/warehouse`
+
+This is different from the majority of Hadoop clusters, as such, it may be necessary to adjust this property in your HDInsights cluster so that it is the same as your source environment.
+
+Doing so will allow you to start using your source data and metadata on your HDInsights cluster immediately after migration, as it will be referenced correctly by your target metastore/database.

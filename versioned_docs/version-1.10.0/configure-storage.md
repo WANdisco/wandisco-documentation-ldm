@@ -79,7 +79,7 @@ Add file systems to provide LiveData Migrator with the information needed to rea
 A range of different file system types are supported as targets, including [ADLS Gen 2](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction), [HDFS](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html), [GCS](https://cloud.google.com/storage), and [S3A](https://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html).
 
 :::note
-LiveData Migrator currently supports HDFS as a migration source.
+LiveData Migrator currently supports HDFS file systems as a migration source.
 
 If your source file system was not discovered automatically or you wish to assign a new source file system, use the `--source` parameter with the `filesystem add hdfs` command to add a suitable HDFS source file system.
 :::
@@ -92,11 +92,11 @@ Although present when invoking the `help` command, Local Filesystem functionalit
 
 | Command | Action |
 |:---|:---|
-| [`filesystem add adls2 oauth`](./command-reference.md#filesystem-add-adls2-oauth) | Add an ADLS Gen 2 filesystem resource using a service principal and oauth credentials |
-| [`filesystem add adls2 sharedKey`](./command-reference.md#filesystem-add-adls2-sharedkey) | Add an ADLS Gen 2 filesystem resource using access key credentials |
-| [`filesystem add gcs`](./command-reference.md#filesystem-add-gcs) | Add a Google Cloud Storage filesystem resource |
-| [`filesystem add hdfs`](./command-reference.md#filesystem-add-hdfs) | Add an HDFS resource |
-| [`filesystem add s3a`](./command-reference.md#filesystem-add-s3a) | Add an S3 filesystem resource (choose this when using IBM COS) |
+| [`filesystem add adls2 oauth`](./command-reference.md#filesystem-add-adls2-oauth) | Add an ADLS Gen 2 file system resource using a service principal and oauth credentials |
+| [`filesystem add adls2 sharedKey`](./command-reference.md#filesystem-add-adls2-sharedkey) | Add an ADLS Gen 2 file system resource using access key credentials |
+| [`filesystem add gcs`](./command-reference.md#filesystem-add-gcs) | Add a Google Cloud Storage file system resource |
+| [`filesystem add hdfs`](./command-reference.md#filesystem-add-hdfs) | Add a Hadoop HDFS file system resource |
+| [`filesystem add s3a`](./command-reference.md#filesystem-add-s3a) | Add a S3 file system resource (choose this when using IBM COS) |
 
 ### Manage file systems
 
@@ -108,30 +108,28 @@ Although present when invoking the `help` command, Local Filesystem functionalit
 | [`filesystem show`](./command-reference.md#filesystem-show) | Get target file system details |
 | [`filesystem types`](./command-reference.md#filesystem-types) | List the types of target file systems available |
 
-## Configure storage for one-time migrations
+## Configure static storage
 
-It's possible to create a source filesystem that is not tracked by LiveData Migrator for changes during a migration. Migrations created from this type of source will become [one-time migrations](./one-time-migration.md) by default. Note that it is not necessary to create a file storage of this type to create a one-time migration.
+A static storage is a filesystem that is not tracked by LiveData Migrator for changes during a migration. Migrations created from a static storage will become [static migrations](./non-live-migration.md) by default.
 
-### Create storage for one-time migrations with the UI
+### Create a static storage with the UI
 
-To create a source filesystem for a one-time migration, uncheck the **Migrate Live Events** box when you configure the storage. When creating a migration from the UI from the storage created, the UI will uncheck the **live migration** option and prevent it from being enabled.
+To create a static storage, uncheck the **Migrate Live Events** box when you configure the storage. When creating a migration from the UI from a static storage, the UI will uncheck the **live migration** option and prevent it from being enabled.
 
-### Create storage for one-time migrations with the CLI
+### Create a static storage with the CLI
 
-LiveData Migrator will only perform *read* tasks on a source filesystem created for one-time migrations. It will not check the source storage for modifications to data during transfer. Any migration that uses the source storage will automatically become a one-time migration, and will have the `scanOnly` flag applied.
+LiveData Migrator will only perform *read* tasks on a static storage. It will not check the source storage for modifications to data during transfer. Any migration that uses a static source storage will automatically become a static migration, and will have the `scanOnly` flag applied.
 
-To create a source for one-time migrations, add the `scanOnly` flag during source creation:
+To create a static storage, add the `scanOnly` flag during source creation:
 
 ```text="Code"
 filesystem add hdfs --source --scanOnly ...
 ```
 
 :::note
-The account used to connect to a source storage intended for one-time migrations only requires read access. Write access is not necessary.
+The account used to connect to a static source storage only requires read access. Write access is not necessary.
 :::
 
 ## Next Steps
 
-Once you have your source and target storage configured, you're ready to [migrate data](./create-migration.md). If you want migrate data to a different path on your target filesystem, [create path mappings](./create-path-mappings.md) first.
-
-If you want to exclude specific file sizes or file names from your data migrations, [define exclusions](./configure-exclusions.md).
+Once you have your source and target storage configured, you're ready to [migrate data](./create-migration.md). If you want to  exclude specific file sizes or file names from your data migrations, [define exclusions](./configure-exclusions.md) next.
