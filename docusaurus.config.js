@@ -58,7 +58,7 @@ module.exports = {
       indexName: 'wandisco-live-data-migrator',
 
       // Optional: see doc section bellow
-      contextualSearch: false,
+      contextualSearch: true,
 
       // Optional: Algolia search parameters
       searchParameters: {
