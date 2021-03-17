@@ -36,7 +36,88 @@ Configure how the UI logs information about its state or user interactions.
 This release of LiveData Migrator contains preview functionality for LDAP UI login.
 :::
 
-Configure a single LDAP user to log in to the UI.
+Configure a single LDAP user to log in to the UI by using the `encryptor` tool:
+
+1. On the LiveData UI host, run the following command:
+
+   ```text
+   livedata-ui encryptor
+   ```
+
+1. [Encrypt your LDAP Manager password](#encrypt-the-manager-password) if you have one and save the encrypted string for step 4.
+
+   1. Select the `Encrypt a string` option when the menu appears.
+
+   1. When the `Please enter a string` prompt appears, enter the password in plain text that you want to encrypt.
+
+      The encrypted password string is then returned, for example: `LvglJEyAySUQBuyUcEeRcYhzrJX6NMl0`.
+
+1. Select the `Setup Livedata UI LDAP authentication` option when the menu appears.
+
+1. Provide your LDAP configuration.
+
+   See the [LDAP configuration properties](#ldap-configuration-properties) for descriptions and examples of each property mentioned below.
+
+   ```text title="Values needed"
+   LDAP base url, (e.g. ldap://localhost): "application.ldap.baseUrl"
+   LDAP port: "application.ldap.port"
+   LDAP base dn: "application.ldap.baseDn"
+   LDAP Manager dn:  (Optional, enter to skip) "application.ldap.managerDn"
+   LDAP manager password: "application.ldap.managerPassword"
+   Use LDAP bind auth? (y/n) "application.ldap.bindAuth"
+   Password attribute. (Optional, enter to skip) "application.ldap.passwordAttribute"
+   User dn patterns (Optional, enter to skip) "application.ldap.userDnPatterns"
+   User search base (Optional, enter to skip) "application.ldap.userSearchBase"
+   User search filter. (Optional, enter to skip) "application.ldap.userSearchFilter"
+   Group search base. (Optional, enter to skip) "application.ldap.groupSearchBase"
+   Group search filter. (Optional, enter to skip) "application.ldap.groupSearchFilter"
+   ```
+
+   Here are two examples of LDAP configuration:
+
+   ```text title="Example with LDAP bind auth and no Manager"
+   LDAP base url, (e.g. ldap://localhost): ldap://localhost
+   LDAP port: 389
+   LDAP base dn: dc=springframework,dc=org
+   LDAP Manager dn:  (Optional, enter to skip) 
+   Use LDAP bind auth? (y/n) y
+   User dn patterns (Optional, enter to skip) {0},ou=people
+   User search base (Optional, enter to skip) 
+   User search filter. (Optional, enter to skip) 
+   Group search base. (Optional, enter to skip) 
+   Group search filter. (Optional, enter to skip) 
+   ```
+
+   ```text title="Example with password attribute and Manager"
+   LDAP base url, (e.g. ldap://localhost): ldap://localhost
+   LDAP port: 389
+   LDAP base dn: dc=springframework,dc=org
+   LDAP Manager dn:  (Optional, enter to skip) CN=manager,OU=city,DC=example,DC=com
+   LDAP manager password: LvglJEyAySUQBuyUcEeRcYhzrJX6NMl0
+   Use LDAP bind auth? (y/n) n
+   Password attribute. (Optional, enter to skip) userPassword
+   User dn patterns (Optional, enter to skip) 
+   User search base (Optional, enter to skip) ou=people
+   User search filter. (Optional, enter to skip) (uid={0})
+   Group search base. (Optional, enter to skip) 
+   Group search filter. (Optional, enter to skip) 
+   ```
+
+1. Select the `Exit` option once complete.
+
+1. Restart the LiveData UI to make the changes active:
+
+   ```text "Example"
+   service livedata-ui restart
+   ```
+
+### LDAP configuration properties
+
+The following properties will be written to the `application-prod.properties` file once LDAP has been configured. Use the descriptions and examples to help complete setup through the `livedata-ui encryptor` tool.
+
+:::note
+Don't configure these properties manually as the `encryptor` tool will handle special characters.
+:::
 
 | Name | Details |
 | --- | --- |
@@ -45,35 +126,26 @@ Configure a single LDAP user to log in to the UI.
 | `application.ldap.port` | The LDAP server port, for example: `389`.<br/><br/>**Default value**: (none)<br/>**Allowed values**: An integer value between `1024` and `65535`.|
 | `application.ldap.baseDn` | The [BaseDN](https://ldapwiki.com/wiki/BaseDN) for the LDAP search criteria, for example: `dc=example,dc=com`.<br/><br/>**Default value**: (none)<br/>**Allowed values**: A comma-separated list of valid LDAP sub-tree entries. |
 
-### Manager credentials
+#### Manager credentials
 
-Provide the manager credentials if the LDAP server has authentication enabled for read access.
+The manager credentials, used if the LDAP server has authentication enabled for read access.
 
 | Name | Details |
 | --- | --- |
 | `application.ldap.managerDn` | The distinguished name (DN) for the LDAP manager, for example: `CN=manager,OU=city,DC=example,DC=com`.<br/><br/>**Default value**: (none)<br/>**Allowed values**: A comma-separated list of valid LDAP sub-tree entries. |
-| `application.ldap.managerPassword` | The password of the LDAP manager. [Encrypt the manager password](#encrypt-the-manager-password) instead of entering this property manually.<br/><br/>**Default value**: (none)<br/>**Allowed values**: An encrypted password. |
+| `application.ldap.managerPassword` | The password of the LDAP manager. Encrypt the manager password using the `encryptor` tool before adding this value.<br/><br/>**Default value**: (none)<br/>**Allowed values**: An encrypted password. |
 
-#### Encrypt the manager password
+#### User authentication
 
-Use the LiveData UI encryptor tool to encrypt the LDAP manager password and store it in `application-prod.properties` file.
+Choose one of the following to use for user authentication with the LDAP server.
 
-1. On the LiveData UI host, run the following command:
+| Name | Details |
+| --- | --- |
+| `application.ldap.bindAuth` | Enable the [Bind Authenticator](https://docs.spring.io/spring-security/site/docs/5.1.5.RELEASE/reference/html/advanced-topics.html#using-bind-authentication) to match a specific user for authentication. If set to `false`, the `passwordAttribute` method is used by default.<br/><br/>**Default value**: (none)<br/>**Allowed values**: `true`, `false` |
+| OR | |
+| `application.ldap.passwordAttribute` | The LDAP attribute for the LDAP user password, for example: `userPassword`.<br/><br/>The value for the user password on the LDAP server **must** be in encrypted in [BCrypt](https://www.browserling.com/tools/bcrypt) format.<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any valid LDAP attribute. |
 
-   ```text
-   livedata-ui encryptor
-   ```
-
-1. Select the `Encrypt and save a property to /etc/wandisco/ui/application-prod.properties` option when the menu appears.
-
-1. Provide the following entries when prompted:
-
-   * `Key` = `application.ldap.managerPassword`
-   * `Value` = (LDAP Manager password in plain text, for example: `myPassword`)
-
-The `/etc/wandisco/ui/application-prod.properties` file is updated with the new property and encrypted password.
-
-### User match configuration
+#### User match configuration
 
 Choose between a user pattern or a search filter to match a valid LDAP user in the database.
 
@@ -81,18 +153,21 @@ Choose between a user pattern or a search filter to match a valid LDAP user in t
 | --- | --- |
 | `application.ldap.userDnPatterns` | The [pattern to match the distinguished name (DN)](https://docs.spring.io/spring-security/site/docs/5.1.5.RELEASE/reference/html/advanced-topics.html#using-bind-authentication) for the user, for example: `uid={0},ou=people`. The `{0}` is used instead of the login name that would normally exist here. Use this method if all of your users are stored under a single node in the directory.<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any valid Java pattern format relative to the `application.ldap.baseDn` defined earlier. |
 | OR |  |
-| `application.ldap.userSearchBase` | Provide the distinguished name (DN) of the LDAP object from where to start the search for a user account, for example: `ou=people`. This field can be left blank if you want to start the search from the `application.ldap.baseDn`.<br/><br/>**Default value**: (none)<br/>**Allowed values**: A valid LDAP DN relative to the `application.ldap.baseDn` defined earlier. |
+| `application.ldap.userSearchBase` | The distinguished name (DN) of the LDAP object from where to start the search for a user account, for example: `ou=people`. This field can be left blank if you want to start the search from the `application.ldap.baseDn`.<br/><br/>**Default value**: (none)<br/>**Allowed values**: A valid LDAP DN relative to the `application.ldap.baseDn` defined earlier. |
 | `application.ldap.userSearchFilter` | The LDAP query string to find the attribute representing the user account, for example `(uid={0})`. The value should be enclosed in brackets, and `{0}` is a required value as it is a token that represents the user account that will be validated.<br/><br/>**Default value**: (none)<br/>**Allowed values**: A valid LDAP attribute to represent the user login name. |
 
-#### User authentication
+#### Group match configuration (not required)
 
-Choose one of the following properties to use for user authentication with the LDAP server.
+:::info
+Group match configuration is not yet used by the LiveData UI as it applies to multiple user accounts (which is not yet supported).
+:::
+
+Choose between a group pattern or a search filter to match a valid LDAP group in the database.
 
 | Name | Details |
 | --- | --- |
-| `application.ldap.bindAuth` | Enable the [Bind Authenticator](https://docs.spring.io/spring-security/site/docs/5.1.5.RELEASE/reference/html/advanced-topics.html#using-bind-authentication) to match a specific user for authentication. If set to `false`, the `passwordAttribute` method is used by default.<br/><br/>**Default value**: (none)<br/>**Allowed values**: `true`, `false` |
-| OR | |
-| `application.ldap.passwordAttribute` | Provide the LDAP attribute for the LDAP user password, for example: `userPassword`.<br/><br/>The value for the user password on the LDAP server **must** be in encrypted in [BCrypt](https://www.browserling.com/tools/bcrypt) format.<br/><br/>**Default value**: (none)<br/>**Allowed values**: Any valid LDAP attribute. |
+| `application.ldap.groupSearchBase` | The distinguished name (DN) from where to start the search for an LDAP group, for example: `ou=groups`. This field can be left blank if you want to start the search from the `application.ldap.baseDn`.<br/><br/>**Default value**: (none)<br/>**Allowed values**: A valid LDAP DN relative to the `application.ldap.baseDn` defined earlier. |
+| `application.ldap.groupSearchFilter` | The filter to use to search for group membership, for example `uniqueMember={0}`.<br/><br/>**Default value**: `uniqueMember={0}`<br/>**Allowed values**: A valid LDAP attribute to represent the user group membership. |
 
 ## Security
 
