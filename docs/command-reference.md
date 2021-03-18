@@ -2639,7 +2639,9 @@ hive agent check --name azureAgent
 
 #### Examples
 
+:::info
 These examples assume that `myScript` is inside the working directory.
+:::
 
 ```text title="Example inside CLI"
 script --file myScript
@@ -2672,7 +2674,7 @@ The action prompt provides many features to guide you during operation.
 | **Syntax indication** | Invalid commands are highlighted as you type. |
 | **Clear the display** | Type `<Ctrl-L>` at any time. |
 | **Previous commands** | Navigate previous commands using the up and down arrows, and use standard emacs shortcuts. |
-| **Interactive or scripted operation** | You can interact with the command line interface directly, or send it commands on standard input to incorporate it into shell scripts. |
+| **Interactive or scripted operation** | You can interact with the command line interface directly, or send it commands on standard input to incorporate it into shell scripts. See [`script`](#script) for more information and examples. |
 
 ## System Service Commands
 
