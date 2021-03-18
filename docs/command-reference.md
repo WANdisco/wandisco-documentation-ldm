@@ -2621,6 +2621,8 @@ SYNOPSYS
 
 Load and execute commands from a text file using the `script --file <filename>` command. This file should have one command per line, and each will be executed as though they were entered directly at the action prompt in that sequence.
 
+Use scripts outside of the LiveData Migrator CLI by referencing the script when running the `livedata-migrator` command (see [examples](#examples-7)).
+
 ```text title="Read and execute commands from a file"
 SYNOPSYS
         script [--file] file
@@ -2629,6 +2631,25 @@ SYNOPSYS
 #### Mandatory Parameters
 
 * **`--file`** The name of the file containing script commands.
+
+```text title="Example contents of a script file"
+hive agent check --name sourceAgent
+hive agent check --name azureAgent
+```
+
+#### Examples
+
+:::info
+These examples assume that `myScript` is inside the working directory.
+:::
+
+```text title="Example inside CLI"
+script --file myScript
+```
+
+```text title="Example outside of CLI (non-interactive)"
+livedata-migrator --script=./myScript
+```
 
 ----
 
@@ -2653,7 +2674,7 @@ The action prompt provides many features to guide you during operation.
 | **Syntax indication** | Invalid commands are highlighted as you type. |
 | **Clear the display** | Type `<Ctrl-L>` at any time. |
 | **Previous commands** | Navigate previous commands using the up and down arrows, and use standard emacs shortcuts. |
-| **Interactive or scripted operation** | You can interact with the command line interface directly, or send it commands on standard input to incorporate it into shell scripts. |
+| **Interactive or scripted operation** | You can interact with the command line interface directly, or send it commands on standard input to incorporate it into shell scripts. See [`script`](#script) for more information and examples. |
 
 ## System Service Commands
 
