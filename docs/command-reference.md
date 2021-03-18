@@ -2621,6 +2621,8 @@ SYNOPSYS
 
 Load and execute commands from a text file using the `script --file <filename>` command. This file should have one command per line, and each will be executed as though they were entered directly at the action prompt in that sequence.
 
+Use scripts outside of the LiveData Migrator CLI by referencing the script when running the `livedata-migrator` command (see [examples](#examples-7)).
+
 ```text title="Read and execute commands from a file"
 SYNOPSYS
         script [--file] file
@@ -2629,6 +2631,23 @@ SYNOPSYS
 #### Mandatory Parameters
 
 * **`--file`** The name of the file containing script commands.
+
+```text title="Example contents of a script file"
+hive agent check --name sourceAgent
+hive agent check --name azureAgent
+```
+
+#### Examples
+
+These examples assume that `myScript` is inside the working directory.
+
+```text title="Example inside CLI"
+script --file myScript
+```
+
+```text title="Example outside of CLI (non-interactive)"
+livedata-migrator --script=./myScript
+```
 
 ----
 
