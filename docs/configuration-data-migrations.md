@@ -6,7 +6,7 @@ sidebar_label: Data migrations
 
 We recommend you make the following configuration changes to your HDFS cluster environment to prepare for data migrations.
 
-## DFS NameNode properties
+## HDFS NameNode properties
 
 There are a number of properties adjustable on the HDFS NameNode that can be used to prevent data migrations from stalling due to an excess of notifications, or from operating too slowly.
 
