@@ -149,7 +149,7 @@ module.exports = {
             {
               "type": "doc",
               "id": "ldm-metrics"
-            }
+            },
             {
               "type": "doc",
               "id": "command-reference"
