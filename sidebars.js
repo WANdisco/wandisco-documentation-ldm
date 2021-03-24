@@ -148,6 +148,10 @@ module.exports = {
           "items": [
             {
               "type": "doc",
+              "id": "ldm-metrics"
+            }
+            {
+              "type": "doc",
               "id": "command-reference"
             },
             {
