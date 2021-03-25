@@ -10,6 +10,18 @@ You can view detailed metrics about recent and ongoing LiveData Migrator events 
 
 If you navigate to the Metrics tab beneath the Dashboard tab in the main menu, you'll see a number of graphs tracking bandwidth usage, data migrated and live events.
 
+### Bandwidth Usage
+
+This graph tracks the rate of data migration across the network within a time period you may specify via the dropdown menu.
+
+### Live Events
+
+This graph tracks the changes made to source data that have yet to be migrated to the migration target.
+
+### Data Migrated per day
+
+This graph charts the total amount of data migrated by LiveData Migrator each day across a timeframe you may specify via date dropdown menus.
+
 ## Viewing Metrics in the CLI
 
 Running the `status` command with the `--diagnostics` parameter will return detailed information about LiveData Migrator operations:
