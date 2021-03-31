@@ -28,7 +28,10 @@ Use the Storage panel to:
 :::info
 The HDFS source file system is normally detected on startup. It will not be detected automatically if Kerberos is enabled or your Hadoop configuration does not contain the information needed to connect to the Hadoop file system.
 
-Hadoop should be installed globally to allow LiveData Migrator to access the configuration during automatic detection. Alternatively, if you're running LiveData Migrator for a single user's environment, Hadoop should be made available to the agent running the service on the PATH environment variable.
+Hadoop should be installed globally on the file system to allow LiveData Migrator to access Hadoop configuration during automatic detection. Alternatively, if you're running LiveData Migrator for a single user's environment, Hadoop should be made available to the agent running the service on the PATH environment variable:
+
+**Systemctl**
+`sudo systemctl set-environment PATH=$PATH`
 :::
 
 If Kerberos is enabled, on the Storage panel, select to configure your _Unknown source_ and provide your source HDFS configuration:
