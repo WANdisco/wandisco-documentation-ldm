@@ -25,6 +25,7 @@ Use the Storage panel to:
 
 ### Configure source storage
 
+<<<<<<< HEAD
 You can can add a new source by performing one of the below actions:
 
 * Configure the _Unknown source_ on the LiveData Migrator dashboard
@@ -51,6 +52,11 @@ If you have deleted the automatically discovered HDFS source but want to restore
 #### Source HDFS configuration
 
 If Kerberos is enabled, provide the following details:
+=======
+Configure your source filesystem if Kerberos is enabled or Hadoop configuration is in a non-default location.
+
+In the Storage panel, select to configure your _Unknown source_ and provide your source HDFS configuration:
+>>>>>>> 9c35eb51... Stephen/docu 784 (#190)
 
 * **Filesystem Name** - Provide a name for your source storage.
 * **Filesystem Type** - The type of filesystem source. Choose _HDFS_.
@@ -62,6 +68,7 @@ If Kerberos is enabled, provide the following details:
   * **Provide a path to files** - Provide the directory or directories containing your HDFS configuration (such as the `core-site.xml` and `hdfs-site.xml`) on your LiveData Migrator host's local filesystem.
   * **Additional Configuration** (Optional) - Override properties or specify additional properties by adding Key/Value pairs.
 
+<<<<<<< HEAD
 #### Local filesystem source configuration
 
 To configure a local filesystem source for use with LiveData Migrator, provide the following details:
@@ -69,6 +76,18 @@ To configure a local filesystem source for use with LiveData Migrator, provide t
 * **Filesystem Name** - Provide a name for your source storage.
 * **Filesystem Type** - The type of filesystem source. Choose _Local Filesystem_.
 * **Mount Point** - The directory within the local filesystem to use as the source storage. You can migrate any data contained within the Mount Point directory.
+=======
+:::note
+
+If Kerberos is disabled, and Hadoop configuration is on the host, LiveData Migration will automatically detect the source filesystem on startup.
+
+Hadoop should be installed globally on the filesystem to allow LiveData Migrator to access Hadoop configuration during automatic detection. Alternatively, if you're running LiveData Migrator for a single user's environment, Hadoop should be made available to the agent running the service on the PATH environment variable:
+
+**Systemctl**
+`sudo systemctl set-environment PATH=$PATH`
+
+:::
+>>>>>>> 9c35eb51... Stephen/docu 784 (#190)
 
 ### Add target storages
 
