@@ -375,7 +375,7 @@ SYNOPSYS
                            [[--properties] list]
 ```
 
-#### Mandatory Parameters
+#### S3a Mandatory Parameters
 
 * **`--file-system-id`** The identifier for the new file system resource. This is referenced in the UI as **Storage Name**.
 * **`--bucket-name`** The name of your S3 bucket. This is referenced in the UI as **Bucket Name**.
@@ -401,7 +401,7 @@ SYNOPSYS
     * Instance profile credentials delivered through the Amazon EC2 metadata service.
 * **Endpoint** (UI & IBM COS only): This is required when adding an IBM COS bucket. IBM provide a list of available endpoints that can be found in their [public documentation](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-endpoints#endpoints-region).
 
-#### S3a optional parameters
+#### S3a Optional Parameters
 
 * **`--access-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the access key with this parameter. This is referenced in the UI as **Access Key**. This is a required parameter when adding an IBM COS bucket.
 * **`--secret-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the secret key using this parameter. This is referenced in the UI as **Secret Key**. This is a required parameter when adding an IBM COS bucket.

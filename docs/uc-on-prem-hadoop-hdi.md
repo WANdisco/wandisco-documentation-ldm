@@ -1,6 +1,6 @@
 ---
 id: uc-on-prem-hadoop-hdi
-title: On-premises Hadoop cluster to Azure HDInsights cluster
+title: On-premises Hadoop to Azure HDInsights
 sidebar_label: On-premises Hadoop to Azure HDI
 ---
 
