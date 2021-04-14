@@ -32,6 +32,23 @@ Configure how the UI logs information about its state or user interactions.
 
 ## LDAP (preview)
 
+<!-- tabs -->
+
+### LDAP in the UI
+
+Through the UI, you can configure LDAP login credentials for LiveData Migrator to use.
+
+1. Anywhere in the LiveData Migrator UI, open Settings by clicking on the gear icon in the bottom left.
+1. Select "LDAP Authentication" from the Settings tab that opens.
+1. Tick the box labelled "Enable LDPA Authentication" at the top of the page.
+1. Fill in your LDAP server configuration details.
+
+:::note
+After saving your configured LDAP login credentials, you will be logged out of the LiveData Migrator UI.
+:::
+
+### LDAP in the CLI
+
 :::info
 This release of LiveData Migrator contains preview functionality for LDAP UI login.
 :::
@@ -79,13 +96,13 @@ Configure a single LDAP user to log in to the UI by using the `encryptor` tool:
    LDAP base url, (e.g. ldap://localhost): ldap://localhost
    LDAP port: 389
    LDAP base dn: dc=springframework,dc=org
-   LDAP Manager dn:  (Optional, enter to skip) 
+   LDAP Manager dn:  (Optional, enter to skip)
    Use LDAP bind auth? (y/n) y
    User dn patterns (Optional, enter to skip) {0},ou=people
-   User search base (Optional, enter to skip) 
-   User search filter. (Optional, enter to skip) 
-   Group search base. (Optional, enter to skip) 
-   Group search filter. (Optional, enter to skip) 
+   User search base (Optional, enter to skip)
+   User search filter. (Optional, enter to skip)
+   Group search base. (Optional, enter to skip)
+   Group search filter. (Optional, enter to skip)
    ```
 
    ```text title="Example with password attribute and Manager"
@@ -96,11 +113,11 @@ Configure a single LDAP user to log in to the UI by using the `encryptor` tool:
    LDAP manager password: LvglJEyAySUQBuyUcEeRcYhzrJX6NMl0
    Use LDAP bind auth? (y/n) n
    Password attribute. (Optional, enter to skip) userPassword
-   User dn patterns (Optional, enter to skip) 
+   User dn patterns (Optional, enter to skip)
    User search base (Optional, enter to skip) ou=people
    User search filter. (Optional, enter to skip) (uid={0})
-   Group search base. (Optional, enter to skip) 
-   Group search filter. (Optional, enter to skip) 
+   Group search base. (Optional, enter to skip)
+   Group search filter. (Optional, enter to skip)
    ```
 
 1. Select the `Exit` option once complete.
