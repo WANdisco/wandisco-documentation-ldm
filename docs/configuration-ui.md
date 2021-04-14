@@ -53,6 +53,10 @@ After you save your configured LDAP login credentials, all users currently logge
 
 ### Configure LDAP Authentication through the CLI
 
+:::note
+You're advised to configure LDAP Authentication through the UI where possible, as the CLI will not provide diagnostic information if you supply incorrect configuration details.
+:::
+
 Configure a single LDAP user to log in to the UI by using the `encryptor` tool:
 
 1. On the LiveData UI host, run the following command:
