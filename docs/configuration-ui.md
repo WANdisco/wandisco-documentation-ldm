@@ -38,7 +38,7 @@ You can configure the LDAP login credentials for LiveData Migrator users through
 
 1. Anywhere in the LiveData Migrator UI, open Settings by clicking on the gear icon in the bottom left.
 1. Select "LDAP Authentication" from the Settings tab that opens.
-1. Tick the box labelled "Enable LDPA Authentication" at the top of the page.
+1. Tick the box labelled "Enable LDAP Authentication" at the top of the page.
 1. Fill in the LDAP Server Configuration Details section with the authentication details for your LDAP Server.
 1. Click the "Check Connection" button to test your connection to the LDAP server.
 1. Fill in the User Search Configuration section to select which users you wish to apply the LDAP Server Configuration details to.
