@@ -85,25 +85,6 @@ connected
 
 The username and password will also be required when accessing the LiveData Migrator REST API directly.
 
-## LDAP Authentication
-
-You can configure the LDAP login credentials for LiveData Migrator users through the UI:
-
-1. Anywhere in the LiveData Migrator UI, open Settings by clicking on the gear icon in the bottom left.
-1. Select "LDAP Authentication" from the Settings tab that opens.
-1. Tick the box labelled "Enable LDPA Authentication" at the top of the page.
-1. Fill in the LDAP Server Configuration Details section with the authentication details for your LDAP Server.
-1. Click the "Check Connection" button to test your connection to the LDAP server.
-1. Fill in the User Search Configuration section to select which users you wish to apply the LDAP Server Configuration details to.
-1. Confirm the user matches automatically returned by the form are as you intended.
-1. Click the "Save" button to save the configuration and log out all LiveData Migrator users currently in the UI.
-
-The configuration form in the UI provides all that you need to know to acquire the necessary information.
-
-:::note
-After you save your configured LDAP login credentials, all users currently logged in to the LiveData Migrator UI will be logged out.
-:::
-
 ## TLS/SSL
 
 To enable SSL on the LiveData Migrator REST API (HTTPS), modify the following `server.ssl.*` properties.
