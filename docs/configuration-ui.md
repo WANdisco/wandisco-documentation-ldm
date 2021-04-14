@@ -30,10 +30,31 @@ Configure how the UI logs information about its state or user interactions.
 | --- | --- |
 | `logging.output.path` | The output path for all logging.<br/><br/>**Default value**: `/var/log/wandisco/ui`<br/>**Allowed values**: The full path to a valid directory that is writable by the user running the UI (typically `hdfs`.)  |
 
-## LDAP (preview)
+## LDAP
 
-:::info
-This release of LiveData Migrator contains preview functionality for LDAP UI login.
+### Configure LDAP Authentication in the UI
+
+You can configure the LDAP login credentials for LiveData Migrator users through the UI:
+
+1. Anywhere in the LiveData Migrator UI, open Settings by clicking on the gear icon in the bottom left.
+1. Select "LDAP Authentication" from the Settings tab that opens.
+1. Tick the box labelled "Enable LDAP Authentication" at the top of the page.
+1. Fill in the LDAP Server Configuration Details section with the authentication details for your LDAP Server.
+1. Click the "Check Connection" button to test your connection to the LDAP server.
+1. Fill in the User Search Configuration section to select which users you wish to apply the LDAP Server Configuration details to.
+1. Confirm the user matches automatically returned by the form are as you intended.
+1. Click the "Save" button to save the configuration and log out all LiveData Migrator users currently in the UI.
+
+The configuration form in the UI provides all that you need to know to acquire the necessary information.
+
+:::note
+After you save your configured LDAP login credentials, all users currently logged in to the LiveData Migrator UI will be logged out.
+:::
+
+### Configure LDAP Authentication through the CLI
+
+:::note
+You're advised to configure LDAP Authentication through the UI where possible, as the CLI will not provide diagnostic information if you supply incorrect configuration details.
 :::
 
 Configure a single LDAP user to log in to the UI by using the `encryptor` tool:
@@ -79,13 +100,13 @@ Configure a single LDAP user to log in to the UI by using the `encryptor` tool:
    LDAP base url, (e.g. ldap://localhost): ldap://localhost
    LDAP port: 389
    LDAP base dn: dc=springframework,dc=org
-   LDAP Manager dn:  (Optional, enter to skip) 
+   LDAP Manager dn:  (Optional, enter to skip)
    Use LDAP bind auth? (y/n) y
    User dn patterns (Optional, enter to skip) {0},ou=people
-   User search base (Optional, enter to skip) 
-   User search filter. (Optional, enter to skip) 
-   Group search base. (Optional, enter to skip) 
-   Group search filter. (Optional, enter to skip) 
+   User search base (Optional, enter to skip)
+   User search filter. (Optional, enter to skip)
+   Group search base. (Optional, enter to skip)
+   Group search filter. (Optional, enter to skip)
    ```
 
    ```text title="Example with password attribute and Manager"
@@ -96,11 +117,11 @@ Configure a single LDAP user to log in to the UI by using the `encryptor` tool:
    LDAP manager password: LvglJEyAySUQBuyUcEeRcYhzrJX6NMl0
    Use LDAP bind auth? (y/n) n
    Password attribute. (Optional, enter to skip) userPassword
-   User dn patterns (Optional, enter to skip) 
+   User dn patterns (Optional, enter to skip)
    User search base (Optional, enter to skip) ou=people
    User search filter. (Optional, enter to skip) (uid={0})
-   Group search base. (Optional, enter to skip) 
-   Group search filter. (Optional, enter to skip) 
+   Group search base. (Optional, enter to skip)
+   Group search filter. (Optional, enter to skip)
    ```
 
 1. Select the `Exit` option once complete.
