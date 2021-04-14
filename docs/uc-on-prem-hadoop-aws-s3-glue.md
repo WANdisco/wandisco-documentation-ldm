@@ -6,20 +6,36 @@ sidebar_label: On-premises Hadoop to AWS S3 & Glue
 
 These are an outline of the steps needed to ready your environment for migration of data and metadata.
 
+**Time to complete:** 1 hour (assuming all prerequisites are met).
+
+## Recommended technical knowledge
+
+* Linux operating system
+* Apache Hadoop administration
+  * Hadoop Distributed Filesystem (HDFS)
+  * Apache Hive
+* AWS Service configuration and management
+  * AWS S3
+  * AWS Glue
+
 ## Prerequisites
 
 ### On-premises Hadoop cluster
 
-Make sure all [prerequisites](./prereqs.md#prerequisites) are met for the source environment. This also includes:
+* All [prerequisites](./prereqs.md#prerequisites) are met for the source environment.
 
-* Network connectivity between your edge node and [AWS S3](https://docs.aws.amazon.com/general/latest/gr/s3.html).
-* Network connectivity between your edge node and [AWS Glue](https://docs.aws.amazon.com/general/latest/gr/glue.html).
+* Network connectivity between your edge node and [AWS S3](https://docs.aws.amazon.com/general/latest/gr/s3.html) & [AWS Glue](https://docs.aws.amazon.com/general/latest/gr/glue.html). These are some of the options available depending on your use-case:
+
+  * [AWS Site-to-Site VPN](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html) - suitable for small/medium/test migrations.
+  * [AWS Direct Connect](https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html) - suitable for larger migrations (up to 100Gbps).
 
 ### AWS S3 and Glue
 
-For your target environment, make sure the following prerequisites are met:
+For your target environment, make sure you have the following:
 
-_TBA_
+* An [AWS account](https://aws.amazon.com/account/).
+* An [AWS S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html).
+* An [AWS Glue connection](https://docs.aws.amazon.com/glue/latest/dg/console-connections.html) to your AWS S3 bucket.
 
 ## Configure for data migrations
 

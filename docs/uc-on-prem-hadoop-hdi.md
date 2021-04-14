@@ -6,6 +6,8 @@ sidebar_label: On-premises Hadoop to Azure HDI
 
 These are an outline of the steps needed to ready your environment for migration of data and metadata.
 
+**Time to complete:** 1 hour (assuming all prerequisites are met).
+
 ## Prerequisites
 
 ### On-premises Hadoop cluster
