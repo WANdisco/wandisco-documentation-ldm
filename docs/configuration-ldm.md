@@ -87,7 +87,7 @@ The username and password will also be required when accessing the LiveData Migr
 
 ## LDAP Authentication
 
-Through the UI, you can configure the LDAP login credentials for LiveData Migrator users.
+You can configure the LDAP login credentials for LiveData Migrator users through the UI:
 
 1. Anywhere in the LiveData Migrator UI, open Settings by clicking on the gear icon in the bottom left.
 1. Select "LDAP Authentication" from the Settings tab that opens.
