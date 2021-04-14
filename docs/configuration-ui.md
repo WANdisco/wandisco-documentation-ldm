@@ -32,23 +32,6 @@ Configure how the UI logs information about its state or user interactions.
 
 ## LDAP (preview)
 
-<!-- tabs -->
-
-### LDAP in the UI
-
-Through the UI, you can configure LDAP login credentials for LiveData Migrator to use.
-
-1. Anywhere in the LiveData Migrator UI, open Settings by clicking on the gear icon in the bottom left.
-1. Select "LDAP Authentication" from the Settings tab that opens.
-1. Tick the box labelled "Enable LDPA Authentication" at the top of the page.
-1. Fill in your LDAP server configuration details.
-
-:::note
-After saving your configured LDAP login credentials, you will be logged out of the LiveData Migrator UI.
-:::
-
-### LDAP in the CLI
-
 :::info
 This release of LiveData Migrator contains preview functionality for LDAP UI login.
 :::
