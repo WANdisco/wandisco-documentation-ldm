@@ -7,7 +7,7 @@ sidebar_label: Configure storage
 The first step in the process of migrating data is to configure your storage, which defines where data is being migrated from (the source) and to (the target).
 
 * Supported sources are: **HDFS**
-* Supported targets are: **ADLS Gen2**, **Amazon S3**, **Google Cloud Storage**, **IBM Cloud Object Storage (S3)** and **HDFS**
+* Supported targets are: **ADLS Gen2**, **Amazon Simple Storage Service (Amazon S3)**, **Google Cloud Storage**, **IBM Cloud Object Storage (S3)** and **HDFS**
 
 Configure storage with either the [UI](#configure-storage-with-the-ui) or the [CLI](#configure-storage-with-the-cli).
 

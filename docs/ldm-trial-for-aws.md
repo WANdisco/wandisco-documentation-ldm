@@ -1,17 +1,17 @@
 ---
 id: ldm-trial-for-aws
-title: LiveData Migrator Trial for AWS
+title: LiveData Migrator Trial for Amazon Web Services (AWS)
 ---
 
 If you want to get familiar with LiveData Migrator before committing to a production implementation, you can use a HDFS Sandbox cluster as your source filesystem for LiveData Migrator.
 
 The HDFS Sandbox for LiveData Migrator is a non-kerberized [HDP 2.6.5 Sandbox](https://www.cloudera.com/downloads/hortonworks-sandbox.html) Docker environment.
 
-The following steps explain how to deploy the HDFS Sandbox and perform a migration of data to your Amazon S3 bucket using LiveData Migrator.
+The following steps explain how to deploy the HDFS Sandbox and perform a migration of data to your Amazon Simple Storage Service (S3) bucket using LiveData Migrator.
 
 ## Prerequisites
 
-Follow our guide to create an AWS EC2 instance that has the correct dependencies installed to host the HDP Sandbox:
+Follow our guide to create an Amazon Elastic Compute Cloud (Amazon EC2) instance that has the correct dependencies installed to host the HDP Sandbox:
 
 [Amazon EC2 Creation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/aws_vm_creation/)
 
