@@ -7,13 +7,13 @@ If you want to get familiar with LiveData Migrator before committing to a produc
 
 The HDFS Sandbox for LiveData Migrator is a non-kerberized [HDP 2.6.5 Sandbox](https://www.cloudera.com/downloads/hortonworks-sandbox.html) Docker environment.
 
-The following steps explain how to deploy the HDFS Sandbox and perform a migration of data to your S3 bucket using LiveData Migrator.
+The following steps explain how to deploy the HDFS Sandbox and perform a migration of data to your Amazon S3 bucket using LiveData Migrator.
 
 ## Prerequisites
 
 Follow our guide to create an AWS EC2 instance that has the correct dependencies installed to host the HDP Sandbox:
 
-[AWS VM Creation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/aws_vm_creation/)
+[Amazon EC2 Creation](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/aws_vm_creation/)
 
 Alternatively, create the host through the AWS portal or host the Sandbox on your own server. The requirements for the host are as follows:
 

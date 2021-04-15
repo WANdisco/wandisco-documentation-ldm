@@ -362,7 +362,7 @@ filesystem add local --file-system-id mytarget --fs-root ./Users/username/destin
 
 ### `filesystem add s3a`
 
-Add an S3 bucket as a target file system using the `filesystem add s3a` command. This method also supports IBM COS buckets.
+Add an Amazon S3 bucket as a target filesystem using the `filesystem add s3a` command. This method also supports IBM COS buckets.
 
 ```text tile="Add an S3 file system"
 SYNOPSYS
@@ -1582,7 +1582,7 @@ Additionally, use only one of the following parameters:
 
 Follow these steps to deploy a remote hive agent for AWS Glue:
 
-1. Transfer the remote server installer to your remote host (EC2 instance):
+1. Transfer the remote server installer to your remote host (Amazon EC2 instance):
 
    ```text title="Example of secure transfer from local to remote host"
    scp /opt/wandisco/hivemigrator/hivemigrator-remote-server-installer.sh myRemoteHost:~
