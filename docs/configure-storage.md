@@ -7,20 +7,20 @@ sidebar_label: Configure storage
 The first step in the process of migrating data is to configure your storage, which defines where data is being migrated from (the source) and to (the target).
 
 * Supported sources are: **HDFS**
-* Supported targets are: **ADLS Gen2**, **S3**, **Google Cloud Storage**, **IBM Cloud Object Storage (S3)** and **HDFS**
+* Supported targets are: **ADLS Gen2**, **Amazon Simple Storage Service (Amazon S3)**, **Google Cloud Storage**, **IBM Cloud Object Storage (S3)** and **HDFS**
 
 Configure storage with either the [UI](#configure-storage-with-the-ui) or the [CLI](#configure-storage-with-the-cli).
 
 ## Configure storage with the UI
 
-The Storage panel shows the underlying storage used by LiveData Migrator as either a source or target. LiveData Migrator supports one source and one or more targets. Each storage displays its associated processes, such as which LiveData Migrator is used to access it.
+The Storage panel shows the filesystems LiveData Migrator uses as either a source or target for data migrations. LiveData Migrator supports one source and one or more targets. Each filesystem displays its associated processes, such as which LiveData Migrator is used to access it.
 
 Use the Storage panel to:
 
-* View and configure the source and target storages.
+* View and configure the source and target filesystems.
 * Add further targets.
 * Add additional LiveData Migrator servers and [LiveData Plane](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/get-started) servers.
-* Configure S3-compatible Targets using the [Hadoop S3A configuration](http://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html) exposed in the UI.
+* Configure Amazon S3-compatible targets using the [Hadoop S3A configuration](http://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html) exposed in the UI.
 * Connect to additional LiveData Migrator or LiveData Plane instances and configure their respective storages.
 
 ### Configure source storage
@@ -64,15 +64,17 @@ Selecting to configure your _Target_ storage on the Storage panel, see the links
 
 ### Validate your source
 
-LiveData Migrator migrates data from a source file system. Validate that the correct source file system is registered or delete the existing one (you'll define a new source in the [Add File Systems](#add-file-systems) step).
+LiveData Migrator migrates data from a source filesystem. Validate that the correct source filesystem is registered or delete the existing one (you'll define a new source in the [Add File Systems](#add-file-systems) step).
 
-:::info
-The source file system is normally detected on startup. It will not be detected automatically if Kerberos is enabled or your Hadoop configuration does not contain the information needed to connect to the Hadoop file system.
+If Kerberos is enabled or your Hadoop configuration does not contain the information needed to connect to the Hadoop file system, use the [`filesystem auto-discover-source hdfs`](./command-reference.md#filesystem-auto-discover-source-hdfs) command to provide your Kerberos credentials and auto-discover your source HDFS configuration.
 
-If Kerberos is enabled, use the [`filesystem auto-discover-source hdfs`](./command-reference.md#filesystem-auto-discover-source-hdfs) command to provide your Kerberos credentials and auto-discover your source HDFS configuration.
+:::note
+
+If Kerberos is disabled, and Hadoop configuration is on the host, LiveData Migration will automatically detect the source filesystem on startup.
+
 :::
 
-You can manage the source file system through these commands.
+Manage the source filesystem with the following commands:
 
 | Command | Action |
 |:---|:---|
