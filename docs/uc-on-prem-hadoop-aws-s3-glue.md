@@ -29,13 +29,72 @@ These are an outline of the steps needed to ready your environment for migration
   * [AWS Site-to-Site VPN](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html) - suitable for small/medium/test migrations.
   * [AWS Direct Connect](https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html) - suitable for larger migrations (up to 100Gbps).
 
+  Ensure that all security best practices are taken into consideration when setting up either [Site-to-Site](https://docs.aws.amazon.com/vpn/latest/s2svpn/security.html) or [Direct Connect](https://docs.aws.amazon.com/directconnect/latest/UserGuide/security.html).
+
 ### AWS S3 and Glue
 
 For your target environment, make sure you have the following:
 
 * An [AWS account](https://aws.amazon.com/account/).
 * An [AWS S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html).
-* An [AWS Glue connection](https://docs.aws.amazon.com/glue/latest/dg/console-connections.html) to your AWS S3 bucket.
+* An [AWS Glue Data Catalog](https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html) instance.
+  * [Internal network configuration between AWS Glue and AWS S3](https://docs.aws.amazon.com/glue/latest/dg/start-connecting.html) including [DNS configuration for your VPC](https://docs.aws.amazon.com/glue/latest/dg/set-up-vpc-dns.html).
+  * An [AWS Glue connection](https://docs.aws.amazon.com/glue/latest/dg/console-connections.html).
+  * If applicable, an [AWS Glue crawler](https://docs.aws.amazon.com/glue/latest/dg/crawler-data-stores.html) configured to crawl your S3 bucket.
+
+### AWS security
+
+All AWS services should be secured using best practices. This is a summary of those practices and which services they apply to.
+
+#### S3
+
+All S3 buckets should adhere to [AWS best practices for S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html). These include the following:
+
+* Use [IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) to grant access to S3 buckets.
+* Follow [IAM security best practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html) when creating policies.
+  * [Create an individual IAM user/role](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#create-iam-users) for access to the bucket (don't use the AWS root account).
+  * Follow the policy of [least privilege](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege) to grant read and write access to the bucket for LiveData Migrator. This includes limiting access through [bucket policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-iam-policies.html) and [access control lists](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html).
+  * [Limit the IAM policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_controlling.html) to the minimal rules required for LiveData Migrator operations on the bucket:
+    * List available buckets
+    * Obtain bucket location
+    * List bucket objects
+    * Put, delete or retrieve objects from the bucket.
+* [IAM Access and Secret Keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) are supported if your are unable to use IAM Roles.
+  * Use [`filesystem update s3a`](./command-reference.md#filesystem-update-s3a) when [rotating access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_RotateAccessKey) to update LiveData Migrator with the new key IDs.
+  * The access and secret keys can be stored or referenced in a location used by the [DefaultAWSCredentialsProviderChain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default). This class can be defined when using the [`--credentials-provider`](./command-reference.md#s3a-mandatory-parameters) option.
+
+    If using the [SimpleAWSCredentialsProvider](https://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html#Simple_name.2Fsecret_credentials_with_SimpleAWSCredentialsProvider.2A) class, the access and secret keys will be stored in the LiveData Migrator database.
+* [Enable server-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html) for your S3 bucket.
+* [Block public access](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html) to the S3 bucket unless you explicitly require it.
+
+#### Glue
+
+All AWS Glue instances should be configured using [AWS security practices for Glue](https://docs.aws.amazon.com/glue/latest/dg/security.html). These include the following:
+
+* Set up [IAM permissions](https://docs.aws.amazon.com/glue/latest/dg/getting-started-access.html) for LiveData Migrator to access AWS Glue, including:
+  * [Create an IAM policy for the Glue service](https://docs.aws.amazon.com/glue/latest/dg/create-service-policy.html).
+  * [Create an IAM role for AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/create-an-iam-role.html).
+  * [Attach a policy to the IAM user to allow access to AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html).
+* [IAM Access and Secret Keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) are supported if your are unable to use IAM Roles.
+  * Use [`hive agent configure glue`](./command-reference.md#hive-agent-configure-glue) when [rotating access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_RotateAccessKey) to update the LiveData Migrator metadata service with the new key IDs.
+  * The access and secret keys can be stored or referenced in a location used by the [DefaultAWSCredentialsProviderChain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default). This class is the default when not using the [`--credentials-provider`](./command-reference.md#glue-credential-parameters) option.
+
+    If specifying the [StaticCredentialsProviderFactory](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/index.html?com/amazonaws/auth/AWSStaticCredentialsProvider.html) class, the access and secret keys will be stored in the LiveData Migrator metadata service database.
+* [Enable encryption in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/set-up-encryption.html).
+
+### AWS costs and quotas
+
+The following table lists the required and optional AWS services that are applicable to this use-case:
+
+| Service | Required? | Pricing | Quotas |
+|---|---|---|---|
+| S3 | **Yes** | [S3 pricing](https://aws.amazon.com/s3/pricing/) | [S3 quotas](https://docs.aws.amazon.com/general/latest/gr/s3.html#limits_s3) |
+| Glue | **Yes** | [Glue pricing](https://aws.amazon.com/glue/pricing/) | [Glue quotas](https://docs.aws.amazon.com/general/latest/gr/glue.html#limits_glue) |
+| Site-to-Site VPN | Optional | [Site-to-Site VPN pricing](https://aws.amazon.com/vpn/pricing/) | [Site-to-Site VPN quotas](https://docs.aws.amazon.com/vpn/latest/s2svpn/vpn-limits.html) |
+| Direct Connect | Optional | [Direct Connect pricing](https://aws.amazon.com/directconnect/pricing/) | [Direct Connect quotas](https://docs.aws.amazon.com/directconnect/latest/UserGuide/limits.html) |
+| Key Management Service (KMS) | Optional | [KMS pricing](https://aws.amazon.com/kms/pricing/) | [KMS quotas](https://docs.aws.amazon.com/kms/latest/developerguide/limits.html) |
+
+See [AWS pricing](https://aws.amazon.com/pricing/) for more general guidance.
 
 ## Configure for data migrations
 
@@ -63,7 +122,7 @@ Configure your AWS S3 bucket as your target filesystem:
 * [UI](./configure-storage.md#add-target-storages)
 * [CLI](./command-reference.md#filesystem-add-s3a)
 
-## (Optional) Create path mappings
+## Create path mappings (optional)
 
 [Create path mappings](./create-path-mappings.md) to ensure that data for managed Hive databases and tables are migrated to an appropriate [folder location on your AWS S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html).
 
@@ -71,7 +130,7 @@ This lets you start using your source data and metadata immediately after migrat
 
 ## Configure for metadata migrations
 
-### Add source hive agent
+### Add Apache Hive as source hive agent
 
 1. (Recommended) [Enable the Hive metastore event listener](./configuration-metadata.md#enable-hive-metastore-event-listener) on the on-premises Hadoop cluster.
 
@@ -89,7 +148,7 @@ This lets you start using your source data and metadata immediately after migrat
      hive agent check --name hiveAgent
      ```
 
-### Add target hive agent
+### Add AWS GLue as target hive agent
 
 1. Configure a hive agent to connect to AWS Glue:
 

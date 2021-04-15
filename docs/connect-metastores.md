@@ -4,7 +4,6 @@ title: Connect metastores for metadata migrations
 sidebar_label: Connect metastores
 ---
 
-
 This version of LiveData Migrator includes a feature that migrates metadata. Metadata can be migrated from [Apache Hive](https://cwiki.apache.org/confluence/display/Hive/Home), [AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/populate-data-catalog.html), and [Azure SQL](https://docs.microsoft.com/en-us/azure/azure-sql/database/sql-database-paas-overview).
 
 Ready to migrate metadata? First, connect to your metastores by adding Hive agents. Then, [define metadata rules](./define-metadata-rules.md) before [migrating metadata](./migrate-metadata.md).
