@@ -20,7 +20,7 @@ Use the Storage panel to:
 * View and configure the source and target filesystems.
 * Add further targets.
 * Add additional LiveData Migrator servers and [LiveData Plane](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/get-started) servers.
-* Configure S3-compatible targets using the [Hadoop S3A configuration](http://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html) exposed in the UI.
+* Configure Amazon S3-compatible targets using the [Hadoop S3A configuration](http://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html) exposed in the UI.
 * Connect to additional LiveData Migrator or LiveData Plane instances and configure their respective storages.
 
 ### Configure source storage
