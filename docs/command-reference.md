@@ -405,8 +405,8 @@ SYNOPSYS
 
 * **`--access-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the access key with this parameter. This is referenced in the UI as **Access Key**. This is a required parameter when adding an IBM COS bucket.
 * **`--secret-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the secret key using this parameter. This is referenced in the UI as **Secret Key**. This is a required parameter when adding an IBM COS bucket.
-* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`. This is referenced in the UI as **S3A Properties** (see [S3a Default Properties](#s3a-default-properties) and [S3a Custom Properties](#s3a-custom-properties) for more information).
-* **`--properties`** Specify properties to use in a comma-separated key/value list.
+* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
+* **`--properties`** Specify properties to use in a comma-separated key/value list. This is referenced in the UI as **S3A Properties** (see [S3a Default Properties](#s3a-default-properties) and [S3a Custom Properties](#s3a-custom-properties) for more information).
 
 #### S3a Default Properties
 
