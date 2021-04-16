@@ -14,7 +14,7 @@ These are an outline of the steps needed to ready your environment for migration
 * Apache Hadoop administration
   * Hadoop Distributed Filesystem (HDFS)
   * Apache Hive
-* AWS Service configuration and management
+* Amazon Web Services (AWS) Service configuration and management
   * Amazon Simple Storage Service (Amazon S3)
   * AWS Glue
 
@@ -31,7 +31,7 @@ These are an outline of the steps needed to ready your environment for migration
 
   Ensure that all security best practices are taken into consideration when setting up either [Site-to-Site](https://docs.aws.amazon.com/vpn/latest/s2svpn/security.html) or [Direct Connect](https://docs.aws.amazon.com/directconnect/latest/UserGuide/security.html).
 
-### Amazon S3 and Glue
+### Amazon S3 and AWS Glue
 
 For your target environment, make sure you have the following:
 
@@ -40,17 +40,17 @@ For your target environment, make sure you have the following:
 * An [AWS Glue Data Catalog](https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html) instance.
   * [Internal network configuration between AWS Glue and Amazon S3](https://docs.aws.amazon.com/glue/latest/dg/start-connecting.html) including [DNS configuration for your VPC](https://docs.aws.amazon.com/glue/latest/dg/set-up-vpc-dns.html).
   * An [AWS Glue connection](https://docs.aws.amazon.com/glue/latest/dg/console-connections.html).
-  * If applicable, an [AWS Glue crawler](https://docs.aws.amazon.com/glue/latest/dg/crawler-data-stores.html) configured to crawl your S3 bucket.
+  * If applicable, an [AWS Glue crawler](https://docs.aws.amazon.com/glue/latest/dg/crawler-data-stores.html) configured to crawl your Amazon S3 bucket.
 
 ### AWS security
 
 All AWS services should be secured using best practices. This is a summary of those practices and which services they apply to.
 
-#### S3
+#### Amazon S3
 
-All S3 buckets should adhere to [AWS best practices for S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html). These include the following:
+All Amazon S3 buckets should adhere to [AWS best practices for Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html). These include the following:
 
-* Use [IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) to grant access to S3 buckets.
+* Use [IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) to grant access to Amazon S3 buckets.
 * Follow [IAM security best practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html) when creating policies.
   * [Create an individual IAM user/role](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#create-iam-users) for access to the bucket (don't use the AWS root account).
   * Follow the policy of [least privilege](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege) to grant read and write access to the bucket for LiveData Migrator. This includes limiting access through [bucket policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-iam-policies.html) and [access control lists](https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html).
@@ -64,15 +64,15 @@ All S3 buckets should adhere to [AWS best practices for S3](https://docs.aws.ama
   * The access and secret keys can be stored or referenced in a location used by the [DefaultAWSCredentialsProviderChain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html#credentials-default). This class can be defined when using the [`--credentials-provider`](./command-reference.md#s3a-mandatory-parameters) option.
 
     If using the [SimpleAWSCredentialsProvider](https://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html#Simple_name.2Fsecret_credentials_with_SimpleAWSCredentialsProvider.2A) class, the access and secret keys will be stored in the LiveData Migrator database.
-* [Enable server-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html) for your S3 bucket.
-* [Block public access](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html) to the S3 bucket unless you explicitly require it.
+* [Enable server-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html) for your Amazon S3 bucket.
+* [Block public access](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html) to the Amazon S3 bucket unless you explicitly require it.
 
-#### Glue
+#### AWS Glue
 
 All AWS Glue instances should be configured using [AWS security practices for Glue](https://docs.aws.amazon.com/glue/latest/dg/security.html). These include the following:
 
 * Set up [IAM permissions](https://docs.aws.amazon.com/glue/latest/dg/getting-started-access.html) for LiveData Migrator to access AWS Glue, including:
-  * [Create an IAM policy for the Glue service](https://docs.aws.amazon.com/glue/latest/dg/create-service-policy.html).
+  * [Create an IAM policy for the AWS Glue service](https://docs.aws.amazon.com/glue/latest/dg/create-service-policy.html).
   * [Create an IAM role for AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/create-an-iam-role.html).
   * [Attach a policy to the IAM user to allow access to AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html).
 * [IAM Access and Secret Keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) are supported if your are unable to use IAM Roles.
@@ -88,8 +88,8 @@ The following table lists the required and optional AWS services that are applic
 
 | Service | Required? | Pricing | Quotas |
 |---|---|---|---|
-| S3 | **Yes** | [S3 pricing](https://aws.amazon.com/s3/pricing/) | [S3 quotas](https://docs.aws.amazon.com/general/latest/gr/s3.html#limits_s3) |
-| Glue | **Yes** | [Glue pricing](https://aws.amazon.com/glue/pricing/) | [Glue quotas](https://docs.aws.amazon.com/general/latest/gr/glue.html#limits_glue) |
+| Amazon S3 | **Yes** | [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/) | [Amazon S3 quotas](https://docs.aws.amazon.com/general/latest/gr/s3.html#limits_s3) |
+| AWS Glue | **Yes** | [AWS Glue pricing](https://aws.amazon.com/glue/pricing/) | [AWS Glue quotas](https://docs.aws.amazon.com/general/latest/gr/glue.html#limits_glue) |
 | Site-to-Site VPN | Optional | [Site-to-Site VPN pricing](https://aws.amazon.com/vpn/pricing/) | [Site-to-Site VPN quotas](https://docs.aws.amazon.com/vpn/latest/s2svpn/vpn-limits.html) |
 | Direct Connect | Optional | [Direct Connect pricing](https://aws.amazon.com/directconnect/pricing/) | [Direct Connect quotas](https://docs.aws.amazon.com/directconnect/latest/UserGuide/limits.html) |
 | Key Management Service (KMS) | Optional | [KMS pricing](https://aws.amazon.com/kms/pricing/) | [KMS quotas](https://docs.aws.amazon.com/kms/latest/developerguide/limits.html) |
