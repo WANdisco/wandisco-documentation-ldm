@@ -103,7 +103,7 @@ This will often take the form of `https://login.microsoftonline.com/{tenant}/oau
 #### Optional Parameters
 
 * **`--insecure`** When provided, LiveData Migrator will not use TLS to encrypt communication with ADLS Gen 2. This may improve throughput, but should only be used when you have other means of securing communication. This is referenced in the UI when **Use Secure Protocol** is unchecked.
-* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
+* **`--properties-files`** Reference a list of existing properties files, each containing Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
 #### Example
@@ -139,7 +139,7 @@ SYNOPSYS
 #### Optional Parameters
 
 * **`--insecure`** When provided, LiveData Migrator will not use TLS to encrypt communication with ADLS Gen 2. This may improve throughput, but should only be used when you have other means of securing communication. This is referenced in the UI when **Use Secure Protocol** is unchecked.
-* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
+* **`--properties-files`** Reference a list of existing properties files, each containing Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
 #### Example
@@ -190,7 +190,7 @@ This is referenced in the UI as **Key File** when the _Key File Options -> Provi
 #### Optional Parameters
 
 * **`--service-account-email`** The email address linked to your GCS service account. This is referenced in the UI as **Email address** and is required when selecting the **Upload P12 Key File** option.
-* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
+* **`--properties-files`** Reference a list of existing properties files, each containing Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
 #### Example
@@ -337,7 +337,7 @@ SYNOPSYS
 * **`--fs-root`** The directory in the local filesystem to scan for data or send data to, depending on whether the filesystem is defined as a source or a target. Should be supplied using the full directory path from the root.
 * **`--source`** Provide this parameter to use the file system resource created as a source.  This is referenced in the UI when configuring the _Unknown source_.
 * **`--scan-only`** Provide this parameter to create a static source filesytem for use in [one-time migrations](./one-time-migration.md). Requires `--source`.
-* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
+* **`--properties-files`** Reference a list of existing properties files, each containing Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
 :::note
