@@ -1,7 +1,7 @@
 ---
 id: uc-on-prem-hadoop-aws-s3-glue
-title: On-premises Hadoop to Amazon S3 and Glue
-sidebar_label: On-premises Hadoop to Amazon S3 & Glue
+title: On-premises Hadoop to Amazon S3 and AWS Glue
+sidebar_label: On-premises Hadoop to Amazon S3 & AWS Glue
 ---
 
 These are an outline of the steps needed to ready your environment for migration of data and metadata.
@@ -15,7 +15,7 @@ These are an outline of the steps needed to ready your environment for migration
   * Hadoop Distributed Filesystem (HDFS)
   * Apache Hive
 * AWS Service configuration and management
-  * Amazon S3
+  * Amazon Simple Storage Service (Amazon S3)
   * AWS Glue
 
 ## Prerequisites
