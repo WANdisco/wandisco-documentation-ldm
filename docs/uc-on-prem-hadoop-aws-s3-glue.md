@@ -1,7 +1,7 @@
 ---
 id: uc-on-prem-hadoop-aws-s3-glue
-title: On-premises Hadoop to AWS S3 and Glue
-sidebar_label: On-premises Hadoop to AWS S3 & Glue
+title: On-premises Hadoop to Amazon S3 and Glue
+sidebar_label: On-premises Hadoop to Amazon S3 & Glue
 ---
 
 These are an outline of the steps needed to ready your environment for migration of data and metadata.
@@ -15,7 +15,7 @@ These are an outline of the steps needed to ready your environment for migration
   * Hadoop Distributed Filesystem (HDFS)
   * Apache Hive
 * AWS Service configuration and management
-  * AWS S3
+  * Amazon S3
   * AWS Glue
 
 ## Prerequisites
@@ -24,21 +24,21 @@ These are an outline of the steps needed to ready your environment for migration
 
 * All [prerequisites](./prereqs.md#prerequisites) are met for the source environment.
 
-* Network connectivity between your edge node and [AWS S3](https://docs.aws.amazon.com/general/latest/gr/s3.html) & [AWS Glue](https://docs.aws.amazon.com/general/latest/gr/glue.html). These are some of the options available depending on your use-case:
+* Network connectivity between your edge node and [Amazon S3](https://docs.aws.amazon.com/general/latest/gr/s3.html) & [AWS Glue](https://docs.aws.amazon.com/general/latest/gr/glue.html). These are some of the options available depending on your use-case:
 
   * [AWS Site-to-Site VPN](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html) - suitable for small/medium/test migrations.
   * [AWS Direct Connect](https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html) - suitable for larger migrations (up to 100Gbps).
 
   Ensure that all security best practices are taken into consideration when setting up either [Site-to-Site](https://docs.aws.amazon.com/vpn/latest/s2svpn/security.html) or [Direct Connect](https://docs.aws.amazon.com/directconnect/latest/UserGuide/security.html).
 
-### AWS S3 and Glue
+### Amazon S3 and Glue
 
 For your target environment, make sure you have the following:
 
 * An [AWS account](https://aws.amazon.com/account/).
-* An [AWS S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html).
+* An [Amazon S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html).
 * An [AWS Glue Data Catalog](https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html) instance.
-  * [Internal network configuration between AWS Glue and AWS S3](https://docs.aws.amazon.com/glue/latest/dg/start-connecting.html) including [DNS configuration for your VPC](https://docs.aws.amazon.com/glue/latest/dg/set-up-vpc-dns.html).
+  * [Internal network configuration between AWS Glue and Amazon S3](https://docs.aws.amazon.com/glue/latest/dg/start-connecting.html) including [DNS configuration for your VPC](https://docs.aws.amazon.com/glue/latest/dg/set-up-vpc-dns.html).
   * An [AWS Glue connection](https://docs.aws.amazon.com/glue/latest/dg/console-connections.html).
   * If applicable, an [AWS Glue crawler](https://docs.aws.amazon.com/glue/latest/dg/crawler-data-stores.html) configured to crawl your S3 bucket.
 
@@ -115,16 +115,16 @@ See [AWS pricing](https://aws.amazon.com/pricing/) for more general guidance.
 
    Ensure to include the `--source` parameter when using the command above.
 
-### Add AWS S3 bucket as target filesystem
+### Add Amazon S3 bucket as target filesystem
 
-Configure your AWS S3 bucket as your target filesystem:
+Configure your Amazon S3 bucket as your target filesystem:
 
 * [UI](./configure-storage.md#add-target-storages)
 * [CLI](./command-reference.md#filesystem-add-s3a)
 
 ## Create path mappings (optional)
 
-[Create path mappings](./create-path-mappings.md) to ensure that data for managed Hive databases and tables are migrated to an appropriate [folder location on your AWS S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html).
+[Create path mappings](./create-path-mappings.md) to ensure that data for managed Hive databases and tables are migrated to an appropriate [folder location on your Amazon S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html).
 
 This lets you start using your source data and metadata immediately after migration, as it will be referenced correctly by your [AWS Glue crawler](https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html) and/or [AWS Glue Studio](https://docs.aws.amazon.com/glue/latest/ug/edit-jobs-source-s3-files.html).
 
@@ -148,7 +148,7 @@ This lets you start using your source data and metadata immediately after migrat
      hive agent check --name hiveAgent
      ```
 
-### Add AWS GLue as target hive agent
+### Add AWS Glue as target hive agent
 
 1. Configure a hive agent to connect to AWS Glue:
 
