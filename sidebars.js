@@ -107,6 +107,10 @@ module.exports = {
             {
               "type": "doc",
               "id": "uc-on-prem-hadoop-hdi"
+            },
+            {
+              "type": "doc",
+              "id": "uc-on-prem-hadoop-aws-s3-glue"
             }
           ]
         },
