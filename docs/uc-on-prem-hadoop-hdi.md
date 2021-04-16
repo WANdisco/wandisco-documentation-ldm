@@ -27,6 +27,10 @@ For your target environment, make sure the following prerequisites are met:
   * HDFS and Hive client libraries installed.
   * A chosen port open for outbound connections (for example: 5552) to communicate with the LiveData Migrator service on the on-premises Hadoop edge node.
 
+## Install LiveData Migrator on your Hadoop edge node
+
+[Download and install](./installation.md#download-and-install-livedata-migrator) LiveData Migrator on your Hadoop edge node.
+
 ## Configure for data migrations
 
 ### Add HDFS as source filesystem
