@@ -405,38 +405,33 @@ SYNOPSYS
 
 * **`--access-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the access key with this parameter. This is referenced in the UI as **Access Key**. This is a required parameter when adding an IBM COS bucket.
 * **`--secret-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the secret key using this parameter. This is referenced in the UI as **Secret Key**. This is a required parameter when adding an IBM COS bucket.
-* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
+* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`. This is referenced in the UI as **S3A Properties** (see [S3a Default Properties](#s3a-default-properties) and [S3a Custom Properties](#s3a-custom-properties) for more information).
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
-#### S3a Properties
+#### S3a Default Properties
 
-:::info
-When adding properties via the UI or API, for example to set a custom `fs.s3a.endpoint`, it is required to also set the following properties manually. They are added by default when using the CLI.
-:::
+These properties are defined by default when adding an S3a filesystem.
 
 * **`fs.s3a.impl`** (default `org.apache.hadoop.fs.s3a.S3AFileSystem`): The implementation class of the S3a Filesystem.
 * **`fs.AbstractFileSystem.s3a.impl`** (default `org.apache.hadoop.fs.s3a.S3A`): The implementation class of the S3a AbstractFileSystem.
-* **`fs.s3a.user.agent.prefix`** (default `WANdisco/LiveDataMigrator`): Sets a custom value that will be pre-pended to the User-Agent header sent in
+* **`fs.s3a.user.agent.prefix`** (default `APN/1.0 WANdisco/1.0 LiveDataMigrator/1.11.6`): Sets a custom value that will be pre-pended to the User-Agent header sent in
     HTTP requests to the S3 back-end by S3aFileSystem.
 * **`fs.s3a.impl.disable.cache`** (default `true`): Disables the S3 file system cache when set to 'true'.
-* **`fs.hadoop.tmp.dir`** (default `tmp`): The parent directory for other temporary directories.
-* **`fs.s3a.fast.upload.buffer`** (default `disk`): Defines how the filesystem will [buffer the upload](#upload-buffering).
-* **`fs.s3a.fast.upload.active.blocks`** (default `8`): Defines how many blocks a single output stream can have uploading or queued at a given time.
-* **`fs.s3a.block.size`** (default `32M`): Defines the maximum size of blocks during file transfer. Use the suffix `K`, `M`, `G`, `T` or `P` to scale the value in Kilobytes, Megabytes, Gigabytes, Terabytes or Petabytes respectively.
-* **`fs.s3a.buffer.dir`** (default `tmp`): Defines the directory used by [disk buffering](#upload-buffering).
+* **`hadoop.tmp.dir`** (default `tmp`): The parent directory for other temporary directories.
 * **`fs.s3a.connection.maximum`** (default `120`) Defines the maximum number of simultaneous connections to the S3 filesystem.
 * **`fs.s3a.threads.max`** (default `100`): Defines the total number of threads to make available in the filesystem for data uploads or any other queued filesystem operation.
 * **`fs.s3a.max.total.tasks`** (default `60`): Defines the number of operations which can be queued for execution at a time.
 
-You can additionally find a list of S3a properties in the [S3a documentation](https://hadoop.apache.org/docs/r3.2.1/hadoop-aws/tools/hadoop-aws/index.html).
+#### S3a Custom Properties
 
-#### Example
+* **`fs.s3a.fast.upload.buffer`** (default `disk`): Defines how the filesystem will [buffer the upload](#upload-buffering).
+* **`fs.s3a.fast.upload.active.blocks`** (default `8`): Defines how many blocks a single output stream can have uploading or queued at a given time.
+* **`fs.s3a.block.size`** (default `32M`): Defines the maximum size of blocks during file transfer. Use the suffix `K`, `M`, `G`, `T` or `P` to scale the value in Kilobytes, Megabytes, Gigabytes, Terabytes or Petabytes respectively.
+* **`fs.s3a.buffer.dir`** (default `tmp`): Defines the directory used by [disk buffering](#upload-buffering).
 
-```text
-filesystem add s3a --file-system-id mytarget --bucket-name mybucket1 --credentials-provider org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider --access-key B6ZAI18Z3UIO002Y777A --secret-key OP87Chokisf4hsTP0Q5j95yI904lT7AaDBGJpp0D
-```
+Find an additional list of S3a properties in the [S3a documentation](https://hadoop.apache.org/docs/r3.2.1/hadoop-aws/tools/hadoop-aws/index.html).
 
-#### Upload Buffering
+##### Upload Buffering
 
 Migrations using an S3A target destination will buffer all uploads. By default, the buffering will occur on the local disk of system LiveData Migrator is running on, in the `/tmp` directory.
 
@@ -455,6 +450,12 @@ Both the `array` and `bytebuffer` options may lead to the consumption of large a
 :::note
   If you run out of disk space on which to buffer the migration, the migration will stall with a series of errors. To avoid this, ensure the file system containing the directory used for buffering (`/tmp` by default) has enough remaining space to facilitate the transfer.
 :::
+
+#### Example
+
+```text
+filesystem add s3a --file-system-id mytarget --bucket-name mybucket1 --credentials-provider org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider --access-key B6ZAI18Z3UIO002Y777A --secret-key OP87Chokisf4hsTP0Q5j95yI904lT7AaDBGJpp0D
+```
 
 ----
 
