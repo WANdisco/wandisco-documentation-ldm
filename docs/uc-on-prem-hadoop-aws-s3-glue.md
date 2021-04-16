@@ -82,6 +82,16 @@ All AWS Glue instances should be configured using [AWS security practices for Gl
     If specifying the [StaticCredentialsProviderFactory](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/index.html?com/amazonaws/auth/AWSStaticCredentialsProvider.html) class, the access and secret keys will be stored in the LiveData Migrator metadata service database.
 * [Enable encryption in AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/set-up-encryption.html).
 
+### AWS deployment
+
+These are some of the options to consider before creating your Amazon S3 bucket and AWS Glue instance:
+
+* [Amazon S3 storage class](https://docs.amazonaws.cn/en_us/AmazonS3/latest/userguide/storage-class-intro.html)
+* [Amazon S3 lifecycle policy](https://docs.amazonaws.cn/en_us/AmazonS3/latest/userguide/object-lifecycle-mgmt.html)
+
+* [AWS Glue cross-account and cross-region](https://aws.amazon.com/blogs/big-data/create-cross-account-and-cross-region-aws-glue-connections/)
+* [AWS Glue resilience](https://docs.aws.amazon.com/glue/latest/dg/disaster-recovery-resiliency.html)
+
 ### AWS costs and quotas
 
 The following table lists the required and optional AWS services that are applicable to this use-case:
@@ -95,6 +105,10 @@ The following table lists the required and optional AWS services that are applic
 | Key Management Service (KMS) | Optional | [KMS pricing](https://aws.amazon.com/kms/pricing/) | [KMS quotas](https://docs.aws.amazon.com/kms/latest/developerguide/limits.html) |
 
 See [AWS pricing](https://aws.amazon.com/pricing/) for more general guidance.
+
+## Install LiveData Migrator on your Hadoop edge node
+
+[Download and install](./installation.md#download-and-install-livedata-migrator) LiveData Migrator on your Hadoop edge node.
 
 ## Configure for data migrations
 
