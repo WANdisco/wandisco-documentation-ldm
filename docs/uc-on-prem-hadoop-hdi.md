@@ -1,10 +1,12 @@
 ---
 id: uc-on-prem-hadoop-hdi
-title: On-premises Hadoop cluster to Azure HDInsights cluster
+title: On-premises Hadoop to Azure HDInsights
 sidebar_label: On-premises Hadoop to Azure HDI
 ---
 
 These are an outline of the steps needed to ready your environment for migration of data and metadata.
+
+**Time to complete:** 1 hour (assuming all prerequisites are met).
 
 ## Prerequisites
 
