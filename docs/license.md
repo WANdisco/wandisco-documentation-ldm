@@ -1,12 +1,16 @@
 ---
 id: license
-title: Upgrade your LiveData Migrator license
-sidebar_label: Upgrade your license
+title: Licensing
+sidebar_label: Licensing
 ---
 
 The LiveData Migrator trial license includes 14 days operation and 5TB of data migration. This gives you full use of LiveData Migrator up to either of these limits.
 
 Once you've reached the limit of your trial license, you'll need to upgrade to a full license to continue using LiveData Migrator. These instructions explain how to upgrade or renew a full license with either the [UI](#upgrade-your-license-in-the-ui) or [CLI](#upgrade-your-license-with-the-cli).
+
+## Costing and billing
+
+* [Amazon Web Services (AWS)](https://aws.amazon.com/marketplace/pp/B07B8SZND9)
 
 ## Upgrade your license in the UI
 
