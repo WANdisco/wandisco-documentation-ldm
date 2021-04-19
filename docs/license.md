@@ -43,11 +43,13 @@ Upload your new license in the License panel of the UI. This panel displays curr
 
 ## License costs
 
-   * [Amazon Web Services (AWS)](https://aws.amazon.com/marketplace/pp/B07B8SZND9)
+Refer to the links to learn more about license costs for LiveData Migrator in each platform.
+
+* [AWS Marketplace](https://aws.amazon.com/marketplace/pp/B07B8SZND9)
 
 ## Billing
 
-Target filesystems incur costs which can vary depending on which Cloud platform you are migrating to. Refer to the following links to learn the costs for each target filesystem.
+Target filesystems incur costs which can vary depending on which Cloud platform you use. Refer to the following links to learn the costs for each target filesystem.
 
 * [Amazon Simple Storage Service (Amazon S3)](https://aws.amazon.com/s3/pricing/)
 * [Google Cloud](https://cloud.google.com/pricing)
