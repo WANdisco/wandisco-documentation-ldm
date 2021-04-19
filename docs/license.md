@@ -8,10 +8,6 @@ The LiveData Migrator trial license includes 14 days operation and 5TB of data m
 
 Once you've reached the limit of your trial license, you'll need to upgrade to a full license to continue using LiveData Migrator. These instructions explain how to upgrade or renew a full license with either the [UI](#upgrade-your-license-in-the-ui) or [CLI](#upgrade-your-license-with-the-cli).
 
-## Costing and billing
-
-* [Amazon Web Services (AWS)](https://aws.amazon.com/marketplace/pp/B07B8SZND9)
-
 ## Upgrade your license in the UI
 
 Upload your new license in the License panel of the UI. This panel displays current license information, including the expiry date, and warnings if your license limits are approaching.
@@ -44,6 +40,18 @@ Upload your new license in the License panel of the UI. This panel displays curr
    ```text title="Example"
    license upload --path /user/hdfs/license.key
    ```
+
+## License costs
+
+   * [Amazon Web Services (AWS)](https://aws.amazon.com/marketplace/pp/B07B8SZND9)
+
+## Billing
+
+Target filesystems incur costs which can vary depending on which Cloud platform you are migrating to. Refer to the following links to learn the costs for each target filesystem.
+
+* [Amazon Simple Storage Service (Amazon S3)](https://aws.amazon.com/s3/pricing/)
+* [Google Cloud](https://cloud.google.com/pricing)
+* [IBM COS](https://www.ibm.com/cloud/object-storage/pricing)
 
 ## Next Steps
 
