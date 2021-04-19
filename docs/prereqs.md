@@ -10,8 +10,6 @@ Ready to start? Check the prerequisites and then follow these steps to get ready
 
 ## Recommended Technical Knowledge
 
-Before starting this installation, you should consider the following knowledge requirements:
-
 ### System administration
 
 * Linux operating system installation
@@ -29,7 +27,7 @@ Before starting this installation, you should consider the following knowledge r
 
 * Proficiency with intended target storage technologies, such as ADLS Gen 2, GCS, HDFS, and Amazon Simple Storage Service (S3).
 * For Amazon Web Services, this includes:
-  - Knowledge of AWS Marketplace, AWS EC2 Console, Amazon Simple Storage Service (S3), and AWS Command Line Tool.
+  - Knowledge of AWS Marketplace, Amazon Elastic Compute Cloud (Amazon EC2) Console, Amazon Simple Storage Service (Amazon S3), and AWS Command Line Tool.
   - Specifically, starting, stopping, and terminating AWS instances, understanding any storage persistence and related costs.
   - Ability to monitor and troubleshoot AWS services.
 
