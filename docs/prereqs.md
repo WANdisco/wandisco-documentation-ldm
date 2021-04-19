@@ -6,7 +6,36 @@ sidebar_label: Prerequisites
 
 Ready to start? Check the prerequisites and then follow these steps to get ready for LiveData Migrator. This latest version of LiveData Migrator also includes a metadata migration feature. Prerequisites to migrate metadata are included in the list below, and you'll find instructions explaining how to use the feature throughout this guide.
 
-[Read the release notes](https://community.wandisco.com/s/article/Release-Notes-WANdisco-LiveData-Migrator-Release-Notes-1-11) to get the latest information about the current version of LiveData Migrator.
+[Read the release notes](https://community.wandisco.com/s/article/Release-Notes-WANdisco-LiveData-Migrator-Release-Notes-1-11-1) to get the latest information about the current version of LiveData Migrator.
+
+## Recommended Technical Knowledge
+
+### System administration
+
+* Linux operating system installation
+* Disk management
+* Memory monitoring and management
+* Command line administration and manually editing configuration files
+* Service configuration and management
+
+### Networking
+
+* IP Address assignation
+* TCP/IP ports and Firewall setup or server certificates (for SSL)
+
+### Cloud Storage Technologies
+
+* Proficiency with intended target storage technologies, such as ADLS Gen 2, GCS, HDFS, and Amazon Simple Storage Service (S3).
+* For Amazon Web Services, this includes:
+  - Knowledge of AWS Marketplace, Amazon Elastic Compute Cloud (Amazon EC2) Console, Amazon Simple Storage Service (Amazon S3), and AWS Command Line Tool.
+  - Specifically, starting, stopping, and terminating AWS instances, understanding any storage persistence and related costs.
+  - Ability to monitor and troubleshoot AWS services.
+
+### LiveData
+
+* An understanding of the installation procedures for your platform, as provided in this guide.
+
+If you’re not confident about meeting the requirements, you can discuss a supported installation by contacting [WANdisco](https://www2.wandisco.com/ldmaquestion).
 
 ## Prerequisites
 
