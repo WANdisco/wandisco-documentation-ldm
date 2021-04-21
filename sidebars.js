@@ -20,11 +20,11 @@ module.exports = {
             },
             {
               "type": "doc",
-              "id": "installation"
+              "id": "license"
             },
             {
               "type": "doc",
-              "id": "license"
+              "id": "installation"
             },
             {
               "type": "doc",
