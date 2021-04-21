@@ -151,7 +151,7 @@ To check that the configuration for the filesystem is correct:
      filesystem show --file-system-id myAWSBucket
      ```
 
-To test a migration to the S3 bucket, [create a migration](./create-migration.md).
+To test a migration to the S3 bucket, [create a migration](./create-migration.md) and run it to transfer data, then check that the data has arrived in its intended destination.
 
 ## Create path mappings (optional)
 
@@ -183,7 +183,7 @@ To check that the configuration for the hive agent is correct:
      hive agent check --name hiveAgent
      ```
 
-To test a metadata migration from the Apache Hive agent, [create a metadata migration](./migrate-metadata.md).
+To test a metadata migration from the Apache Hive agent, [create a metadata migration](./migrate-metadata.md) and run it to transfer data, then check that the data has arrived in its intended destination.
 
 ### Add AWS Glue as target hive agent
 
@@ -205,7 +205,7 @@ To check that the configuration for the hive agent is correct:
     hive agent check --name hiveAgent
     ```
 
-To test a metadata migration to the AWS Glue target agent, [create a metadata migration](./migrate-metadata.md).
+To test a metadata migration to the AWS Glue target agent, [create a metadata migration](./migrate-metadata.md) and run it to transfer data, then check that the data has arrived in its intended destination.
 
 ## Troubleshooting
 
