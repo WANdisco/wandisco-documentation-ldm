@@ -140,7 +140,7 @@ You may then [test your target filesystem](#test-target-filesystem).
 
 ### Test the S3 bucket target
 
-LiveData Migrator automatically tests the connection to any target filesystem added to ensure the details provided are valid and a migration can be established.
+LiveData Migrator automatically tests the connection to any target filesystem added to ensure the details provided are valid and a migration can be created and run.
 
 To check that the configuration for the filesystem is correct:
 
@@ -172,7 +172,7 @@ This lets you start using your source data and metadata immediately after migrat
 
 ### Test the Apache Hive source hive agent
 
-LiveData Migrator automatically tests the connection to any hive agent added to ensure the details provided are valid and a metadata migration can be established.
+LiveData Migrator automatically tests the connection to any hive agent added to ensure the details provided are valid and a metadata migration can be created and run.
 
 To check that the configuration for the hive agent is correct:
 
@@ -194,7 +194,7 @@ Configure a hive agent to connect to AWS Glue:
 
 ### Test the AWS Glue target hive agent
 
-LiveData Migrator automatically tests the connection to any hive agent added to ensure the details provided are valid and a metadata migration can be established.
+LiveData Migrator automatically tests the connection to any hive agent added to ensure the details provided are valid and a metadata migration can be created and run.
 
 To check that the configuration for the hive agent is correct:
 
