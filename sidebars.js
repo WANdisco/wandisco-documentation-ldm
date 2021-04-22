@@ -165,6 +165,21 @@ module.exports = {
           ]
         },
         {
+          "collapsed": true,
+          "type": "category",
+          "label": "Preview Features",
+          "items": [
+            {
+              "type": "doc",
+              "id": "preview-features"
+            },
+            {
+              "type": "doc",
+              "id": "backup-and-restore"
+            }
+          ]
+        },
+        {
           "type": "doc",
           "id": "troubleshooting"
         }
