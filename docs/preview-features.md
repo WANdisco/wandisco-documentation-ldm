@@ -30,7 +30,7 @@ Enable this feature with the following property:
 
 `preview.feature.backup-restore=ON`
 
-### [Verifications](./verifications.md)
+### Verifications
 
 <!--Documentation pending-->
 
