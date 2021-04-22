@@ -20,7 +20,7 @@ LiveData Migrator must then be restarted for the changes to take effect:
 
 ## Current Preview Features
 
-The following preview features are currently available in LiveData Migrator 1.12:
+The following preview features are currently available in LiveData Migrator:
 
 ### [Backup and Restore](./backup-and-restore.md)
 
