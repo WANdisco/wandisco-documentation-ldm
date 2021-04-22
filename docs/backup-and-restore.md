@@ -68,7 +68,7 @@ Restore LiveData Migrator from a backup by using the following curl command:
 curl -X POST -H "Content-Type: application/json" -d @backup.json http://myldmhost:18080/backups/restore --verbose
 ```
 
-In this example, the backup file is named backup.json and the file is located in the user's current working directory. 
+In this example, the backup file is named `backup.json` and the file is located in the user's current working directory. 
 
 ### Periodic Backup
 
