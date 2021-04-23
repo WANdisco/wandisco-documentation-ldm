@@ -34,11 +34,11 @@ When creating or updating an ADLS2 target filesystem using the OAuth2 authentica
 
 To force the migration to start (or resume) despite the warning, update the ADLS2 filesystem with the following property and restart LiveData Migrator afterwards:
 
-```text="Property"
+```text title="Property"
 fs.ignore-authentication-privileges=true
 ```
 
-```text="Example Usage"
+```text title="Example Usage"
 filesystem update adls2 oauth --file-system-id target --properties fs.ignore-authentication-privileges=true
 ```
 
@@ -51,8 +51,6 @@ When adding an S3 bucket as a storage through the LiveData UI, the following err
 `Failed to connect to LiveData Migrator`
 
 This can be due to an incorrectly entered access or secret key. Double check that you provided the correct keys with no extra characters (including spaces), and try again.
-
-### 
 
 ## Notifications
 
