@@ -249,7 +249,7 @@ See the links below for guidance for common Hadoop distributions:
 * **`--user`** The name of the HDFS user to be used when performing operations against the file system. In environments where Kerberos is disabled, this user must be the HDFS super user, such as `hdfs`.
 * **`--kerberos-principal`** The Kerberos principal to authenticate with and perform migrations as. This principal should map to the [HDFS super user](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsPermissionsGuide.html#The_Super-User) using [auth_to_local](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SecureMode.html#Mapping_from_Kerberos_principals_to_OS_user_accounts) rules.
 * **`--kerberos-keytab`** The Kerberos keytab containing the principal defined for the `--kerberos-principal` parameter. This must be accessible to the local system user running the LiveData Migrator service (default is `hdfs`).
-* **`--source`** Provide this parameter to use the file system resource created as a source.  This is referenced in the UI when configuring the _Unknown source_.
+* **`--source`** Provide this parameter to use the file system resource created as a source. This is referenced in the UI when configuring the _Unknown source_.
 * **`--scan-only`** Provide this parameter to create a static source filesystem for use in [one-time migrations](./one-time-migration.md). Requires `--source`.
 * **`--properties-files`** Reference a list of existing properties files that contain Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.  This is referenced in the UI as **Provide a path to files** under the _Additional Configuration_ option.
 * **`--properties`** Specify properties to use in a comma-separated key/value list. This is referenced in the UI as **Additional Configuration** under the _Additional Configuration_ option.
@@ -362,7 +362,7 @@ filesystem add local --file-system-id mytarget --fs-root ./Users/username/destin
 
 ### `filesystem add s3a`
 
-Add an Amazon S3 bucket as a target filesystem using the `filesystem add s3a` command. This method also supports IBM COS buckets.
+Add an Amazon S3 bucket as either a migration source or target using the `filesystem add s3a` command. This method also supports IBM COS buckets.
 
 ```text tile="Add an S3 file system"
 SYNOPSYS
@@ -371,6 +371,8 @@ SYNOPSYS
                            [[--access-key] string]
                            [[--secret-key] string]
                            [--credentials-provider] string
+                           [--source]
+                           [--scan-only]
                            [[--properties-files] list]
                            [[--properties] list]
 ```
@@ -405,6 +407,8 @@ SYNOPSYS
 
 * **`--access-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the access key with this parameter. This is referenced in the UI as **Access Key**. This is a required parameter when adding an IBM COS bucket.
 * **`--secret-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the secret key using this parameter. This is referenced in the UI as **Secret Key**. This is a required parameter when adding an IBM COS bucket.
+* **`--source`** Provide this parameter to use the file system resource created as a source. This is referenced in the UI when configuring the _Unknown source_.
+* **`--scan-only`** Provide this parameter to create a static source filesystem for use in [one-time migrations](./one-time-migration.md). Requires `--source`.
 * **`--properties-files`** Reference a list of existing properties files, each containing Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list. This is referenced in the UI as **S3A Properties** (see [S3a Default Properties](#s3a-default-properties) and [S3a Custom Properties](#s3a-custom-properties) for more information).
 
