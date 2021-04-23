@@ -4,7 +4,7 @@ title: Network Requirements
 sidebar_label: Network requirements
 ---
 
-Set up your network before installing LiveData Migrator (LDM).
+Configure your network to allow connectivity between your source and target environments, and for accessing the management interface (LiveData UI).
 
 There are three LDM components that use network ports for TCP connections: LiveData Migrator, HiveMigrator and LiveData UI.
 
