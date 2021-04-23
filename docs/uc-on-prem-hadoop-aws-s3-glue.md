@@ -136,6 +136,23 @@ Configure your Amazon S3 bucket as your target filesystem:
 * [UI](./configure-storage.md#add-target-storages)
 * [CLI](./command-reference.md#filesystem-add-s3a)
 
+You may then [test your target filesystem](#test-target-filesystem).
+
+### Test the S3 bucket target
+
+LiveData Migrator automatically tests the connection to any target filesystem added to ensure the details provided are valid and a migration can be created and run.
+
+To check that the configuration for the filesystem is correct:
+
+   * UI - the target will show a healthy connection.
+   * CLI - the `filesystem show` command will show only a target that was successfully added:
+
+     ```text title="Example"
+     filesystem show --file-system-id myAWSBucket
+     ```
+
+To test a migration to the S3 bucket, [create a migration](./create-migration.md) and run it to transfer data, then check that the data has arrived in its intended destination.
+
 ## Create path mappings (optional)
 
 [Create path mappings](./create-path-mappings.md) to ensure that data for managed Hive databases and tables are migrated to an appropriate [folder location on your Amazon S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html).
@@ -153,7 +170,11 @@ This lets you start using your source data and metadata immediately after migrat
    * [UI](./connect-metastores.md#add-source-agent)
    * [CLI](./command-reference.md#hive-agent-add-hive)
 
-1. Check that the configuration for the hive agent is correct:
+### Test the Apache Hive source hive agent
+
+LiveData Migrator automatically tests the connection to any hive agent added to ensure the details provided are valid and a metadata migration can be created and run.
+
+To check that the configuration for the hive agent is correct:
 
    * UI - the agent will show a healthy connection.
    * CLI
@@ -162,21 +183,37 @@ This lets you start using your source data and metadata immediately after migrat
      hive agent check --name hiveAgent
      ```
 
+To test a metadata migration from the Apache Hive agent, [create a metadata migration](./migrate-metadata.md) and run it to transfer data, then check that the data has arrived in its intended destination.
+
 ### Add AWS Glue as target hive agent
 
-1. Configure a hive agent to connect to AWS Glue:
+Configure a hive agent to connect to AWS Glue:
 
    * [UI](./connect-metastores.md#add-target-agents)
    * [CLI](./command-reference.md#hive-agent-add-glue)
 
-1. Check that the configuration for the hive agent is correct:
+### Test the AWS Glue target hive agent
 
-   * UI - the agent will show a healthy connection.
-   * CLI
+LiveData Migrator automatically tests the connection to any hive agent added to ensure the details provided are valid and a metadata migration can be created and run.
 
-     ```text title="Example"
-     hive agent check --name azureAgent
-     ```
+To check that the configuration for the hive agent is correct:
+
+  * UI - the agent will show a healthy connection.
+  * CLI
+
+    ```text title="Example"
+    hive agent check --name hiveAgent
+    ```
+
+To test a metadata migration to the AWS Glue target agent, [create a metadata migration](./migrate-metadata.md) and run it to transfer data, then check that the data has arrived in its intended destination.
+
+## Troubleshooting
+
+In the event a filesystem or hive agent could not be added, LiveData Migrator will provide you with error messages in most cases to help you discern the issue.
+
+If no data appears to have been transferred in either a migration or a metadata migration, check LiveData Migrator's notifications for errors. In most cases, these will provide you with the information you need to diagnose any problems.
+
+In the event of a problem you cannot diagnose, contact [WANdisco support](https://community.wandisco.com/portal/s/).
 
 ## Network architecture
 

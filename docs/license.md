@@ -1,12 +1,22 @@
 ---
 id: license
-title: Upgrade your LiveData Migrator license
-sidebar_label: Upgrade your license
+title: Licensing
+sidebar_label: Licensing
 ---
 
 The LiveData Migrator trial license includes 14 days operation and 5TB of data migration. This gives you full use of LiveData Migrator up to either of these limits.
 
 Once you've reached the limit of your trial license, you'll need to upgrade to a full license to continue using LiveData Migrator. These instructions explain how to upgrade or renew a full license with either the [UI](#upgrade-your-license-in-the-ui) or [CLI](#upgrade-your-license-with-the-cli).
+
+## License costs and billing
+
+Contact the [WANdisco Sales team](https://www2.wandisco.com/contact-us) to learn more about LiveData Migrator license pricing, or [AWS Marketplace](https://aws.amazon.com/marketplace/pp/B07B8SZND9) if you are an Amazon Web Services (AWS) customer.
+
+Target filesystems incur billing costs which vary depending on Cloud platform. Refer to the following links to learn the costs for each target filesystem.
+
+* [Amazon Simple Storage Service (Amazon S3)](https://aws.amazon.com/s3/pricing/)
+* [Google Cloud](https://cloud.google.com/pricing)
+* [IBM COS](https://www.ibm.com/cloud/object-storage/pricing)
 
 ## Upgrade your license in the UI
 

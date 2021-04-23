@@ -362,7 +362,7 @@ filesystem add local --file-system-id mytarget --fs-root ./Users/username/destin
 
 ### `filesystem add s3a`
 
-Add an Amazon S3 bucket as a target filesystem using the `filesystem add s3a` command. This method also supports IBM COS buckets.
+Add an Amazon Simple Storage Service (Amazon S3) bucket as a target filesystem using the `filesystem add s3a` command. This method also supports IBM COS buckets.
 
 ```text tile="Add an S3 file system"
 SYNOPSYS
@@ -375,11 +375,13 @@ SYNOPSYS
                            [[--properties] list]
 ```
 
+For guidance about access, permissions, and security when adding an Amazon S3 bucket as a target filesystem, see [Security best practices in IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html).
+
 #### S3a Mandatory Parameters
 
 * **`--file-system-id`** The identifier for the new file system resource. This is referenced in the UI as **Storage Name**.
-* **`--bucket-name`** The name of your S3 bucket. This is referenced in the UI as **Bucket Name**.
-* **`--credentials-provider`** The Java class name of a credentials provider for authenticating with the S3 endpoint. This is referenced in the UI as **Credentials Provider**. This is not a required parameter when adding an IBM COS bucket through the UI.  
+* **`--bucket-name`** The name of your Amazon S3 bucket. This is referenced in the UI as **Bucket Name**.
+* **`--credentials-provider`** The Java class name of a credentials provider for authenticating with the Amazon S3 endpoint. This is referenced in the UI as **Credentials Provider**. This is not a required parameter when adding an IBM COS bucket through the UI.  
   The Provider options available include:
   * **`org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider`**
 
@@ -387,7 +389,7 @@ SYNOPSYS
 
   * **`com.amazonaws.auth.InstanceProfileCredentialsProvider`**
 
-    Use this provider when running LiveData Migrator on an EC2 instance that has [been assigned an IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) with policies that allow it to access the S3 bucket.
+    Use this provider when running LiveData Migrator on an Elastic Compute Cloud (EC2) instance that has [been assigned an IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) with policies that allow it to access the Amazon S3 bucket.
 
   * **`com.amazonaws.auth.DefaultAWSCredentialsProviderChain`**
 
