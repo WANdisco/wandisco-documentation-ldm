@@ -215,6 +215,35 @@ If no data appears to have been transferred in either a migration or a metadata 
 
 In the event of a problem you cannot diagnose, contact [WANdisco support](https://community.wandisco.com/portal/s/).
 
+## Network architecture
+
+![LiveData Migrator Network Architecture](/img/ldm-aws-architecture.png)
+
+The diagram is an example of LiveData Migrator architecture between two environments - On-premises and AWS Cloud.
+
+### On-premises
+
+1. All migration activity, both reads and writes, goes through the LiveData Migrator service. Data transfer to AWS is via Port 443 (HTTPS). Metadata transfer through the HiveMigrator functionality is over port 6780/6781 (HTTP/HTTPS).
+
+1. Interaction with LiveData Migrator is handled either through WANdisco's LiveData UI component (port 8081) or LiveData Migrator CLI (via LDM's API port 18080). The LDM CLI does not open any ports itself and acts as a client.
+
+### AWS Cloud
+
+1. The WAN connection to AWS from the source environment (see [AWS Site-to-Site VPN](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html) and [AWS Direct Connect](https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html)).
+
+1. A VPC and Subnet (see [Working with VPCs and subnets](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-vpcs.html)) that are configured with access to the underlying storage and metastore and necessary external connectivity to the source environment.
+
+1. The [IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) role and associated permissions for access to resources.
+
+1. The underlying storage ([Amazon S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html)) and metastore ([AWS Glue Data Catalog](https://docs.aws.amazon.com/glue/latest/dg/populate-data-catalog.html)).
+
+   :::important
+   By default, S3 buckets are set as private to prevent unauthorized access. We strongly recommend that you read the following blog on the AWS support site for a good overview of this subject:  
+   [Best practices for securing sensitive data in AWS data stores](https://aws.amazon.com/blogs/database/best-practices-for-securing-sensitive-data-in-aws-data-stores/)
+   :::
+
+1. The [AWS Key Management Service](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html) configured to encrypt both the Amazon S3 bucket and AWS Glue instance.
+
 ## Next Steps
 
 Start [defining exclusions](./configure-exclusions.md) and [migrating data](./create-migration.md). You can also [create metadata rules](./define-metadata-rules.md) and start [migrating metadata](./migrate-metadata.md).
