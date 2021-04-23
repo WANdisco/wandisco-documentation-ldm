@@ -20,6 +20,10 @@ module.exports = {
             },
             {
               "type": "doc",
+              "id": "network-requirements"
+            },
+            {
+              "type": "doc",
               "id": "installation"
             },
             {

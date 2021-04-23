@@ -1,7 +1,7 @@
 ---
 id: api-reference
 title: API Reference
-sidebar_label: API Reference
+sidebar_label: API reference
 ---
 
 LiveData Migrator exposes a REST API for use by external clients. These API resources provide equivalent functionality to the commands described in the [Command Reference](./command-reference.md) except for the commands related to [metadata migrations](./migrate-metadata.md).
