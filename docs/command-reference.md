@@ -407,10 +407,14 @@ SYNOPSYS
 
 * **`--access-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the access key with this parameter. This is referenced in the UI as **Access Key**. This is a required parameter when adding an IBM COS bucket.
 * **`--secret-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the secret key using this parameter. This is referenced in the UI as **Secret Key**. This is a required parameter when adding an IBM COS bucket.
-* **`--source`** Provide this parameter to use the file system resource created as a source. This is referenced in the UI when configuring the _Unknown source_.
+* **`--source`** _(Preview)_ Provide this parameter to use the file system resource created as a source. This is referenced in the UI when configuring the _Unknown source_.
 * **`--scan-only`** Provide this parameter to create a static source filesystem for use in [one-time migrations](./one-time-migration.md). Requires `--source`.
 * **`--properties-files`** Reference a list of existing properties files, each containing Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list. This is referenced in the UI as **S3A Properties** (see [S3a Default Properties](#s3a-default-properties) and [S3a Custom Properties](#s3a-custom-properties) for more information).
+
+:::note
+Amazon S3a as a source is currently a preview feature.
+:::
 
 #### S3a Default Properties
 

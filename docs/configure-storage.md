@@ -6,7 +6,7 @@ sidebar_label: Configure storage
 
 The first step in the process of migrating data is to configure your storage, which defines where data is being migrated from (the source) and to (the target).
 
-* Supported sources are: **HDFS** and **Amazon Simple Storage Service (Amazon S3) (preview)** 
+* Supported sources are: **HDFS**, **Amazon Simple Storage Service (Amazon S3) _(preview)_** and **local storage**
 * Supported targets are: **ADLS Gen2**, **Amazon Simple Storage Service (Amazon S3)**, **Google Cloud Storage**, **IBM Cloud Object Storage (S3)** and **HDFS**
 
 Configure storage with either the [UI](#configure-storage-with-the-ui) or the [CLI](#configure-storage-with-the-cli).
@@ -31,9 +31,10 @@ You can can add a new source by performing one of the below actions:
 * Click the add prompt under "Products" on the LiveData Migrator dashboard
 * Click the add source prompt under the LiveData Migrator overview page
 
-You can create a source of one of the following two types:
+You can create a source of one of the following three types:
 
 * **HDFS**
+* **Amazon S3 bucket**
 * **Local filesystem**
 
 :::info
@@ -65,6 +66,10 @@ In the Storage panel, select to configure your _Unknown source_ and provide your
 * Additional Configuration
   * **Provide a path to files** - Provide the directory or directories containing your HDFS configuration (such as the `core-site.xml` and `hdfs-site.xml`) on your LiveData Migrator host's local filesystem.
   * **Additional Configuration** (Optional) - Override properties or specify additional properties by adding Key/Value pairs.
+
+#### Source Amazon S3 bucket configuration (Preview)
+
+Amazon S3 buckets as a source are currently supported as a preview feature. [You must configure an Amazon S3 bucket source through the CLI](./command-reference.md#filesystem-add-s3a).
 
 #### Local filesystem source configuration
 
