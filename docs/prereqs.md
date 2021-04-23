@@ -27,8 +27,8 @@ Ready to start? Check the prerequisites and then follow these steps to get ready
 
 * Proficiency with intended target storage technologies, such as ADLS Gen 2, GCS, HDFS, and Amazon Simple Storage Service (S3).
 * For Amazon Web Services, this includes:
-  * Knowledge of AWS Marketplace, Amazon Elastic Compute Cloud (Amazon EC2) Console, Amazon Simple Storage Service (Amazon S3), and AWS Command Line Tool.
-  * Specifically, starting, stopping, and terminating AWS instances, understanding any storage persistence and related costs.
+  * Knowledge of AWS Marketplace, Amazon Simple Storage Service (Amazon S3), AWS Glue Data Catalog, and AWS Command Line Tool.
+  * Understanding any storage persistence and related costs.
   * Ability to monitor and troubleshoot AWS services.
 
 ### LiveData
