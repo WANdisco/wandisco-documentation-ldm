@@ -11,20 +11,46 @@ Please ensure you have read the [Prerequisites](./prereqs.md) as you may experie
 
 We recommend making use of logs when troubleshooting LiveData Migrator. See [Log Commands](./command-reference.md#log-commands) for information on how to enable logging across various levels. Logs for each component of LiveData Migrator are stored in the `/var/log/wandisco/` directory within the LiveData Migrator installation directory, with a directory for each component, such as `/var/log/wandisco/ui` for the LiveData UI.
 
-## Insufficient container permissions with an ADLS2 target filesystem when using OAuth2 authentication
+## General
 
+### Rule names parameter does not autocomplete in the CLI
+
+When adding the `--rule-names` parameter to the end of a `hive migration add` command, auto-completion will not suggest the parameter name. For example:
+
+```text title="Example"
+WANdisco LiveData Migrator >> hive migration add --name test --source sourceAgent --target testGlue --rule-names
+```
+
+To work around this, either:
+
+* Use the `--rule-names` parameter earlier in the command. For example: `WANdisco LiveData Migrator >> hive migration add --name test --rule-names`
+* Use the Tab key twice in the CLI when attempting to autocomplete the parameter, and select `--rule-names` with the left and right arrow keys.
+
+## Microsoft Azure resources
+
+### Insufficient container permissions with an ADLS2 target filesystem when using OAuth2 authentication
 
 When creating or updating an ADLS2 target filesystem using the OAuth2 authentication protocol, you may have insufficient permission to guarantee a successful migration. This is usually because the Role Based Access Control on the service principal does not guarantee root access. In this case, the migration will fail to start (or resume) and issue a warning.
 
 To force the migration to start (or resume) despite the warning, update the ADLS2 filesystem with the following property and restart LiveData Migrator afterwards:
 
-```text="Property"
+```text title="Property"
 fs.ignore-authentication-privileges=true
 ```
 
-```text="Example Usage"
-filesystem update adls2 oauth -file-system-id targ  -properties fs.ignore-authentication-privileges=true
+```text title="Example Usage"
+filesystem update adls2 oauth --file-system-id target --properties fs.ignore-authentication-privileges=true
 ```
+
+## Amazon Web Services (AWS) resources
+
+### Failed to connect to LiveData Migrator when adding S3 storage through the UI using access/secret keys
+
+When adding an S3 bucket as a storage through the LiveData UI, the following error may display when attempting to save the configuration:
+
+`Failed to connect to LiveData Migrator`
+
+This can be due to an incorrectly entered access or secret key. Double check that you provided the correct keys with no extra characters (including spaces), and try again.
 
 ## Notifications
 
@@ -61,16 +87,3 @@ And the following setting determines the low watermark percentage:
 ```text title="Example"
 notifications.pending.region.clear.percent=50
 ```
-
-### Rule names parameter does not autocomplete in the CLI
-
-When adding the `--rule-names` parameter to the end of a `hive migration add` command, auto-completion will not suggest the parameter name. For example:
-
-```text title="Example"
-WANdisco LiveData Migrator >> hive migration add --name test --source sourceAgent --target testGlue --rule-names
-```
-
-To work around this, either:
-
-* Use the `--rule-names` parameter earlier in the command. For example: `WANdisco LiveData Migrator >> hive migration add --name test --rule-names`
-* Use the Tab key twice in the CLI when attempting to autocomplete the parameter, and select `--rule-names` with the left and right arrow keys.
