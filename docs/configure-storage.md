@@ -6,7 +6,7 @@ sidebar_label: Configure storage
 
 The first step in the process of migrating data is to configure your storage, which defines where data is being migrated from (the source) and to (the target).
 
-* Supported sources are: **HDFS**
+* Supported sources are: **HDFS**, **Amazon Simple Storage Service (Amazon S3) _(preview)_** and **local storage**
 * Supported targets are: **ADLS Gen2**, **Amazon Simple Storage Service (Amazon S3)**, **Google Cloud Storage**, **IBM Cloud Object Storage (S3)** and **HDFS**
 
 Configure storage with either the [UI](#configure-storage-with-the-ui) or the [CLI](#configure-storage-with-the-cli).
@@ -31,9 +31,10 @@ You can can add a new source by performing one of the below actions:
 * Click the add prompt under "Products" on the LiveData Migrator dashboard
 * Click the add source prompt under the LiveData Migrator overview page
 
-You can create a source of one of the following two types:
+You can create a source of one of the following three types:
 
 * **HDFS**
+* **Amazon S3 bucket**
 * **Local filesystem**
 
 :::info
@@ -65,6 +66,38 @@ In the Storage panel, select to configure your _Unknown source_ and provide your
 * Additional Configuration
   * **Provide a path to files** - Provide the directory or directories containing your HDFS configuration (such as the `core-site.xml` and `hdfs-site.xml`) on your LiveData Migrator host's local filesystem.
   * **Additional Configuration** (Optional) - Override properties or specify additional properties by adding Key/Value pairs.
+
+#### Source Amazon S3 bucket configuration (Preview)
+
+Amazon S3 buckets as a source are currently supported as a preview feature. To configure an Amazon S3 bucket source for use with LiveData Migrator, provide the following details:
+
+* **Filesystem Name** - Provide a name for your source storage.
+* **Filesystem Type** - The type of filesystem source. Choose _AWS S3_.
+* **Bucket Name** - The reference name of the Amazon S3 bucket you are using.
+* **Credentials Provider** - The Java class name of a credentials provider for authenticating with the S3 endpoint. This is not a required parameter when adding an IBM COS bucket through the UI.
+The Provider options available include:
+* **`org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider`**
+
+  Use this provider to offer credentials as an access key and secret access key with the `--access-key` and `--secret-key` Parameters.
+
+* **`com.amazonaws.auth.InstanceProfileCredentialsProvider`**
+
+  Use this provider when running LiveData Migrator on an EC2 instance that has [been assigned an IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) with policies that allow it to access the S3 bucket.
+
+* **`com.amazonaws.auth.DefaultAWSCredentialsProviderChain`**
+
+  A commonly-used credentials provider chain that looks for credentials in this order:
+
+  * Environment Variables - `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, or `AWS_ACCESS_KEY` and `AWS_SECRET_KEY`.
+  * Java System Properties - `aws.accessKeyId` and `aws.secretKey`.
+  * Web Identity Token credentials from the environment or container.
+  * Credential profiles file at the default location (`~/.aws/credentials`) shared by all AWS SDKs and the AWS CLI.
+  * Credentials delivered through the Amazon EC2 container service if `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` environment variable is set and security manager has permission to access the variable.
+  * Instance profile credentials delivered through the Amazon EC2 metadata service.
+* **Access Key** (Optional) - When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the access key with this parameter. This is a required parameter when adding an IBM COS bucket.
+* **Secret Key** (Optional) - When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the secret key using this parameter. This is a required parameter when adding an IBM COS bucket.
+* **Additional Configuration** (Optional) - Override properties or specify additional properties by adding Key/Value pairs.
+* **Migrate Live Events** - Enabled by default, this setting will allow LiveData Migrator to automatically migrate changes from this source's data to the target storage during a migration. See [One-Time Migration](./one-time-migration.md) for more information.
 
 #### Local filesystem source configuration
 
