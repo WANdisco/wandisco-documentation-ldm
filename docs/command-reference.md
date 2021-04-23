@@ -1,7 +1,7 @@
 ---
 id: command-reference
 title: Command Reference
-sidebar_label: Command Reference
+sidebar_label: Command reference
 ---
 
 Looking to learn more about LiveData Migrator commands? This reference page includes a comprehensive description of each command available from the LiveData Migrator CLI.

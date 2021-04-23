@@ -20,11 +20,15 @@ module.exports = {
             },
             {
               "type": "doc",
-              "id": "license"
+              "id": "network-requirements"
             },
             {
               "type": "doc",
               "id": "installation"
+            },
+            {
+              "type": "doc",
+              "id": "license"
             },
             {
               "type": "doc",
