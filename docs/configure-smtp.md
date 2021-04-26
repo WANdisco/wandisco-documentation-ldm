@@ -19,6 +19,8 @@ Configure an SMTP server in the UI by accessing the SMTP configuration tab and f
 3. Provide the necessary details in the empty form.
 4. Click Save.
 
+Once your SMTP server is ready, you can [configure email notifications in the UI](./configuration-ui.md).
+
 ### Configure an SMTP server through the CLI
 
 Use the following command to set up an SMTP server through the CLI:
@@ -50,3 +52,5 @@ Supply the following parameters:
 ```text
 notification email smtp set --host myldmhost --port myport --security 0 --email ldmsystem@domain.com  --login myusername --password mypassword
 ```
+
+Once your SMTP server is ready, you can [configure email notifications through the CLI](./configuration-ui.md). 
