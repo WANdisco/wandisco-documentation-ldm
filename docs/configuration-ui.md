@@ -190,6 +190,18 @@ Choose between a group pattern or a search filter to match a valid LDAP group in
 | `application.ldap.groupSearchBase` | The distinguished name (DN) from where to start the search for an LDAP group, for example: `ou=groups`. This field can be left blank if you want to start the search from the `application.ldap.baseDn`.<br/><br/>**Default value**: (none)<br/>**Allowed values**: A valid LDAP DN relative to the `application.ldap.baseDn` defined earlier. |
 | `application.ldap.groupSearchFilter` | The filter to use to search for group membership, for example `uniqueMember={0}`.<br/><br/>**Default value**: `uniqueMember={0}`<br/>**Allowed values**: A valid LDAP attribute to represent the user group membership. |
 
+## SMTP
+
+Configuring an SMTP server for LiveData Migrator allows the use of [email notifications](./configuration-ui.md), which notify the user via email when certain events occur in LiveData Migrator.
+
+### Configure an SMTP server in the UI
+
+To access SMTP configuration:
+
+1. Click on the LiveData Migrator instance name (e.g. "localhost") on the dashboard to access the overview page.
+2. Under the configuration category on the left, select "SMTP Settings".
+3. 
+
 ## Security
 
 ### Basic authentication compatibility
