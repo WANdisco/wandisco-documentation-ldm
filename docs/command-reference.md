@@ -578,10 +578,6 @@ SYNOPSYS
 
 Update an existing Azure Data Lake Storage Gen 2 container migration target with a specified filesystem ID using the `filesystem update adls2 oauth` command. You will be prompted to optionally update the [service principal](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal) and [OAuth 2](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols) credentials.
 
-
-=======
-Any optional parameters supplied will update the corresponding details of the existing filesystem.
-
 Any optional parameters supplied will update the corresponding details of the existing filesystem. The parameters that can be changed are the same as the ones listed in the [`filesystem add adls2 oauth`](./command-reference.md#filesystem-add-adls2-oauth) section.
 
 All parameters are optional except `--file-system-id`, which specifies the file system you want to update.
@@ -643,7 +639,6 @@ filesystem update hdfs --file-system-id mysource --default-fs hdfs://sourcenames
 ```text title="Example for source NameNode HA cluster with Kerberos enabled"
 filesystem update hdfs --file-system-id mytarget --default-fs hdfs://sourcenameservice --properties-files /etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml --kerberos-keytab /etc/security/keytabs/hdfs.headless.keytab --kerberos-principal hdfs@SOURCEREALM.COM
 ```
-
 
 ----
 
@@ -1110,8 +1105,6 @@ migration add --path /repl1 --target mytarget –-migration-id myNewMigration --
 
 ----
 
-
-
 ### `migration run`
 
 Start a migration that was created without the `--auto-start` parameter.
@@ -1379,7 +1372,7 @@ The Azure hive agent requires a ADLS Gen2 storage account and container name, th
 Additionally, use only one of the following parameters:
 
 * **`--file-system-id`** The name of the filesystem that will be associated with this agent (for example: `myadls2storage`). This will ensure any [path mappings](./create-path-mappings.md) are correctly linked between the filesystem and the agent. This is referenced in the UI as **Filesystem**.
-* **`--default-fs-override`** Provide an override for the default filesystem URI instead of a filesystem name (for example: `abfss://mycontainer@mystorageaccount.dfs.core.windows.net`). This is referenced in the UI as **DefaultFS Override**.
+* **`--default-fs-override`** Provide an override for the default filesystem URI instead of a filesystem name (for example: `abfss://mycontainer@mystorageaccount.dfs.core.windows.net`). This is referenced in the UI as **DefaultFs Override**.
 
 #### Optional Parameters
 
@@ -1563,7 +1556,7 @@ SYNOPSYS
 Additionally, use only one of the following parameters:
 
 * **`--file-system-id`** The name of the filesystem that will be associated with this agent (for example: `mys3bucket`). This will ensure any [path mappings](./create-path-mappings.md) are correctly linked between the filesystem and the agent. This is referenced in the UI as **Filesystem**.
-* **`--default-fs-override`** Provide an override for the default filesystem URI instead of a filesystem name (for example: `s3a://mybucket/`). This is referenced in the UI as **DefaultFS Override**.
+* **`--default-fs-override`** Provide an override for the default filesystem URI instead of a filesystem name (for example: `s3a://mybucket/`). This is referenced in the UI as **DefaultFs Override**.
 
 #### Glue Credential Parameters
 
@@ -1613,7 +1606,7 @@ Follow these steps to deploy a remote hive agent for AWS Glue:
 
    See the **Example for remote AWS Glue agent** example below for further guidance.
 
-#### Example
+#### Examples
 
 ```text title="Example for local AWS Glue agent"
 hive agent add glue --name glueAgent --access-key ACCESS6HCFPAQIVZTKEY --secret-key SECRET1vTMuqKOIuhET0HAI78UIPfSRjcswTKEY --glue-endpoint glue.eu-west-1.amazonaws.com --aws-region eu-west-1 --file-system-id mys3bucket
@@ -1663,7 +1656,7 @@ SYNOPSYS
 Additionally, use only one of the following parameters:
 
 * **`--file-system-id`** The name of the filesystem that will be associated with this agent (for example: `myhdfs`). This will ensure any [path mappings](./create-path-mappings.md) are correctly linked between the filesystem and the agent. This is referenced in the UI as **Filesystem**.
-* **`--default-fs-override`** Provide an override for the default filesystem URI instead of a filesystem name (for example: `hdfs://nameservice01`). This is referenced in the UI as **DefaultFS Override**.
+* **`--default-fs-override`** Provide an override for the default filesystem URI instead of a filesystem name (for example: `hdfs://nameservice01`). This is referenced in the UI as **DefaultFs Override**.
 
 #### Optional Parameters
 
@@ -1727,6 +1720,109 @@ hive agent add hive --name targetmanualAgent --host myRemoteHost.example.com --p
 :::note
 If specifying Kerberos and config path information for remote agents, ensure that the directories and Kerberos principal are correct for your chosen remote host (not your local host).
 :::
+
+----
+
+### `hive agent add databricks`
+
+Add a [Databricks](https://databricks.com/product/delta-lake-on-databricks) hive agent to connect to a Databricks Delta Lake metastore ([AWS](https://docs.databricks.com/data/metastores/index.html), [Azure](https://docs.microsoft.com/en-us/azure/databricks/data/metastores/) or [GCS](https://docs.gcp.databricks.com/data/metastores/index.html)) using the `hive agent add databricks` command.
+
+If your LiveData Migrator host can communicate directly with the Databricks Delta Lake, then a local hive agent will be sufficient. Otherwise, consider using a remote hive agent.
+
+:::info remote deployments
+For a remote hive agent connection, specify a remote host that will be used to communicate with the local LiveData Migrator server (constrained to a user-defined port).
+
+A small service will be deployed on this remote host so that the hive agent can migrate data to and/or from the Databricks Delta Lake.
+:::
+
+```text title="Add Databricks agent"
+SYNOPSYS
+        hive agent add databricks [[--name] string]
+                                  [--jdbc-server-hostname] string
+                                  [--jdbc-port] int
+                                  [--jdbc-http-path] string
+                                  [--access-token] string
+                                  [[--fs-mount-point] string]
+                                  [--convert-to-delta]
+                                  [--delete-after-conversion]
+                                  [[--file-system-id] string]
+                                  [[--default-fs-override] string]
+                                  [[--host] string]
+                                  [[--port] integer]
+                                  [--no-ssl]
+```
+
+#### Databricks Mandatory Parameters
+
+* **`--name`** The identifier to give to the new Hive agent. This is referenced in the UI as **Name**.
+* **`--jdbc-server-hostname`** The server hostname for the Databricks cluster ([AWS](https://docs.databricks.com/integrations/bi/jdbc-odbc-bi.html#get-server-hostname-port-http-path-and-jdbc-url), [Azure](https://docs.microsoft.com/en-us/azure/databricks/integrations/bi/jdbc-odbc-bi#get-server-hostname-port-http-path-and-jdbc-url) or [GCS](https://docs.gcp.databricks.com/integrations/bi/jdbc-odbc-bi.html#get-server-hostname-port-http-path-and-jdbc-url)). This is referenced in the UI as **JDBC Server Hostname**.
+* **`--jdbc-port`** The port used for JDBC connections to the Databricks cluster ([AWS](https://docs.databricks.com/integrations/bi/jdbc-odbc-bi.html#get-server-hostname-port-http-path-and-jdbc-url), [Azure](https://docs.microsoft.com/en-us/azure/databricks/integrations/bi/jdbc-odbc-bi#get-server-hostname-port-http-path-and-jdbc-url) or [GCS](https://docs.gcp.databricks.com/integrations/bi/jdbc-odbc-bi.html#get-server-hostname-port-http-path-and-jdbc-url)). This is referenced in the UI as **JDBC Port**.
+* **`--jdbc-http-path`** The HTTP path for the Databricks cluster ([AWS](https://docs.databricks.com/integrations/bi/jdbc-odbc-bi.html#get-server-hostname-port-http-path-and-jdbc-url), [Azure](https://docs.microsoft.com/en-us/azure/databricks/integrations/bi/jdbc-odbc-bi#get-server-hostname-port-http-path-and-jdbc-url) or [GCS](https://docs.gcp.databricks.com/integrations/bi/jdbc-odbc-bi.html#get-server-hostname-port-http-path-and-jdbc-url)). This is referenced in the UI as **JDBC Http Path**.
+* **`--access-token`** The personal access token to be used for the Databricks cluster ([AWS](https://docs.databricks.com/dev-tools/api/latest/authentication.html#generate-a-personal-access-token), [Azure](https://docs.microsoft.com/en-us/azure/databricks/sql/user/security/personal-access-tokens#--generate-a-personal-access-token) or [GCS](https://docs.gcp.databricks.com/dev-tools/api/latest/authentication.html#generate-a-personal-access-token)). This is referenced in the UI as **Access Token**.
+
+Additionally, use only one of the following parameters:
+
+* **`--file-system-id`** The name of the filesystem that will be associated with this agent (for example: `myadls2` or `mys3bucket`). This will ensure any [path mappings](./create-path-mappings.md) are correctly linked between the filesystem and the agent. This is referenced in the UI as **Filesystem**.
+* **`--default-fs-override`** Provide an override for the default filesystem URI instead of a filesystem name (for example: `dbfs:/mybucket`). This is referenced in the UI as **DefaultFs Override**.
+
+#### Databricks Optional Parameters
+
+* **`--fs-mount-point`** Define the [ADLS](https://docs.microsoft.com/en-us/azure/databricks/data/data-sources/azure/azure-storage#--mount-azure-blob-storage-containers-to-dbfs)/[S3](https://docs.databricks.com/data/databricks-file-system.html#mount-storage)/[GCS](https://docs.gcp.databricks.com/data/data-sources/google/gcs.html) location within the Databricks filesystem for locating migrations (for example: `/mnt/mybucketname`). This is referenced in the UI as **FS Mount Point**.
+
+  :::note
+  This option is mandatory if `--convert-to-delta` is used. The Databricks agent will use this location to copy all associated table data and metadata into Databricks during conversion.
+  :::
+
+* **`--convert-to-delta`** All underlying table data and metadata is migrated to the storage location defined by the `--fs-mount-point` parameter. Use this option to automatically copy the associated data and metadata into Delta Lake on Databricks ([AWS](https://docs.databricks.com/spark/latest/spark-sql/language-manual/delta-copy-into.html), [Azure](https://docs.microsoft.com/en-us/azure/databricks/spark/latest/spark-sql/language-manual/delta-copy-into) or [GCS](https://docs.gcp.databricks.com/spark/latest/spark-sql/language-manual/delta-copy-into.html)), and convert tables into Delta Lake format. This is referenced in the UI as **Convert to delta format**.
+
+  The following parameter can only be used if `--convert-to-delta` has been specified:
+  * **`--delete-after-conversion`** Use this option to delete the underlying table data and metadata from the storage location (defined by `--fs-mount-point`) once it has been converted into Delta Lake on Databricks. This is referenced in the UI as **Delete after conversion**.
+
+    :::important
+    Only use this option if you are performing [one-time migrations](./one-time-migration.md) for the underlying table data. The Databricks agent does not support continuous (live) updates of table data when transferring to Delta Lake on Databricks.
+    :::
+
+#### Parameters for remote hive agents only
+
+* **`--host`** The host where the remote hive agent will be deployed.
+* **`--port`** The port for the remote hive agent to use on the remote host. This port is used to communicate with the local LiveData Migrator server.
+* **`--no-ssl`** [TLS/SSL encryption and certificate authentication](./configuration-hvm.md#tlsssl-certificates) is enabled by default between LiveData Migrator and the remote agent. Use this parameter to disable it.
+
+##### Steps for remote agent deployment
+
+Follow these steps to deploy a remote hive agent for Databricks Delta Lake:
+
+1. Transfer the remote server installer to your remote host:
+
+   ```text title="Example of secure transfer from local to remote host"
+   scp /opt/wandisco/hivemigrator/hivemigrator-remote-server-installer.sh myRemoteHost:~
+   ```
+
+1. On your remote host, run the installer as root (or sudo) user in silent mode:
+
+   ```text
+   ./hivemigrator-remote-server-installer.sh -- --silent
+   ```
+
+1. On your remote host, start the remote server service:
+
+   ```text
+   service hivemigrator-remote-server start
+   ```
+
+1. On your local host, run the `hive agent add databricks` command to configure your remote hive agent.
+
+   See the **Example for remote Databricks agent** example below for further guidance.
+
+#### Examples
+
+```text title="Example for local Databricks agent"
+hive agent add databricks --name databricksAgent --jdbc-server-hostname mydbcluster.cloud.databricks.com  --jdbc-port 443 --jdbc-http-path sql/protocolv1/o/8445611123456789/0234-125567-testy978 --access-token daexamplefg123456789t6f0b57dfdtoken4 --file-system-id mys3bucket --fs-mount-point /mnt/mybucket --convert-to-delta
+```
+
+```text title="Example for remote Databricks agent"
+hive agent add databricks --name databricksAgent --jdbc-server-hostname mydbcluster.cloud.databricks.com  --jdbc-port 443 --jdbc-http-path sql/protocolv1/o/8445611123456789/0234-125567-testy978 --access-token daexamplefg123456789t6f0b57dfdtoken4 --file-system-id mys3bucket --fs-mount-point /mnt/mybucket --convert-to-delta --host myRemoteHost.example.com --port 5552
+```
 
 ----
 
@@ -1807,6 +1903,22 @@ All parameters are optional except `--name`, which is required to specify the ex
 
 ```text
 hive agent configure hive --name sourceAgent --kerberos-keytab /opt/keytabs/hive.keytab --kerberos-principal hive/myhostname.example.com@REALM.COM
+```
+
+----
+
+### `hive agent configure databricks`
+
+Change the configuration of an existing Databricks agent using `hive agent configure databricks`.
+
+The parameters that can be changed are the same as the ones listed in the [`hive agent add databricks`](#hive-agent-add-databricks) section.
+
+All parameters are optional except `--name`, which is required to specify the existing hive agent that you wish to configure.
+
+#### Example
+
+```text
+hive agent configure hive --name databricksAgent --access-token myexamplefg123456789t6fnew7dfdtoken4
 ```
 
 ----
