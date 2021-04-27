@@ -368,6 +368,7 @@ Add an Amazon S3 bucket as either a migration source or target using the `filesy
 SYNOPSYS
         filesystem add s3a [--file-system-id] string
                            [--bucket-name] string
+                           [[--endpoint] string]
                            [[--access-key] string]
                            [[--secret-key] string]
                            [--credentials-provider] string
@@ -407,6 +408,7 @@ SYNOPSYS
 
 * **`--access-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the access key with this parameter. This is referenced in the UI as **Access Key**. This is a required parameter when adding an IBM COS bucket.
 * **`--secret-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the secret key using this parameter. This is referenced in the UI as **Secret Key**. This is a required parameter when adding an IBM COS bucket.
+* **`--endpoint`** _(S3 as a target only)_ Provide a specific endpoint to access the S3 bucket such as an [AWS PrivateLink endpoint](https://docs.aws.amazon.com/AmazonS3/latest/userguide/privatelink-interface-endpoints.html) (for example: `vpce-0e25b8cdd720f900e-argc85vg.s3.us-east-1.vpce.amazonaws.com`). When using this parameter, do not use the `fs.s3a.endpoint` property as an additional [custom property](#s3a-custom-properties) as this supersedes it. This is referenced in the UI as **Use AWS PrivateLink -> PrivateLink VPC**.
 * **`--source`** _(Preview)_ Provide this parameter to use the file system resource created as a source. This is referenced in the UI when configuring the _Unknown source_.
 * **`--scan-only`** Provide this parameter to create a static source filesystem for use in [one-time migrations](./one-time-migration.md). Requires `--source`.
 * **`--properties-files`** Reference a list of existing properties files, each containing Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
@@ -431,6 +433,8 @@ These properties are defined by default when adding an S3a filesystem.
 * **`fs.s3a.max.total.tasks`** (default `60`): Defines the number of operations which can be queued for execution at a time.
 
 #### S3a Custom Properties
+
+These are some of the additional properties that can be added when creating an S3a filesystem.
 
 * **`fs.s3a.fast.upload.buffer`** (default `disk`): Defines how the filesystem will [buffer the upload](#upload-buffering).
 * **`fs.s3a.fast.upload.active.blocks`** (default `8`): Defines how many blocks a single output stream can have uploading or queued at a given time.
@@ -1550,8 +1554,8 @@ SYNOPSYS
 #### Glue Parameters
 
 * **`--name`** The identifier to give to the new Hive agent. This is referenced in the UI as **Name**.
-* **`--glue-endpoint`** The [AWS Glue service endpoint](https://docs.aws.amazon.com/general/latest/gr/glue.html) for connections to the data catalog. This is referenced in the UI as **AWS Glue Service Endpoint**.
-* **`--aws-region`** The [AWS region](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) that your data catalog is located in (default is `us-east-1`). This is referenced in the UI as **AWS Region**.
+* **`--glue-endpoint`** The [AWS Glue service endpoint](https://docs.aws.amazon.com/general/latest/gr/glue.html) for connections to the data catalog. [VPC endpoint types](https://docs.aws.amazon.com/glue/latest/dg/vpc-endpoint.html) are also supported. This is referenced in the UI as **AWS Glue Service Endpoint**.
+* **`--aws-region`** The [AWS region](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) that your data catalog is located in (default is `us-east-1`). Do not use this parameter. This is referenced in the UI as **AWS Region**.
 
 Additionally, use only one of the following parameters:
 
