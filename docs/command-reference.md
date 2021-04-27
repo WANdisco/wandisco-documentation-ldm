@@ -1555,7 +1555,7 @@ SYNOPSYS
 
 * **`--name`** The identifier to give to the new Hive agent. This is referenced in the UI as **Name**.
 * **`--glue-endpoint`** The [AWS Glue service endpoint](https://docs.aws.amazon.com/general/latest/gr/glue.html) for connections to the data catalog. [VPC endpoint types](https://docs.aws.amazon.com/glue/latest/dg/vpc-endpoint.html) are also supported. This is referenced in the UI as **AWS Glue Service Endpoint**.
-* **`--aws-region`** The [AWS region](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) that your data catalog is located in (default is `us-east-1`). Do not use this parameter. This is referenced in the UI as **AWS Region**.
+* **`--aws-region`** The [AWS region](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) that your data catalog is located in (default is `us-east-1`). This is referenced in the UI as **AWS Region**.
 
 Additionally, use only one of the following parameters:
 
