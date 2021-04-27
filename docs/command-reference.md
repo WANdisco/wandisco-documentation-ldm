@@ -2415,11 +2415,55 @@ hive show tables --agent-name sourceAgent --database mydb01 --like testtbl*
 
 ----
 
-### `notifications email smtp set`
+### `notification email addresses add`
+
+Add email addresses to the subscription list for email notifications.
+
+```text title="Subscribe email address to notifications."
+
+SYNOPSYS
+	notification email addresses add [--addresses] set  
+```
+
+#### Mandatory Parameters
+
+* **`--addresses`** A comma-separated lists of email addresses to be added.
+
+#### Example
+
+```text
+notification email addresses add --addresses myemail@company.org,personalemail@gmail.com
+```
+
+----
+
+### `notification email addresses remove`
+
+Remove email addresses from the subscription list for email notifications.
+
+```text title="Unsubscribe email address to notifications."
+
+SYNOPSYS
+	notification email addresses remove [--addresses] set  
+```
+
+#### Mandatory Parameters
+
+* **`--addresses`** A comma-separated lists of email addresses to be removed. Use auto-completion to quickly select from subscribed emails.
+
+#### Example
+
+```text
+notification email addresses remove --addresses myemail@company.org,personalemail@gmail.com
+```
+
+----
+
+### `notification email smtp set`
 
 Configure the details of an SMTP server for LiveData Migrator to connect to.
 
-```
+```text title="Configure the SMTP adapter."
 SYNOPSYS
 	notification email smtp set [--host] string  [--port] integer  [--security] security-enum  [--email] string  [[--login] string]  [[--password] string]  
 ```
@@ -2444,14 +2488,114 @@ notification email smtp set --host my.internal.host --port 587 --security SSL --
 
 ----
 
-### `notifications email smtp show`
+### `notification email smtp show`
 
 Display the details of the SMTP server LiveData Migrator is configured to use.
 
+```text title="Show the current configuration of SMTP adapter."
+SYNOPSYS
+	notification email smtp show
 ```
-NAME
-	notification email smtp show - Show the current configuration of SMTP adapter.
+
+----
+
+### `notification email subscriptions show`
+
+Show a list of currently subscribed emails and notifications.
+
+```text title="Show email notification subscriptions."
+SYNOPSYS
+	notification email subscriptions show
 ```
+
+----
+
+### `notification email types add`
+
+Add notification types to the email notification subscription list.
+
+See the output from the command [`notification email types show`](#notification-email-types-show) for a list of all currently available notification types.
+
+```text title="Subscribe on notification types."
+SYNOPSYS
+  notification email types add [--types] set  
+```
+
+#### Mandatory Parameters
+
+* **`--types`** A comma-separated list of notification types to subscribe to.
+
+#### Example
+
+```text
+notification email types add MISSING_EVENTS,EVENTS_BEHIND,MIGRATION_AUTO_STOPPED
+```
+----
+
+### `notification email types remove`
+
+Remove notification types from the email notification subscription list.
+
+```text title="Unsubscribe on notification types."
+SYNOPSYS
+	notification email types remove [--types] set  
+```
+----
+
+#### Mandatory Parameters
+
+* **`--types`** A comma-separated list of notification types to unsubscribe from.
+
+#### Example
+
+```text
+notification email types remove MISSING_EVENTS,EVENTS_BEHIND,MIGRATION_AUTO_STOPPED
+```
+
+----
+
+### `notification email types show`
+
+Return a list of all available notification types to subscribe to.
+
+```text title="Show email notification types."
+SYNOPSYS
+  notification email types show
+```
+
+----
+
+### `notification latest`
+
+Display the latest notification LiveData Migrator presented and additional details about the notification.
+
+```text title="Get the latest notification."
+SYNOPSYS
+	notification latest
+```
+
+----
+
+### `notification show`
+
+Show the details of a specific notification. Use tab autocompletion to cycle through the list of notifications received along with their type, timestamp and UUID.
+
+```text title="Show notification details."
+SYNOPSYS
+	notification show [--notification-id] string  
+```
+
+#### Mandatory Parameters
+
+* **``--notification-id`** The UUID of the notification to be shown.
+
+#### Example
+
+```
+notification show --notification-id urn:uuid:6a1f2047-8445-460d-b27c-ec5c0496b727
+```
+
+----
 
 ## License Commands
 
