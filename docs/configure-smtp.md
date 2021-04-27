@@ -8,7 +8,7 @@ sidebar_label: SMTP Server
 
 ## SMTP
 
-Configuring an SMTP server for LiveData Migrator allows the use of [email notifications](./configuration-ui.md), which notify the user via email when certain events occur in LiveData Migrator.
+Configuring a connection to an SMTP server for LiveData Migrator allows the use of [email notifications](./configuration-ui.md), which notify the user via email when certain events occur in LiveData Migrator.
 
 ### Configure an SMTP server in the UI
 
@@ -21,20 +21,20 @@ Configure an SMTP server in the UI by accessing the SMTP configuration tab and f
 
 #### Fields
 
-* **SMTP Email Server (Required)**: The host domain for your SMTP server.
-* **SMTP Connection Security (Required)**: The type of security for your SMTP server to use. Can be **TLS**, **SSL** or **None**.
-* **SMTP Port (Required)**: The port the SMTP server will use to send emails.
-* **Use Authentication**: When enabled, creates a login to use for authenticating with the SMTP server.
+* **SMTP Email Server (Required)**: The host domain or IP address of your SMTP server.
+* **SMTP Connection Security (Required)**: The type of security your SMTP server uses. Can be **TLS**, **SSL** or **None**.
+* **SMTP Port (Required)**: The port used to connect to the SMTP server.
+* **Use Authentication**: Optional field. Enables the provision of a username and password for authenticating with the SMTP server.
 * **SMTP Username**: The username to use for authenticating with the SMTP server. Requires **Use Authentication** to be enabled.
 * **SMTP Password**: The password to use for authenticating with the SMTP server. Requires **Use Authentication** to be enabled.
-* **Sender Email Address (Required)**: The email address attached to any emails automatically sent by LiveData Migrator from the SMTP server.
+* **Sender Email Address (Required)**: The email address to use with any emails automatically sent by LiveData Migrator from the SMTP server.
 * **Email Subject Prefix (Required)**: Text that will automatically precede the subject of any email sent by LiveData Migrator from the SMTP server. This can be used to easily identify these emails in the inbox.
 
-Once you've saved the form and the SMTP server is ready, you can [configure email notifications in the UI](./configuration-ui.md).
+Once you've saved the form and the SMTP server is configured, you can [configure email notifications in the UI](./configuration-ui.md).
 
 ### Configure an SMTP server through the CLI
 
-Use the following command to set up an SMTP server through the CLI:
+Use the following command to set up a connection to an SMTP server through the CLI:
 
 ```
 notification email smtp set
@@ -46,15 +46,15 @@ Supply the following parameters:
 
 | Name | Details |
 | --- | --- |
-| `--host` |  |
-| `--port` | The port to use for the SMTP server. Many SMTP servers use port 25. |
-| `--security` | The type of security to use on the server. Can be either `ssl`, `tls` or `none`. |
-| `--email` | The email address for the SMTP server to use. This address will be the sender of all configured [email notifications](./configuration-ui.md). |
+| `--host` | The host address of the SMTP server. |
+| `--port` | The port to connect to the SMTP server. Many SMTP servers use port 25. |
+| `--security` | The type of security the server uses. Can be either `ssl`, `tls` or `none`. |
+| `--email` | The email address for LiveData Migrator to use with emails sent through the SMTP server. This address will be the sender of all configured [email notifications](./configuration-ui.md). |
 
 #### Optional Parameters
 
-| `--login` | The email address to be used when logging in to the server. Usually your address. |
-| `--password` | The password to associate with the SMTP server login. |
+| `--login` | The username to authenticate with the SMTP server. |
+| `--password` | The password to authenticate with the SMTP server login. Required if a login is provided. |
 
 #### Example
 

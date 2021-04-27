@@ -2411,6 +2411,37 @@ SYNOPSYS
 hive show tables --agent-name sourceAgent --database mydb01 --like testtbl*
 ```
 
+## Notification Commands
+
+----
+
+### `notifications email smtp set`
+
+Configure the details of an SMTP server for LiveData Migrator to connect to.
+
+```
+SYNOPSYS
+	notification email smtp set [--host] string  [--port] integer  [--security] security-enum  [--email] string  [[--login] string]  [[--password] string]  
+```
+
+#### Mandatory Parameters
+
+* **`--host`** The host address of the SMTP server.
+* **`--port`** The port to connect to the SMTP server. Many SMTP servers use port 25.
+* **`--security`** The type of security the server uses. Can be either `ssl`, `tls` or `none`.
+* **`--email`** The email address for LiveData Migrator to use with emails sent through the SMTP server. This address will be the sender of all configured [email notifications](./configuration-ui.md).
+
+#### Optional Parameters
+
+* **`--login`** The username to authenticate with the SMTP server.
+* **`--password`** The password to authenticate with the SMTP server login. Required if a login is provided.
+
+#### Example
+
+```text
+notification email smtp set --host my.internal.host --port 587 --security SSL --email livedatamigrator@wandisco.com  --login myusername --password mypassword
+```
+
 ## License Commands
 
 ----
