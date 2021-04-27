@@ -2442,6 +2442,17 @@ SYNOPSYS
 notification email smtp set --host my.internal.host --port 587 --security SSL --email livedatamigrator@wandisco.com  --login myusername --password mypassword
 ```
 
+----
+
+### `notifications email smtp show`
+
+Display the details of the SMTP server LiveData Migrator is configured to use.
+
+```
+NAME
+	notification email smtp show - Show the current configuration of SMTP adapter.
+```
+
 ## License Commands
 
 ----
