@@ -6,6 +6,8 @@ sidebar_label: Connect metastores
 
 This version of LiveData Migrator includes a feature that migrates metadata. Metadata can be migrated from [Apache Hive](https://cwiki.apache.org/confluence/display/Hive/Home), [AWS Glue](https://docs.aws.amazon.com/glue/latest/dg/populate-data-catalog.html), and [Azure SQL](https://docs.microsoft.com/en-us/azure/azure-sql/database/sql-database-paas-overview).
 
+Additionally, [Databricks Delta Lake](https://databricks.com/product/delta-lake-on-databricks) metastores are supported as a target and LiveData Migrator can convert tables to Delta format during migration.
+
 Ready to migrate metadata? First, connect to your metastores by adding Hive agents. Then, [define metadata rules](./define-metadata-rules.md) before [migrating metadata](./migrate-metadata.md).
 
 ## Connect metastores with the UI
@@ -20,7 +22,7 @@ Alternatively, add a new agent. The source agent can be any of the following dis
 
 * [Apache Hive](./command-reference.md#hive-agent-add-hive)
 * [AWS Glue Data Catalog](./command-reference.md#hive-agent-add-glue)
-* [Azure SQL](/command-reference.md#hive-agent-add-azure)
+* [Azure SQL](./command-reference.md#hive-agent-add-azure)
 
 ### Add target agents
 
@@ -28,7 +30,8 @@ Select your LiveData Migrator instance from the Storage panel and add new agents
 
 * [Apache Hive](./command-reference.md#hive-agent-add-hive)
 * [AWS Glue Data Catalog](./command-reference.md#hive-agent-add-glue)
-* [Azure SQL](/command-reference.md#hive-agent-add-azure)
+* [Azure SQL](./command-reference.md#hive-agent-add-azure)
+* [Databricks Delta Lake](./command-reference.md#hive-agent-add-databricks)
 
 ## Connect metastores with the CLI
 
@@ -42,6 +45,7 @@ Add hive agents to connect your source and target metastores.
 | [`hive agent add filesystem`](./command-reference.md#hive-agent-add-filesystem) | Add a hive agent for a local filesystem |
 | [`hive agent add glue`](./command-reference.md#hive-agent-add-glue) | Add a hive agent for an AWS Glue Data Catalog |
 | [`hive agent add hive`](./command-reference.md#hive-agent-add-hive) | Add a hive agent for a local or remote Apache Hive metastore |
+| [`hive agent add databricks`](./command-reference.md#hive-agent-add-databricks) | Add a hive agent for a Databricks Delta Lake metastore |
 
 ### Configure existing hive agents
 
@@ -51,6 +55,7 @@ Add hive agents to connect your source and target metastores.
 | [`hive agent configure filesystem`](./command-reference.md#hive-agent-configure-filesystem) | Change the configuration of an existing hive agent for the local filesystem |
 | [`hive agent configure glue`](./command-reference.md#hive-agent-configure-glue) | Change the configuration of an existing hive agent for the AWS Glue Data Catalog |
 | [`hive agent configure hive`](./command-reference.md#hive-agent-configure-hive) | Change the configuration of an existing hive agent for the Apache Hive metastore |
+| [`hive agent configure databricks`](./command-reference.md#hive-agent-configure-databricks) | Change the configuration of an existing hive agent for the Databricks Delta Lake metastore |
 
 ### Manage hive agents
 
