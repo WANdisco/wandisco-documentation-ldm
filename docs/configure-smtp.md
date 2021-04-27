@@ -1,10 +1,8 @@
 ---
-id: configuration-smtp
+id: configure-smtp
 title: Configuring an SMTP server
 sidebar_label: SMTP Server
 ---
-
-<!-- This file is temporary until I figure out where to put the info -->
 
 ## SMTP
 
@@ -12,14 +10,14 @@ Configuring a connection to an SMTP server for LiveData Migrator allows the use 
 
 ### Configure an SMTP server in the UI
 
-Configure an SMTP server in the UI by accessing the SMTP configuration tab and filling in the necessary fields:
+Configure an SMTP server in the UI by accessing the SMTP configuration tab and filling in the necessary fields.
 
 1. Click on the LiveData Migrator instance name (e.g. "localhost") on the dashboard to access the overview page.
 2. Under the configuration category on the left, select "SMTP Settings".
 3. Provide the necessary fields in the empty form.
 4. Click Save.
 
-#### Fields
+#### SMTP Server Configuration Fields
 
 * **SMTP Email Server (Required)**: The host domain or IP address of your SMTP server.
 * **SMTP Connection Security (Required)**: The type of security your SMTP server uses. Can be **TLS**, **SSL** or **None**.
@@ -44,22 +42,22 @@ Supply the following parameters:
 
 #### Mandatory Parameters
 
-| Name | Details |
-| --- | --- |
-| `--host` | The host address of the SMTP server. |
-| `--port` | The port to connect to the SMTP server. Many SMTP servers use port 25. |
-| `--security` | The type of security the server uses. Can be either `ssl`, `tls` or `none`. |
-| `--email` | The email address for LiveData Migrator to use with emails sent through the SMTP server. This address will be the sender of all configured [email notifications](./configuration-ui.md). |
+* **`--host`** The host address of the SMTP server.
+* **`--port`** The port to connect to the SMTP server. Many SMTP servers use port 25.
+* **`--security`** The type of security the server uses. Can be either `ssl`, `tls` or `none`.
+* **`--email`** The email address for LiveData Migrator to use with emails sent through the SMTP server. This address will be the sender of all configured [email notifications](./configuration-ui.md).
 
 #### Optional Parameters
 
-| `--login` | The username to authenticate with the SMTP server. |
-| `--password` | The password to authenticate with the SMTP server login. Required if a login is provided. |
+* **`--login`** The username to authenticate with the SMTP server.
+* **`--password`** The password to authenticate with the SMTP server login. Required if a login is provided.
 
 #### Example
 
 ```text
 notification email smtp set --host my.internal.host --port 587 --security SSL --email livedatamigrator@wandisco.com  --login myusername --password mypassword
 ```
+
+You can view the details of your SMTP server configuration at any time by running the command `notifications email smtp show`.
 
 Once your SMTP server is ready, you can [configure email notifications through the CLI](./configuration-ui.md).
