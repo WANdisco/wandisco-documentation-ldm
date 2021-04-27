@@ -1,21 +1,26 @@
 ---
 id: configure-smtp
-title: Configuring an SMTP server
-sidebar_label: SMTP Server
+title: Configure Notifications
+sidebar_label: Notifications
 ---
 
-## SMTP
+## Email Notifications
 
-Configuring a connection to an SMTP server for LiveData Migrator allows the use of [email notifications](./configuration-ui.md), which notify the user via email when certain events occur in LiveData Migrator.
+LiveData Migrator supports sending email notifications whenever certain events occur, such as when a migration stops or falls behind file system events.
+
+To use email notifications:
+
+1. [Configure an SMTP server to send the emails](#configure-an-smtp-server)
+1. [Opt in to the desired notifications](#opt-in-to-email-notifications)
 
 ### Configure an SMTP server in the UI
 
 Configure an SMTP server in the UI by accessing the SMTP configuration tab and filling in the necessary fields.
 
 1. Click on the LiveData Migrator instance name (e.g. "localhost") on the dashboard to access the overview page.
-2. Under the configuration category on the left, select "SMTP Settings".
-3. Provide the necessary fields in the empty form.
-4. Click Save.
+1. Under the configuration category on the left, select **SMTP Settings**.
+1. Provide the necessary fields in the empty form.
+1. Click **Save**.
 
 #### SMTP Server Configuration Fields
 
@@ -28,7 +33,7 @@ Configure an SMTP server in the UI by accessing the SMTP configuration tab and f
 * **Sender Email Address (Required)**: The email address to use with any emails automatically sent by LiveData Migrator from the SMTP server.
 * **Email Subject Prefix (Required)**: Text that will automatically precede the subject of any email sent by LiveData Migrator from the SMTP server. This can be used to easily identify these emails in the inbox.
 
-Once you've saved the form and the SMTP server is configured, you can [configure email notifications in the UI](./configuration-ui.md).
+Once you've saved the form and the SMTP server is configured, you can [configure email notifications in the UI](#configure-email-notifications-in-the-ui).
 
 ### Configure an SMTP server through the CLI
 
@@ -45,7 +50,7 @@ Supply the following parameters:
 * **`--host`** The host address of the SMTP server.
 * **`--port`** The port to connect to the SMTP server. Many SMTP servers use port 25.
 * **`--security`** The type of security the server uses. Can be either `ssl`, `tls` or `none`.
-* **`--email`** The email address for LiveData Migrator to use with emails sent through the SMTP server. This address will be the sender of all configured [email notifications](./configuration-ui.md).
+* **`--email`** The email address for LiveData Migrator to use with emails sent through the SMTP server. This address will be the sender of all configured email notifications.
 
 #### Optional Parameters
 
@@ -60,4 +65,30 @@ notification email smtp set --host my.internal.host --port 587 --security SSL --
 
 You can view the details of your SMTP server configuration at any time by running the command `notifications email smtp show`.
 
-Once your SMTP server is ready, you can [configure email notifications through the CLI](./configuration-ui.md).
+Once your SMTP server is ready, you can [configure email notifications through the CLI](#configure-email-notifications-through-the-cli).
+
+### Configure email notifications in the UI
+
+Configure an SMTP server in the UI by accessing the Email Notifications tab and filling in the necessary fields.
+
+1. Click on the LiveData Migrator instance name (e.g. "localhost") on the dashboard to access the overview page (or continue from configuring an SMTP server in the UI).
+1. Under the configuration category on the left, select **Email Notifications**.
+1. Enter the email address you want to send notifications to.
+1. Opt in to the event notifications you want to receive.
+1. Click **Save**.
+
+#### Email notification types
+
+* **Data migration has stopped:** LiveData Migrator sends this notification any time a migration automatically stops, informing you of the migration's name and reason for termination.
+* **Data migration is missing events:** ???
+* **LiveData Migrator is falling behind system events:** LiveData Migrator sends this notification when it determines the number of events occurring on a source filesystem is too rapid for a migration to keep up with over a given period of time. The email will contain the migration name, the file system ID and simple statistics about the events.  
+
+### Configure email notifications through the CLI
+
+Use [commands in the CLI](./command-reference.md#notification-commands) to:
+
+* [Subscribe email addresses to notifications](./command-reference.md#notification-email-addresses-add).
+* [Unsubscribe email addresses from notifications](./command-reference.md#notification-email-addresses-remove).
+* [Add notification types to subscribe to](./command-reference.md#notification-email-types-add).
+* [Remove notification types from subscription](./command-reference.md#notification-email-types-remove).
+* [View the available notification types for subscription](./command-reference.md#notification-email-types-show).
