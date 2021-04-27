@@ -1,7 +1,7 @@
 ---
 id: ldm-metrics
 title: Viewing Metrics
-sidebar_label: Viewing Metrics
+sidebar_label: Viewing metrics
 ---
 
 View detailed metrics about recent and ongoing LiveData Migrator events and activity through the UI or the CLI, such as changes to source data pending migration, bandwidth usage, data migration statistics and more.
