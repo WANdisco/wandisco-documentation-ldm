@@ -67,9 +67,13 @@ In the Storage panel, select to configure your _Unknown source_ and provide your
   * **Provide a path to files** - Provide the directory or directories containing your HDFS configuration (such as the `core-site.xml` and `hdfs-site.xml`) on your LiveData Migrator host's local filesystem.
   * **Additional Configuration** (Optional) - Override properties or specify additional properties by adding Key/Value pairs.
 
-#### Source Amazon S3 bucket configuration (Preview)
+#### Source Amazon S3 bucket configuration
 
-Amazon S3 buckets as a source are currently supported as a preview feature. To configure an Amazon S3 bucket source for use with LiveData Migrator, provide the following details:
+:::note
+Amazon S3 buckets as a source are currently supported as a preview feature.
+:::
+
+To configure an Amazon S3 bucket source for use with LiveData Migrator, provide the following details:
 
 * **File System ID** - Provide a name for your source storage.
 * **Storage Type** - The type of filesystem source. Choose _AWS S3_.
