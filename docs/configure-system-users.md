@@ -58,16 +58,16 @@ Follow the steps depending on which service or services you want to change the u
 1. Change ownership of the related directories to the new system user/group:
 
    ```text title="livedata-migrator"
-   chown -R <user>:<group> /opt/wandisco/livedata-migrator
-   chown -R <user>:<group> /etc/wandisco/livedata-migrator
-   chown -R <user>:<group> /var/log/wandisco/livedata-migrator
+   chown -R <user>:<group> /opt/wandisco/livedata-migrator \
+   chown -R <user>:<group> /etc/wandisco/livedata-migrator \
+   chown -R <user>:<group> /var/log/wandisco/livedata-migrator \
    chown -R <user>:<group> /var/run/livedata-migrator
    ```
 
    ```text title="livedata-ui"
-   chown -R <user>:<group> /opt/wandisco/ui
-   chown -R <user>:<group> /etc/wandisco/ui
-   chown -R <user>:<group> /var/log/wandisco/ui
+   chown -R <user>:<group> /opt/wandisco/ui \
+   chown -R <user>:<group> /etc/wandisco/ui \
+   chown -R <user>:<group> /var/log/wandisco/ui \
    chown -R <user>:<group> /var/run/livedata-ui
    ```
 
@@ -108,16 +108,16 @@ Follow the steps depending on which service or services you want to change the u
 1. Change ownership of the related directories to the new system user/group:
 
    ```text title="hivemigrator"
-   chown -R <user>:<group> /opt/wandisco/hivemigrator
-   chown -R <user>:<group> /etc/wandisco/hivemigrator
-   chown -R <user>:<group> /var/log/wandisco/hivemigrator
+   chown -R <user>:<group> /opt/wandisco/hivemigrator \
+   chown -R <user>:<group> /etc/wandisco/hivemigrator \
+   chown -R <user>:<group> /var/log/wandisco/hivemigrator \
    chown -R <user>:<group> /var/run/hivemigrator
    ```
 
    ```text title="hivemigrator-remote-server"
-   chown -R <user>:<group> /opt/wandisco/hivemigrator-remote-server
-   chown -R <user>:<group> /etc/wandisco/hivemigrator-remote-server
-   chown -R <user>:<group> /var/log/wandisco/hivemigrator-remote-server
+   chown -R <user>:<group> /opt/wandisco/hivemigrator-remote-server \
+   chown -R <user>:<group> /etc/wandisco/hivemigrator-remote-server \
+   chown -R <user>:<group> /var/log/wandisco/hivemigrator-remote-server \
    chown -R <user>:<group> /var/run/livedata-hivemigrator-remote-server
    ```
 

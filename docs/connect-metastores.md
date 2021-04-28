@@ -8,6 +8,10 @@ This version of LiveData Migrator includes a feature that migrates metadata. Met
 
 Additionally, [Databricks Delta Lake](https://databricks.com/product/delta-lake-on-databricks) metastores are supported as a target and LiveData Migrator can convert tables to Delta format during migration.
 
+:::note
+Databricks agents are currently available as a preview feature.
+:::
+
 Ready to migrate metadata? First, connect to your metastores by adding Hive agents. Then, [define metadata rules](./define-metadata-rules.md) before [migrating metadata](./migrate-metadata.md).
 
 ## Connect metastores with the UI

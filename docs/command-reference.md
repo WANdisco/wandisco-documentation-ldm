@@ -1729,6 +1729,10 @@ If specifying Kerberos and config path information for remote agents, ensure tha
 
 ### `hive agent add databricks`
 
+:::note
+Databricks agents are currently available as a preview feature.
+:::
+
 Add a [Databricks](https://databricks.com/product/delta-lake-on-databricks) hive agent to connect to a Databricks Delta Lake metastore ([AWS](https://docs.databricks.com/data/metastores/index.html), [Azure](https://docs.microsoft.com/en-us/azure/databricks/data/metastores/) or [GCP](https://docs.gcp.databricks.com/data/metastores/index.html)) using the `hive agent add databricks` command.
 
 If your LiveData Migrator host can communicate directly with the Databricks Delta Lake, then a local hive agent will be sufficient. Otherwise, consider using a remote hive agent.
@@ -1756,6 +1760,30 @@ SYNOPSYS
                                   [--no-ssl]
 ```
 
+#### Enable JDBC connections to Databricks
+
+The following steps are required to enable Java Database Connectivity (JDBC) to Databricks Delta Lake:
+
+1. Download the [Databricks JDBC driver](https://databricks.com/spark/jdbc-drivers-download).
+
+   :::note
+   License restrictions prevent this driver from being included in the LiveData Migrator installation.
+   :::
+
+1. Unzip the package and upload the `SparkJDBC42.jar` file to the LiveData Migrator host.
+
+1. Move the `SparkJDBC42.jar` file to the LiveData Migrator directory below:
+
+   ```text
+   /opt/wandisco/hivemigrator/agent/databricks
+   ```
+
+1. Change ownership of the Jar file to the [HiveMigrator system user and group](./configure-system-users.md#defaults):
+
+   ```text title="Example for hive:hadoop"
+   chown hive:hadoop /opt/wandisco/hivemigrator/agent/databricks/SparkJDBC42.jar
+   ```
+
 #### Databricks Mandatory Parameters
 
 * **`--name`** The identifier to give to the new Hive agent. This is referenced in the UI as **Name**.
@@ -1766,15 +1794,19 @@ SYNOPSYS
 
 Additionally, use only one of the following parameters:
 
+:::important
+If the `--convert-to-delta` option is used, the `--default-fs-override` parameter must also be provided with the value set to `dbfs:`.
+:::
+
 * **`--file-system-id`** The name of the filesystem that will be associated with this agent (for example: `myadls2` or `mys3bucket`). This will ensure any [path mappings](./create-path-mappings.md) are correctly linked between the filesystem and the agent. This is referenced in the UI as **Filesystem**.
-* **`--default-fs-override`** Provide an override for the default filesystem URI instead of a filesystem name (for example: `dbfs:/mybucket`). This is referenced in the UI as **DefaultFs Override**.
+* **`--default-fs-override`** Provide an override for the default filesystem URI instead of a filesystem name (for example: `dbfs:`). This is referenced in the UI as **DefaultFs Override**.
 
 #### Databricks Optional Parameters
 
-* **`--fs-mount-point`** Define the [ADLS](https://docs.microsoft.com/en-us/azure/databricks/data/data-sources/azure/azure-storage#--mount-azure-blob-storage-containers-to-dbfs)/[S3](https://docs.databricks.com/data/databricks-file-system.html#mount-storage)/[GCP](https://docs.gcp.databricks.com/data/data-sources/google/gcs.html) location within the Databricks filesystem for locating migrations (for example: `/mnt/mybucketname`). This is referenced in the UI as **FS Mount Point**.
+* **`--fs-mount-point`** Define the [ADLS](https://docs.microsoft.com/en-us/azure/databricks/data/data-sources/azure/azure-storage#--mount-azure-blob-storage-containers-to-dbfs)/[S3](https://docs.databricks.com/data/databricks-file-system.html#mount-storage)/[GCP](https://docs.gcp.databricks.com/data/data-sources/google/gcs.html) location within the Databricks filesystem for containing migrations (for example: `/mnt/mybucketname`). This is referenced in the UI as **FS Mount Point**.
 
   :::note
-  This option is mandatory if `--convert-to-delta` is used. The Databricks agent will use this location to copy all associated table data and metadata into Databricks during conversion.
+  This parameter is required if `--convert-to-delta` is used. The Databricks agent will copy all associated table data and metadata into this location within the Databricks filesystem during conversion.
   :::
 
 * **`--convert-to-delta`** All underlying table data and metadata is migrated to the storage location defined by the `--fs-mount-point` parameter. Use this option to automatically copy the associated data and metadata into Delta Lake on Databricks ([AWS](https://docs.databricks.com/spark/latest/spark-sql/language-manual/delta-copy-into.html), [Azure](https://docs.microsoft.com/en-us/azure/databricks/spark/latest/spark-sql/language-manual/delta-copy-into) or [GCP](https://docs.gcp.databricks.com/spark/latest/spark-sql/language-manual/delta-copy-into.html)), and convert tables into Delta Lake format. This is referenced in the UI as **Convert to delta format**.
@@ -1821,11 +1853,11 @@ Follow these steps to deploy a remote hive agent for Databricks Delta Lake:
 #### Examples
 
 ```text title="Example for local Databricks agent"
-hive agent add databricks --name databricksAgent --jdbc-server-hostname mydbcluster.cloud.databricks.com  --jdbc-port 443 --jdbc-http-path sql/protocolv1/o/8445611123456789/0234-125567-testy978 --access-token daexamplefg123456789t6f0b57dfdtoken4 --file-system-id mys3bucket --fs-mount-point /mnt/mybucket --convert-to-delta
+hive agent add databricks --name databricksAgent --jdbc-server-hostname mydbcluster.cloud.databricks.com  --jdbc-port 443 --jdbc-http-path sql/protocolv1/o/8445611123456789/0234-125567-testy978 --access-token daexamplefg123456789t6f0b57dfdtoken4 --file-system-id mys3bucket --default-fs-override dbfs: --fs-mount-point /mnt/mybucket --convert-to-delta
 ```
 
 ```text title="Example for remote Databricks agent"
-hive agent add databricks --name databricksAgent --jdbc-server-hostname mydbcluster.cloud.databricks.com  --jdbc-port 443 --jdbc-http-path sql/protocolv1/o/8445611123456789/0234-125567-testy978 --access-token daexamplefg123456789t6f0b57dfdtoken4 --file-system-id mys3bucket --fs-mount-point /mnt/mybucket --convert-to-delta --host myRemoteHost.example.com --port 5552
+hive agent add databricks --name databricksAgent --jdbc-server-hostname mydbcluster.cloud.databricks.com  --jdbc-port 443 --jdbc-http-path sql/protocolv1/o/8445611123456789/0234-125567-testy978 --access-token daexamplefg123456789t6f0b57dfdtoken4 --file-system-id mys3bucket --default-fs-override dbfs: --fs-mount-point /mnt/mybucket --convert-to-delta --host myRemoteHost.example.com --port 5552
 ```
 
 ----
