@@ -79,9 +79,9 @@ Configure an SMTP server in the UI by accessing the Email Notifications tab and 
 
 #### Email notification types
 
-* **Data migration has stopped:** LiveData Migrator sends this notification any time a migration automatically stops, informing you of the migration's name and reason for termination.
-* **Data migration is missing events:** ???
-* **LiveData Migrator is falling behind system events:** LiveData Migrator sends this notification when it determines the number of events (changes to data) occurring on a source filesystem is too rapid for a migration to keep up with over a given period of time. The email will contain the migration name, the file system ID and simple statistics about the events.  
+* **Data migration has stopped:** LiveData Migrator sends this notification any time a migration automatically stops, informing you of the migration's name and the exception message that caused the migration to terminate.
+* **Data migration is missing events:** This notification is thrown when LiveData Migrator doesn't receive the expected number of events in a migration, and fails to retry querying them 10 times.
+* **LiveData Migrator is falling behind system events:** LiveData Migrator sends this notification when it determines the number of events (changes to data) occurring on a source filesystem is too rapid for a migration to keep up with over a given period of time. The email will contain the migration name, the file system ID and simple statistics about the events. The sensitivity of this notification is configurable.
 
 ### Configure email notifications through the CLI
 
