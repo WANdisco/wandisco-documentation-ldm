@@ -738,7 +738,7 @@ exclusion add file-size --exclusion-id 100mbfiles --description "Files greater t
 
 ### `exclusion add regex`
 
-Create an exclusion that can be applied to migrations to prevent certain files and directories being transferred based on matching file/directory name using regular expression. Once associated with a migration using [`migration exclusion add`](#migration-exclusion-add), files and directories that match the regular expression will not be migrated.
+Create an exclusion using a regular expression to prevent certain files and directories being transferred based on matching file or directory names. Once associated with a migration using [`migration exclusion add`](#migration-exclusion-add), files and directories that match the regular expression will not be migrated.
 
 ```text title="Create a new exclusion by regular expression policy"
 SYNOPSYS
