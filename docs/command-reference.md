@@ -1104,7 +1104,7 @@ SYNOPSYS
 
 #### Optional Parameters
 
-* **`--migration-id`** Provide an identifier for the new migration. An identifier will be auto-generated if one is not provided.
+* **`--migration-id`** Provide an identifier for the new migration. An identifier will be auto-generated if one is not provided. This is referenced in the UI as **Migration Name**.
 * **`--exclusions`** A comma-separated list of exclusions by name. This is referenced in the UI as **Add new exclusion**.
 * **`--auto-start`** Provide this parameter if you want the migration to start immediately. If not provided, the migration will only take effect once run. This is referenced in the UI as **Auto-start migration**.
 * **`--action-policy`** This parameter determines what happens if the migration encounters content in the target path with the same name and size. This is referenced in the UI as **Skip Or Overwrite Settings**.  
