@@ -738,25 +738,38 @@ exclusion add file-size --exclusion-id 100mbfiles --description "Files greater t
 
 ### `exclusion add regex`
 
-Create an exclusion that can be applied to migrations to constrain the files transferred by a policy based on matching file name by regular expression. Once associated with a migration using [`migration exclusion add`](#migration-exclusion-add), files that match the policy will not be migrated.
+Create an exclusion that can be applied to migrations to prevent certain files and directories being transferred based on matching file/directory name using regular expression. Once associated with a migration using [`migration exclusion add`](#migration-exclusion-add), files and directories that match the regular expression will not be migrated.
 
 ```text title="Create a new exclusion by regular expression policy"
 SYNOPSYS
         exclusion add regex [--exclusion-id] string
                             [--description] string
                             [--regex] string
+                            [[--type] string]
 ```
 
 #### Mandatory Parameters
 
 * **`--exclusion-id`** The identifier for the exclusion policy. This is referenced in the UI as **Name**.
 * **`--description`** A user-friendly description for the policy. This is referenced in the UI as **Description**.
-* **`--regex`** A regular expression in a syntax of either [Java PCRE](https://regexr.com/) or [Automata](https://www.javatpoint.com/theory-of-automata) type. This is referenced in the UI as **Regex**.
+* **`--regex`** A regular expression in a syntax of either [Java PCRE](https://regexr.com/), [Automata](https://www.javatpoint.com/theory-of-automata) or [GLOB](https://en.wikipedia.org/wiki/Glob_(programming)) type. This is referenced in the UI as **Regex**.
 
-#### Example
+#### Optional Parameters
 
-```text
-exclusion add regex --description "No paths that start with test"  --exclusion-id exclusion1 --regex ^test\.*
+* **`--type`** Choose the regular expression syntax type. There are three options available:
+
+  1. `JAVA_PCRE` _(default)_
+  1. `AUTOMATA`
+  1. `GLOB`
+
+#### Examples
+
+```text title="Example glob pattern"
+exclusion add regex --description "No paths or files that start with test" --exclusion-id exclusion1 --type GLOB --regex test*
+```
+
+```text title="Example Java PCRE pattern"
+exclusion add regex --description "No paths of files that start with test" --exclusion-id exclusion1 --regex ^test\.*
 ```
 
 #### Using backslash characters within `--regex` parameter
@@ -2723,33 +2736,31 @@ See the examples below for reference.
 help connect
 
 NAME
-	connect - Connect to LiveData Migrator and HiveMigrator.
+        connect - Connect to LiveData Migrator and HiveMigrator.
 
 SYNOPSYS
-	connect [[--host] string]  [--ssl]  [[--lm2port] int]  [[--hvm-port] int]  [[--timeout] integer]  [[--user] string]  
+        connect [[--host] string]  [--ssl]  [[--lm2port] int]  [[--hvm-port] int]  [[--timeout] integer]  [[--user] string]  
 ```
 
 ```text title="Use of backslashes"
 help hive\ migration\ add
 
 NAME
-	hive migration add - Create new migration.
+        hive migration add - Create new migration.
 
 SYNOPSYS
-	hive migration add [--source] string  [--target] string  [[--name] string]  [--auto-start]  [--once]  [--rule-names] list  
+        hive migration add [--source] string  [--target] string  [[--name] string]  [--auto-start]  [--once]  [--rule-names] list  
 ```
 
 ```text title="Use of quotation marks"
 help "filesystem add local"
 
 NAME
-	filesystem add local - Add a Local filesystem via HCFS API.
+        filesystem add local - Add a Local filesystem via HCFS API.
 
 SYNOPSYS
-	filesystem add local [--file-system-id] string  [[--fs-root] string]  [--source]  [--scan-only]  [[--properties-files] list]  [[--properties] string]  
-
+        filesystem add local [--file-system-id] string  [[--fs-root] string]  [--source]  [--scan-only]  [[--properties-files] list]  [[--properties] string]  
 ```
-
 
 ----
 
