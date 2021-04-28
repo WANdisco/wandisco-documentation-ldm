@@ -2825,3 +2825,15 @@ The following commands will only affect logging of the CLI terminal, and will no
 `log info`  
 `log debug`  
 `log trace`
+
+## External Commands
+
+Use these commands outside of the LiveData Migrator CLI.
+
+### `livedata-migrator`
+
+Launch LiveData Migrator and its connected services.
+
+#### Optional Parameters
+
+* **`--version`** List the versions of all LiveData Migrator components without starting LiveData Migrator. Includes **LiveData Migrator**, **LiveData UI**, **LiveData Migrator CLI**, **HiveMigrator** and the **HiveMigrator Azure Libraries**.
