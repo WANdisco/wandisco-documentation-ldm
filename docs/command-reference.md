@@ -2837,3 +2837,14 @@ Launch LiveData Migrator and its connected services.
 #### Optional Parameters
 
 * **`--version`** List the versions of all LiveData Migrator components without starting LiveData Migrator. Includes **LiveData Migrator**, **LiveData UI**, **LiveData Migrator CLI**, **HiveMigrator** and the **HiveMigrator Azure Libraries**.
+
+#### Example Output
+
+```text
+livedata-migrator --version
+livedata-migrator 1.12.0-1462
+livedata-ui 6.6.1-1914
+livedata-migrator-cli 1.3.0-209
+hivemigrator 1.3.0-514
+hivemigrator-azure-hdi 1.3.0-514
+```
