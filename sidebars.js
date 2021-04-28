@@ -146,6 +146,10 @@ module.exports = {
             {
               "type": "doc",
               "id": "configure-system-users"
+            },
+            {
+              "type": "doc",
+              "id": "configure-smtp"
             }
           ]
         },

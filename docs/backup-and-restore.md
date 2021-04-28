@@ -57,7 +57,9 @@ curl -X POST http://myldmhost:18080/backups?mask=false > backup.json
 ### Restore from backup
 
 :::warning
-Before restoring LiveData Migrator from a backup, you should delete the `default-db` file to ensure there are no setting conflicts. By default, the folder is in the directory `/opt/wandisco/livedata-migrator/db/default-db`.
+Before restoring LiveData Migrator from a backup, you should delete the `default-db` file to ensure there are no setting conflicts. By default, the folder is in the following directory:
+
+`/opt/wandisco/livedata-migrator/db/default-db` <!-- minor formatting change -->
 
 The restoration process will still reinstate your previously backed up settings, meaning you will not lose them.
 :::
@@ -68,7 +70,7 @@ Restore LiveData Migrator from a backup by using the following curl command:
 curl -X POST -H "Content-Type: application/json" -d @backup.json http://myldmhost:18080/backups/restore --verbose
 ```
 
-In this example, the backup file is named `backup.json` and the file is located in the user's current working directory. 
+In this example, the backup file is named `backup.json` and the file is located in the user's current working directory.
 
 ### Periodic Backup
 

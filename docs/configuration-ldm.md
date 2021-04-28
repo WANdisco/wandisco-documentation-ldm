@@ -167,6 +167,19 @@ function FindProxyForURL(url, host) {
 
 :::
 
+## Configure Notification Properties
+
+Adjust notification properties in the `application.properties` file:
+
+```text
+/etc/wandisco/livedata-migrator/application.properties
+```
+
+| Name | Details |
+| --- | --- |
+| `notifications.pending.region.warn.percent` | The warning percentage threshold of events LiveData Migrator has fallen behind by. A migration exceeding this quota triggers the **Data migration is falling behind system events** notification. **Default: 90**. |
+| `notifications.pending.region.clear.percent` | The warning clearing percentage threshold of events LiveData Migrator has fallen behind by. A migration that previously exceeded the `notifications.pending.region.warn.percent` quota that then falls below this value will automatically clear its **Data migration is falling behind system events** notification. **Default: 80**. |
+
 ## Directory structure
 
 The following directories are used for the LiveData Migrator core package:
