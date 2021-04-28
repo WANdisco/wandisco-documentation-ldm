@@ -1766,11 +1766,7 @@ The following steps are required to enable Java Database Connectivity (JDBC) to 
 
 1. Download the [Databricks JDBC driver](https://databricks.com/spark/jdbc-drivers-download).
 
-   :::note
-   License restrictions prevent this driver from being included in the LiveData Migrator installation.
-   :::
-
-1. Unzip the package and upload the `SparkJDBC42.jar` file to the LiveData Migrator host.
+1. Unzip the package and upload the `SparkJDBC42.jar` file to the LiveData Migrator host machine.
 
 1. Move the `SparkJDBC42.jar` file to the LiveData Migrator directory below:
 
