@@ -29,6 +29,9 @@ Configure how the UI logs information about its state or user interactions.
 | Name | Details |
 | --- | --- |
 | `logging.output.path` | The output path for all logging.<br/><br/>**Default value**: `/var/log/wandisco/ui`<br/>**Allowed values**: The full path to a valid directory that is writable by the user running the UI (typically `hdfs`.)  |
+| `logging.level.ROOT` | The [log level](https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/boot-features-logging.html#boot-features-custom-log-levels).<br/><br/>**Default value**: `INFO`<br/>**Allowed values**: A valid log level: `TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR`, `FATAL`, or `OFF`  |
+| `logging.audit.output.filename` | The output filename for the audit log. This will be suffixed with the date in `yyyy-MM-dd` format.<br/><br/>**Default value**: `livedata_ui_audit`<br/>**Allowed values**: A valid string |
+| `logging.audit.days-kept` | The amount of days that the audit log will be retained.<br/><br/>**Default value**: `90`<br/>**Allowed values**: An integer value representing the number of days |
 
 ## LDAP
 

@@ -164,6 +164,10 @@ module.exports = {
             },
             {
               "type": "doc",
+              "id": "audit-logs"
+            },
+            {
+              "type": "doc",
               "id": "command-reference"
             },
             {

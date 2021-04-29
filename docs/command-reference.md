@@ -3055,7 +3055,7 @@ Launch LiveData Migrator and its connected services.
 #### Example Output
 
 ```text
-livedata-migrator --version
+# livedata-migrator --version
 livedata-migrator 1.12.0-1462
 livedata-ui 6.6.1-1914
 livedata-migrator-cli 1.3.0-209
