@@ -33,7 +33,9 @@ Configure how the UI logs information about its state or user interactions.
 | `logging.audit.output.filename` | The output filename for the audit log. This will be suffixed with the date in `yyyy-MM-dd` format.<br/><br/>**Default value**: `livedata_ui_audit`<br/>**Allowed values**: A valid string |
 | `logging.audit.days-kept` | The amount of days that the audit log will be retained.<br/><br/>**Default value**: `90`<br/>**Allowed values**: An integer value representing the number of days |
 
-## LDAP
+## User management through LDAP
+
+Use LDAP to set up access privileges for LiveData UI users.
 
 ### Configure LDAP Authentication in the UI
 

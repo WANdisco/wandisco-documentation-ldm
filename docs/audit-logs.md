@@ -6,7 +6,7 @@ sidebar_label: Audit logs
 
 The LiveData UI tracks all user-driven interactions and resulting changes (including errors) and creates a record in the form of a log file.
 
-Use these audit logs to monitor LiveData Migrator activity.
+Use these audit logs to monitor user activity in LiveData Migrator.
 
 :::note
 Only UI driven actions are recorded in these audit logs.
