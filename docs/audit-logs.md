@@ -9,7 +9,7 @@ The LiveData UI tracks all user-driven interactions and resulting changes (inclu
 Use these audit logs to monitor LiveData Migrator activity.
 
 :::note
-Only UI driven changes are recorded in these audit logs.
+Only UI driven actions are recorded in these audit logs.
 :::
 
 ## Where to find the audit logs and default configuration
