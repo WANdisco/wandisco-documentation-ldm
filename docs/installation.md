@@ -8,6 +8,8 @@ Ready to install? Check the [prerequisites](./prereqs.md) and then follow these 
 
 :::note
 Do you have an older version already installed? If so, perform the steps in the [Uninstall a previous release](./uninstall.md) page first.
+
+Check the component versions of your current installation by running `livedata-migrator --version` on your LiveData Migrator host machine.
 :::
 
 ## Download and install LiveData Migrator
@@ -56,7 +58,6 @@ Do you have an older version already installed? If so, perform the steps in the 
 The default system user for the LiveData Migrator and LiveData UI services is `hdfs`, and the default system user for the HiveMigrator service is `hive`.
 
 [Configure system users](./configure-system-users.md) if you want to change these defaults.
-
 
 ## Next Steps
 
