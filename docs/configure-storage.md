@@ -170,10 +170,6 @@ If your source file system was not discovered automatically or you wish to assig
 
 You can define multiple target file systems, which you can migrate to at the same time.
 
-:::caution
-Although present when invoking the `help` command, Local Filesystem functionality is not yet available. This will be coming in a future release.
-:::
-
 | Command | Action |
 |:---|:---|
 | [`filesystem add adls2 oauth`](./command-reference.md#filesystem-add-adls2-oauth) | Add an ADLS Gen 2 filesystem resource using a service principal and oauth credentials |

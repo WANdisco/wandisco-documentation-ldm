@@ -7,7 +7,7 @@ sidebar_label: Configure exclusions
 Define exclusions to prevent certain files and directories from being migrated. There are three types of exclusions, which will exclude by:
 
 * File size
-* File and directory names (defined using regular expression patterns of either [Java PCRE](https://regexr.com/) or [Automata](https://www.javatpoint.com/theory-of-automata) type)
+* File and directory names (defined using regular expression patterns of either [Java PCRE](https://regexr.com/), [Automata](https://www.javatpoint.com/theory-of-automata) or [GLOB](https://en.wikipedia.org/wiki/Glob_(programming)) type)
 * Last modification date of directories and files
 
 Exclusion templates are associated with a storage, allowing you to selectively ignore content during migration when that storage is used as the source.
