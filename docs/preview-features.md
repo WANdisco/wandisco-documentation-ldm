@@ -10,7 +10,7 @@ Preview features are LiveData Migrator features that are still under development
 
 Preview features must be enabled by finding the corresponding property with the prefix `preview.feature.` and changing the `OFF` value to `ON`. For example:
 
-```
+```text title="Example for enabling Backup & Restore"
 preview.feature.backup-restore=ON
 ```
 
@@ -30,10 +30,12 @@ Enable this feature with the following property:
 
 `preview.feature.backup-restore=ON`
 
-### Verifications
+### Migration Verifications
 
 <!--Documentation pending-->
 
 Enable this feature with the following property:
 
-`preview.feature.verifications=ON`
+```text
+preview.feature.verifications=ON
+```
