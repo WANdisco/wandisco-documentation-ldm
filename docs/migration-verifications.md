@@ -21,7 +21,7 @@ Use this feature to scan your source and target filesystems (on a migration path
 
 These are the main aspects and considerations of this feature:
 
-* A migration verification can only be performed on a [Live or Running](./manage-migrations.md#data-migration-states) data migration.
+* A migration verification can only be performed on a [Live, Running or Completed](./manage-migrations.md#data-migration-states) data migration.
 * Only one verification can be active at a time for each data migration.
 * Verifications are based on the current progress of the migration, and will ignore any paths that are not yet scanned.
 * For [one-time migrations](./one-time-migration.md) (`--scanOnly`), verifications will ignore any client changes.

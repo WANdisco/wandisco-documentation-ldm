@@ -36,7 +36,7 @@ preview.feature.backup-restore=ON
 
 ### [Migration verifications](./migration-verifications.md)
 
-This feature allows you to run a verification job on a [Live or Running](./manage-migrations.md#data-migration-states) data migration. The verification job will scan your source and target filesystems (in the migration path) and compare them for any discrepancies.
+This feature allows you to run a verification job on a [Live, Running or Completed](./manage-migrations.md#data-migration-states) data migration. The verification job will scan your source and target filesystems (in the migration path) and compare them for any discrepancies.
 
 Enable this feature with the following property:
 
