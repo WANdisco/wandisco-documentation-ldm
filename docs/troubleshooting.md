@@ -26,6 +26,34 @@ To work around this, either:
 * Use the `--rule-names` parameter earlier in the command. For example: `WANdisco LiveData Migrator >> hive migration add --name test --rule-names`
 * Use the Tab key twice in the CLI when attempting to autocomplete the parameter, and select `--rule-names` with the left and right arrow keys.
 
+### HiveMigrator configuration files missing when reinstalling LiveData Migrator on Ubuntu/Debian
+
+This issue will occur when you have removed the HiveMigrator package with `apt-get remove` instead of `apt-get purge` during the [uninstall](./uninstall.md#uninstall-livedata-migrator) steps.
+
+The `/etc/wandisco/hivemigrator` directory will be missing files as a result. The cause is that the Ubuntu package management tool ([dpkg](https://man7.org/linux/man-pages/man1/dpkg.1.html)) stores service configuration information in its internal database and assumes this directory already has the needed files (even if they were manually removed).
+
+To resolve this:
+
+1. Cleanup the dpkg database for the HiveMigrator service:
+
+   ```text
+   rm -f /var/lib/dpkg/info/hivemigrator*
+   ```
+
+1. Fully remove the HiveMigrator package again using `dpkg` and the `--purge` option:
+
+   ```text
+   dpkg --purge hivemigrator
+   ```
+
+1. Carry out the install steps for the new version of LiveData Migrator.
+
+1. If needed, install the HiveMigrator package using `dpkg` and the `--force-confmiss` option:
+
+   ```text title="Example"
+   dpkg -i --force-confmiss hivemigrator_1.3.1-518_all.deb
+   ```
+
 ## Microsoft Azure resources
 
 ### Insufficient container permissions with an ADLS2 target filesystem when using OAuth2 authentication
