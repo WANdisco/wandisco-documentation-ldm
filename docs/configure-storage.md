@@ -104,7 +104,7 @@ The Provider options available include:
 * **Migrate Live Events** - Enabled by default, this setting will allow LiveData Migrator to automatically migrate changes from this source's data to the target storage during a migration. See [One-Time Migration](./one-time-migration.md) for more information.
 
 :::note
-As an additional step, ensure your account has the necessary SQS permissions to access the bucket as storage.
+As an additional step, ensure your account has the [necessary SQS permissions](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-basic-examples-of-sqs-policies.html) to [access the bucket as storage](https://docs.aws.amazon.com/AmazonS3/latest/userguide/grant-destinations-permissions-to-s3.html#grant-sns-sqs-permission-for-s3).
 :::
 
 #### Local filesystem source configuration
