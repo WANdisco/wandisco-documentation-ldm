@@ -10,12 +10,12 @@ Migration verifications are currently available as a preview feature. You must [
 This preview version can only be used through the CLI or REST API.
 :::
 
-LiveData Migrator performs a best-effort to migrate existing data and ongoing changes, but there are a variety of reasons that can impede this. For example:
+LiveData Migrator migrates existing data and ongoing changes to between source and target filesystems, but certain factors may impede this, such as:
 
 * Service failures or interruptions.
 * Software errors or individual file migration failures.
 
-Use this feature to scan your source and target filesystems (on a migration path) and compare them for any discrepancies.
+Use this feature to scan your source and target filesystems (on a migration path) and compare them for any discrepancies to verify the status of your migration.
 
 ## Limitations and considerations
 
