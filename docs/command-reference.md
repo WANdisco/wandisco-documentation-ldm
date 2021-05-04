@@ -969,7 +969,7 @@ SYNOPSYS
 
 #### Mandatory Parameters
 
-* **`--migration-id`** The identifier of the migration to stop.
+* **`--migration-id`** The migration name or identifier to stop.
 
 #### Example
 
@@ -990,7 +990,7 @@ SYNOPSYS
 
 #### Mandatory Parameters
 
-* **`--migration-id`** The identifier of the migration to resume.
+* **`--migration-id`** The migration name or identifier to resume.
 
 #### Example
 
@@ -1011,7 +1011,7 @@ SYNOPSYS
 
 #### Mandatory Parameters
 
-* **`--migration-id`** The identifier of the migration to delete.
+* **`--migration-id`** The migration name or identifier to delete.
 
 #### Example
 
@@ -1033,7 +1033,7 @@ SYNOPSYS
 
 #### Mandatory Parameters
 
-* **`--migration-id`** The identifier of the migration with which to associate the exclusion.
+* **`--migration-id`** The migration name or identifier with which to associate the exclusion.
 * **`--exclusion-id`** The identifier of the exclusion to associate with the migration. This is referenced in the UI as **Name**.
 
 #### Example
@@ -1056,7 +1056,7 @@ SYNOPSYS
 
 #### Mandatory Parameters
 
-* **`--migration-id`** The identifier of the migration from which to remove the exclusion.
+* **`--migration-id`** The migration name or identifier from which to remove the exclusion.
 * **`--exclusion-id`** The identifier of the exclusion to remove from the migration. This is referenced in the UI as **Name**.
 
 #### Example
@@ -1104,7 +1104,7 @@ SYNOPSYS
 
 #### Optional Parameters
 
-* **`--migration-id`** Provide an identifier for the new migration. An identifier will be auto-generated if one is not provided. This is referenced in the UI as **Migration Name**.
+* **`--migration-id`** Provide a name or identifier for the new migration. An identifier will be auto-generated if one is not provided. This is referenced in the UI as **Migration Name**.
 * **`--exclusions`** A comma-separated list of exclusions by name. This is referenced in the UI as **Add new exclusion**.
 * **`--auto-start`** Provide this parameter if you want the migration to start immediately. If not provided, the migration will only take effect once run. This is referenced in the UI as **Auto-start migration**.
 * **`--action-policy`** This parameter determines what happens if the migration encounters content in the target path with the same name and size. This is referenced in the UI as **Skip Or Overwrite Settings**.  
@@ -1133,7 +1133,7 @@ SYNOPSYS
 
 #### Mandatory Parameters
 
-* **`--migration-id`** The identifier of the migration to run.
+* **`--migration-id`** The migration name or identifier to run.
 
 #### Example
 
@@ -1148,21 +1148,132 @@ migration run –-migration-id myNewMigration
 Provide a JSON description of a specific migration.
 
 ```text title="Get migration details"
-NAME
-        migration show - Get migration details.
-
 SYNOPSYS
         migration show [--migration-id] string
 ```
 
 #### Mandatory Parameters
 
-* **`--migration-id`** The identifier of the migration to show.
+* **`--migration-id`** The migration name or identifier to show.
 
 #### Example
 
 ```text
 migration show --migration-id myNewMigration
+```
+
+----
+
+### `migration verification add`
+
+:::note
+Migration verification commands are currently in preview. [This feature must be enabled before it can be used](./preview-features.md#migration-verifications).
+:::
+
+Add a migration verification for a specified migration. This will scan your source and target filesystems (in the migration path) and compare them for any discrepancies.
+
+The verification status will show the number of missing paths and files on the target filesystem and also the number of file size mismatches between the source and target. The verification status can be viewed by using [`migration verification show`](#migration-verification-show) (for individual verification jobs) or [`migration verification list`](#migration-verification-list) (for all verification jobs).
+
+Once a verification job is complete, a verification report will be created in the `/var/log/wandisco/livedata-migrator` directory in the format of `verification-report-{verificationId}-{startTime}.log`. This report will contain more details including any paths that have discrepancies.
+
+See [migration verifications](./migration-verifications.md) for more details.
+
+```text title="Verify a migration"
+SYNOPSYS
+        migration verification add [--migration-id] string
+                                   [--override]
+```
+
+#### Mandatory Parameters
+
+* **`--migration-id`** The migration name or identifier to start (or override) a verification on.
+
+#### Optional Parameters
+
+* **`--override`** Stop the currently running verification and start a new one.
+
+#### Examples
+
+```text title="Start a verification job"
+migration verification add --migration-id myMigration
+```
+
+```text title="Stop the running verification and start a new one"
+migration verification add --migration-id myMigration --override
+```
+
+----
+
+### `migration verification list`
+
+:::note
+Migration verification commands are currently in preview. [This feature must be enabled before it can be used](./preview-features.md#migration-verifications).
+:::
+
+List all running migration verification jobs and their statuses (use [`migration verification show`](#migration-verification-show) when just wanting the status for one verification job).
+
+```text title="List all verification jobs"
+SYNOPSYS
+        migration verification list
+```
+
+----
+
+### `migration verification show`
+
+:::note
+Migration verification commands are currently in preview. [This feature must be enabled before it can be used](./preview-features.md#migration-verifications).
+:::
+
+Show the status of a specific migration verification.
+
+```text title="Show a verification job for a migration"
+SYNOPSYS
+        migration verification show [--migration-id] string
+```
+
+#### Mandatory Parameters
+
+* **`--migration-id`** Show the status of the current verification job running on this migration name or identifier (only one verification job can be running per migration).
+
+#### Example
+
+See [verification status values](./migration-verifications.md#verification-status-values) for further explanation of the output.
+
+```text title="Example status of a completed verification"
+WANdisco LiveData Migrator >> migration verification show --migration-id testmig
+{
+  "migrationId" : "testmig",
+  "state" : "COMPLETED",
+  "verificationId" : "e1aedfbd-b094-4a1b-a294-69cdd5a6030a",
+  "verificationPath" : "/testdir",
+  "startTime" : "2021-04-29T13:27:44.278Z",
+  "completeTime" : "2021-04-29T13:27:45.392Z",
+  "verificationEdge" : "/testmig/testdir01/testfile01",
+  "scannerSummary" : {
+    "progressSummary" : {
+      "filesScanned" : 177,
+      "directoriesScanned" : 47,
+      "bytesScanned" : 1105391944,
+      "filesExcluded" : 51,
+      "dirsExcluded" : 0,
+      "bytesExcluded" : 0,
+      "baseScanCompletionTime" : "2021-04-29T13:27:45.392Z"
+    },
+    "contentSummary" : {
+      "byteCount" : 1105391944,
+      "fileCount" : 194,
+      "directoryCount" : 81
+    }
+  },
+  "verificationProgress" : {
+    "matchedPathCount" : 224,
+    "totalFailedPathCount" : 0,
+    "targetFilesMissing" : 0,
+    "targetDirectoriesMissing" : 0,
+    "filesizeMismatches" : 0
+  }
+}
 ```
 
 ----
@@ -1193,7 +1304,7 @@ SYNOPSYS
 * **`--migrations`** Displays information about each running migration.
 * **`--network`** Displays file transfer throughput in Gib/s during the last 10 seconds, 1 minute and 30 minutes.
 
-#### Example
+#### Examples
 
 ```text title="Status"
 WANdisco LiveMigrator >> status
