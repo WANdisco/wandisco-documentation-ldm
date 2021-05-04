@@ -1170,18 +1170,13 @@ migration show --migration-id myNewMigration
 Migration verification commands are currently in preview, [this feature must be enabled before it can be used](./preview-features.md#migration-verifications).
 :::
 
-Add a migration verification for a specified migration. This will scan your source and target filesystems (in the migration path) and compare them for any discrepancies. The verification report will show the number of missing paths and files on the target filesystem and also the number of file size mismatches between the source and target.
+Add a migration verification for a specified migration. This will scan your source and target filesystems (in the migration path) and compare them for any discrepancies.
 
-The verification report can be viewed by using [`migration verification show`](#migration-verification-show) (for individual verifications) or [`migration verification list`](#migration-verification-list) (for all verifications).
+The verification status will show the number of missing paths and files on the target filesystem and also the number of file size mismatches between the source and target. The verification status can be viewed by using [`migration verification show`](#migration-verification-show) (for individual verification jobs) or [`migration verification list`](#migration-verification-list) (for all verification jobs).
 
-These are the main aspects and considerations of this feature:
+Once a verification job is complete, a verification report will be created in the `/var/log/wandisco/livedata-migrator` directory in the format of `verification-report-{verificationId}-{startTime}.log`. This report will contain more details including any paths that have discrepancies.
 
-* A migration verification can only be performed on a [LIVE or RUNNING](./manage-migrations.md#data-migration-states) data migration.
-* Only one verification can be active at a time for each data migration.
-* Verifications are based on the current progress of the migration, and will ignore any paths that are not yet scanned.
-* For [one-time migrations](./one-time-migration.md) (`--scanOnly`), verifications will ignore any client changes.
-* The verification will ignore any files & directories that have been [excluded](./configure-exclusions.md) from the migration.
-* The verification will take into account any [path mappings](./create-path-mappings.md) that are applicable to the migration.
+See [migration verifications](./migration-verifications.md) for more details.
 
 ```text title="Verify a migration"
 SYNOPSYS
@@ -1191,11 +1186,11 @@ SYNOPSYS
 
 #### Mandatory Parameters
 
-* **`--migration-id`** The migration name/identifier to start a verification on.
+* **`--migration-id`** The migration name/identifier to start (or override) a verification on.
 
 #### Optional Parameters
 
-* **`--override`** Stop the running verification for this migration, and start a new one.
+* **`--override`** Stop the currently running verification and start a new one.
 
 #### Examples
 
@@ -1215,6 +1210,13 @@ migration verification add --migration-id myMigration --override
 Migration verification commands are currently in preview, [this feature must be enabled before it can be used](./preview-features.md#migration-verifications).
 :::
 
+List all running migration verification jobs and their statuses (use [`migration verification show`](#migration-verification-show) when just wanting the status for one verification job).
+
+```text title="List all verification jobs"
+SYNOPSYS
+        migration verification list
+```
+
 ----
 
 ### `migration verification show`
@@ -1222,6 +1224,57 @@ Migration verification commands are currently in preview, [this feature must be 
 :::note
 Migration verification commands are currently in preview, [this feature must be enabled before it can be used](./preview-features.md#migration-verifications).
 :::
+
+Show the status of a specific migration verification.
+
+```text title="Show a verification job for a migration"
+SYNOPSYS
+        migration verification show [--migration-id] string
+```
+
+#### Mandatory Parameters
+
+* **`--migration-id`** Show the status of the current verification job running on this migration name/identifier (only one verification job can be running per migration).
+
+#### Example
+
+See [verification status values](./migration-verifications.md#verification-status-values) for further explanation of the output.
+
+```text title="Example status of a completed verification"
+WANdisco LiveData Migrator >> migration verification show --migration-id testmig
+{
+  "migrationId" : "testmig",
+  "state" : "COMPLETED",
+  "verificationId" : "e1aedfbd-b094-4a1b-a294-69cdd5a6030a",
+  "verificationPath" : "/testdir",
+  "startTime" : "2021-04-29T13:27:44.278Z",
+  "completeTime" : "2021-04-29T13:27:45.392Z",
+  "verificationEdge" : "/testmig/testdir01/testfile01",
+  "scannerSummary" : {
+    "progressSummary" : {
+      "filesScanned" : 177,
+      "directoriesScanned" : 47,
+      "bytesScanned" : 1105391944,
+      "filesExcluded" : 51,
+      "dirsExcluded" : 0,
+      "bytesExcluded" : 0,
+      "baseScanCompletionTime" : "2021-04-29T13:27:45.392Z"
+    },
+    "contentSummary" : {
+      "byteCount" : 1105391944,
+      "fileCount" : 194,
+      "directoryCount" : 81
+    }
+  },
+  "verificationProgress" : {
+    "matchedPathCount" : 224,
+    "totalFailedPathCount" : 0,
+    "targetFilesMissing" : 0,
+    "targetDirectoriesMissing" : 0,
+    "filesizeMismatches" : 0
+  }
+}
+```
 
 ----
 

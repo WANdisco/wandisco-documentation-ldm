@@ -192,6 +192,10 @@ module.exports = {
             {
               "type": "doc",
               "id": "backup-and-restore"
+            },
+            {
+              "type": "doc",
+              "id": "migration-verifications"
             }
           ]
         },

@@ -22,7 +22,7 @@ These configuration properties are used to adjust general items of operation.
 | --- | --- |
 | `spring.jackson.serialization.INDENT_OUTPUT` | Whether to apply indentation to JSON output from command results<br/><br/>**Default value**: `true`<br/>**Allowed values**: `true`, `false` |
 | `springdoc.swagger-ui.path` | The path at which clients can access the Swagger documentation for the LiveData Migrator REST API<br/><br/>**Default value**: `/ldm-api.html`<br/>**Allowed values**: Any valid file path |
-| `pull.threads` | The size of the thread pool that is used for executing activities related to notifications of changes in an HDFS environment<br/><br/>**Default value**: `100`<br/>**Allowed values**: An integer value between `1` and `10000` |
+| `pull.threads` | The size of the thread pool that is used for executing activities related to notifications of changes in an HDFS environment<br/><br/>**Default value**: `150`<br/>**Allowed values**: An integer value between `1` and `10000` |
 | `engine.threads` | The size of the thread pool used to perform migration of content from the source file system to targets<br/><br/>**Default value**: `1000`<br/>**Allowed values**: An integer value between `1` and `10000` |
 | `persisted.store` | Reserved for future use <br/><br/>**Default value**: `true` |
 | `server.port` | The TCP port used to listen for clients interacting with the [REST API](./api-reference.md)<br/><br/>**Default value**: `18080`<br/>**Allowed values**: An integer value between `1024` and `65535` |
