@@ -32,7 +32,7 @@ This issue will occur when you have removed the HiveMigrator package with `apt-g
 
 The `/etc/wandisco/hivemigrator` directory will be missing files as a result. The cause is that the Ubuntu package management tool ([dpkg](https://man7.org/linux/man-pages/man1/dpkg.1.html)) stores service configuration information in its internal database and assumes this directory already has the needed files (even if they were manually removed).
 
-To workaround this:
+To resolve this:
 
 1. Cleanup the dpkg database for the HiveMigrator service:
 
