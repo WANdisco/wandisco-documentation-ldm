@@ -17,13 +17,21 @@ LiveData Migrator migrates existing data and ongoing changes to between source a
 
 Use this feature to scan your source and target filesystems (on a migration path) and compare them for any discrepancies to verify the status of your migration.
 
+## How it works
+
+Migration verifications can be run alongside active migrations as it is a separate process and will not interfere with running migrations.
+
+The verification job uses a different scanning method to that of a migration scan. The migration path and any client activity will be scanned, but no data will be moved. The verification job will simply compare the source and target filesystems and provide the scanning status.
+
+As a result, the verification job will complete much faster than the data migration itself.
+
 ## Limitations and considerations
 
 These are the main aspects and considerations of this feature:
 
 * A migration verification can only be performed on a [Live, Running or Completed](./manage-migrations.md#data-migration-states) data migration.
 * Only one verification can be active at a time for each data migration.
-* Verifications are based on the current progress of the migration, and will ignore any paths that are not yet scanned.
+* A verification job does not ignore paths that are not yet migrated, so the status report will show missing files for a [Running](./manage-migrations.md#data-migration-states) migration.
 * For [one-time migrations](./one-time-migration.md) (`--scanOnly`), verifications will ignore any client changes.
 * The verification will ignore any files & directories that have been [excluded](./configure-exclusions.md) from the migration.
 * The verification will take into account any [path mappings](./create-path-mappings.md) that are applicable to the migration.
@@ -94,7 +102,7 @@ The verification status can be viewed by using:
 
 The important values to consider are contained within the `verificationProgress` output:
 
-* **`matchedPathCount`** The total number of files and directories that were or have been scanned.
+* **`matchedPathCount`** The total number of files and directories that were or have been migrated to the target filesystem.
 * **`totalFailedPathCount`** The total number of files and directories that are missing on the target filesystem.
 * **`targetFilesMissing`** The number of files that are missing on the target filesystem.
 * **`targetDirectoriesMissing`** The number of directories that are missing on the target filesystem.
