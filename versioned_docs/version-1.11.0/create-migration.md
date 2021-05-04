@@ -12,7 +12,6 @@ You will typically create multiple migrations so that you can select specific co
 
 ## Create a new migration with the UI
 
-1. Provide a name for the migration.
 1. Choose a source and target from one of your [storages](./configure-storage.md).
 1. Choose the Path to set the scope of the migration.
 

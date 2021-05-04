@@ -144,12 +144,12 @@ LiveData Migrator automatically tests the connection to any target filesystem ad
 
 To check that the configuration for the filesystem is correct:
 
-   * UI - the target will show a healthy connection.
-   * CLI - the `filesystem show` command will show only a target that was successfully added:
+* UI - the target will show a healthy connection.
+* CLI - the `filesystem show` command will show only a target that was successfully added:
 
-     ```text title="Example"
-     filesystem show --file-system-id myAWSBucket
-     ```
+  ```text title="Example"
+  filesystem show --file-system-id myAWSBucket
+  ```
 
 To test a migration to the S3 bucket, [create a migration](./create-migration.md) and run it to transfer data, then check that the data has arrived in its intended destination.
 
@@ -176,12 +176,12 @@ LiveData Migrator automatically tests the connection to any hive agent added to 
 
 To check that the configuration for the hive agent is correct:
 
-   * UI - the agent will show a healthy connection.
-   * CLI
+* UI - the agent will show a healthy connection.
+* CLI
 
-     ```text title="Example"
-     hive agent check --name hiveAgent
-     ```
+  ```text title="Example"
+  hive agent check --name hiveAgent
+  ```
 
 To test a metadata migration from the Apache Hive agent, [create a metadata migration](./migrate-metadata.md) and run it to transfer data, then check that the data has arrived in its intended destination.
 
@@ -189,8 +189,8 @@ To test a metadata migration from the Apache Hive agent, [create a metadata migr
 
 Configure a hive agent to connect to AWS Glue:
 
-   * [UI](./connect-metastores.md#add-target-agents)
-   * [CLI](./command-reference.md#hive-agent-add-glue)
+* [UI](./connect-metastores.md#add-target-agents)
+* [CLI](./command-reference.md#hive-agent-add-glue)
 
 ### Test the AWS Glue target hive agent
 
@@ -198,12 +198,12 @@ LiveData Migrator automatically tests the connection to any hive agent added to 
 
 To check that the configuration for the hive agent is correct:
 
-  * UI - the agent will show a healthy connection.
-  * CLI
+* UI - the agent will show a healthy connection.
+* CLI
 
-    ```text title="Example"
-    hive agent check --name hiveAgent
-    ```
+  ```text title="Example"
+  hive agent check --name hiveAgent
+  ```
 
 To test a metadata migration to the AWS Glue target agent, [create a metadata migration](./migrate-metadata.md) and run it to transfer data, then check that the data has arrived in its intended destination.
 
@@ -221,7 +221,7 @@ In the event of a problem you cannot diagnose, contact [WANdisco support](https:
 
 The diagram is an example of LiveData Migrator architecture between two environments - On-premises and AWS Cloud.
 
-### On-premises
+### On-Premises
 
 1. All migration activity, both reads and writes, goes through the LiveData Migrator service. Data transfer to AWS is via Port 443 (HTTPS). Metadata transfer through the HiveMigrator functionality is over port 6780/6781 (HTTP/HTTPS).
 

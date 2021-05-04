@@ -1,7 +1,7 @@
 ---
 id: command-reference
 title: Command Reference
-sidebar_label: Command reference
+sidebar_label: Command Reference
 ---
 
 Looking to learn more about LiveData Migrator commands? This reference page includes a comprehensive description of each command available from the LiveData Migrator CLI.
@@ -103,7 +103,7 @@ This will often take the form of `https://login.microsoftonline.com/{tenant}/oau
 #### Optional Parameters
 
 * **`--insecure`** When provided, LiveData Migrator will not use TLS to encrypt communication with ADLS Gen 2. This may improve throughput, but should only be used when you have other means of securing communication. This is referenced in the UI when **Use Secure Protocol** is unchecked.
-* **`--properties-files`** Reference a list of existing properties files, each containing Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
+* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
 #### Example
@@ -139,7 +139,7 @@ SYNOPSYS
 #### Optional Parameters
 
 * **`--insecure`** When provided, LiveData Migrator will not use TLS to encrypt communication with ADLS Gen 2. This may improve throughput, but should only be used when you have other means of securing communication. This is referenced in the UI when **Use Secure Protocol** is unchecked.
-* **`--properties-files`** Reference a list of existing properties files, each containing Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
+* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
 #### Example
@@ -190,7 +190,7 @@ This is referenced in the UI as **Key File** when the _Key File Options -> Provi
 #### Optional Parameters
 
 * **`--service-account-email`** The email address linked to your GCS service account. This is referenced in the UI as **Email address** and is required when selecting the **Upload P12 Key File** option.
-* **`--properties-files`** Reference a list of existing properties files, each containing Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
+* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
 #### Example
@@ -249,7 +249,7 @@ See the links below for guidance for common Hadoop distributions:
 * **`--user`** The name of the HDFS user to be used when performing operations against the file system. In environments where Kerberos is disabled, this user must be the HDFS super user, such as `hdfs`.
 * **`--kerberos-principal`** The Kerberos principal to authenticate with and perform migrations as. This principal should map to the [HDFS super user](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsPermissionsGuide.html#The_Super-User) using [auth_to_local](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SecureMode.html#Mapping_from_Kerberos_principals_to_OS_user_accounts) rules.
 * **`--kerberos-keytab`** The Kerberos keytab containing the principal defined for the `--kerberos-principal` parameter. This must be accessible to the local system user running the LiveData Migrator service (default is `hdfs`).
-* **`--source`** Provide this parameter to use the file system resource created as a source. This is referenced in the UI when configuring the _Unknown source_.
+* **`--source`** Provide this parameter to use the file system resource created as a source.  This is referenced in the UI when configuring the _Unknown source_.
 * **`--scan-only`** Provide this parameter to create a static source filesystem for use in [one-time migrations](./one-time-migration.md). Requires `--source`.
 * **`--properties-files`** Reference a list of existing properties files that contain Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.  This is referenced in the UI as **Provide a path to files** under the _Additional Configuration_ option.
 * **`--properties`** Specify properties to use in a comma-separated key/value list. This is referenced in the UI as **Additional Configuration** under the _Additional Configuration_ option.
@@ -337,7 +337,7 @@ SYNOPSYS
 * **`--fs-root`** The directory in the local filesystem to scan for data or send data to, depending on whether the filesystem is defined as a source or a target. Should be supplied using the full directory path from the root.
 * **`--source`** Provide this parameter to use the file system resource created as a source.  This is referenced in the UI when configuring the _Unknown source_.
 * **`--scan-only`** Provide this parameter to create a static source filesytem for use in [one-time migrations](./one-time-migration.md). Requires `--source`.
-* **`--properties-files`** Reference a list of existing properties files, each containing Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
+* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
 * **`--properties`** Specify properties to use in a comma-separated key/value list.
 
 :::note
@@ -362,29 +362,24 @@ filesystem add local --file-system-id mytarget --fs-root ./Users/username/destin
 
 ### `filesystem add s3a`
 
-Add an Amazon Simple Storage Service (Amazon S3) bucket as a target filesystem using the `filesystem add s3a` command. This method also supports IBM COS buckets.
+Add an S3 bucket as a target file system using the `filesystem add s3a` command. This method also supports IBM COS buckets.
 
 ```text tile="Add an S3 file system"
 SYNOPSYS
         filesystem add s3a [--file-system-id] string
                            [--bucket-name] string
-                           [[--endpoint] string]
                            [[--access-key] string]
                            [[--secret-key] string]
                            [--credentials-provider] string
-                           [--source]
-                           [--scan-only]
                            [[--properties-files] list]
                            [[--properties] list]
 ```
 
-For guidance about access, permissions, and security when adding an Amazon S3 bucket as a target filesystem, see [Security best practices in IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html).
-
-#### S3a Mandatory Parameters
+#### Mandatory Parameters
 
 * **`--file-system-id`** The identifier for the new file system resource. This is referenced in the UI as **Storage Name**.
-* **`--bucket-name`** The name of your Amazon S3 bucket. This is referenced in the UI as **Bucket Name**.
-* **`--credentials-provider`** The Java class name of a credentials provider for authenticating with the Amazon S3 endpoint. This is referenced in the UI as **Credentials Provider**. This is not a required parameter when adding an IBM COS bucket through the UI.  
+* **`--bucket-name`** The name of your S3 bucket. This is referenced in the UI as **Bucket Name**.
+* **`--credentials-provider`** The Java class name of a credentials provider for authenticating with the S3 endpoint. This is referenced in the UI as **Credentials Provider**. This is not a required parameter when adding an IBM COS bucket through the UI.  
   The Provider options available include:
   * **`org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider`**
 
@@ -392,7 +387,7 @@ For guidance about access, permissions, and security when adding an Amazon S3 bu
 
   * **`com.amazonaws.auth.InstanceProfileCredentialsProvider`**
 
-    Use this provider when running LiveData Migrator on an Elastic Compute Cloud (EC2) instance that has [been assigned an IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) with policies that allow it to access the Amazon S3 bucket.
+    Use this provider when running LiveData Migrator on an EC2 instance that has [been assigned an IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html) with policies that allow it to access the S3 bucket.
 
   * **`com.amazonaws.auth.DefaultAWSCredentialsProviderChain`**
 
@@ -406,45 +401,42 @@ For guidance about access, permissions, and security when adding an Amazon S3 bu
     * Instance profile credentials delivered through the Amazon EC2 metadata service.
 * **Endpoint** (UI & IBM COS only): This is required when adding an IBM COS bucket. IBM provide a list of available endpoints that can be found in their [public documentation](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-endpoints#endpoints-region).
 
-#### S3a Optional Parameters
+#### S3a optional parameters
 
 * **`--access-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the access key with this parameter. This is referenced in the UI as **Access Key**. This is a required parameter when adding an IBM COS bucket.
 * **`--secret-key`** When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the secret key using this parameter. This is referenced in the UI as **Secret Key**. This is a required parameter when adding an IBM COS bucket.
-* **`--endpoint`** _(S3 as a target only)_ Provide a specific endpoint to access the S3 bucket such as an [AWS PrivateLink endpoint](https://docs.aws.amazon.com/AmazonS3/latest/userguide/privatelink-interface-endpoints.html) (for example: `vpce-0e25b8cdd720f900e-argc85vg.s3.us-east-1.vpce.amazonaws.com`). When using this parameter, do not use the `fs.s3a.endpoint` property as an additional [custom property](#s3a-custom-properties) as this supersedes it. This is referenced in the UI as **Use AWS PrivateLink -> PrivateLink VPC**.
-* **`--source`** _(Preview)_ Provide this parameter to use the file system resource created as a source. This is referenced in the UI when configuring the _Unknown source_.
-* **`--scan-only`** Provide this parameter to create a static source filesystem for use in [one-time migrations](./one-time-migration.md). Requires `--source`.
-* **`--properties-files`** Reference a list of existing properties files, each containing Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
-* **`--properties`** Specify properties to use in a comma-separated key/value list. This is referenced in the UI as **S3A Properties** (see [S3a Default Properties](#s3a-default-properties) and [S3a Custom Properties](#s3a-custom-properties) for more information).
+* **`--properties-files`** Reference a list of existing properties files, each that contains Hadoop configuration properties in the format used by `core-site.xml` or `hdfs-site.xml`.
+* **`--properties`** Specify properties to use in a comma-separated key/value list.
 
-:::note
-Amazon S3a as a source is currently a preview feature.
+#### S3a Properties
+
+:::info
+When adding properties via the UI or API, for example to set a custom `fs.s3a.endpoint`, it is required to also set the following properties manually. They are added by default when using the CLI.
 :::
-
-#### S3a Default Properties
-
-These properties are defined by default when adding an S3a filesystem.
 
 * **`fs.s3a.impl`** (default `org.apache.hadoop.fs.s3a.S3AFileSystem`): The implementation class of the S3a Filesystem.
 * **`fs.AbstractFileSystem.s3a.impl`** (default `org.apache.hadoop.fs.s3a.S3A`): The implementation class of the S3a AbstractFileSystem.
-* **`fs.s3a.user.agent.prefix`** (default `APN/1.0 WANdisco/1.0 LiveDataMigrator/1.11.6`): Sets a custom value that will be pre-pended to the User-Agent header sent in HTTP requests to the S3 back-end by S3aFileSystem.
+* **`fs.s3a.user.agent.prefix`** (default `WANdisco/LiveDataMigrator`): Sets a custom value that will be pre-pended to the User-Agent header sent in
+    HTTP requests to the S3 back-end by S3aFileSystem.
 * **`fs.s3a.impl.disable.cache`** (default `true`): Disables the S3 file system cache when set to 'true'.
-* **`hadoop.tmp.dir`** (default `tmp`): The parent directory for other temporary directories.
-* **`fs.s3a.connection.maximum`** (default `120`) Defines the maximum number of simultaneous connections to the S3 filesystem.
-* **`fs.s3a.threads.max`** (default `100`): Defines the total number of threads to make available in the filesystem for data uploads or any other queued filesystem operation.
-* **`fs.s3a.max.total.tasks`** (default `60`): Defines the number of operations which can be queued for execution at a time.
-
-#### S3a Custom Properties
-
-These are some of the additional properties that can be added when creating an S3a filesystem.
-
+* **`fs.hadoop.tmp.dir`** (default `tmp`): The parent directory for other temporary directories.
 * **`fs.s3a.fast.upload.buffer`** (default `disk`): Defines how the filesystem will [buffer the upload](#upload-buffering).
 * **`fs.s3a.fast.upload.active.blocks`** (default `8`): Defines how many blocks a single output stream can have uploading or queued at a given time.
 * **`fs.s3a.block.size`** (default `32M`): Defines the maximum size of blocks during file transfer. Use the suffix `K`, `M`, `G`, `T` or `P` to scale the value in Kilobytes, Megabytes, Gigabytes, Terabytes or Petabytes respectively.
 * **`fs.s3a.buffer.dir`** (default `tmp`): Defines the directory used by [disk buffering](#upload-buffering).
+* **`fs.s3a.connection.maximum`** (default `120`) Defines the maximum number of simultaneous connections to the S3 filesystem.
+* **`fs.s3a.threads.max`** (default `100`): Defines the total number of threads to make available in the filesystem for data uploads or any other queued filesystem operation.
+* **`fs.s3a.max.total.tasks`** (default `60`): Defines the number of operations which can be queued for execution at a time.
 
-Find an additional list of S3a properties in the [S3a documentation](https://hadoop.apache.org/docs/r3.2.1/hadoop-aws/tools/hadoop-aws/index.html).
+You can additionally find a list of S3a properties in the [S3a documentation](https://hadoop.apache.org/docs/r3.2.1/hadoop-aws/tools/hadoop-aws/index.html).
 
-##### Upload Buffering
+#### Example
+
+```text
+filesystem add s3a --file-system-id mytarget --bucket-name mybucket1 --credentials-provider org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider --access-key B6ZAI18Z3UIO002Y777A --secret-key OP87Chokisf4hsTP0Q5j95yI904lT7AaDBGJpp0D
+```
+
+#### Upload Buffering
 
 Migrations using an S3A target destination will buffer all uploads. By default, the buffering will occur on the local disk of system LiveData Migrator is running on, in the `/tmp` directory.
 
@@ -463,12 +455,6 @@ Both the `array` and `bytebuffer` options may lead to the consumption of large a
 :::note
   If you run out of disk space on which to buffer the migration, the migration will stall with a series of errors. To avoid this, ensure the file system containing the directory used for buffering (`/tmp` by default) has enough remaining space to facilitate the transfer.
 :::
-
-#### Example
-
-```text
-filesystem add s3a --file-system-id mytarget --bucket-name mybucket1 --credentials-provider org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider --access-key B6ZAI18Z3UIO002Y777A --secret-key OP87Chokisf4hsTP0Q5j95yI904lT7AaDBGJpp0D
-```
 
 ----
 
@@ -583,6 +569,10 @@ SYNOPSYS
 
 Update an existing Azure Data Lake Storage Gen 2 container migration target with a specified filesystem ID using the `filesystem update adls2 oauth` command. You will be prompted to optionally update the [service principal](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal) and [OAuth 2](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols) credentials.
 
+
+=======
+Any optional parameters supplied will update the corresponding details of the existing filesystem.
+
 Any optional parameters supplied will update the corresponding details of the existing filesystem. The parameters that can be changed are the same as the ones listed in the [`filesystem add adls2 oauth`](./command-reference.md#filesystem-add-adls2-oauth) section.
 
 All parameters are optional except `--file-system-id`, which specifies the file system you want to update.
@@ -644,6 +634,7 @@ filesystem update hdfs --file-system-id mysource --default-fs hdfs://sourcenames
 ```text title="Example for source NameNode HA cluster with Kerberos enabled"
 filesystem update hdfs --file-system-id mytarget --default-fs hdfs://sourcenameservice --properties-files /etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml --kerberos-keytab /etc/security/keytabs/hdfs.headless.keytab --kerberos-principal hdfs@SOURCEREALM.COM
 ```
+
 
 ----
 
@@ -739,38 +730,25 @@ exclusion add file-size --exclusion-id 100mbfiles --description "Files greater t
 
 ### `exclusion add regex`
 
-Create an exclusion using a regular expression to prevent certain files and directories being transferred based on matching file or directory names. Once associated with a migration using [`migration exclusion add`](#migration-exclusion-add), files and directories that match the regular expression will not be migrated.
+Create an exclusion that can be applied to migrations to constrain the files transferred by a policy based on matching file name by regular expression. Once associated with a migration using [`migration exclusion add`](#migration-exclusion-add), files that match the policy will not be migrated.
 
 ```text title="Create a new exclusion by regular expression policy"
 SYNOPSYS
         exclusion add regex [--exclusion-id] string
                             [--description] string
                             [--regex] string
-                            [[--type] string]
 ```
 
 #### Mandatory Parameters
 
 * **`--exclusion-id`** The identifier for the exclusion policy. This is referenced in the UI as **Name**.
 * **`--description`** A user-friendly description for the policy. This is referenced in the UI as **Description**.
-* **`--regex`** A regular expression in a syntax of either [Java PCRE](https://regexr.com/), [Automata](https://www.javatpoint.com/theory-of-automata) or [GLOB](https://en.wikipedia.org/wiki/Glob_(programming)) type. This is referenced in the UI as **Regex**.
+* **`--regex`** A regular expression in a syntax of either [Java PCRE](https://regexr.com/) or [Automata](https://www.javatpoint.com/theory-of-automata) type. This is referenced in the UI as **Regex**.
 
-#### Optional Parameters
+#### Example
 
-* **`--type`** Choose the regular expression syntax type. There are three options available:
-
-  1. `JAVA_PCRE` _(default)_
-  1. `AUTOMATA`
-  1. `GLOB`
-
-#### Examples
-
-```text title="Example glob pattern"
-exclusion add regex --description "No paths or files that start with test" --exclusion-id exclusion1 --type GLOB --regex test*
-```
-
-```text title="Example Java PCRE pattern"
-exclusion add regex --description "No paths of files that start with test" --exclusion-id exclusion1 --regex ^test\.*
+```text
+exclusion add regex --description "No paths that start with test"  --exclusion-id exclusion1 --regex ^test\.*
 ```
 
 #### Using backslash characters within `--regex` parameter
@@ -970,7 +948,7 @@ SYNOPSYS
 
 #### Mandatory Parameters
 
-* **`--migration-id`** The migration name or identifier to stop.
+* **`--migration-id`** The identifier of the migration to stop.
 
 #### Example
 
@@ -991,7 +969,7 @@ SYNOPSYS
 
 #### Mandatory Parameters
 
-* **`--migration-id`** The migration name or identifier to resume.
+* **`--migration-id`** The identifier of the migration to resume.
 
 #### Example
 
@@ -1012,7 +990,7 @@ SYNOPSYS
 
 #### Mandatory Parameters
 
-* **`--migration-id`** The migration name or identifier to delete.
+* **`--migration-id`** The identifier of the migration to delete.
 
 #### Example
 
@@ -1034,7 +1012,7 @@ SYNOPSYS
 
 #### Mandatory Parameters
 
-* **`--migration-id`** The migration name or identifier with which to associate the exclusion.
+* **`--migration-id`** The identifier of the migration with which to associate the exclusion.
 * **`--exclusion-id`** The identifier of the exclusion to associate with the migration. This is referenced in the UI as **Name**.
 
 #### Example
@@ -1057,7 +1035,7 @@ SYNOPSYS
 
 #### Mandatory Parameters
 
-* **`--migration-id`** The migration name or identifier from which to remove the exclusion.
+* **`--migration-id`** The identifier of the migration from which to remove the exclusion.
 * **`--exclusion-id`** The identifier of the exclusion to remove from the migration. This is referenced in the UI as **Name**.
 
 #### Example
@@ -1105,7 +1083,7 @@ SYNOPSYS
 
 #### Optional Parameters
 
-* **`--migration-id`** Provide a name or identifier for the new migration. An identifier will be auto-generated if one is not provided. This is referenced in the UI as **Migration Name**.
+* **`--migration-id`** Provide an identifier for the new migration. An identifier will be auto-generated if one is not provided.
 * **`--exclusions`** A comma-separated list of exclusions by name. This is referenced in the UI as **Add new exclusion**.
 * **`--auto-start`** Provide this parameter if you want the migration to start immediately. If not provided, the migration will only take effect once run. This is referenced in the UI as **Auto-start migration**.
 * **`--action-policy`** This parameter determines what happens if the migration encounters content in the target path with the same name and size. This is referenced in the UI as **Skip Or Overwrite Settings**.  
@@ -1123,6 +1101,8 @@ migration add --path /repl1 --target mytarget –-migration-id myNewMigration --
 
 ----
 
+
+
 ### `migration run`
 
 Start a migration that was created without the `--auto-start` parameter.
@@ -1134,7 +1114,7 @@ SYNOPSYS
 
 #### Mandatory Parameters
 
-* **`--migration-id`** The migration name or identifier to run.
+* **`--migration-id`** The identifier of the migration to run.
 
 #### Example
 
@@ -1149,132 +1129,21 @@ migration run –-migration-id myNewMigration
 Provide a JSON description of a specific migration.
 
 ```text title="Get migration details"
+NAME
+        migration show - Get migration details.
+
 SYNOPSYS
         migration show [--migration-id] string
 ```
 
 #### Mandatory Parameters
 
-* **`--migration-id`** The migration name or identifier to show.
+* **`--migration-id`** The identifier of the migration to show.
 
 #### Example
 
 ```text
 migration show --migration-id myNewMigration
-```
-
-----
-
-### `migration verification add`
-
-:::note
-Migration verification commands are currently in preview. [This feature must be enabled before it can be used](./preview-features.md#migration-verifications).
-:::
-
-Add a migration verification for a specified migration. This will scan your source and target filesystems (in the migration path) and compare them for any discrepancies.
-
-The verification status will show the number of missing paths and files on the target filesystem and also the number of file size mismatches between the source and target. The verification status can be viewed by using [`migration verification show`](#migration-verification-show) (for individual verification jobs) or [`migration verification list`](#migration-verification-list) (for all verification jobs).
-
-Once a verification job is complete, a verification report will be created in the `/var/log/wandisco/livedata-migrator` directory in the format of `verification-report-{verificationId}-{startTime}.log`. This report will contain more details including any paths that have discrepancies.
-
-See [migration verifications](./migration-verifications.md) for more details.
-
-```text title="Verify a migration"
-SYNOPSYS
-        migration verification add [--migration-id] string
-                                   [--override]
-```
-
-#### Mandatory Parameters
-
-* **`--migration-id`** The migration name or identifier to start (or override) a verification on.
-
-#### Optional Parameters
-
-* **`--override`** Stop the currently running verification and start a new one.
-
-#### Examples
-
-```text title="Start a verification job"
-migration verification add --migration-id myMigration
-```
-
-```text title="Stop the running verification and start a new one"
-migration verification add --migration-id myMigration --override
-```
-
-----
-
-### `migration verification list`
-
-:::note
-Migration verification commands are currently in preview. [This feature must be enabled before it can be used](./preview-features.md#migration-verifications).
-:::
-
-List all running migration verification jobs and their statuses (use [`migration verification show`](#migration-verification-show) when just wanting the status for one verification job).
-
-```text title="List all verification jobs"
-SYNOPSYS
-        migration verification list
-```
-
-----
-
-### `migration verification show`
-
-:::note
-Migration verification commands are currently in preview. [This feature must be enabled before it can be used](./preview-features.md#migration-verifications).
-:::
-
-Show the status of a specific migration verification.
-
-```text title="Show a verification job for a migration"
-SYNOPSYS
-        migration verification show [--migration-id] string
-```
-
-#### Mandatory Parameters
-
-* **`--migration-id`** Show the status of the current verification job running on this migration name or identifier (only one verification job can be running per migration).
-
-#### Example
-
-See [verification status values](./migration-verifications.md#verification-status-values) for further explanation of the output.
-
-```text title="Example status of a completed verification"
-WANdisco LiveData Migrator >> migration verification show --migration-id testmig
-{
-  "migrationId" : "testmig",
-  "state" : "COMPLETED",
-  "verificationId" : "e1aedfbd-b094-4a1b-a294-69cdd5a6030a",
-  "verificationPath" : "/testdir",
-  "startTime" : "2021-04-29T13:27:44.278Z",
-  "completeTime" : "2021-04-29T13:27:45.392Z",
-  "verificationEdge" : "/testmig/testdir01/testfile01",
-  "scannerSummary" : {
-    "progressSummary" : {
-      "filesScanned" : 177,
-      "directoriesScanned" : 47,
-      "bytesScanned" : 1105391944,
-      "filesExcluded" : 51,
-      "dirsExcluded" : 0,
-      "bytesExcluded" : 0,
-      "baseScanCompletionTime" : "2021-04-29T13:27:45.392Z"
-    },
-    "contentSummary" : {
-      "byteCount" : 1105391944,
-      "fileCount" : 194,
-      "directoryCount" : 81
-    }
-  },
-  "verificationProgress" : {
-    "matchedPathCount" : 224,
-    "totalFailedPathCount" : 0,
-    "targetFilesMissing" : 0,
-    "targetDirectoriesMissing" : 0,
-    "filesizeMismatches" : 0
-  }
-}
 ```
 
 ----
@@ -1305,7 +1174,7 @@ SYNOPSYS
 * **`--migrations`** Displays information about each running migration.
 * **`--network`** Displays file transfer throughput in Gib/s during the last 10 seconds, 1 minute and 30 minutes.
 
-#### Examples
+#### Example
 
 ```text title="Status"
 WANdisco LiveMigrator >> status
@@ -1501,7 +1370,7 @@ The Azure hive agent requires a ADLS Gen2 storage account and container name, th
 Additionally, use only one of the following parameters:
 
 * **`--file-system-id`** The name of the filesystem that will be associated with this agent (for example: `myadls2storage`). This will ensure any [path mappings](./create-path-mappings.md) are correctly linked between the filesystem and the agent. This is referenced in the UI as **Filesystem**.
-* **`--default-fs-override`** Provide an override for the default filesystem URI instead of a filesystem name (for example: `abfss://mycontainer@mystorageaccount.dfs.core.windows.net`). This is referenced in the UI as **DefaultFs Override**.
+* **`--default-fs-override`** Provide an override for the default filesystem URI instead of a filesystem name (for example: `abfss://mycontainer@mystorageaccount.dfs.core.windows.net`). This is referenced in the UI as **DefaultFS Override**.
 
 #### Optional Parameters
 
@@ -1679,13 +1548,13 @@ SYNOPSYS
 #### Glue Parameters
 
 * **`--name`** The identifier to give to the new Hive agent. This is referenced in the UI as **Name**.
-* **`--glue-endpoint`** The [AWS Glue service endpoint](https://docs.aws.amazon.com/general/latest/gr/glue.html) for connections to the data catalog. [VPC endpoint types](https://docs.aws.amazon.com/glue/latest/dg/vpc-endpoint.html) are also supported. This is referenced in the UI as **AWS Glue Service Endpoint**.
-* **`--aws-region`** The [AWS region](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) that your data catalog is located in (default is `us-east-1`). If `--glue-endpoint` is specified, this parameter will be ignored. This is referenced in the UI as **AWS Region**.
+* **`--glue-endpoint`** The [AWS Glue service endpoint](https://docs.aws.amazon.com/general/latest/gr/glue.html) for connections to the data catalog. This is referenced in the UI as **AWS Glue Service Endpoint**.
+* **`--aws-region`** The [AWS region](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) that your data catalog is located in (default is `us-east-1`). This is referenced in the UI as **AWS Region**.
 
 Additionally, use only one of the following parameters:
 
 * **`--file-system-id`** The name of the filesystem that will be associated with this agent (for example: `mys3bucket`). This will ensure any [path mappings](./create-path-mappings.md) are correctly linked between the filesystem and the agent. This is referenced in the UI as **Filesystem**.
-* **`--default-fs-override`** Provide an override for the default filesystem URI instead of a filesystem name (for example: `s3a://mybucket/`). This is referenced in the UI as **DefaultFs Override**.
+* **`--default-fs-override`** Provide an override for the default filesystem URI instead of a filesystem name (for example: `s3a://mybucket/`). This is referenced in the UI as **DefaultFS Override**.
 
 #### Glue Credential Parameters
 
@@ -1713,7 +1582,7 @@ Additionally, use only one of the following parameters:
 
 Follow these steps to deploy a remote hive agent for AWS Glue:
 
-1. Transfer the remote server installer to your remote host (Amazon EC2 instance):
+1. Transfer the remote server installer to your remote host (EC2 instance):
 
    ```text title="Example of secure transfer from local to remote host"
    scp /opt/wandisco/hivemigrator/hivemigrator-remote-server-installer.sh myRemoteHost:~
@@ -1735,7 +1604,7 @@ Follow these steps to deploy a remote hive agent for AWS Glue:
 
    See the **Example for remote AWS Glue agent** example below for further guidance.
 
-#### Examples
+#### Example
 
 ```text title="Example for local AWS Glue agent"
 hive agent add glue --name glueAgent --access-key ACCESS6HCFPAQIVZTKEY --secret-key SECRET1vTMuqKOIuhET0HAI78UIPfSRjcswTKEY --glue-endpoint glue.eu-west-1.amazonaws.com --aws-region eu-west-1 --file-system-id mys3bucket
@@ -1785,7 +1654,7 @@ SYNOPSYS
 Additionally, use only one of the following parameters:
 
 * **`--file-system-id`** The name of the filesystem that will be associated with this agent (for example: `myhdfs`). This will ensure any [path mappings](./create-path-mappings.md) are correctly linked between the filesystem and the agent. This is referenced in the UI as **Filesystem**.
-* **`--default-fs-override`** Provide an override for the default filesystem URI instead of a filesystem name (for example: `hdfs://nameservice01`). This is referenced in the UI as **DefaultFs Override**.
+* **`--default-fs-override`** Provide an override for the default filesystem URI instead of a filesystem name (for example: `hdfs://nameservice01`). This is referenced in the UI as **DefaultFS Override**.
 
 #### Optional Parameters
 
@@ -1849,137 +1718,6 @@ hive agent add hive --name targetmanualAgent --host myRemoteHost.example.com --p
 :::note
 If specifying Kerberos and config path information for remote agents, ensure that the directories and Kerberos principal are correct for your chosen remote host (not your local host).
 :::
-
-----
-
-### `hive agent add databricks`
-
-:::note
-Databricks agents are currently available as a preview feature.
-:::
-
-Add a [Databricks](https://databricks.com/product/delta-lake-on-databricks) hive agent to connect to a Databricks Delta Lake metastore ([AWS](https://docs.databricks.com/data/metastores/index.html), [Azure](https://docs.microsoft.com/en-us/azure/databricks/data/metastores/) or [GCP](https://docs.gcp.databricks.com/data/metastores/index.html)) using the `hive agent add databricks` command.
-
-If your LiveData Migrator host can communicate directly with the Databricks Delta Lake, then a local hive agent will be sufficient. Otherwise, consider using a remote hive agent.
-
-:::info remote deployments
-For a remote hive agent connection, specify a remote host that will be used to communicate with the local LiveData Migrator server (constrained to a user-defined port).
-
-A small service will be deployed on this remote host so that the hive agent can migrate data to and/or from the Databricks Delta Lake.
-:::
-
-```text title="Add Databricks agent"
-SYNOPSYS
-        hive agent add databricks [[--name] string]
-                                  [--jdbc-server-hostname] string
-                                  [--jdbc-port] int
-                                  [--jdbc-http-path] string
-                                  [--access-token] string
-                                  [[--fs-mount-point] string]
-                                  [--convert-to-delta]
-                                  [--delete-after-conversion]
-                                  [[--file-system-id] string]
-                                  [[--default-fs-override] string]
-                                  [[--host] string]
-                                  [[--port] integer]
-                                  [--no-ssl]
-```
-
-#### Enable JDBC connections to Databricks
-
-The following steps are required to enable Java Database Connectivity (JDBC) to Databricks Delta Lake:
-
-1. Download the [Databricks JDBC driver](https://databricks.com/spark/jdbc-drivers-download).
-
-1. Unzip the package and upload the `SparkJDBC42.jar` file to the LiveData Migrator host machine.
-
-1. Move the `SparkJDBC42.jar` file to the LiveData Migrator directory below:
-
-   ```text
-   /opt/wandisco/hivemigrator/agent/databricks
-   ```
-
-1. Change ownership of the Jar file to the [HiveMigrator system user and group](./configure-system-users.md#defaults):
-
-   ```text title="Example for hive:hadoop"
-   chown hive:hadoop /opt/wandisco/hivemigrator/agent/databricks/SparkJDBC42.jar
-   ```
-
-#### Databricks Mandatory Parameters
-
-* **`--name`** The identifier to give to the new Hive agent. This is referenced in the UI as **Name**.
-* **`--jdbc-server-hostname`** The server hostname for the Databricks cluster ([AWS](https://docs.databricks.com/integrations/bi/jdbc-odbc-bi.html#get-server-hostname-port-http-path-and-jdbc-url), [Azure](https://docs.microsoft.com/en-us/azure/databricks/integrations/bi/jdbc-odbc-bi#get-server-hostname-port-http-path-and-jdbc-url) or [GCP](https://docs.gcp.databricks.com/integrations/bi/jdbc-odbc-bi.html#get-server-hostname-port-http-path-and-jdbc-url)). This is referenced in the UI as **JDBC Server Hostname**.
-* **`--jdbc-port`** The port used for JDBC connections to the Databricks cluster ([AWS](https://docs.databricks.com/integrations/bi/jdbc-odbc-bi.html#get-server-hostname-port-http-path-and-jdbc-url), [Azure](https://docs.microsoft.com/en-us/azure/databricks/integrations/bi/jdbc-odbc-bi#get-server-hostname-port-http-path-and-jdbc-url) or [GCP](https://docs.gcp.databricks.com/integrations/bi/jdbc-odbc-bi.html#get-server-hostname-port-http-path-and-jdbc-url)). This is referenced in the UI as **JDBC Port**.
-* **`--jdbc-http-path`** The HTTP path for the Databricks cluster ([AWS](https://docs.databricks.com/integrations/bi/jdbc-odbc-bi.html#get-server-hostname-port-http-path-and-jdbc-url), [Azure](https://docs.microsoft.com/en-us/azure/databricks/integrations/bi/jdbc-odbc-bi#get-server-hostname-port-http-path-and-jdbc-url) or [GCP](https://docs.gcp.databricks.com/integrations/bi/jdbc-odbc-bi.html#get-server-hostname-port-http-path-and-jdbc-url)). This is referenced in the UI as **JDBC Http Path**.
-* **`--access-token`** The personal access token to be used for the Databricks cluster ([AWS](https://docs.databricks.com/dev-tools/api/latest/authentication.html#generate-a-personal-access-token), [Azure](https://docs.microsoft.com/en-us/azure/databricks/sql/user/security/personal-access-tokens#--generate-a-personal-access-token) or [GCP](https://docs.gcp.databricks.com/dev-tools/api/latest/authentication.html#generate-a-personal-access-token)). This is referenced in the UI as **Access Token**.
-
-Additionally, use only one of the following parameters:
-
-:::important
-If the `--convert-to-delta` option is used, the `--default-fs-override` parameter must also be provided with the value set to `dbfs:`.
-:::
-
-* **`--file-system-id`** The name of the filesystem that will be associated with this agent (for example: `myadls2` or `mys3bucket`). This will ensure any [path mappings](./create-path-mappings.md) are correctly linked between the filesystem and the agent. This is referenced in the UI as **Filesystem**.
-* **`--default-fs-override`** Provide an override for the default filesystem URI instead of a filesystem name (for example: `dbfs:`). This is referenced in the UI as **DefaultFs Override**.
-
-#### Databricks Optional Parameters
-
-* **`--fs-mount-point`** Define the [ADLS](https://docs.microsoft.com/en-us/azure/databricks/data/data-sources/azure/azure-storage#--mount-azure-blob-storage-containers-to-dbfs)/[S3](https://docs.databricks.com/data/databricks-file-system.html#mount-storage)/[GCP](https://docs.gcp.databricks.com/data/data-sources/google/gcs.html) location within the Databricks filesystem for containing migrations (for example: `/mnt/mybucketname`). This is referenced in the UI as **FS Mount Point**.
-
-  :::note
-  This parameter is required if `--convert-to-delta` is used. The Databricks agent will copy all associated table data and metadata into this location within the Databricks filesystem during conversion.
-  :::
-
-* **`--convert-to-delta`** All underlying table data and metadata is migrated to the storage location defined by the `--fs-mount-point` parameter. Use this option to automatically copy the associated data and metadata into Delta Lake on Databricks ([AWS](https://docs.databricks.com/spark/latest/spark-sql/language-manual/delta-copy-into.html), [Azure](https://docs.microsoft.com/en-us/azure/databricks/spark/latest/spark-sql/language-manual/delta-copy-into) or [GCP](https://docs.gcp.databricks.com/spark/latest/spark-sql/language-manual/delta-copy-into.html)), and convert tables into Delta Lake format. This is referenced in the UI as **Convert to delta format**.
-
-  The following parameter can only be used if `--convert-to-delta` has been specified:
-  * **`--delete-after-conversion`** Use this option to delete the underlying table data and metadata from the storage location (defined by `--fs-mount-point`) once it has been converted into Delta Lake on Databricks. This is referenced in the UI as **Delete after conversion**.
-
-    :::important
-    Only use this option if you are performing [one-time migrations](./one-time-migration.md) for the underlying table data. The Databricks agent does not support continuous (live) updates of table data when transferring to Delta Lake on Databricks.
-    :::
-
-#### Parameters for remote hive agents only
-
-* **`--host`** The host where the remote hive agent will be deployed.
-* **`--port`** The port for the remote hive agent to use on the remote host. This port is used to communicate with the local LiveData Migrator server.
-* **`--no-ssl`** [TLS/SSL encryption and certificate authentication](./configuration-hvm.md#tlsssl-certificates) is enabled by default between LiveData Migrator and the remote agent. Use this parameter to disable it.
-
-##### Steps for remote agent deployment
-
-Follow these steps to deploy a remote hive agent for Databricks Delta Lake:
-
-1. Transfer the remote server installer to your remote host:
-
-   ```text title="Example of secure transfer from local to remote host"
-   scp /opt/wandisco/hivemigrator/hivemigrator-remote-server-installer.sh myRemoteHost:~
-   ```
-
-1. On your remote host, run the installer as root (or sudo) user in silent mode:
-
-   ```text
-   ./hivemigrator-remote-server-installer.sh -- --silent
-   ```
-
-1. On your remote host, start the remote server service:
-
-   ```text
-   service hivemigrator-remote-server start
-   ```
-
-1. On your local host, run the `hive agent add databricks` command to configure your remote hive agent.
-
-   See the **Example for remote Databricks agent** example below for further guidance.
-
-#### Examples
-
-```text title="Example for local Databricks agent"
-hive agent add databricks --name databricksAgent --jdbc-server-hostname mydbcluster.cloud.databricks.com  --jdbc-port 443 --jdbc-http-path sql/protocolv1/o/8445611123456789/0234-125567-testy978 --access-token daexamplefg123456789t6f0b57dfdtoken4 --file-system-id mys3bucket --default-fs-override dbfs: --fs-mount-point /mnt/mybucket --convert-to-delta
-```
-
-```text title="Example for remote Databricks agent"
-hive agent add databricks --name databricksAgent --jdbc-server-hostname mydbcluster.cloud.databricks.com  --jdbc-port 443 --jdbc-http-path sql/protocolv1/o/8445611123456789/0234-125567-testy978 --access-token daexamplefg123456789t6f0b57dfdtoken4 --file-system-id mys3bucket --default-fs-override dbfs: --fs-mount-point /mnt/mybucket --convert-to-delta --host myRemoteHost.example.com --port 5552
-```
 
 ----
 
@@ -2060,22 +1798,6 @@ All parameters are optional except `--name`, which is required to specify the ex
 
 ```text
 hive agent configure hive --name sourceAgent --kerberos-keytab /opt/keytabs/hive.keytab --kerberos-principal hive/myhostname.example.com@REALM.COM
-```
-
-----
-
-### `hive agent configure databricks`
-
-Change the configuration of an existing Databricks agent using `hive agent configure databricks`.
-
-The parameters that can be changed are the same as the ones listed in the [`hive agent add databricks`](#hive-agent-add-databricks) section.
-
-All parameters are optional except `--name`, which is required to specify the existing hive agent that you wish to configure.
-
-#### Example
-
-```text
-hive agent configure hive --name databricksAgent --access-token myexamplefg123456789t6fnew7dfdtoken4
 ```
 
 ----
@@ -2680,192 +2402,6 @@ SYNOPSYS
 hive show tables --agent-name sourceAgent --database mydb01 --like testtbl*
 ```
 
-## Notification Commands
-
-----
-
-### `notification email addresses add`
-
-Add email addresses to the subscription list for email notifications.
-
-```text title="Subscribe email address to notifications."
-
-SYNOPSYS
-	notification email addresses add [--addresses] set  
-```
-
-#### Mandatory Parameters
-
-* **`--addresses`** A comma-separated lists of email addresses to be added.
-
-#### Example
-
-```text
-notification email addresses add --addresses myemail@company.org,personalemail@gmail.com
-```
-
-----
-
-### `notification email addresses remove`
-
-Remove email addresses from the subscription list for email notifications.
-
-```text title="Unsubscribe email address to notifications."
-
-SYNOPSYS
-	notification email addresses remove [--addresses] set  
-```
-
-#### Mandatory Parameters
-
-* **`--addresses`** A comma-separated lists of email addresses to be removed. Use auto-completion to quickly select from subscribed emails.
-
-#### Example
-
-```text
-notification email addresses remove --addresses myemail@company.org,personalemail@gmail.com
-```
-
-----
-
-### `notification email smtp set`
-
-Configure the details of an SMTP server for LiveData Migrator to connect to.
-
-```text title="Configure the SMTP adapter."
-SYNOPSYS
-	notification email smtp set [--host] string  [--port] integer  [--security] security-enum  [--email] string  [[--login] string]  [[--password] string]  
-```
-
-#### Mandatory Parameters
-
-* **`--host`** The host address of the SMTP server.
-* **`--port`** The port to connect to the SMTP server. Many SMTP servers use port 25.
-* **`--security`** The type of security the server uses. Can be either `ssl`, `tls` or `none`.
-* **`--email`** The email address for LiveData Migrator to use with emails sent through the SMTP server. This address will be the sender of all configured [email notifications](./configuration-ui.md).
-
-#### Optional Parameters
-
-* **`--login`** The username to authenticate with the SMTP server.
-* **`--password`** The password to authenticate with the SMTP server login. Required if a login is provided.
-
-#### Example
-
-```text
-notification email smtp set --host my.internal.host --port 587 --security SSL --email livedatamigrator@wandisco.com  --login myusername --password mypassword
-```
-
-----
-
-### `notification email smtp show`
-
-Display the details of the SMTP server LiveData Migrator is configured to use.
-
-```text title="Show the current configuration of SMTP adapter."
-SYNOPSYS
-	notification email smtp show
-```
-
-----
-
-### `notification email subscriptions show`
-
-Show a list of currently subscribed emails and notifications.
-
-```text title="Show email notification subscriptions."
-SYNOPSYS
-	notification email subscriptions show
-```
-
-----
-
-### `notification email types add`
-
-Add notification types to the email notification subscription list.
-
-See the output from the command [`notification email types show`](#notification-email-types-show) for a list of all currently available notification types.
-
-```text title="Subscribe on notification types."
-SYNOPSYS
-  notification email types add [--types] set  
-```
-
-#### Mandatory Parameters
-
-* **`--types`** A comma-separated list of notification types to subscribe to.
-
-#### Example
-
-```text
-notification email types add MISSING_EVENTS,EVENTS_BEHIND,MIGRATION_AUTO_STOPPED
-```
-----
-
-### `notification email types remove`
-
-Remove notification types from the email notification subscription list.
-
-```text title="Unsubscribe on notification types."
-SYNOPSYS
-	notification email types remove [--types] set  
-```
-----
-
-#### Mandatory Parameters
-
-* **`--types`** A comma-separated list of notification types to unsubscribe from.
-
-#### Example
-
-```text
-notification email types remove MISSING_EVENTS,EVENTS_BEHIND,MIGRATION_AUTO_STOPPED
-```
-
-----
-
-### `notification email types show`
-
-Return a list of all available notification types to subscribe to.
-
-```text title="Show email notification types."
-SYNOPSYS
-  notification email types show
-```
-
-----
-
-### `notification latest`
-
-Display the latest notification LiveData Migrator presented and additional details about the notification.
-
-```text title="Get the latest notification."
-SYNOPSYS
-	notification latest
-```
-
-----
-
-### `notification show`
-
-Show the details of a specific notification. Use tab autocompletion to cycle through the list of notifications received along with their type, timestamp and UUID.
-
-```text title="Show notification details."
-SYNOPSYS
-	notification show [--notification-id] string  
-```
-
-#### Mandatory Parameters
-
-* **``--notification-id`** The UUID of the notification to be shown.
-
-#### Example
-
-```
-notification show --notification-id urn:uuid:6a1f2047-8445-460d-b27c-ec5c0496b727
-```
-
-----
-
 ## License Commands
 
 ----
@@ -3034,31 +2570,33 @@ See the examples below for reference.
 help connect
 
 NAME
-        connect - Connect to LiveData Migrator and HiveMigrator.
+	connect - Connect to LiveData Migrator and HiveMigrator.
 
 SYNOPSYS
-        connect [[--host] string]  [--ssl]  [[--lm2port] int]  [[--hvm-port] int]  [[--timeout] integer]  [[--user] string]  
+	connect [[--host] string]  [--ssl]  [[--lm2port] int]  [[--hvm-port] int]  [[--timeout] integer]  [[--user] string]  
 ```
 
 ```text title="Use of backslashes"
 help hive\ migration\ add
 
 NAME
-        hive migration add - Create new migration.
+	hive migration add - Create new migration.
 
 SYNOPSYS
-        hive migration add [--source] string  [--target] string  [[--name] string]  [--auto-start]  [--once]  [--rule-names] list  
+	hive migration add [--source] string  [--target] string  [[--name] string]  [--auto-start]  [--once]  [--rule-names] list  
 ```
 
 ```text title="Use of quotation marks"
 help "filesystem add local"
 
 NAME
-        filesystem add local - Add a Local filesystem via HCFS API.
+	filesystem add local - Add a Local filesystem via HCFS API.
 
 SYNOPSYS
-        filesystem add local [--file-system-id] string  [[--fs-root] string]  [--source]  [--scan-only]  [[--properties-files] list]  [[--properties] string]  
+	filesystem add local [--file-system-id] string  [[--fs-root] string]  [--source]  [--scan-only]  [[--properties-files] list]  [[--properties] string]  
+
 ```
+
 
 ----
 
@@ -3083,8 +2621,6 @@ SYNOPSYS
 
 Load and execute commands from a text file using the `script --file <filename>` command. This file should have one command per line, and each will be executed as though they were entered directly at the action prompt in that sequence.
 
-Use scripts outside of the LiveData Migrator CLI by referencing the script when running the `livedata-migrator` command (see [examples](#examples-7)).
-
 ```text title="Read and execute commands from a file"
 SYNOPSYS
         script [--file] file
@@ -3093,25 +2629,6 @@ SYNOPSYS
 #### Mandatory Parameters
 
 * **`--file`** The name of the file containing script commands.
-
-```text title="Example contents of a script file"
-hive agent check --name sourceAgent
-hive agent check --name azureAgent
-```
-
-#### Examples
-
-:::info
-These examples assume that `myScript` is inside the working directory.
-:::
-
-```text title="Example inside CLI"
-script --file myScript
-```
-
-```text title="Example outside of CLI (non-interactive)"
-livedata-migrator --script=./myScript
-```
 
 ----
 
@@ -3136,7 +2653,7 @@ The action prompt provides many features to guide you during operation.
 | **Syntax indication** | Invalid commands are highlighted as you type. |
 | **Clear the display** | Type `<Ctrl-L>` at any time. |
 | **Previous commands** | Navigate previous commands using the up and down arrows, and use standard emacs shortcuts. |
-| **Interactive or scripted operation** | You can interact with the command line interface directly, or send it commands on standard input to incorporate it into shell scripts. See [`script`](#script) for more information and examples. |
+| **Interactive or scripted operation** | You can interact with the command line interface directly, or send it commands on standard input to incorporate it into shell scripts. |
 
 ## System Service Commands
 
@@ -3162,26 +2679,3 @@ The following commands will only affect logging of the CLI terminal, and will no
 `log info`  
 `log debug`  
 `log trace`
-
-## External Commands
-
-Use these commands outside of the LiveData Migrator CLI.
-
-### `livedata-migrator`
-
-Launch LiveData Migrator and its connected services.
-
-#### Optional Parameters
-
-* **`--version`** List the versions of all LiveData Migrator components without starting LiveData Migrator. Includes **LiveData Migrator**, **LiveData UI**, **LiveData Migrator CLI**, **HiveMigrator** and the **HiveMigrator Azure Libraries**.
-
-#### Example Output
-
-```text
-# livedata-migrator --version
-livedata-migrator 1.12.0-1462
-livedata-ui 6.6.1-1914
-livedata-migrator-cli 1.3.0-209
-hivemigrator 1.3.0-514
-hivemigrator-azure-hdi 1.3.0-514
-```

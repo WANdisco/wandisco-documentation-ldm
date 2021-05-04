@@ -11,78 +11,20 @@ Please ensure you have read the [Prerequisites](./prereqs.md) as you may experie
 
 We recommend making use of logs when troubleshooting LiveData Migrator. See [Log Commands](./command-reference.md#log-commands) for information on how to enable logging across various levels. Logs for each component of LiveData Migrator are stored in the `/var/log/wandisco/` directory within the LiveData Migrator installation directory, with a directory for each component, such as `/var/log/wandisco/ui` for the LiveData UI.
 
-## General
+## Insufficient container permissions with an ADLS2 target filesystem when using OAuth2 authentication
 
-### Rule names parameter does not autocomplete in the CLI
-
-When adding the `--rule-names` parameter to the end of a `hive migration add` command, auto-completion will not suggest the parameter name. For example:
-
-```text title="Example"
-WANdisco LiveData Migrator >> hive migration add --name test --source sourceAgent --target testGlue --rule-names
-```
-
-To work around this, either:
-
-* Use the `--rule-names` parameter earlier in the command. For example: `WANdisco LiveData Migrator >> hive migration add --name test --rule-names`
-* Use the Tab key twice in the CLI when attempting to autocomplete the parameter, and select `--rule-names` with the left and right arrow keys.
-
-### HiveMigrator configuration files missing when reinstalling LiveData Migrator on Ubuntu/Debian
-
-This issue will occur when you have removed the HiveMigrator package with `apt-get remove` instead of `apt-get purge` during the [uninstall](./uninstall.md#uninstall-livedata-migrator) steps.
-
-The `/etc/wandisco/hivemigrator` directory will be missing files as a result. The cause is that the Ubuntu package management tool ([dpkg](https://man7.org/linux/man-pages/man1/dpkg.1.html)) stores service configuration information in its internal database and assumes this directory already has the needed files (even if they were manually removed).
-
-To resolve this:
-
-1. Cleanup the dpkg database for the HiveMigrator service:
-
-   ```text
-   rm -f /var/lib/dpkg/info/hivemigrator*
-   ```
-
-1. Fully remove the HiveMigrator package again using `dpkg` and the `--purge` option:
-
-   ```text
-   dpkg --purge hivemigrator
-   ```
-
-1. Carry out the install steps for the new version of LiveData Migrator.
-
-1. If needed, install the HiveMigrator package using `dpkg` and the `--force-confmiss` option:
-
-   ```text title="Example"
-   dpkg -i --force-confmiss hivemigrator_1.3.1-518_all.deb
-   ```
-
-## Microsoft Azure resources
-
-### Insufficient container permissions with an ADLS2 target filesystem when using OAuth2 authentication
 
 When creating or updating an ADLS2 target filesystem using the OAuth2 authentication protocol, you may have insufficient permission to guarantee a successful migration. This is usually because the Role Based Access Control on the service principal does not guarantee root access. In this case, the migration will fail to start (or resume) and issue a warning.
 
 To force the migration to start (or resume) despite the warning, update the ADLS2 filesystem with the following property and restart LiveData Migrator afterwards:
 
-```text title="Property"
+```text="Property"
 fs.ignore-authentication-privileges=true
 ```
 
-```text title="Example Usage"
-filesystem update adls2 oauth --file-system-id target --properties fs.ignore-authentication-privileges=true
+```text="Example Usage"
+filesystem update adls2 oauth -file-system-id targ  -properties fs.ignore-authentication-privileges=true
 ```
-
-## Amazon Web Services (AWS) resources
-
-### Failed to connect to LiveData Migrator when adding S3 storage through the UI using access/secret keys
-
-When adding an S3 bucket as a storage through the LiveData UI, the following error may display when attempting to save the configuration:
-
-`Failed to connect to LiveData Migrator`
-
-This can be due to an incorrectly entered access or secret key. Double check that you provided the correct keys with no extra characters (including spaces), and try again.
-
-### Error Code: AccessDenied. Error Message: Access to the resource https://sqs.eu-west-1.amazonaws.com/ is denied.
-
-This problem arises if your account does not have sufficient SQS permissions to access the bucket resource. To fix this, ask your organisation administrator to assign the necessary privileges in the SQS policy manager.
 
 ## Notifications
 
@@ -119,3 +61,16 @@ And the following setting determines the low watermark percentage:
 ```text title="Example"
 notifications.pending.region.clear.percent=50
 ```
+
+### Rule names parameter does not autocomplete in the CLI
+
+When adding the `--rule-names` parameter to the end of a `hive migration add` command, auto-completion will not suggest the parameter name. For example:
+
+```text title="Example"
+WANdisco LiveData Migrator >> hive migration add --name test --source sourceAgent --target testGlue --rule-names
+```
+
+To work around this, either:
+
+* Use the `--rule-names` parameter earlier in the command. For example: `WANdisco LiveData Migrator >> hive migration add --name test --rule-names`
+* Use the Tab key twice in the CLI when attempting to autocomplete the parameter, and select `--rule-names` with the left and right arrow keys.
