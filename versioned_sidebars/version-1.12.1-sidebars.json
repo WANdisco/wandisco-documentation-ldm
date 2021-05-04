@@ -1,0 +1,212 @@
+{
+  "version-1.12.1/someSidebar": [
+    {
+      "collapsed": false,
+      "type": "category",
+      "label": "LiveData Migrator",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-1.12.1/about"
+        },
+        {
+          "collapsed": false,
+          "type": "category",
+          "label": "Installation",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-1.12.1/prereqs"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/network-requirements"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/installation"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/license"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/uninstall"
+            }
+          ]
+        },
+        {
+          "type": "doc",
+          "id": "version-1.12.1/get-started"
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Migrate data",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-1.12.1/configure-storage"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/create-path-mappings"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/create-migration"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/one-time-migration"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/configure-exclusions"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/manage-migrations"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/manage-bandwidth"
+            }
+          ]
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Migrate metadata",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-1.12.1/connect-metastores"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/define-metadata-rules"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/migrate-metadata"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/manage-metadata-migrations"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/view-metadata"
+            }
+          ]
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Common use cases",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-1.12.1/uc-on-prem-hadoop-hdi"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/uc-on-prem-hadoop-aws-s3-glue"
+            }
+          ]
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Configuration",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-1.12.1/configuration-ldm"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/configuration-hvm"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/configuration-ui"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/configuration-data-migrations"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/configuration-metadata"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/configure-system-users"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/configure-smtp"
+            }
+          ]
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Reference",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-1.12.1/ldm-metrics"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/audit-logs"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/command-reference"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/api-reference"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/jar"
+            }
+          ]
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Preview Features",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-1.12.1/preview-features"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/backup-and-restore"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.1/migration-verifications"
+            }
+          ]
+        },
+        {
+          "type": "doc",
+          "id": "version-1.12.1/troubleshooting"
+        },
+        {
+          "type": "doc",
+          "id": "version-1.12.1/support"
+        }
+      ]
+    }
+  ]
+}
