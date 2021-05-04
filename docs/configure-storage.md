@@ -146,9 +146,7 @@ LiveData Migrator migrates data from a source filesystem. Validate that the corr
 If Kerberos is enabled or your Hadoop configuration does not contain the information needed to connect to the Hadoop file system, use the [`filesystem auto-discover-source hdfs`](./command-reference.md#filesystem-auto-discover-source-hdfs) command to provide your Kerberos credentials and auto-discover your source HDFS configuration.
 
 :::note
-
 If Kerberos is disabled, and Hadoop configuration is on the host, LiveData Migration will automatically detect the source filesystem on startup.
-
 :::
 
 Manage the source filesystem with the following commands:
