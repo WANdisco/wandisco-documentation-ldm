@@ -52,6 +52,10 @@ When adding an S3 bucket as a storage through the LiveData UI, the following err
 
 This can be due to an incorrectly entered access or secret key. Double check that you provided the correct keys with no extra characters (including spaces), and try again.
 
+### Error Code: AccessDenied. Error Message: Access to the resource https://sqs.eu-west-1.amazonaws.com/ is denied.
+
+This problem arises if your account does not have sufficient SQS permissions to access the bucket resource. To fix this, ask your organisation administrator to assign the necessary privileges in the SQS policy manager.
+
 ## Notifications
 
 Below are some of the most common notifications that you may encounter during the deployment or use of LiveData Migrator.

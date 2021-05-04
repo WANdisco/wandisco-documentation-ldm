@@ -103,6 +103,10 @@ The Provider options available include:
 * **S3A Properties** (Optional) - Override properties or specify additional properties by adding Key/Value pairs.
 * **Migrate Live Events** - Enabled by default, this setting will allow LiveData Migrator to automatically migrate changes from this source's data to the target storage during a migration. See [One-Time Migration](./one-time-migration.md) for more information.
 
+:::note
+As an additional step, ensure your account has the [necessary SQS permissions](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-basic-examples-of-sqs-policies.html) to [access the bucket as storage](https://docs.aws.amazon.com/AmazonS3/latest/userguide/grant-destinations-permissions-to-s3.html#grant-sns-sqs-permission-for-s3).
+:::
+
 #### Local filesystem source configuration
 
 To configure a local filesystem source for use with LiveData Migrator, provide the following details:
