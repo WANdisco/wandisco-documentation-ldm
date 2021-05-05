@@ -1,5 +1,5 @@
 {
-  "version-1.12.1/someSidebar": [
+  "version-1.12.0/someSidebar": [
     {
       "collapsed": false,
       "type": "category",
@@ -7,7 +7,7 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-1.12.1/about"
+          "id": "version-1.12.0/about"
         },
         {
           "collapsed": false,
@@ -16,29 +16,29 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-1.12.1/prereqs"
+              "id": "version-1.12.0/prereqs"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/network-requirements"
+              "id": "version-1.12.0/network-requirements"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/installation"
+              "id": "version-1.12.0/installation"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/license"
+              "id": "version-1.12.0/license"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/uninstall"
+              "id": "version-1.12.0/uninstall"
             }
           ]
         },
         {
           "type": "doc",
-          "id": "version-1.12.1/get-started"
+          "id": "version-1.12.0/get-started"
         },
         {
           "collapsed": true,
@@ -47,31 +47,31 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-1.12.1/configure-storage"
+              "id": "version-1.12.0/configure-storage"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/create-path-mappings"
+              "id": "version-1.12.0/create-path-mappings"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/create-migration"
+              "id": "version-1.12.0/create-migration"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/one-time-migration"
+              "id": "version-1.12.0/one-time-migration"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/configure-exclusions"
+              "id": "version-1.12.0/configure-exclusions"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/manage-migrations"
+              "id": "version-1.12.0/manage-migrations"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/manage-bandwidth"
+              "id": "version-1.12.0/manage-bandwidth"
             }
           ]
         },
@@ -82,23 +82,23 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-1.12.1/connect-metastores"
+              "id": "version-1.12.0/connect-metastores"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/define-metadata-rules"
+              "id": "version-1.12.0/define-metadata-rules"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/migrate-metadata"
+              "id": "version-1.12.0/migrate-metadata"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/manage-metadata-migrations"
+              "id": "version-1.12.0/manage-metadata-migrations"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/view-metadata"
+              "id": "version-1.12.0/view-metadata"
             }
           ]
         },
@@ -109,11 +109,11 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-1.12.1/uc-on-prem-hadoop-hdi"
+              "id": "version-1.12.0/uc-on-prem-hadoop-hdi"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/uc-on-prem-hadoop-aws-s3-glue"
+              "id": "version-1.12.0/uc-on-prem-hadoop-aws-s3-glue"
             }
           ]
         },
@@ -124,31 +124,31 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-1.12.1/configuration-ldm"
+              "id": "version-1.12.0/configuration-ldm"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/configuration-hvm"
+              "id": "version-1.12.0/configuration-hvm"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/configuration-ui"
+              "id": "version-1.12.0/configuration-ui"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/configuration-data-migrations"
+              "id": "version-1.12.0/configuration-data-migrations"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/configuration-metadata"
+              "id": "version-1.12.0/configuration-metadata"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/configure-system-users"
+              "id": "version-1.12.0/configure-system-users"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/configure-smtp"
+              "id": "version-1.12.0/configure-smtp"
             }
           ]
         },
@@ -159,23 +159,23 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-1.12.1/ldm-metrics"
+              "id": "version-1.12.0/ldm-metrics"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/audit-logs"
+              "id": "version-1.12.0/audit-logs"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/command-reference"
+              "id": "version-1.12.0/command-reference"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/api-reference"
+              "id": "version-1.12.0/api-reference"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/jar"
+              "id": "version-1.12.0/jar"
             }
           ]
         },
@@ -186,25 +186,25 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-1.12.1/preview-features"
+              "id": "version-1.12.0/preview-features"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/backup-and-restore"
+              "id": "version-1.12.0/backup-and-restore"
             },
             {
               "type": "doc",
-              "id": "version-1.12.1/migration-verifications"
+              "id": "version-1.12.0/migration-verifications"
             }
           ]
         },
         {
           "type": "doc",
-          "id": "version-1.12.1/troubleshooting"
+          "id": "version-1.12.0/troubleshooting"
         },
         {
           "type": "doc",
-          "id": "version-1.12.1/support"
+          "id": "version-1.12.0/support"
         }
       ]
     }
