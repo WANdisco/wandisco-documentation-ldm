@@ -30,15 +30,15 @@ Configure these properties in the `hdfs-site.xml` for the cluster, this will var
 
 ### dfs.namenode.inotify.max.events.per.rpc
 
-This value dictates the maximum number of events the NameNode can send to an inotify client in a single RPC response. By default, this is set to `1000`, which should consume no more than 1MB of memory.
+This value dictates the maximum number of events the NameNode can send to an inotify client in a single [RPC](https://cwiki.apache.org/confluence/display/HADOOP2/HadoopRpc) response. By default, this is set to `1000`, which should consume no more than 1MB of memory.
 
-You may increase this value to allow for more events to occur simultaneously, at the cost of higher memory use and potentially lower performance, depending on the hardware your HDFS cluster is running on.
+You may increase this value to allow iNotify clients (such as LiveData Migrator) to receive larger batches of event notifications in a single RPC, at the cost of higher memory use.
 
-We recommend setting this value to `100000` for production use, provided your cluster is capable of providing at least 100MB of memory to the migration process at a given time.
+We recommend setting this value to `100000` for production use. By increasing this, your NameNode should be capable of allocating at least an additional 100MB of memory from its maximum heap capacity to deliver these larger batches of events.
 
 ### dfs.namenode.checkpoint.txns
 
-This value determines how many namespace transactions will trigger a checkpoint to occur, updating the filesystem metadata.
+This value determines the threshold of which the number of namespace transactions will trigger a checkpoint, updating the filesystem metadata. If this threshold is reached, the checkpoint will be triggered regardless of whether the `dfs.namenode.checkpoint.period` has expired.
 
 The default value for this is `1000000`, but we recommend increasing it to `10000000` for production use.
 
