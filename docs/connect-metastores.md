@@ -18,9 +18,9 @@ Ready to migrate metadata? First, connect to your metastores by adding Hive agen
 
 ### Add source agent
 
-LiveData Migrator will attempt to auto-discover and create an agent for your source environment. Select your LiveData Migrator instance from the Storage panel and check whether an existing agent is listed.
+LiveData Migrator will attempt to auto-discover and create an agent for your source environment. Select your LiveData Migrator instance from the filesystem panel and check whether an existing agent is listed.
 
-If Kerberos is enabled on your cluster and HDFS is configured as your source storage, select to configure the existing agent and provide the Kerberos credentials.
+If Kerberos is enabled on your cluster and HDFS is configured as your source filesystem, select to configure the existing agent and provide the Kerberos credentials.
 
 Alternatively, add a new agent. The source agent can be any of the following distributions:
 

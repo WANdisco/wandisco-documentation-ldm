@@ -10,7 +10,7 @@ Define exclusions to prevent certain files and directories from being migrated. 
 * File and directory names (defined using regular expression patterns of either [Java PCRE](https://regexr.com/), [Automata](https://www.javatpoint.com/theory-of-automata) or [GLOB](https://en.wikipedia.org/wiki/Glob_(programming)) type)
 * Last modification date of directories and files
 
-Exclusion templates are associated with a storage, allowing you to selectively ignore content during migration when that storage is used as the source.
+Exclusion templates are associated with a filesystem, allowing you to selectively ignore content during migration when that filesystem is used as the source.
 
 Use the [UI](#configure-exclusions-with-the-ui) or the [CLI](#configure-exclusions-with-the-cli) to configure exclusions.
 
@@ -19,14 +19,14 @@ Use the [UI](#configure-exclusions-with-the-ui) or the [CLI](#configure-exclusio
 Assign exclusions to new or existing migrations.
 
 :::note
-Default exclusions will automatically apply to certain storages depending on the platform. For example, ADLS storage types have a maximum individual file size limit of 4.55TiB, and any files larger will be automatically excluded.
+Default exclusions will automatically apply to certain filesystems depending on the platform. For example, ADLS storage types have a maximum individual file size limit of 4.55TiB, and any files larger will be automatically excluded.
 :::
 
 ### Add new exclusions
 
-1. In the **Storages** list on the dashboard, click the settings for the appropriate storage.
+1. In the **Filesystems** list on the dashboard, click the settings for the appropriate filesystem.
 1. Select **LiveData Migrator** under the _Processes_ list to display the exclusion templates.
-1. Click **Add Exclusion Template** to associate the exclusion with the selected storage and enter the parameters for the exclusion:
+1. Click **Add Exclusion Template** to associate the exclusion with the selected filesystem and enter the parameters for the exclusion:
    * **Exclusion type** - _Regex_, _File Size_, or _Date_.
    * **Name** - The name given to the exclusion template (for example: `100gbfilelimit`).
    * **Description** - A brief description of what the exclusion is doing. For example: "_Files larger than 100GB are excluded_").
@@ -38,7 +38,7 @@ Once the exclusion is added and passed validation, it appears on the exclusion l
 
 ### Remove exclusions from the templates list
 
-1. In the **Storages** list on the dashboard, click the settings for the appropriate storage.
+1. In the **Filesystems** list on the dashboard, click the settings for the appropriate filesystem.
 1. Select **LiveData Migrator** under the _Processes_ list to display the exclusion templates.
 1. Click the trash icon.
 

@@ -49,7 +49,7 @@ For each entry, the following will be recorded:
 
 #### Redaction policy
 
-By default, all sensitive information (such as passwords and storage access keys) will be redacted in the audit entries.
+By default, all sensitive information (such as passwords and filesystem access keys) will be redacted in the audit entries.
 
 ## Examples of audit entries
 
