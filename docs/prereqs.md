@@ -26,10 +26,10 @@ Ready to start? Check the prerequisites and then follow these steps to get ready
 ### Cloud Storage Technologies
 
 * Proficiency with intended target storage technologies, such as ADLS Gen 2, GCS, HDFS, and Amazon Simple Storage Service (S3).
-* For Amazon Web Services, this includes:
-  * Knowledge of AWS Marketplace, Amazon Simple Storage Service (Amazon S3), AWS Glue Data Catalog, and AWS Command Line Tool.
-  * Understanding any storage persistence and related costs.
-  * Ability to monitor and troubleshoot AWS services.
+  * For Amazon Web Services, this includes:
+    * Knowledge of AWS Marketplace, Amazon Simple Storage Service (Amazon S3), AWS Glue Data Catalog, and AWS Command Line Tool.
+    * Understanding any storage persistence and related costs.
+    * Ability to monitor and troubleshoot AWS services.
 
 ### LiveData
 
@@ -55,7 +55,7 @@ If you’re not confident about meeting the requirements, you can discuss a supp
 
 ## Machine Specification
 
-* **16 CPUs, 32 GB RAM** (minimum **4 CPUs, 16 GB RAM**)
+* **16 CPUs, 48 GB RAM** (minimum **4 CPUs, 32 GB RAM**)
   * If deploying LiveData Migrator on a Hadoop cluster, the host machine should be an edge node that matches at least 75-80% of the NameNode host specification.
 * **200 GB** (SSD-backed volumes) (minimum **100 GB**)
 * **2 Gbps** minimum network. Your network bandwidth must be able to cope with transferring data and ongoing changes from your source storage.
