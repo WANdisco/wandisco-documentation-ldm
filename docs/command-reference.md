@@ -1165,6 +1165,28 @@ migration show --migration-id myNewMigration
 
 ----
 
+### `migration pending-region add`
+
+Add a [pending region](./manage-migrations.md#pending-regions) to a migration.
+
+```text title="Add pending region for rescan to migration"
+SYNOPSYS
+        migration pending-region add [--migration-id] string [--path] string
+```
+
+#### Mandatory Parameters
+
+* **`--migration-id`** The migration name or identifier to add a pending region to.
+* **`--path`** The path string of the region to add for rescan.
+
+#### Example
+
+```text
+migration pending-region add --migration-id myMigration --path etc/files
+```
+
+----
+
 ### `migration verification add`
 
 :::note

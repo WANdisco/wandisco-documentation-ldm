@@ -56,7 +56,20 @@ When viewing a migration, click on the **Details** panel. Click the option to **
 | [`migration list`](./command-reference.md#migration-list) | List running and active migrations |
 | [`migration run`](./command-reference.md#migration-run) | Start a migration |
 | [`migration show`](./command-reference.md#migration-show) | Get migration details |
+| [`migration pending-region add`](./command-reference.md#migration-pending-region-add) | Add a pending region to a migration |
 | [`status`](./command-reference.md#status) | Get migration status |
+
+### Pending regions
+
+LiveData Migrator uses pending regions to keep your directories up to date if they change during data migrations. If directories are updated while being migrated, the changed paths on the source filesystem are tracked by the migration so they can be re-scanned for updates when the migration finishes.
+
+LiveData Migrator collects pending regions automatically during a migration, but you can manually add them if you want the directories to be re-scanned after further updates. You can also re-run the entire migration by making the root directory the pending region.
+
+Add a pending region to a migration by running the `migration pending-region add` command.
+
+```text title="Example"
+migration pending-region add --migration-id myFirstMigration --path /dir1/userA
+```
 
 ### Data migration states
 
