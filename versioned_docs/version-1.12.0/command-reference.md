@@ -1858,10 +1858,6 @@ If specifying Kerberos and config path information for remote agents, ensure tha
 Databricks agents are currently available as a preview feature.
 :::
 
-:::info
-The source table format must be [Parquet](https://databricks.com/glossary/what-is-parquet) to ensure a successful migration to Databricks Delta Lake.
-:::
-
 Add a [Databricks](https://databricks.com/product/delta-lake-on-databricks) hive agent to connect to a Databricks Delta Lake metastore ([AWS](https://docs.databricks.com/data/metastores/index.html), [Azure](https://docs.microsoft.com/en-us/azure/databricks/data/metastores/) or [GCP](https://docs.gcp.databricks.com/data/metastores/index.html)) using the `hive agent add databricks` command.
 
 If your LiveData Migrator host can communicate directly with the Databricks Delta Lake, then a local hive agent will be sufficient. Otherwise, consider using a remote hive agent.

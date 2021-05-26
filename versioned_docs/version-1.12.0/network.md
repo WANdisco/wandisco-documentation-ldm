@@ -14,7 +14,7 @@ Ensure the following ports are open on your on-premises network:
 
 | Port | Description | Direction |
 |:-----|:------------|:----------|
-| 18080 | LDM REST API | Inbound |
+| 18080 | LDM REST API | Outbound |
 | 443 | Data transfer (HTTPS) | Outbound |
 
 For more information (such as port changes), see [General configuration for LiveData Migrator](https://docs.wandisco.com/live-data-migrator/docs/configuration-ldm#general-configuration).
@@ -29,12 +29,8 @@ You only need to enable one of these ports depending on whether your connection 
 
 | Port | Description | Direction |
 |:-----|:------------|:----------|
-| 6780 | Metadata transfer (HTTP) | Inbound |
-| 6781 | Metadata transfer (HTTPS) | Inbound |
-
-### HiveMigrator remote agents port requirements
-
-The port used to communicate with a remote agent is defined in remote agent's configuration. This port will be open for inbound connections on the remote agent side and HiveMigrator will connect to it as a client.
+| 6780 | Metadata transfer (HTTP) | Outbound |
+| 6781 | Metadata transfer (HTTPS) | Outbound |
 
 ## LiveData UI port requirements
 
@@ -42,7 +38,7 @@ Ensure the following port is open on your platform to allow bi-directional commu
 
 | Port | Description | Direction |
 |:-----|:------------|:----------|
-| 8081 | LiveData UI | Inbound |
+| 8081 | LiveData UI | Bi-directional |
 
 For more information (such as port changes), see [General configuration for LiveData UI](https://docs.wandisco.com/live-data-migrator/docs/configuration-ui#general-configuration).
 

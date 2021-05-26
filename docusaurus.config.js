@@ -1,6 +1,6 @@
 const versions = require('./versions.json');
 
-const currentVersion = '1.12.0';
+const currentVersion = 'TBA';
 
 const site_urls = {
   wandisco: {

@@ -1,5 +1,5 @@
-module.exports = {
-  "someSidebar": [
+{
+  "version-1.12.0/someSidebar": [
     {
       "collapsed": false,
       "type": "category",
@@ -7,7 +7,7 @@ module.exports = {
       "items": [
         {
           "type": "doc",
-          "id": "about"
+          "id": "version-1.12.0/about"
         },
         {
           "collapsed": false,
@@ -16,29 +16,29 @@ module.exports = {
           "items": [
             {
               "type": "doc",
-              "id": "prereqs"
+              "id": "version-1.12.0/prereqs"
             },
             {
               "type": "doc",
-              "id": "network-requirements"
+              "id": "version-1.12.0/network-requirements"
             },
             {
               "type": "doc",
-              "id": "installation"
+              "id": "version-1.12.0/installation"
             },
             {
               "type": "doc",
-              "id": "license"
+              "id": "version-1.12.0/license"
             },
             {
               "type": "doc",
-              "id": "uninstall"
+              "id": "version-1.12.0/uninstall"
             }
           ]
         },
         {
           "type": "doc",
-          "id": "get-started"
+          "id": "version-1.12.0/get-started"
         },
         {
           "collapsed": true,
@@ -47,32 +47,31 @@ module.exports = {
           "items": [
             {
               "type": "doc",
-              "id": "configure-storage"
+              "id": "version-1.12.0/configure-storage"
             },
             {
               "type": "doc",
-              "id": "create-path-mappings"
+              "id": "version-1.12.0/create-path-mappings"
             },
             {
               "type": "doc",
-              "id": "create-migration"
+              "id": "version-1.12.0/create-migration"
             },
             {
               "type": "doc",
-              "id": "one-time-migration"
+              "id": "version-1.12.0/one-time-migration"
             },
             {
               "type": "doc",
-              "id": "configure-exclusions"
-            },
-
-            {
-              "type": "doc",
-              "id": "manage-migrations"
+              "id": "version-1.12.0/configure-exclusions"
             },
             {
               "type": "doc",
-              "id": "manage-bandwidth"
+              "id": "version-1.12.0/manage-migrations"
+            },
+            {
+              "type": "doc",
+              "id": "version-1.12.0/manage-bandwidth"
             }
           ]
         },
@@ -83,24 +82,24 @@ module.exports = {
           "items": [
             {
               "type": "doc",
-              "id": "connect-metastores"
+              "id": "version-1.12.0/connect-metastores"
             },
             {
               "type": "doc",
-              "id": "define-metadata-rules"
+              "id": "version-1.12.0/define-metadata-rules"
             },
             {
               "type": "doc",
-              "id": "migrate-metadata"
+              "id": "version-1.12.0/migrate-metadata"
             },
             {
               "type": "doc",
-              "id": "manage-metadata-migrations"
+              "id": "version-1.12.0/manage-metadata-migrations"
             },
             {
               "type": "doc",
-              "id": "view-metadata"
-            },
+              "id": "version-1.12.0/view-metadata"
+            }
           ]
         },
         {
@@ -110,46 +109,46 @@ module.exports = {
           "items": [
             {
               "type": "doc",
-              "id": "uc-on-prem-hadoop-hdi"
+              "id": "version-1.12.0/uc-on-prem-hadoop-hdi"
             },
             {
               "type": "doc",
-              "id": "uc-on-prem-hadoop-aws-s3-glue"
+              "id": "version-1.12.0/uc-on-prem-hadoop-aws-s3-glue"
             }
           ]
         },
         {
-          "collapsed":true,
+          "collapsed": true,
           "type": "category",
           "label": "Configuration",
           "items": [
             {
               "type": "doc",
-              "id": "configuration-ldm"
+              "id": "version-1.12.0/configuration-ldm"
             },
             {
               "type": "doc",
-              "id": "configuration-hvm"
+              "id": "version-1.12.0/configuration-hvm"
             },
             {
               "type": "doc",
-              "id": "configuration-ui"
+              "id": "version-1.12.0/configuration-ui"
             },
             {
               "type": "doc",
-              "id": "configuration-data-migrations"
+              "id": "version-1.12.0/configuration-data-migrations"
             },
             {
               "type": "doc",
-              "id": "configuration-metadata"
+              "id": "version-1.12.0/configuration-metadata"
             },
             {
               "type": "doc",
-              "id": "configure-system-users"
+              "id": "version-1.12.0/configure-system-users"
             },
             {
               "type": "doc",
-              "id": "configure-smtp"
+              "id": "version-1.12.0/configure-smtp"
             }
           ]
         },
@@ -160,23 +159,23 @@ module.exports = {
           "items": [
             {
               "type": "doc",
-              "id": "ldm-metrics"
+              "id": "version-1.12.0/ldm-metrics"
             },
             {
               "type": "doc",
-              "id": "audit-logs"
+              "id": "version-1.12.0/audit-logs"
             },
             {
               "type": "doc",
-              "id": "command-reference"
+              "id": "version-1.12.0/command-reference"
             },
             {
               "type": "doc",
-              "id": "api-reference"
+              "id": "version-1.12.0/api-reference"
             },
             {
               "type": "doc",
-              "id": "jar"
+              "id": "version-1.12.0/jar"
             }
           ]
         },
@@ -187,27 +186,27 @@ module.exports = {
           "items": [
             {
               "type": "doc",
-              "id": "preview-features"
+              "id": "version-1.12.0/preview-features"
             },
             {
               "type": "doc",
-              "id": "backup-and-restore"
+              "id": "version-1.12.0/backup-and-restore"
             },
             {
               "type": "doc",
-              "id": "migration-verifications"
+              "id": "version-1.12.0/migration-verifications"
             }
           ]
         },
         {
           "type": "doc",
-          "id": "troubleshooting"
+          "id": "version-1.12.0/troubleshooting"
         },
         {
           "type": "doc",
-          "id": "support"
+          "id": "version-1.12.0/support"
         }
       ]
     }
   ]
-};
+}

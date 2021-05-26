@@ -12,10 +12,6 @@ Additionally, [Databricks Delta Lake](https://databricks.com/product/delta-lake-
 Databricks agents are currently available as a preview feature.
 :::
 
-:::info
-The source table format must be [Parquet](https://databricks.com/glossary/what-is-parquet) to ensure a successful migration to Databricks Delta Lake.
-:::
-
 Ready to migrate metadata? First, connect to your metastores by adding Hive agents. Then, [define metadata rules](./define-metadata-rules.md) before [migrating metadata](./migrate-metadata.md).
 
 ## Connect metastores with the UI
