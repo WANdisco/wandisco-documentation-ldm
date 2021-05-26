@@ -105,6 +105,8 @@ The Provider options available include:
 
 :::note
 As an additional step, ensure your account has the [necessary SQS permissions](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-basic-examples-of-sqs-policies.html) to [access the bucket as storage](https://docs.aws.amazon.com/AmazonS3/latest/userguide/grant-destinations-permissions-to-s3.html#grant-sns-sqs-permission-for-s3).
+
+For example, configuring an allow rule for `sqs:*` will allow all organization users configured with SQS to perform the necessary actions with LiveData Migrator.
 :::
 
 #### Local filesystem source configuration
