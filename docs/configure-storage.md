@@ -76,7 +76,7 @@ Amazon S3 buckets as a source are currently supported as a preview feature.
 To configure an Amazon S3 bucket source for use with LiveData Migrator, provide the following details:
 
 * **File System ID** - Provide a name for your source storage.
-* **Storage Type** - The type of filesystem source. Choose _AWS S3_.
+* **Storage Type** - The type of filesystem source. Choose _Amazon S3_.
 * **Bucket Name** - The reference name of the Amazon S3 bucket you are using.
 * **Credentials Provider** - The Java class name of a credentials provider for authenticating with the S3 endpoint. This is not a required parameter when adding an IBM COS bucket through the UI.
 The Provider options available include:
