@@ -42,12 +42,12 @@ Use LDAP to set up access privileges for LiveData UI users.
 You can configure the LDAP login credentials for LiveData Migrator users through the UI:
 
 1. Anywhere in the LiveData Migrator UI, open Settings by clicking on the gear icon in the bottom left.
-1. Select **LDAP Authentication** from the Settings tab that opens.
+1. Select **LDAP Authentication** from the Settings panel that opens.
 1. Tick the box labelled **Enable LDAP Authentication** at the top of the page.
 1. Fill in the LDAP Server Configuration Details section with the authentication details for your LDAP Server.
 1. Click the **Check Connection** button to test your connection to the LDAP server.
 
-### Add users to LiveData Migrator through LDAP
+#### Add users to LiveData Migrator through LDAP
 
 1. Fill in the User Search Configuration section to select which users you wish to apply the LDAP Server Configuration details to.
 1. Confirm the user matches automatically returned by the form are as you intended.
@@ -58,6 +58,34 @@ The configuration form in the UI provides all that you need to know to acquire t
 :::note
 After you save your configured LDAP login credentials, all users currently logged in to the LiveData Migrator UI will be logged out.
 :::
+
+#### Manage LDAP user access control
+
+Use the **Access Control** tab in the Settings panel to manage LDAP user privileges, setting Read-Only or Admin privileges. You can also enable **Default access to Read Only** to set the default LiveData Migrator privileges for LDAP users to Read Only.
+
+:::note
+This process requires user groups to be set up in the LDAP server.
+:::
+
+To manage user privileges by group, first assign a **Group Name Attribute** to a group in the **Access Control** tab:
+
+1. Fill in the **LDAP Group Filter** with a query that will select the intended users.
+1. Add a reference name for the group under **Group Name Attribute**. This will be used to map privileges to the group.
+1. Specify the search base for the LDAP group under **LDAP Group Search Base** and choose whether you want to search only the immediate base (**One Level Search**) or all subtrees within it (**Subtree Search**).
+
+Once you've created a group containing the users you want to manage, add the group to the corresponding privileges list, separating multiple entries with commas and spaces:
+
+* Add the group reference name to **Read Only Groups** to assign everyone in the group Read Only privileges.
+* Add the group reference name to **Admin Groups** to assign everyone in the group Admin privileges.
+
+For example:
+
+```
+Read Only Groups
+|developers, teamA|
+```
+
+Once you've finished making changes to group privileges, click **Apply** to save the new settings.
 
 ### Configure LDAP Authentication through the CLI
 
@@ -247,13 +275,13 @@ Configure a single LDAP user to log in to the UI by using the `encryptor` tool:
    LDAP base url, (e.g. ldap://localhost): ldap://localhost
    LDAP port: 389
    LDAP base dn: dc=springframework,dc=org
-   LDAP Manager dn:  (Optional, enter to skip) 
+   LDAP Manager dn:  (Optional, enter to skip)
    Use LDAP bind auth? (y/n) y
    User dn patterns (Optional, enter to skip) {0},ou=people
-   User search base (Optional, enter to skip) 
-   User search filter. (Optional, enter to skip) 
-   Group search base. (Optional, enter to skip) 
-   Group search filter. (Optional, enter to skip) 
+   User search base (Optional, enter to skip)
+   User search filter. (Optional, enter to skip)
+   Group search base. (Optional, enter to skip)
+   Group search filter. (Optional, enter to skip)
    ```
 
    ```text title="Example with password attribute and Manager"
@@ -264,11 +292,11 @@ Configure a single LDAP user to log in to the UI by using the `encryptor` tool:
    LDAP manager password: LvglJEyAySUQBuyUcEeRcYhzrJX6NMl0
    Use LDAP bind auth? (y/n) n
    Password attribute. (Optional, enter to skip) userPassword
-   User dn patterns (Optional, enter to skip) 
+   User dn patterns (Optional, enter to skip)
    User search base (Optional, enter to skip) ou=people
    User search filter. (Optional, enter to skip) (uid={0})
-   Group search base. (Optional, enter to skip) 
-   Group search filter. (Optional, enter to skip) 
+   Group search base. (Optional, enter to skip)
+   Group search filter. (Optional, enter to skip)
    ```
 
 1. Select the `Exit` option once complete.
