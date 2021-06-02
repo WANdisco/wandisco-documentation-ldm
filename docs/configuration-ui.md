@@ -71,12 +71,16 @@ To manage user privileges by group, first assign a **Group Name Attribute** to a
 
 1. Fill in the **LDAP Group Filter** with a query that will select the intended users.
 1. Add a reference name for the group under **Group Name Attribute**. This will be used to map privileges to the group.
-1. Specify the search base for the LDAP group under **LDAP Group Search Base** and choose whether you want to search only the immediate base (**One Level Search**) or all subtrees within it (**Subtree Search**).
+1. Specify the search base for the LDAP group under **LDAP Group Search Base** and choose whether you want to search only the immediate base (**One Level Search**) or all subtrees within it (**Subtree Search**). Leaving the search base blank will search from the root of the hierarchy.
 
-Once you've created a group containing the users you want to manage, add the group to the corresponding privileges list, separating multiple entries with commas and spaces:
+Once you have defined how to find groups in your LDAP server, add the group to the corresponding privileges list, adding additional entries via the "Add" button indicated by a `+` in the UI:
 
 * Add the group reference name to **Read Only Groups** to assign everyone in the group Read Only privileges.
 * Add the group reference name to **Admin Groups** to assign everyone in the group Admin privileges.
+
+:::note
+Users in groups assigned to both roles (Read Only and Admin) will receive the most privileged role (in this case, Admin).
+:::
 
 For example:
 
@@ -85,7 +89,11 @@ Read Only Groups
 |developers, teamA|
 ```
 
-Once you've finished making changes to group privileges, click **Apply** to save the new settings.
+Once you've finished making changes to group privileges, click **Apply** to save the new settings. Changes to user privileges will take effect from their next login session.
+
+:::note
+To immediately apply changes to all users, restart the UI server after applying.
+:::
 
 ### Configure LDAP Authentication through the CLI
 
