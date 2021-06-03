@@ -174,7 +174,7 @@ Choose between a group pattern or a search filter to match a valid LDAP group in
 
 ### Reset LDAP admin user password
 
-Reset the admin user's password for LiveData Migrator by creating a file named reset.password in the UI configuration directory (`/etc/wandisco/ui` by default).
+Reset the admin user's password for LiveData Migrator by creating a file named `reset.password` in the UI configuration directory (`/etc/wandisco/ui` by default).
 
 Provide details within the file as follows:
 
@@ -183,7 +183,9 @@ email=user@domain.com
 password=newPassword
 ```
 
-Restart the UI server. The admin user's password will be updated to the value set in the file if the email provided matches that of the registered admin. The password file will then be automatically deleted.
+Restart the UI server after the file has been created.
+
+The admin user's password will be updated to the value set in the file if the email provided matches that of the registered admin. The password file will then be automatically deleted.
 
 :::note
 This process cannot be used for LDAP users other than the admin.
