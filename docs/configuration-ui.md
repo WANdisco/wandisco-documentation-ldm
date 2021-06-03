@@ -67,13 +67,13 @@ Use the **Access Control** tab in the Settings panel to manage LDAP user privile
 This process requires user groups to be set up in the LDAP server.
 :::
 
-To manage user privileges by group, first assign a **Group Name Attribute** to a group in the **Access Control** tab:
+To manage user privileges by group, first configure LiveData Migrator to search for groups in the **Access Control** tab:
 
-1. Fill in the **LDAP Group Filter** with a query that will select the intended users.
-1. Add a reference name for the group under **Group Name Attribute**. This will be used to map privileges to the group.
+1. Fill in the **LDAP Group Filter** with a query denoting the field in a group that will select the intended users. For example, `(uniqueMember={0})`. (The {0} will be automatically filled in with the full display name of each user.)
+1. Add the name attribute used by the groups in your LDAP server under **Group Name Attribute**, such as `cn`. LiveData Migrator will check this attribute in each group for any groups you name in the privilege assignment section below.
 1. Specify the search base for the LDAP group under **LDAP Group Search Base** and choose whether you want to search only the immediate base (**One Level Search**) or all subtrees within it (**Subtree Search**). Leaving the search base blank will search from the root of the hierarchy.
 
-Once you have defined how to find groups in your LDAP server, add the group to the corresponding privileges list, adding additional entries via the "Add" button indicated by a `+` in the UI:
+Once you have defined how to find groups in your LDAP server, add the groups you want to the corresponding privileges lists, adding additional entries via the "Add" button indicated by a `+` in the UI:
 
 * Add the group reference name to **Read Only Groups** to assign everyone in the group Read Only privileges.
 * Add the group reference name to **Admin Groups** to assign everyone in the group Admin privileges.
@@ -82,18 +82,38 @@ Once you have defined how to find groups in your LDAP server, add the group to t
 Users in groups assigned to both roles (Read Only and Admin) will receive the most privileged role (in this case, Admin).
 :::
 
-For example:
-
-```
-Read Only Groups
-|developers, teamA|
-```
-
-Once you've finished making changes to group privileges, click **Apply** to save the new settings. Changes to user privileges will take effect from their next login session.
+Finally, click **Apply** to save any changes to settings made. Changes to user privileges will take effect from their next login session.
 
 :::note
 To immediately apply changes to all users, restart the UI server after applying.
 :::
+
+##### Example
+
+Where you might have the following LDAP group:
+
+```
+cn=admins,ou=subgroups,ou=groups,dc=springframework,dc=org
+
+Attributes
+objectclass: top
+objectclass: groupOfUniqueNames
+cn: admins
+ou: admin
+uniqueMember:
+uid=rob@test.com,ou=people,dc=springframework,dc=org
+uniqueMember:
+uid=joe,ou=otherpeople,dc=springframework,dc=org
+```
+
+Supply an **LDAP Group Filter** of `(uniqueMember={0})`, and a **Group Name Attribute** of `cn`. You may leave the **LDAP Group Search Base** empty and select **Subtree Search** to search the root level and all groups contained within. Finally, to give users in the group admin privileges, supply the `cn` value of the group (`admins`) to the **Admin groups** field below.
+
+```
+Admin Groups
+admins
+```
+
+Once you've finished making changes to group privileges, click **Apply** to save the new settings. Changes will be applied to each user at their next login.
 
 ### Configure LDAP Authentication through the CLI
 
