@@ -69,23 +69,27 @@ This process requires user groups to be set up in the LDAP server.
 
 To manage user privileges by group, first configure LiveData Migrator to search for groups in the **Access Control** tab:
 
-1. Fill in the **LDAP Group Filter** with a query denoting the field in a group that will select the intended users. For example, `(uniqueMember={0})`. (The {0} will be automatically filled in with the full display name of each user.)
+1. Fill in the **LDAP Group Filter** with a query denoting the field in a group that will select the intended users. For example, `(uniqueMember={0})` (the {0} will be automatically filled in with the full distinguished name of each user).
 1. Add the name attribute used by the groups in your LDAP server under **Group Name Attribute**, such as `cn`. LiveData Migrator will check this attribute in each group for any groups you name in the privilege assignment section below.
 1. Specify the search base for the LDAP group under **LDAP Group Search Base** and choose whether you want to search only the immediate base (**One Level Search**) or all subtrees within it (**Subtree Search**). Leaving the search base blank will search from the root of the hierarchy.
 
-Once you have defined how to find groups in your LDAP server, add the groups you want to the corresponding privileges lists, adding additional entries via the "Add" button indicated by a `+` in the UI:
+Once you have defined how to find groups in your LDAP server, add the groups you want to the corresponding privileges lists:
 
 * Add the group reference name to **Read Only Groups** to assign everyone in the group Read Only privileges.
 * Add the group reference name to **Admin Groups** to assign everyone in the group Admin privileges.
+
+Add additional entries via the "Add" button indicated by a `+` in the UI.
 
 :::note
 Users in groups assigned to both roles (Read Only and Admin) will receive the most privileged role (in this case, Admin).
 :::
 
-Finally, click **Apply** to save any changes to settings made. Changes to user privileges will take effect from their next login session.
+Click **Apply** to save any changes to settings made. Any changes to user privileges will take effect in their next login session.
 
 :::note
-To immediately apply changes to all users, restart the UI server after applying.
+Restart the UI server to immediately apply changes to all users:
+
+`service livedata-ui restart`
 :::
 
 ##### Example
