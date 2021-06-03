@@ -42,12 +42,12 @@ Use LDAP to set up access privileges for LiveData UI users.
 You can configure the LDAP login credentials for LiveData Migrator users through the UI:
 
 1. Anywhere in the LiveData Migrator UI, open Settings by clicking on the gear icon in the bottom left.
-1. Select **LDAP Authentication** from the Settings tab that opens.
+1. Select **LDAP Authentication** from the Settings panel that opens.
 1. Tick the box labelled **Enable LDAP Authentication** at the top of the page.
 1. Fill in the LDAP Server Configuration Details section with the authentication details for your LDAP Server.
 1. Click the **Check Connection** button to test your connection to the LDAP server.
 
-### Add users to LiveData Migrator through LDAP
+#### Add users to LiveData Migrator through LDAP
 
 1. Fill in the User Search Configuration section to select which users you wish to apply the LDAP Server Configuration details to.
 1. Confirm the user matches automatically returned by the form are as you intended.
@@ -58,6 +58,66 @@ The configuration form in the UI provides all that you need to know to acquire t
 :::note
 After you save your configured LDAP login credentials, all users currently logged in to the LiveData Migrator UI will be logged out.
 :::
+
+#### Manage LDAP user access control
+
+Use the **Access Control** tab in the Settings panel to manage LDAP user privileges, setting Read-Only or Admin privileges. You can also enable **Default access to Read Only** to set the default LiveData Migrator privileges for LDAP users to Read Only.
+
+:::note
+This process requires user groups to be set up in the LDAP server.
+:::
+
+To manage user privileges by group, first configure LiveData Migrator to search for groups in the **Access Control** tab:
+
+1. Fill in the **LDAP Group Filter** with a query denoting the field in a group that will select the intended users. For example, `(uniqueMember={0})` (the {0} will be automatically filled in with the full distinguished name of each user).
+1. Add the name attribute used by the groups in your LDAP server under **Group Name Attribute**, such as `cn`. LiveData Migrator will check this attribute in each group for any groups you name in the privilege assignment section below.
+1. Specify the search base for the LDAP group under **LDAP Group Search Base** and choose whether you want to search only the immediate base (**One Level Search**) or all subtrees within it (**Subtree Search**). Leaving the search base blank will search from the root of the hierarchy.
+
+Once you have defined how to find groups in your LDAP server, add the groups you want to the corresponding privileges lists:
+
+* Add the group reference name to **Read Only Groups** to assign everyone in the group Read Only privileges.
+* Add the group reference name to **Admin Groups** to assign everyone in the group Admin privileges.
+
+Add additional entries via the "Add" button indicated by a `+` in the UI.
+
+:::note
+Users in groups assigned to both roles (Read Only and Admin) will receive the most privileged role (in this case, Admin).
+:::
+
+Click **Apply** to save any changes to settings made. Any changes to user privileges will take effect in their next login session.
+
+:::note
+Restart the UI server to immediately apply changes to all users:
+
+`service livedata-ui restart`
+:::
+
+##### Example
+
+Where you might have the following LDAP group:
+
+```
+cn=admins,ou=subgroups,ou=groups,dc=springframework,dc=org
+
+Attributes
+objectclass: top
+objectclass: groupOfUniqueNames
+cn: admins
+ou: admin
+uniqueMember:
+uid=rob@test.com,ou=people,dc=springframework,dc=org
+uniqueMember:
+uid=joe,ou=otherpeople,dc=springframework,dc=org
+```
+
+Supply an **LDAP Group Filter** of `(uniqueMember={0})`, and a **Group Name Attribute** of `cn`. You may leave the **LDAP Group Search Base** empty and select **Subtree Search** to search the root level and all groups contained within. Finally, to give users in the group admin privileges, supply the `cn` value of the group (`admins`) to the **Admin groups** field below.
+
+```
+Admin Groups
+admins
+```
+
+Once you've finished making changes to group privileges, click **Apply** to save the new settings. Changes will be applied to each user at their next login.
 
 ### Configure LDAP Authentication through the CLI
 
@@ -247,13 +307,13 @@ Configure a single LDAP user to log in to the UI by using the `encryptor` tool:
    LDAP base url, (e.g. ldap://localhost): ldap://localhost
    LDAP port: 389
    LDAP base dn: dc=springframework,dc=org
-   LDAP Manager dn:  (Optional, enter to skip) 
+   LDAP Manager dn:  (Optional, enter to skip)
    Use LDAP bind auth? (y/n) y
    User dn patterns (Optional, enter to skip) {0},ou=people
-   User search base (Optional, enter to skip) 
-   User search filter. (Optional, enter to skip) 
-   Group search base. (Optional, enter to skip) 
-   Group search filter. (Optional, enter to skip) 
+   User search base (Optional, enter to skip)
+   User search filter. (Optional, enter to skip)
+   Group search base. (Optional, enter to skip)
+   Group search filter. (Optional, enter to skip)
    ```
 
    ```text title="Example with password attribute and Manager"
@@ -264,11 +324,11 @@ Configure a single LDAP user to log in to the UI by using the `encryptor` tool:
    LDAP manager password: LvglJEyAySUQBuyUcEeRcYhzrJX6NMl0
    Use LDAP bind auth? (y/n) n
    Password attribute. (Optional, enter to skip) userPassword
-   User dn patterns (Optional, enter to skip) 
+   User dn patterns (Optional, enter to skip)
    User search base (Optional, enter to skip) ou=people
    User search filter. (Optional, enter to skip) (uid={0})
-   Group search base. (Optional, enter to skip) 
-   Group search filter. (Optional, enter to skip) 
+   Group search base. (Optional, enter to skip)
+   Group search filter. (Optional, enter to skip)
    ```
 
 1. Select the `Exit` option once complete.
