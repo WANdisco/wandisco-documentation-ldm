@@ -6,11 +6,11 @@ sidebar_label: Get started
 
 You can use the LiveData Migrator UI or CLI to manage resources and migrate data.
 
-If you want to use the [UI](#get-started-with-the-livedata-migrator-ui) to operate LiveData Migrator, register your LiveData Migrator account after installation. If you want to use the [CLI](#get-started-with-the-livedata-migrator-cli) to operate LiveData Migrator, you're ready to log in.
+If you want to [use the UI to operate LiveData Migrator](#get-started-with-the-livedata-migrator-ui), register your LiveData Migrator account after installation. If you want to [use the CLI to operate LiveData Migrator](#get-started-with-the-livedata-migrator-cli), you're ready to log in.
 
 ## LiveData UI
 
-The LiveData UI can manage multiple LiveData Migrators as well as LiveData Plane from one convenient interface. It is designed to be intuitive and contains on-screen instructions to help you perform migrations and configuration tasks successfully.
+The LiveData UI can manage multiple LiveData Migrator instances as well as LiveData Plane from one convenient interface. It is designed to be intuitive and contains on-screen instructions to help you perform migrations and configuration tasks successfully.
 
 The UI is available on port 8081 on your LiveData Migrator host. For example, if you were running LiveData Migrator on a host named `myldmhost.example.com`, the URL would be:
 
@@ -24,13 +24,13 @@ You'll be asked to register the first time you use the UI. Fill in the registrat
 
 Internet access from the host is not required, but when it is available, you'll be sent confirmation of your registration. We'll use your registration information to send you important information about your LiveData Migrator account, such as a reminder before your license expires. You can also opt in to receive additional product updates.
 
-### Add additional LiveData Migrators
+### Add additional LiveData Migrator instances
 
 If you have additional LiveData Migrator instances, these can be managed in the LiveData UI.
 
 Follow these steps to add an additional instance of LiveData Migrator:
 
-1. On the LiveData UI dashboard, click **+** to add an additional **Products**.
+1. On the LiveData UI dashboard, click **+** under **Products** to add a new product.
 1. On the **Connect to a New Product** page, select **LiveData Migrator**.
 1. Fill in the LiveData Migrator instance details:
    * **Product name** - Give your LiveData Migrator instance a name (for example: `LDM-02`).
