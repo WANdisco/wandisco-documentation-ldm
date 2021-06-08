@@ -46,7 +46,7 @@ preview.feature.verifications=ON
 
 ## Preview status
 
-These features do not require enablement in the properties file.
+These features do not require enablement in the properties file. They are immediately available for use.
 
 ### S3 as a source filesystem
 
