@@ -20,7 +20,7 @@ LiveData Migrator must then be restarted for the changes to take effect:
 service livedata-migrator restart
 ```
 
-## Current Preview Features
+## Current preview features
 
 The following preview features are currently available in LiveData Migrator.
 
@@ -42,4 +42,24 @@ Enable this feature with the following property:
 
 ```text
 preview.feature.verifications=ON
+```
+
+## Preview status
+
+These features do not require enablement in the properties file.
+
+### S3 as a source filesystem
+
+LiveData Migrator supports Amazon Simple Storage Service (Amazon S3) buckets as source storage.
+
+#### Creating an Amazon S3 source through the UI
+
+To configure an Amazon S3 bucket as a source filesystem, select **Amazon S3** in the **Storage Type** dropdown menu when [configuring storage with the UI](./configure-storage.md#configure-storage-with-the-ui).
+
+#### Creating an Amazon S3 source in the CLI
+
+Supply the `--source` parameter to the [`filesystem add s3a` command](./command-reference.md#filesystem-add-s3a).
+
+```text title="Example"
+filesystem add s3a --file-system-id mytarget --bucket-name mybucket1 --credentials-provider org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider --access-key B6ZAI18Z3UIO002Y777A --secret-key OP87Chokisf4hsTP0Q5j95yI904lT7AaDBGJpp0D --source
 ```
