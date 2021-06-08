@@ -1165,6 +1165,28 @@ migration show --migration-id myNewMigration
 
 ----
 
+### `migration path status`
+
+View all actions scheduled on a source filesystem in the specified path.
+
+```text title="Show information on the migration status of a path on the source filesystem"
+SYNOPSYS
+        migration path status [--source-path] string [--source] string
+```
+
+#### Mandatory Parameters
+
+* **`--source-path`** The path on the filesystem to review actions for. Supply a full directory.
+* **`--source`** The filesystem ID of the source system the path is in.
+
+#### Example
+
+```text
+migration path status --source-path /root/mypath/ --source mySource
+```
+
+----
+
 ### `migration pending-region add`
 
 Add a [pending region](./manage-migrations.md#pending-regions) to a migration.
