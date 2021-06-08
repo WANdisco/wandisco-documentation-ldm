@@ -13,7 +13,7 @@ You will typically create multiple migrations so that you can select specific co
 ## Create a new migration with the UI
 
 1. Provide a name for the migration.
-1. Choose a **Source** and **Target** from one of your [storages](./configure-storage.md).
+1. Choose a **Source** and **Target** from your [storages](./configure-storage.md).
 1. Choose the Path on your source filesystem that you want to migrate.
 
    Use the folder browser and click the path name you want to migrate. Click the grey folder next to a path name to go inside of it and view its subdirectories.
