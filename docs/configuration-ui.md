@@ -52,7 +52,7 @@ You can configure the LDAP login credentials for LiveData Migrator users through
 1. Fill in the User Search Configuration section to select which users you wish to apply the LDAP Server Configuration details to.
 1. Confirm the user matches automatically returned by the form are as you intended.
 1. Click the **Save** button to save the configuration and log out all LiveData Migrator users currently in the UI.
-1. Click the confirmation dialogue to restart the LiveData UI to apply the changes. Log back in to the UI afterwards.
+1. Click the confirmation dialogue option to restart the LiveData UI to apply the changes. Log back in to the UI afterwards.
 
 The configuration form in the UI provides all that you need to know to acquire the necessary information.
 
