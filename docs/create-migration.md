@@ -13,12 +13,16 @@ You will typically create multiple migrations so that you can select specific co
 ## Create a new migration with the UI
 
 1. Provide a name for the migration.
-1. Choose a source and target from one of your [storages](./configure-storage.md).
-1. Choose the Path to set the scope of the migration.
+1. Choose a **Source** and **Target** from one of your [storages](./configure-storage.md).
+1. Choose the Path on your source filesystem that you want to migrate.
 
-    :::note
-    ADLS Gen2 has a filesystem restriction of 60 segments. If you are migrating to an ADLS Gen2 storage, your path must have less than 60 segments.
-    :::
+   Use the folder browser and click the path name you want to migrate. Click the grey folder next to a path name to go inside of it and view its subdirectories.
+
+   Alternatively, enter the path manually.
+
+   :::note
+   ADLS Gen2 has a filesystem restriction of 60 segments. If you are migrating to an ADLS Gen2 storage, your path must have less than 60 segments.
+   :::
 
 1. Enable the **Auto-start migration** option if you want to start the migration right away. (You can start it manually when [viewing it later](./manage-migrations.md#manage-migrations-with-the-ui) if you prefer.)
 1. [Apply any exclusions](#assign-exclusions-to-a-new-migration) to reduce the scope within this Path.
@@ -58,7 +62,6 @@ Follow the command links to learn how to set the parameters and see examples.
 1. If you don't have auto-start enabled, manually start the migration:
 
    [`migration run`](./command-reference.md#migration-run)
-
 
 ## Create a one-time migration
 
