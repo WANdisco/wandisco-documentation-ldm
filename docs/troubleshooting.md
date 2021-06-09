@@ -121,3 +121,11 @@ And the following setting determines the low watermark percentage:
 ```text title="Example"
 notifications.pending.region.clear.percent=50
 ```
+
+## Troubleshooting techniques
+
+Use these LiveData Migrator features to identify problems with migrations or filesystems.
+
+### Check path status
+
+You can [check the status of a file path](./configure-storage.md#check-path-status) in either the UI or the CLI to determine whether any work is scheduled on the file. 

@@ -143,7 +143,7 @@ Selecting to configure your _Target_ storage on the Storage panel, see the links
 
 ### Validate your source
 
-LiveData Migrator migrates data from a source filesystem. Validate that the correct source filesystem is registered or delete the existing one (you'll define a new source in the [Add File Systems](#add-file-systems) step).
+LiveData Migrator migrates data from a source filesystem. Verify that the correct source filesystem is registered or delete the existing one (you'll define a new source in the [Add File Systems](#add-file-systems) step).
 
 If Kerberos is enabled or your Hadoop configuration does not contain the information needed to connect to the Hadoop file system, use the [`filesystem auto-discover-source hdfs`](./command-reference.md#filesystem-auto-discover-source-hdfs) command to provide your Kerberos credentials and auto-discover your source HDFS configuration.
 
@@ -191,6 +191,24 @@ You can define multiple target file systems, which you can migrate to at the sam
 | [`filesystem list`](./command-reference.md#filesystem-list) | List of target file systems |
 | [`filesystem show`](./command-reference.md#filesystem-show) | Get target file system details |
 | [`filesystem types`](./command-reference.md#filesystem-types) | List the types of target file systems available |
+
+## Check path status
+
+Check the status of a path on your source filesystem to view any scheduled work to be performed on it.
+
+### Check path status in the UI
+
+1. From the main LiveData Migrator dashboard, click the triple dot button next to one of your filesystems
+1. In the menu that appears, select **Path Status**
+1. Select a source filesystem from the **Select a source filesystem** dropdown menu
+1. Enter the full path of a file on the source filesystem
+1. Click **Search**
+
+You will be shown information about the file, such as the migration it's associated with, the target and file path it's expected to migrate to, and whether or not any work is scheduled on the file.
+
+### Check path status through the CLI
+
+Use the [`migration path status` command](./command-reference.md#migration-path-status) to view information about a file path, such as the migration it's associated with, the target and file path it's expected to migrate to, and whether or not any work is scheduled on the file.
 
 ## Configure storage for one-time migrations
 
