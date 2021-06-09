@@ -1083,6 +1083,12 @@ SYNOPSYS
 
 Create a new migration to initiate data migration from your source file system.
 
+:::caution
+Do not write to target filesystem paths when a migration is underway. This could interfere with LiveData Migrator functionality and lead to undetermined behavior.
+
+Use different filesystem paths when writing to the target storage directly (and not through LiveData Migrator).
+:::
+
 ```text title="Create a new migration"
 SYNOPSYS
         migration add [[--migration-id] string]
