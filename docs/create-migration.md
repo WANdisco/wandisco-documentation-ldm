@@ -10,6 +10,12 @@ Migrations transfer existing data from the defined source to a target. LiveData 
 
 You will typically create multiple migrations so that you can select specific content from your source storage by Path. You can also migrate to multiple independent storages at the same time by defining multiple migration resources.
 
+:::caution
+Do not write to target filesystem paths when a migration is underway. This could interfere with LiveData Migrator functionality and lead to undetermined behavior.
+
+Use different filesystem paths when writing to the target storage directly (and not through LiveData Migrator).
+:::
+
 ## Create a new migration with the UI
 
 1. Provide a name for the migration.
