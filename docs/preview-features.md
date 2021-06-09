@@ -70,7 +70,7 @@ LiveData Migrator supports metadata migration to Databricks Delta Lake.
 
 #### Creating a Databricks metadata agent in the UI
 
-To configure Databricks Delta Lake as a metadata agent, select **Databricks** in the **Agent Type** dropdown menu when [connecting metastores with the UI](./connect-metastores.md#connect-metastores-with-the-ui).
+To configure Databricks Delta Lake as a metadata agent, select **Databricks** in the **Agent Type** dropdown menu when [connecting metastores with the UI](./connect-metastores.md#add-target-agents).
 
 #### Creating a Databricks metadata agent through the CLI
 
