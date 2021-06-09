@@ -63,3 +63,17 @@ Supply the `--source` parameter to the [`filesystem add s3a` command](./command-
 ```text title="Example"
 filesystem add s3a --file-system-id mytarget --bucket-name mybucket1 --credentials-provider org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider --access-key B6ZAI18Z3UIO002Y777A --secret-key OP87Chokisf4hsTP0Q5j95yI904lT7AaDBGJpp0D --source
 ```
+
+### Databricks Hive agent
+
+LiveData Migrator supports metadata migration to Databricks Delta Lake.
+
+#### Creating a Databricks hive agent through the CLI
+
+Use the [`hive agent add databricks` command](./command-reference.md#hive-agent-add-databricks) to set up a Databricks agent in the CLI.
+
+```text title="Example for remote Databricks agent"
+hive agent add databricks --name databricksAgent --jdbc-server-hostname mydbcluster.cloud.databricks.com  --jdbc-port 443 --jdbc-http-path sql/protocolv1/o/8445611123456789/0234-125567-testy978 --access-token daexamplefg123456789t6f0b57dfdtoken4 --file-system-id mys3bucket --default-fs-override dbfs: --fs-mount-point /mnt/mybucket --convert-to-delta --host myRemoteHost.example.com --port 5552
+```
+
+See the [command reference page](./command-reference.md#hive-agent-add-databricks) for more information on how to configure Delta Lake and set up a hive agent.
