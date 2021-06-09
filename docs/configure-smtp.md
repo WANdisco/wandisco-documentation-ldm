@@ -9,13 +9,13 @@ LiveData Migrator supports sending email notifications whenever certain events o
 To use email notifications:
 
 1. [Configure an SMTP server to send the emails](#configure-an-smtp-server-in-the-ui)
-1. [Opt in to the desired notifications](#configure-email-notifications-in-the-ui)
+1. [Opt into the desired notifications](#configure-email-notifications-in-the-ui)
 
 ## Configure an SMTP server in the UI
 
 Configure an SMTP server in the UI by accessing the SMTP configuration tab and filling in the necessary fields.
 
-1. Click on the LiveData Migrator instance name (e.g. "localhost") on the dashboard to access the overview page.
+1. Click on the LiveData Migrator instance name (for example, "localhost") on the dashboard to access the overview page.
 1. Under the configuration category on the left, select **SMTP Settings**.
 1. Provide the necessary fields in the empty form.
 1. Click **Save**.
@@ -69,10 +69,10 @@ Once your SMTP server is ready, you can [configure email notifications through t
 
 Set up email notifications in the UI by accessing the Email Notifications tab and filling in the necessary fields.
 
-1. Click on the LiveData Migrator instance name (e.g. "localhost") on the dashboard to access the overview page (or continue from configuring an SMTP server in the UI).
+1. Click on the LiveData Migrator instance name (for example, "localhost") on the dashboard to access the overview page (or continue from configuring an SMTP server in the UI).
 1. Under the configuration category on the left, select **Email Notifications**.
 1. Enter the email address you want to send notifications to.
-1. Opt in to the event notifications you want to receive.
+1. Opt into the event notifications you want to receive.
 1. Click **Save**.
 
 Click **Send a test email** to send a test notification email to the specified address. If you receive an email with the text "This is a test email notification" and a list of email addresses subscribed to notifications, you've configured email notifications correctly.
