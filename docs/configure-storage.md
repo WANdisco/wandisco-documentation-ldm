@@ -194,7 +194,7 @@ You can define multiple target file systems, which you can migrate to at the sam
 
 ## Check path status
 
-You can check a file path on one of your source filesystems to view any scheduled work to be performed on it.
+Check the status of a path on your source filesystem to view any scheduled work to be performed on it.
 
 ### Check path status in the UI
 
@@ -208,7 +208,7 @@ You will be shown information about the file, such as the migration it's associa
 
 ### Check path status through the CLI
 
-Use the [`migration path status` command](./command-reference.md#migration-path-status) to view information about a file path, such as the migration it's associated with, the target and file path it's expected to migrate to, and whether or not any work is scheduled on the file. 
+Use the [`migration path status` command](./command-reference.md#migration-path-status) to view information about a file path, such as the migration it's associated with, the target and file path it's expected to migrate to, and whether or not any work is scheduled on the file.
 
 ## Configure storage for one-time migrations
 
