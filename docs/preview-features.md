@@ -20,7 +20,7 @@ LiveData Migrator must then be restarted for the changes to take effect:
 service livedata-migrator restart
 ```
 
-## Current Preview Features
+## Current preview features
 
 The following preview features are currently available in LiveData Migrator.
 
@@ -43,3 +43,41 @@ Enable this feature with the following property:
 ```text
 preview.feature.verifications=ON
 ```
+
+## Preview status
+
+These features do not require enablement in the properties file. They are immediately available for use.
+
+### S3 as a source filesystem
+
+LiveData Migrator supports Amazon Simple Storage Service (Amazon S3) buckets as source storage.
+
+#### Creating an Amazon S3 source in the UI
+
+To configure an Amazon S3 bucket as a source filesystem, select **Amazon S3** in the **Storage Type** dropdown menu when [configuring storage with the UI](./configure-storage.md#configure-storage-with-the-ui).
+
+#### Creating an Amazon S3 source through the CLI
+
+Supply the `--source` parameter to the [`filesystem add s3a` command](./command-reference.md#filesystem-add-s3a).
+
+```text title="Example"
+filesystem add s3a --file-system-id mytarget --bucket-name mybucket1 --credentials-provider org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider --access-key B6ZAI18Z3UIO002Y777A --secret-key OP87Chokisf4hsTP0Q5j95yI904lT7AaDBGJpp0D --source
+```
+
+### Databricks metadata agent
+
+LiveData Migrator supports metadata migration to Databricks Delta Lake.
+
+#### Creating a Databricks metadata agent in the UI
+
+To configure Databricks Delta Lake as a metadata agent, select **Databricks** in the **Agent Type** dropdown menu when [connecting metastores with the UI](./connect-metastores.md#add-target-agents).
+
+#### Creating a Databricks metadata agent through the CLI
+
+Use the [`hive agent add databricks` command](./command-reference.md#hive-agent-add-databricks) to set up a Databricks agent in the CLI.
+
+```text title="Example for remote Databricks agent"
+hive agent add databricks --name databricksAgent --jdbc-server-hostname mydbcluster.cloud.databricks.com  --jdbc-port 443 --jdbc-http-path sql/protocolv1/o/8445611123456789/0234-125567-testy978 --access-token daexamplefg123456789t6f0b57dfdtoken4 --file-system-id mys3bucket --default-fs-override dbfs: --fs-mount-point /mnt/mybucket --convert-to-delta --host myRemoteHost.example.com --port 5552
+```
+
+See the [command reference page](./command-reference.md#hive-agent-add-databricks) for more information on how to configure Delta Lake and set up a metadata agent.
