@@ -57,8 +57,10 @@ If you’re not confident about meeting the requirements, you can discuss a supp
 
 * **16 CPUs, 48 GB RAM** (minimum **4 CPUs, 32 GB RAM**)
   * If deploying LiveData Migrator on a Hadoop cluster, the host machine should be an edge node that matches at least 75-80% of the NameNode host specification.
-* **200 GB** (SSD-backed volumes) (minimum **100 GB**)
-* **2 Gbps** minimum network. Your network bandwidth must be able to cope with transferring data and ongoing changes from your source storage.
+* **200 GB** (minimum **100 GB**)
+  * SSD-based storage is recommended.
+* **2 Gbps** minimum network capacity
+  * Your network bandwidth must be able to cope with transferring data and ongoing changes from your source storage.
 
 ## Production Use Configuration
 
