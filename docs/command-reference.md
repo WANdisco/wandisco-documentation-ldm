@@ -1948,7 +1948,7 @@ The following steps are required to enable Java Database Connectivity (JDBC) to 
 Additionally, use only one of the following parameters:
 
 :::important
-If the `--convert-to-delta` option is used, the `--default-fs-override` parameter must also be provided with the value set to `dbfs:`, or a path inside the Databricks filesystem, for example `dbfs:/mount/externalStorage`.
+If the `--convert-to-delta` option is used, the `--default-fs-override` parameter must also be provided with the value set to `dbfs:`, or a path inside the Databricks filesystem. For example, `dbfs:/mount/externalStorage`.
 :::
 
 * **`--file-system-id`** The name of the filesystem that will be associated with this agent (for example: `myadls2` or `mys3bucket`). This will ensure any [path mappings](./create-path-mappings.md) are correctly linked between the filesystem and the agent. This is referenced in the UI as **Filesystem**.
