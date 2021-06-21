@@ -26,7 +26,7 @@ You can create path mappings through the UI. To access path mappings:
 * Click on the LiveData Migrator hostname under your "Products" list in the dashboard.
 * Under the "Configuration" menu, select "Path Mappings".
 
-Here, you will see a list of your existing path mappings, if any.
+Here, you will see a list of any existing path mappings.
 
 ### Add a path mapping
 
