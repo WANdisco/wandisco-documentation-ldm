@@ -18,7 +18,7 @@ The Storage panel shows the filesystems LiveData Migrator uses as either a sourc
 Use the Storage panel to:
 
 * View and configure the source and target filesystems.
-* Add further targets.
+* Add or remove targets.
 * Add additional LiveData Migrator servers and [LiveData Plane](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/get-started) servers.
 * Configure Amazon S3-compatible targets using the [Hadoop S3A configuration](http://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html) exposed in the UI.
 * Connect to additional LiveData Migrator or LiveData Plane instances and configure their respective storages.
@@ -138,6 +138,10 @@ Selecting to configure your _Target_ storage on the Storage panel, see the links
 * [S3 / IBM Cloud Object Storage (S3)](./command-reference.md#s3a-mandatory-parameters)
 * [Google Cloud Storage](./command-reference.md#mandatory-parameters-3)
 * [HDFS](./command-reference/#mandatory-parameters-4)
+
+### Delete target storages
+
+Delete a target storage from its **Storage Configuration** panel. Click the **Delete Storage** button. Before you can delete a target storage you must ensure that you first [delete any associated migrations](./manage-migrations#delete-a-migration).
 
 ## Configure storage with the CLI
 
