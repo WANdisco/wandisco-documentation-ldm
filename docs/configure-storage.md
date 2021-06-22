@@ -214,6 +214,34 @@ You will be shown information about the file, such as the migration it's associa
 
 Use the [`migration path status` command](./command-reference.md#migration-path-status) to view information about a file path, such as the migration it's associated with, the target and file path it's expected to migrate to, and whether or not any work is scheduled on the file.
 
+## Configure success files
+
+Use success files to determine when a specific directory has migrated successfully and the data within is ready for an application or job to process on the target side.
+
+Success files are migrated last within their containing directory, meaning they can be used to ascertain that the directory they are contained within has finished migration.
+
+:::note
+Success files can only be added to HDFS source filesystems.
+:::
+
+### Configure success files in the UI
+
+1. Click on an HDFS source filesystem of choice in the LiveData Migrator dashboard.
+1. Under **Success File**, supply a filename or glob pattern that matches any success files you want to add (for example: `/**_SUCCESS`).
+1. Click **Save**.
+
+### Configure success files through the CLI
+
+Add success files in the CLI by supplying a filename or glob pattern to the `--success-file` parameter of the [`filesystem add hdfs`](./command-reference.md#filesystem-add-hdfs) or [`filesystem update hdfs`](./command-reference.md#filesystem-update-hdfs) command:
+
+```text title="add"
+filesystem add hdfs --file-system-id mysource --source --success-file /mypath/myfile.txt
+```
+
+```text title="update"
+filesystem update hdfs --file-system-id mysource --success-file /**_SUCCESS
+```
+
 ## Configure storage for one-time migrations
 
 It's possible to create a source filesystem that is not tracked by LiveData Migrator for changes during a migration. Migrations created from this type of source will become [one-time migrations](./one-time-migration.md) by default. Note that it is not necessary to create a file storage of this type to create a one-time migration.
