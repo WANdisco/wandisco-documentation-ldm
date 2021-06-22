@@ -210,6 +210,12 @@ You will be shown information about the file, such as the migration it's associa
 
 Use the [`migration path status` command](./command-reference.md#migration-path-status) to view information about a file path, such as the migration it's associated with, the target and file path it's expected to migrate to, and whether or not any work is scheduled on the file.
 
+## Configure success files
+
+Use success files to determine when a specific directory has migrated successfully and the data within is ready for an application or job to process on the target side.
+
+Success files are migrated last within their directory,
+
 ## Configure storage for one-time migrations
 
 It's possible to create a source filesystem that is not tracked by LiveData Migrator for changes during a migration. Migrations created from this type of source will become [one-time migrations](./one-time-migration.md) by default. Note that it is not necessary to create a file storage of this type to create a one-time migration.
