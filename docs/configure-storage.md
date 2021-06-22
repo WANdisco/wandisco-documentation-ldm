@@ -141,7 +141,7 @@ Selecting to configure your _Target_ storage on the Storage panel, see the links
 
 ### Delete target storages
 
-Delete a target storage from its **Storage Configuration** panel. Click the **Delete Storage** button. Before you can delete a target storage you must ensure that you first delete any associated migrations. See [Delete a migration](./manage-migrations#delete-a-migration).
+Delete a target storage from its **Storage Configuration** panel. Click the **Delete Storage** button. Before you can delete a target storage you must ensure that you first [delete any associated migrations](./manage-migrations#delete-a-migration).
 
 ## Configure storage with the CLI
 
