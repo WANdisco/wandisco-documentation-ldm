@@ -135,5 +135,5 @@ The **Failed Operations** panel on LiveData UI's Migration screen provides a cou
   ```
 
 :::note
-Historical failure information may be garbage collected, so it may not be possible to show all failures. In this case a warning will appear that states' *"We're unable to show detailed results of failed operations. We only have detailed results from the most recent <number of available failures> results"*
+Historical failure information may be garbage collected, so it may not be possible to show all failures. In this case a warning will appear that states' *"We're unable to show detailed results of failed operations. We only have detailed results from the most recent [number of available failures] results"*
 :::
