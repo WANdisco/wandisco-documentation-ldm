@@ -16,16 +16,30 @@ Click **View migration** to see more detail.
 A migration must be stopped or aborted before it can be deleted.
 :::
 
+### Migration metrics
+
+View details about migration events and remaining scanned paths to better understand a migration's progress.
+
+1. In the dashboard, select a migration.
+1. You will be taken to the **Status** of the migration tab by default.
+
+Under **Migration Metrics**, observe the following:
+
+* **Events yet to be migrated:** this graph shows the size of the scheduled actions queue across a time period selected in the **Filter by** dropdown menu.
+* **Paths to be scanned:** this graph displays the size of the queue for paths yet to be scanned across a time period selected in the **Filter by** dropdown menu.
+
 ### Assign exclusions to an existing migration
 
 Adding exclusions to an existing migration will change the future actions performed for that migration, but will not affect previously migrated content.
 
-1. In the dashboard, select an ongoing migration to view its **Exclusions**.
+1. In the dashboard, select a migration.
+1. Under the sidebar that appears, select **Exclusions**.
 1. Click **Add** and select the appropriate exclusion template from the drop-down list.
 
 ### Remove exclusions from an existing migration
 
-1. In the dashboard, select an ongoing migration to view its **Exclusions**.
+1. In the dashboard, select a migration.
+1. Under the sidebar that appears, select **Exclusions**.
 1. Remove any of the exclusions one at a time.
 
 ### Stop a migration
