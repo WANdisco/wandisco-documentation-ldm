@@ -42,7 +42,7 @@ SYNOPSYS
 
 #### Mandatory Parameters
 
-* **`--file-system-id`** The identifier of the source file system resource to delete. This is referenced in the UI as **Filesystem Name**.
+* **`--file-system-id`** The identifier of the source file system resource to delete. This is referenced in the UI as **Storage Name**.
 
 #### Example
 
@@ -92,7 +92,7 @@ SYNOPSYS
 
 #### Mandatory Parameters
 
-* **`--file-system-id`** The identifier to give the new filesystem resource. This is referenced in the UI as **Filesystem Name**.
+* **`--file-system-id`** The identifier to give the new file system resource. This is referenced in the UI as **Storage Name**.
 * **`--storage-account-name`** The name of the ADLS Gen 2 storage account to target. This is referenced in the UI as **Account Name**.
 * **`--oauth2-client-id`** The client ID (also known as [application ID](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#get-tenant-and-app-id-values-for-signing-in)) for your Azure service principal. This is referenced in the UI as **Client ID**.
 * **`--oauth2-client-secret`** The client secret (also known as [application secret](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#option-2-create-a-new-application-secret)) for the Azure service principal. This is referenced in the UI as **Secret**.
@@ -152,9 +152,9 @@ filesystem add adls2 sharedKey --file-system-id mytarget --storage-account-name 
 
 ### `filesystem add gcs`
 
-Add a Google Cloud Storage filesystem as a migration target using the `filesystem add gcs` command, which requires credentials in the form of an account key file.
+Add a Google Cloud Storage as a migration target using the `filesystem add gcs` command, which requires credentials in the form of an account key file.
 
-```text title="Add a Google Cloud Storage filesystem"
+```text title="Add a Google Cloud Storage file system"
 SYNOPSYS
         filesystem add gcs [--file-system-id] string
                            [[--service-account-json-key-file] string]
@@ -169,7 +169,7 @@ SYNOPSYS
 
 #### Mandatory Parameters
 
-* **`--file-system-id`** The identifier to give the new file system resource. This is referenced in the UI as **Filesystem Name**.
+* **`--file-system-id`** The identifier to give the new file system resource. This is referenced in the UI as **Storage Name**.
 * **`--bucket-name`** The bucket name of a Google Cloud Storage account. This is referenced in the UI as **Bucket Name**.
 
 #### Service account key parameters
@@ -205,7 +205,7 @@ filesystem add gcs --file-system-id gcsAgent --bucket-name myGcsBucket --service
 
 Add a Hadoop Distributed File System (HDFS) as either a migration source or target using the `filesystem add hdfs` command.
 
-Creating a HDFS resource with this command will normally only be used when migrating to a target HDFS filesystem (rather than another storage service like ADLS Gen 2 or S3a). LiveData Migrator will attempt to auto-detect the *source* HDFS when started from the command line unless Kerberos is enabled on your source environment.
+Creating a HDFS resource with this command will normally only be used when migrating to a target HDFS storage (rather than another storage service like ADLS Gen 2 or S3a). LiveData Migrator will attempt to auto-detect the *source* HDFS when started from the command line unless Kerberos is enabled on your source environment.
 
 If Kerberos is enabled on your source environment, use the [`filesystem auto-discover-source hdfs`](#filesystem-auto-discover-source-hdfs) command to provide Kerberos credentials and auto-discover your source HDFS configuration.
 
@@ -224,7 +224,7 @@ SYNOPSYS
 
 #### Mandatory Parameters
 
-* **`--file-system-id`** The identifier to give the new file system resource. This is referenced in the UI as **Filesystem Name**.
+* **`--file-system-id`** The identifier to give the new file system resource. This is referenced in the UI as **Storage Name**.
 * **`--default-fs`** A string that defines how LiveData Migrator accesses HDFS. This is referenced in the UI as **Default FS**.  
   It can be specified in a number of forms:
   1. As a single HDFS URI, such as `hdfs://192.168.1.10:8020` (using an IP address) or `hdfs://myhost.localdomain:8020` (using a hostname).
@@ -330,7 +330,7 @@ SYNOPSYS
 
 #### Mandatory Parameters
 
-* **`--file-system-id`** The identifier to give the new file system resource. This is referenced in the UI as **Filesystem Name**.
+* **`--file-system-id`** The identifier to give the new file system resource. This is referenced in the UI as **Storage Name**.
 
 #### Optional Parameters
 
@@ -382,7 +382,7 @@ For guidance about access, permissions, and security when adding an Amazon S3 bu
 
 #### S3a Mandatory Parameters
 
-* **`--file-system-id`** The identifier for the new file system resource. This is referenced in the UI as **Filesystem Name**.
+* **`--file-system-id`** The identifier for the new file system resource. This is referenced in the UI as **Storage Name**.
 * **`--bucket-name`** The name of your Amazon S3 bucket. This is referenced in the UI as **Bucket Name**.
 * **`--credentials-provider`** The Java class name of a credentials provider for authenticating with the Amazon S3 endpoint. This is referenced in the UI as **Credentials Provider**. This is not a required parameter when adding an IBM COS bucket through the UI.  
   The Provider options available include:
@@ -522,7 +522,7 @@ SYNOPSYS
 
 #### Mandatory Parameters
 
-* **`--file-system-id`** The identifier of the file system resource to delete. This is referenced in the UI as **Filesystem Name**.
+* **`--file-system-id`** The identifier of the file system resource to delete. This is referenced in the UI as **Storage Name**.
 
 #### Example
 
@@ -558,7 +558,7 @@ SYNOPSYS
 
 #### Mandatory Parameters
 
-* **`--file-system-id`** The identifier of the file system resource to show. This is referenced in the UI as **Filesystem Name**.
+* **`--file-system-id`** The identifier of the file system resource to show. This is referenced in the UI as **Storage Name**.
 
 #### Example
 
@@ -1083,12 +1083,6 @@ SYNOPSYS
 
 Create a new migration to initiate data migration from your source file system.
 
-:::caution
-Do not write to target filesystem paths when a migration is underway. This could interfere with LiveData Migrator functionality and lead to undetermined behavior.
-
-Use different filesystem paths when writing to the target storage directly (and not through LiveData Migrator).
-:::
-
 ```text title="Create a new migration"
 SYNOPSYS
         migration add [[--migration-id] string]
@@ -1117,7 +1111,7 @@ SYNOPSYS
 * **`--action-policy`** This parameter determines what happens if the migration encounters content in the target path with the same name and size. This is referenced in the UI as **Skip Or Overwrite Settings**.  
   There are two options available:
   1. **`com.wandisco.livemigrator2.migration.OverwriteActionPolicy`** _(default policy)_  
-     Every file is replaced, even if file size is identical on the target filesystem. This is referenced in the UI as **Overwrite**.
+     Every file is replaced, even if file size is identical on the target storage. This is referenced in the UI as **Overwrite**.
   1. **`com.wandisco.livemigrator2.migration.SkipIfSizeMatchActionPolicy`**  
      If the file size is identical between the source and target, the file is skipped. If it’s a different size, the whole file is replaced. This is referenced in the UI as **Skip if Size Match**.
 
@@ -1167,28 +1161,6 @@ SYNOPSYS
 
 ```text
 migration show --migration-id myNewMigration
-```
-
-----
-
-### `migration pending-region add`
-
-Add a [pending region](./manage-migrations.md#pending-regions) to a migration.
-
-```text title="Add pending region for rescan to migration"
-SYNOPSYS
-        migration pending-region add [--migration-id] string [--path] string
-```
-
-#### Mandatory Parameters
-
-* **`--migration-id`** The migration name or identifier to add a pending region to.
-* **`--path`** The path string of the region to add for rescan.
-
-#### Example
-
-```text
-migration pending-region add --migration-id myMigration --path etc/files
 ```
 
 ----
@@ -1886,10 +1858,6 @@ If specifying Kerberos and config path information for remote agents, ensure tha
 Databricks agents are currently available as a preview feature.
 :::
 
-:::info
-The source table format must be [Parquet](https://databricks.com/glossary/what-is-parquet) to ensure a successful migration to Databricks Delta Lake.
-:::
-
 Add a [Databricks](https://databricks.com/product/delta-lake-on-databricks) hive agent to connect to a Databricks Delta Lake metastore ([AWS](https://docs.databricks.com/data/metastores/index.html), [Azure](https://docs.microsoft.com/en-us/azure/databricks/data/metastores/) or [GCP](https://docs.gcp.databricks.com/data/metastores/index.html)) using the `hive agent add databricks` command.
 
 If your LiveData Migrator host can communicate directly with the Databricks Delta Lake, then a local hive agent will be sufficient. Otherwise, consider using a remote hive agent.
@@ -1948,7 +1916,7 @@ The following steps are required to enable Java Database Connectivity (JDBC) to 
 Additionally, use only one of the following parameters:
 
 :::important
-If the `--convert-to-delta` option is used, the `--default-fs-override` parameter must also be provided with the value set to `dbfs:`, or a path inside the Databricks filesystem. For example, `dbfs:/mount/externalStorage`.
+If the `--convert-to-delta` option is used, the `--default-fs-override` parameter must also be provided with the value set to `dbfs:`.
 :::
 
 * **`--file-system-id`** The name of the filesystem that will be associated with this agent (for example: `myadls2` or `mys3bucket`). This will ensure any [path mappings](./create-path-mappings.md) are correctly linked between the filesystem and the agent. This is referenced in the UI as **Filesystem**.
@@ -1962,21 +1930,14 @@ If the `--convert-to-delta` option is used, the `--default-fs-override` paramete
   This parameter is required if `--convert-to-delta` is used. The Databricks agent will copy all associated table data and metadata into this location within the Databricks filesystem during conversion.
   :::
 
-* **`--convert-to-delta`** All underlying table data and metadata is migrated to the filesystem location defined by the `--fs-mount-point` parameter. Use this option to automatically copy the associated data and metadata into Delta Lake on Databricks ([AWS](https://docs.databricks.com/spark/latest/spark-sql/language-manual/delta-copy-into.html), [Azure](https://docs.microsoft.com/en-us/azure/databricks/spark/latest/spark-sql/language-manual/delta-copy-into) or [GCP](https://docs.gcp.databricks.com/spark/latest/spark-sql/language-manual/delta-copy-into.html)), and convert tables into Delta Lake format. This is referenced in the UI as **Convert to delta format**.
+* **`--convert-to-delta`** All underlying table data and metadata is migrated to the storage location defined by the `--fs-mount-point` parameter. Use this option to automatically copy the associated data and metadata into Delta Lake on Databricks ([AWS](https://docs.databricks.com/spark/latest/spark-sql/language-manual/delta-copy-into.html), [Azure](https://docs.microsoft.com/en-us/azure/databricks/spark/latest/spark-sql/language-manual/delta-copy-into) or [GCP](https://docs.gcp.databricks.com/spark/latest/spark-sql/language-manual/delta-copy-into.html)), and convert tables into Delta Lake format. This is referenced in the UI as **Convert to delta format**.
 
   The following parameter can only be used if `--convert-to-delta` has been specified:
-  * **`--delete-after-conversion`** Use this option to delete the underlying table data and metadata from the filesystem location (defined by `--fs-mount-point`) once it has been converted into Delta Lake on Databricks. This is referenced in the UI as **Delete after conversion**.
+  * **`--delete-after-conversion`** Use this option to delete the underlying table data and metadata from the storage location (defined by `--fs-mount-point`) once it has been converted into Delta Lake on Databricks. This is referenced in the UI as **Delete after conversion**.
 
     :::important
     Only use this option if you are performing [one-time migrations](./one-time-migration.md) for the underlying table data. The Databricks agent does not support continuous (live) updates of table data when transferring to Delta Lake on Databricks.
     :::
-
-- If a migration to Databricks runs without the **`--convert-to-delta`** option, then some migrated data may not be visible from the Databricks side. To avoid this issue, ensure that the value of `default-fs-override` is set to "`dbfs:`" with the value of `--fs-mount-point`.
-
-  **Example:**
-  ```
-  --default-fs-override dbfs:/mnt/mybucketname    
-  ```
 
 #### Parameters for remote hive agents only
 
@@ -2858,28 +2819,6 @@ SYNOPSYS
 
 ```text
 notification email types remove MISSING_EVENTS,EVENTS_BEHIND,MIGRATION_AUTO_STOPPED
-```
-
-----
-
-### `migration path status`
-
-View all actions scheduled on a source filesystem in the specified path.
-
-```text title="Show information on the migration status of a path on the source filesystem"
-SYNOPSYS
-        migration path status [--source-path] string [--source] string
-```
-
-#### Mandatory Parameters
-
-* **`--source-path`** The path on the filesystem to review actions for. Supply a full directory.
-* **`--source`** The filesystem ID of the source system the path is in.
-
-#### Example
-
-```text
-migration path status --source-path /root/mypath/ --source mySource
 ```
 
 ----

@@ -18,7 +18,7 @@ The following describes the default audit logging configuration for the LiveData
 
 | File name | Containing directory | Rotation period | Retention period |
 |---|---|---|---|
-| `livedata_ui_audit.yyyy-MM-dd.log` | `/var/log/wandisco/audit/ui` | Daily | 90 days |
+| `livedata_ui_audit.yyyy-MM-dd.log` | `/var/log/wandisco/ui` | Daily | 90 days |
 
 * An audit log will not be created for the days that no UI activity was seen.
 * The rotation period cannot be changed.
@@ -49,7 +49,7 @@ For each entry, the following will be recorded:
 
 #### Redaction policy
 
-By default, all sensitive information (such as passwords and filesystem access keys) will be redacted in the audit entries.
+By default, all sensitive information (such as passwords and storage access keys) will be redacted in the audit entries.
 
 ## Examples of audit entries
 

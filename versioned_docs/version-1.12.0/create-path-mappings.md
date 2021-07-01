@@ -23,10 +23,10 @@ Using path mapping enables any migrated data (relating to managed Hive databases
 
 You can create path mappings through the UI. To access path mappings:
 
-* Click on the LiveData Migrator hostname under your "Products" list in the dashboard.
-* Under the "Configuration" menu, select "Path Mappings".
+* Clicking on the LiveData Migrator hostname under your "Products" list in the dashboard.
+* Under the "Configuration" menu, select "Path Mappings"
 
-Here, you will see a list of any existing path mappings.
+Here, you will see a list of your existing path mappings, if any.
 
 ### Add a path mapping
 

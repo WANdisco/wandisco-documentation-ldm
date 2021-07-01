@@ -22,25 +22,40 @@ Follow these steps to enable basic authentication on the HiveMigrator REST API:
 
    ```text title="Change the enabled parameter from false to true"
    micronaut:
-
+   
      security:
        enabled: true
    ```
 
-1. [If basic authentication is enabled on the LiveData Migrator REST API](./configuration-ldm.md#security), add two properties, `username` and `password`, inside the integration section of the `/etc/wandisco/hivemigrator/application.yaml` file. Use the same username for HiveMigrator and LiveData Migrator. If the LiveData Migrator credentials and the HiveMigrator credentials (defined in the next step) are the same, you will only need to authenticate once when [connecting through the CLI](#connecting-to-hivemigrator-with-basic-authentication).
+1. [If basic authentication is enabled on the LiveData Migrator REST API](./configuration-ldm.md#security), add the password to the `/etc/wandisco/hivemigrator/application.yaml` file in plain text.
 
-  The password string needs to be encrypted using a [bcrypt generator](https://www.browserling.com/tools/bcrypt) that provides a "2a" prefix at the beginning of the encrypted password, as shown in the following example.
+   Add the `lm2Password` key as a top level parameter:
 
    ```text title="Example"
-   micronaut:
-  liveDataMigrator:
-    port: 18080
-    useSsl: false
-    username: "admin"
-    password: "password"
-storagePath: /opt/wandisco/hivemigrator/hivemigrator.db
-username: "admin"
-password: "$2a$10$3gc/9QTnGQQj51e0YRAK.OAplbj4A9S4sx7rRpMSOSpb5UrLW2p/."
+   storagePath: /opt/wandisco/hivemigrator/hivemigrator.db
+   liveDataMigratorPort: 18080
+
+   lm2Password: "password"
+   ```
+
+   If the LiveData Migrator credentials and the HiveMigrator credentials (defined in the next step) are the same, you will only need to authenticate once when [connecting through the CLI](#connecting-to-hivemigrator-with-basic-authentication).
+
+1. In the same file, add the `username` and `password` key values as top level parameters.
+
+   [If basic authentication is enabled on the LiveData Migrator REST API](./configuration-ldm.md#security), use the same username for HiveMigrator and LiveData Migrator.
+
+   The password value needs to be encrypted using a [bcrypt generator](https://www.browserling.com/tools/bcrypt).
+
+   :::important bcrypt password must have a 2a hash prefix
+   HiveMigrator only supports "2a" hash prefixes for encrypted passwords. Use a [bcrypt generator](https://www.browserling.com/tools/bcrypt) that provides a "2a" prefix at the beginning of the encrypted password.
+   :::
+
+   ```text title="Example"
+   storagePath: /opt/wandisco/hivemigrator/hivemigrator.db
+   liveDataMigratorPort: 18080
+
+   username: "admin"
+   password: "$2a$10$mQXFoGAdLryWcZLjSP31Q.5cSgtoCPO3ernnsK4F6/gva8lyn1qgu"
    ```
 
 1. Restart the HiveMigrator service to enable the new configuration:

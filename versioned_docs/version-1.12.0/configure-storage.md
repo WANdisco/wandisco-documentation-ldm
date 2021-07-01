@@ -1,29 +1,29 @@
 ---
 id: configure-storage
-title: Configure filesystems
-sidebar_label: Configure filesystems
+title: Configure storage
+sidebar_label: Configure storage
 ---
 
-The first step in the process of migrating data is to configure your filesystems, which define where data is being migrated from (the source) and to (the target).
+The first step in the process of migrating data is to configure your storage, which defines where data is being migrated from (the source) and to (the target).
 
 * Supported sources are: **HDFS**, **Amazon Simple Storage Service (Amazon S3) _(preview)_** and **local storage**
 * Supported targets are: **ADLS Gen2**, **Amazon Simple Storage Service (Amazon S3)**, **Google Cloud Storage**, **IBM Cloud Object Storage (S3)** and **HDFS**
 
-Configure filesystems with either the [UI](#configure-filesystems-with-the-ui) or the [CLI](#configure-filesystems-with-the-cli).
+Configure storage with either the [UI](#configure-storage-with-the-ui) or the [CLI](#configure-storage-with-the-cli).
 
-## Configure filesystems with the UI
+## Configure storage with the UI
 
-The **Filesystems** panel shows the filesystems LiveData Migrator uses as either a source or target for data migrations. LiveData Migrator supports one source and one or more targets. Each filesystem displays its associated processes, such as which LiveData Migrator is used to access it.
+The Storage panel shows the filesystems LiveData Migrator uses as either a source or target for data migrations. LiveData Migrator supports one source and one or more targets. Each filesystem displays its associated processes, such as which LiveData Migrator is used to access it.
 
-Use the **Filesystems** panel to:
+Use the Storage panel to:
 
 * View and configure the source and target filesystems.
-* Add or remove targets.
+* Add further targets.
 * Add additional LiveData Migrator servers and [LiveData Plane](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/get-started) servers.
 * Configure Amazon S3-compatible targets using the [Hadoop S3A configuration](http://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html) exposed in the UI.
-* Connect to additional LiveData Migrator or LiveData Plane instances and configure their respective filesystems.
+* Connect to additional LiveData Migrator or LiveData Plane instances and configure their respective storages.
 
-### Configure source filesystem
+### Configure source storage
 
 You can can add a new source by performing one of the below actions:
 
@@ -55,10 +55,10 @@ If Kerberos is enabled, provide the following details:
 
 Configure your source filesystem if Kerberos is enabled or Hadoop configuration is in a non-default location.
 
-In the **Filesystems** panel, select to configure your _Unknown source_ and provide your source HDFS configuration:
+In the Storage panel, select to configure your _Unknown source_ and provide your source HDFS configuration:
 
-* **File System ID** - Provide a name for your source filesystem.
-* **Filesystem Type** - The type of filesystem source. Choose _HDFS_.
+* **File System ID** - Provide a name for your source storage.
+* **Storage Type** - The type of filesystem source. Choose _HDFS_.
 * **Default FS** - Provide the `fs.defaultFS` value from your HDFS configuration.
 * Kerberos Configuration
   * **Kerberos Principal** - Provide a principal that will map to the [HDFS super user](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsPermissionsGuide.html#The_Super-User) using [auth_to_local](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SecureMode.html#Mapping_from_Kerberos_principals_to_OS_user_accounts) rules.
@@ -75,8 +75,8 @@ Amazon S3 buckets as a source are currently supported as a preview feature.
 
 To configure an Amazon S3 bucket source for use with LiveData Migrator, provide the following details:
 
-* **File System ID** - Provide a name for your source filesystem.
-* **Filesystem Type** - The type of filesystem source. Choose _Amazon S3_.
+* **File System ID** - Provide a name for your source storage.
+* **Storage Type** - The type of filesystem source. Choose _AWS S3_.
 * **Bucket Name** - The reference name of the Amazon S3 bucket you are using.
 * **Credentials Provider** - The Java class name of a credentials provider for authenticating with the S3 endpoint. This is not a required parameter when adding an IBM COS bucket through the UI.
 The Provider options available include:
@@ -101,20 +101,18 @@ The Provider options available include:
 * **Access Key** (Optional) - When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the access key with this parameter. This is a required parameter when adding an IBM COS bucket.
 * **Secret Key** (Optional) - When using the `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider` credentials provider, specify the secret key using this parameter. This is a required parameter when adding an IBM COS bucket.
 * **S3A Properties** (Optional) - Override properties or specify additional properties by adding Key/Value pairs.
-* **Migrate Live Events** - Enabled by default, this setting will allow LiveData Migrator to automatically migrate changes from this source's data to the target filesystem during a migration. See [One-Time Migration](./one-time-migration.md) for more information.
+* **Migrate Live Events** - Enabled by default, this setting will allow LiveData Migrator to automatically migrate changes from this source's data to the target storage during a migration. See [One-Time Migration](./one-time-migration.md) for more information.
 
 :::note
 As an additional step, ensure your account has the [necessary SQS permissions](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-basic-examples-of-sqs-policies.html) to [access the bucket as storage](https://docs.aws.amazon.com/AmazonS3/latest/userguide/grant-destinations-permissions-to-s3.html#grant-sns-sqs-permission-for-s3).
-
-For example, configuring an allow rule for `sqs:*` will allow all organization users configured with SQS to perform the necessary actions with LiveData Migrator.
 :::
 
 #### Local filesystem source configuration
 
 To configure a local filesystem source for use with LiveData Migrator, provide the following details:
 
-* **File System ID** - Provide a name for your source filesystem.
-* **Filesystem Type** - The type of filesystem source. Choose _Local Filesystem_.
+* **File System ID** - Provide a name for your source storage.
+* **Storage Type** - The type of filesystem source. Choose _Local Filesystem_.
 * **Mount Point** - The directory within the local filesystem to use as the source storage. You can migrate any data contained within the Mount Point directory.
 
 :::note
@@ -128,9 +126,9 @@ Hadoop should be installed globally on the filesystem to allow LiveData Migrator
 
 :::
 
-### Add target filesystems
+### Add target storages
 
-Selecting to configure your _Target_ filesystem on the Filesystem panel, see the links below for the configuration needed for each platform:
+Selecting to configure your _Target_ storage on the Storage panel, see the links below for the configuration needed for each platform:
 
 * ADLS Gen2 - The configuration needed will depend on the **Authentication Type** chosen:
   * [Shared Key](./command-reference.md#mandatory-parameters-2)
@@ -139,15 +137,11 @@ Selecting to configure your _Target_ filesystem on the Filesystem panel, see the
 * [Google Cloud Storage](./command-reference.md#mandatory-parameters-3)
 * [HDFS](./command-reference/#mandatory-parameters-4)
 
-### Delete target filesystems
-
-Delete a target filesystem from its **Filesystem Configuration** panel. Click the **Delete Filesystem** button. Before you can delete a target filesystem you must ensure that you first [delete any associated migrations](./manage-migrations#delete-a-migration).
-
-## Configure filesystems with the CLI
+## Configure storage with the CLI
 
 ### Validate your source
 
-LiveData Migrator migrates data from a source filesystem. Verify that the correct source filesystem is registered or delete the existing one (you'll define a new source in the [Add File Systems](#add-file-systems) step).
+LiveData Migrator migrates data from a source filesystem. Validate that the correct source filesystem is registered or delete the existing one (you'll define a new source in the [Add File Systems](#add-file-systems) step).
 
 If Kerberos is enabled or your Hadoop configuration does not contain the information needed to connect to the Hadoop file system, use the [`filesystem auto-discover-source hdfs`](./command-reference.md#filesystem-auto-discover-source-hdfs) command to provide your Kerberos credentials and auto-discover your source HDFS configuration.
 
@@ -164,19 +158,19 @@ Manage the source filesystem with the following commands:
 | [`source fs show`](./command-reference.md#source-fs-show) | Show the source FileSystem configuration |
 | [`filesystem auto-discover-source hdfs`](./command-reference.md#filesystem-auto-discover-source-hdfs) | Provide your Kerberos credentials to access your source HDFS configuration |
 
-### Add filesystems
+### Add file systems
 
-Add filesystems to provide LiveData Migrator with the information needed to read content from your source and migrate content to your target.
+Add file systems to provide LiveData Migrator with the information needed to read content from your source and migrate content to your target.
 
-A range of different filesystem types are supported as targets, including [ADLS Gen 2](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction), [HDFS](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html), [GCS](https://cloud.google.com/storage), and [S3A](https://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html).
+A range of different file system types are supported as targets, including [ADLS Gen 2](https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction), [HDFS](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html), [GCS](https://cloud.google.com/storage), and [S3A](https://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html).
 
 :::note
 LiveData Migrator currently supports HDFS as a migration source.
 
-If your source filesystem was not discovered automatically or you wish to assign a new source file system, use the `--source` parameter with the `filesystem add hdfs` command to add a suitable HDFS source filesystem.
+If your source file system was not discovered automatically or you wish to assign a new source file system, use the `--source` parameter with the `filesystem add hdfs` command to add a suitable HDFS source file system.
 :::
 
-You can define multiple target filesystems, which you can migrate to at the same time.
+You can define multiple target file systems, which you can migrate to at the same time.
 
 | Command | Action |
 |:---|:---|
@@ -196,63 +190,17 @@ You can define multiple target filesystems, which you can migrate to at the same
 | [`filesystem show`](./command-reference.md#filesystem-show) | Get target file system details |
 | [`filesystem types`](./command-reference.md#filesystem-types) | List the types of target file systems available |
 
-## Check path status
-
-Check the status of a path on your source filesystem to view any scheduled work to be performed on it.
-
-### Check path status in the UI
-
-1. From the main LiveData Migrator dashboard, click the triple dot button next to one of your filesystems
-1. In the menu that appears, select **Path Status**
-1. Select a source filesystem from the **Select a source filesystem** dropdown menu
-1. Enter the full path of a file on the source filesystem
-1. Click **Search**
-
-You will be shown information about the file, such as the migration it's associated with, the target and file path it's expected to migrate to, and whether or not any work is scheduled on the file.
-
-### Check path status through the CLI
-
-Use the [`migration path status` command](./command-reference.md#migration-path-status) to view information about a file path, such as the migration it's associated with, the target and file path it's expected to migrate to, and whether or not any work is scheduled on the file.
-
-## Configure success files
-
-Use success files to determine when a specific directory has migrated successfully and the data within is ready for an application or job to process on the target side.
-
-Success files are migrated last within their containing directory, meaning they can be used to ascertain that the directory they are contained within has finished migration.
-
-:::note
-Success files can only be added to HDFS source filesystems.
-:::
-
-### Configure success files in the UI
-
-1. Click on an HDFS source filesystem of choice in the LiveData Migrator dashboard.
-1. Under **Success File**, supply a filename or glob pattern that matches any success files you want to add (for example: `/**_SUCCESS`).
-1. Click **Save**.
-
-### Configure success files through the CLI
-
-Add success files in the CLI by supplying a filename or glob pattern to the `--success-file` parameter of the [`filesystem add hdfs`](./command-reference.md#filesystem-add-hdfs) or [`filesystem update hdfs`](./command-reference.md#filesystem-update-hdfs) command:
-
-```text title="add"
-filesystem add hdfs --file-system-id mysource --source --success-file /mypath/myfile.txt
-```
-
-```text title="update"
-filesystem update hdfs --file-system-id mysource --success-file /**_SUCCESS
-```
-
 ## Configure storage for one-time migrations
 
-It's possible to create a source filesystem that is not tracked by LiveData Migrator for changes during a migration. Migrations created from this type of source will become [one-time migrations](./one-time-migration.md) by default. Note that it is not necessary to create a filesystem of this type to create a one-time migration.
+It's possible to create a source filesystem that is not tracked by LiveData Migrator for changes during a migration. Migrations created from this type of source will become [one-time migrations](./one-time-migration.md) by default. Note that it is not necessary to create a file storage of this type to create a one-time migration.
 
-### Create filesystems for one-time migrations with the UI
+### Create storage for one-time migrations with the UI
 
-To create a source filesystem for a one-time migration, uncheck the **Migrate Live Events** box when you configure the filesystem. When creating a migration from the UI from the filesystem created, the UI will uncheck the **live migration** option and prevent it from being enabled.
+To create a source filesystem for a one-time migration, uncheck the **Migrate Live Events** box when you configure the storage. When creating a migration from the UI from the storage created, the UI will uncheck the **live migration** option and prevent it from being enabled.
 
-### Create filesystems for one-time migrations with the CLI
+### Create storage for one-time migrations with the CLI
 
-LiveData Migrator will only perform *read* tasks on a source filesystem created for one-time migrations. It will not check the source filesystem for modifications to data during transfer. Any migration that uses the source filesystem will automatically become a one-time migration, and will have the `scanOnly` flag applied.
+LiveData Migrator will only perform *read* tasks on a source filesystem created for one-time migrations. It will not check the source storage for modifications to data during transfer. Any migration that uses the source storage will automatically become a one-time migration, and will have the `scanOnly` flag applied.
 
 To create a source for one-time migrations, add the `scanOnly` flag during source creation:
 
@@ -261,11 +209,11 @@ filesystem add hdfs --source --scanOnly ...
 ```
 
 :::note
-The account used to connect to a source filesystem intended for one-time migrations only requires read access. Write access is not necessary.
+The account used to connect to a source storage intended for one-time migrations only requires read access. Write access is not necessary.
 :::
 
 ## Next Steps
 
-Once you have your source and target filesystem configured, you're ready to [migrate data](./create-migration.md). If you want migrate data to a different path on your target filesystem, [create path mappings](./create-path-mappings.md) first.
+Once you have your source and target storage configured, you're ready to [migrate data](./create-migration.md). If you want migrate data to a different path on your target filesystem, [create path mappings](./create-path-mappings.md) first.
 
 If you want to exclude specific file sizes or file names from your data migrations, [define exclusions](./configure-exclusions.md).
