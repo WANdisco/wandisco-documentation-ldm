@@ -52,6 +52,8 @@ If you’re not confident about meeting the requirements, you can discuss a supp
   * The Hive service must be present on the cluster.
   * SSH/CLI access to the cluster.
   * If Kerberos is enabled on your Hadoop cluster, a valid keytab containing a suitable principal for the Hive service user must be available. The host for the keytab will depend on whether you deploy locally, remotely, or both (see the [`hive agent add hive`](./command-reference.md#hive-agent-add-hive) section for more information).
+    * The keytab must be owned by the same user running LiveData Migrator's metadata migration component.
+
 
 ## Machine Specification
 
