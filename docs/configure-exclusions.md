@@ -19,7 +19,7 @@ Use the [UI](#configure-exclusions-with-the-ui) or the [CLI](#configure-exclusio
 Assign exclusions to new or existing migrations.
 
 :::note
-Default exclusions will automatically apply to certain filesystems depending on the platform. For example, ADLS storage types have a maximum individual file size limit of 4.55TiB, and any files larger will be automatically excluded.
+Default exclusions will automatically apply to certain filesystems depending on the platform. For example, ADLS filesystem types have a maximum individual file size limit of 4.55TiB, and any files larger will be automatically excluded.
 :::
 
 ### Add new exclusions

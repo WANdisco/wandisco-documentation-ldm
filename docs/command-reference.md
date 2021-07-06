@@ -131,7 +131,7 @@ SYNOPSYS
 
 #### Mandatory Parameters
 
-* **`--file-system-id`** The identifier to give the new file system resource. This is referenced in the UI as **Storage Name**.
+* **`--file-system-id`** The identifier to give the new file system resource. This is referenced in the UI as **Filesystem Name**.
 * **`--storage-account-name`** The name of the ADLS Gen 2 storage account to target. This is referenced in the UI as **Account Name**.
 * **`--shared-key`** The [shared account key](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) to use as credentials to write to the storage account. This is referenced in the UI as **Access Key**.
 * **`--container-name`** The name of the container in the storage account to which content will be migrated. This is referenced in the UI as **Container Name**.
@@ -1086,7 +1086,7 @@ Create a new migration to initiate data migration from your source file system.
 :::caution
 Do not write to target filesystem paths when a migration is underway. This could interfere with LiveData Migrator functionality and lead to undetermined behavior.
 
-Use different filesystem paths when writing to the target storage directly (and not through LiveData Migrator).
+Use different filesystem paths when writing to the target filesystem directly (and not through LiveData Migrator).
 :::
 
 ```text title="Create a new migration"
