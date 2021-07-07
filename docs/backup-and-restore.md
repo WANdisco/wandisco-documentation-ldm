@@ -35,11 +35,11 @@ The backup and restore feature makes use of a REST API to send backup and restor
 Use the following command to write a backup to a file on the host machine:
 
 ```text title="Save a masked backup"
-curl -X POST http://myldmhost:18080/backups
+curl -X POST http://myldmhost:18080/preview/backups
 ```
 
 ```text title="Save an unmasked backup"
-curl -X POST http://myldmhost:18080/backups?mask=false
+curl -X POST http://myldmhost:18080/preview/backups?mask=false
 ```
 
 In the above example, `myldmhost` should be replaced with the IP address or domain name of the server hosting LiveData Migrator.
@@ -51,7 +51,7 @@ The `mask` parameter, which is `true` by default, means secure keys - such as th
 Use the following command to write the backup to a specified file (in this case, `backup.json`):
 
 ```text title="Write the backup to a specific file"
-curl -X POST http://myldmhost:18080/backups?mask=false > backup.json
+curl -X POST http://myldmhost:18080/preview/backups?mask=false > backup.json
 ```
 
 ### Restore from backup
@@ -67,7 +67,7 @@ The restoration process will still reinstate your previously backed up settings,
 Restore LiveData Migrator from a backup by using the following curl command:
 
 ```text title="Restore from backup"
-curl -X POST -H "Content-Type: application/json" -d @backup.json http://myldmhost:18080/backups/restore --verbose
+curl -X POST -H "Content-Type: application/json" -d @backup.json http://myldmhost:18080/preview/backups/restore --verbose
 ```
 
 In this example, the backup file is named `backup.json` and the file is located in the user's current working directory.
