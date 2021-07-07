@@ -20,6 +20,21 @@ LiveData Migrator must then be restarted for the changes to take effect:
 service livedata-migrator restart
 ```
 
+You may check which preview features are currently active with the following curl command:
+
+```text title="Command"
+curl localhost:18080/preview
+```
+
+The command will return information similar to the following:
+```text title="Output"
+curl localhost:18080/preview
+{
+  "preview/verifications" : "OFF",
+  "preview/backups" : "OFF"
+}
+```
+
 ## Current Preview Features
 
 The following preview features are currently available in LiveData Migrator.
