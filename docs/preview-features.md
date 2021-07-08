@@ -20,6 +20,7 @@ LiveData Migrator must then be restarted for the changes to take effect:
 service livedata-migrator restart
 ```
 
+
 ## Current preview features
 
 You may check which preview features are currently active with the following curl command:

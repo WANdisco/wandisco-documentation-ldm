@@ -137,7 +137,7 @@ Selecting to configure your _Target_ storage on the Storage panel, see the links
   * [Service Principal (OAuth2)](./command-reference.md#mandatory-parameters-1)
 * [S3 / IBM Cloud Object Storage (S3)](./command-reference.md#s3a-mandatory-parameters)
 * [Google Cloud Storage](./command-reference.md#mandatory-parameters-3)
-* [HDFS](./command-reference/#mandatory-parameters-4)
+* [HDFS](./command-reference.md/#mandatory-parameters-4)
 
 ### Delete target storages
 
