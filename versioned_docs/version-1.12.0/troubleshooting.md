@@ -82,9 +82,7 @@ This can be due to an incorrectly entered access or secret key. Double check tha
 
 ### Error Code: AccessDenied. Error Message: Access to the resource https://sqs.eu-west-1.amazonaws.com/ is denied.
 
-This problem arises if your account does not have sufficient SQS permissions to access the bucket resource. To fix this, ask your organisation administrator to [assign the necessary privileges in the SQS policy manager](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-basic-examples-of-sqs-policies.html).
-
-For example, configuring an allow rule for `sqs:*` will allow all organization users configured with SQS to perform the necessary actions with LiveData Migrator.
+This problem arises if your account does not have sufficient SQS permissions to access the bucket resource. To fix this, ask your organisation administrator to assign the necessary privileges in the SQS policy manager.
 
 ## Notifications
 
@@ -121,11 +119,3 @@ And the following setting determines the low watermark percentage:
 ```text title="Example"
 notifications.pending.region.clear.percent=50
 ```
-
-## Troubleshooting techniques
-
-Use these LiveData Migrator features to identify problems with migrations or filesystems.
-
-### Check path status
-
-You can [check the status of a file path](./configure-storage.md#check-path-status) in either the UI or the CLI to determine whether any work is scheduled on the file. 

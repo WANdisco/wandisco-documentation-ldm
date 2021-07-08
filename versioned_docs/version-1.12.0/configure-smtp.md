@@ -9,13 +9,13 @@ LiveData Migrator supports sending email notifications whenever certain events o
 To use email notifications:
 
 1. [Configure an SMTP server to send the emails](#configure-an-smtp-server-in-the-ui)
-1. [Opt into the desired notifications](#configure-email-notifications-in-the-ui)
+1. [Opt in to the desired notifications](#configure-email-notifications-in-the-ui)
 
 ## Configure an SMTP server in the UI
 
 Configure an SMTP server in the UI by accessing the SMTP configuration tab and filling in the necessary fields.
 
-1. Click on the LiveData Migrator instance name (for example, "localhost") on the dashboard to access the overview page.
+1. Click on the LiveData Migrator instance name (e.g. "localhost") on the dashboard to access the overview page.
 1. Under the configuration category on the left, select **SMTP Settings**.
 1. Provide the necessary fields in the empty form.
 1. Click **Save**.
@@ -69,21 +69,17 @@ Once your SMTP server is ready, you can [configure email notifications through t
 
 Set up email notifications in the UI by accessing the Email Notifications tab and filling in the necessary fields.
 
-1. Click on the LiveData Migrator instance name (for example, "localhost") on the dashboard to access the overview page (or continue from configuring an SMTP server in the UI).
+1. Click on the LiveData Migrator instance name (e.g. "localhost") on the dashboard to access the overview page (or continue from configuring an SMTP server in the UI).
 1. Under the configuration category on the left, select **Email Notifications**.
 1. Enter the email address you want to send notifications to.
-1. Opt into the event notifications you want to receive.
+1. Opt in to the event notifications you want to receive.
 1. Click **Save**.
-
-Click **Send a test email** to send a test notification email to the specified address. If you receive an email with the text "This is a test email notification" and a list of email addresses subscribed to notifications, you've configured email notifications correctly.
 
 ### Email notification types
 
 * **Data migration has stopped:** LiveData Migrator sends this notification any time a migration automatically stops, informing you of the migration's name and the exception message that caused the migration to terminate.
-* **LiveData Migrator is falling behind system events:** LiveData Migrator sends this notification when it determines the number of events (changes to data) occurring on a source filesystem is too rapid for a migration to keep up with over a given period of time. The email will contain the migration name, the file system ID and simple statistics about the events. [The sensitivity of this notification is configurable](./configuration-ldm.md#configure-notification-properties).
 * **Data migration is missing events:** This notification is thrown when LiveData Migrator doesn't receive the expected number of events in a migration, and fails to retry querying them 10 times.
-* **Filesystems are unhealthy:** LiveData Migrator sends this notification when it cannot connect to a source or target filesystem, notifying you of the filesystem that failed connection.
-* **Files are failing to migrate:** These notifications are sent when a file fails to transfer in a migration, providing a link to the migration that failed to transfer the files.
+* **LiveData Migrator is falling behind system events:** LiveData Migrator sends this notification when it determines the number of events (changes to data) occurring on a source filesystem is too rapid for a migration to keep up with over a given period of time. The email will contain the migration name, the file system ID and simple statistics about the events. [The sensitivity of this notification is configurable](./configuration-ldm.md#configure-notification-properties).
 
 ## Configure email notifications through the CLI
 

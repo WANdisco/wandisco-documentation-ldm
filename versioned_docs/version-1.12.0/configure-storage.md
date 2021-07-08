@@ -18,7 +18,7 @@ The Storage panel shows the filesystems LiveData Migrator uses as either a sourc
 Use the Storage panel to:
 
 * View and configure the source and target filesystems.
-* Add or remove targets.
+* Add further targets.
 * Add additional LiveData Migrator servers and [LiveData Plane](https://wandisco.github.io/wandisco-documentation/docs/quickstarts/preparation/get-started) servers.
 * Configure Amazon S3-compatible targets using the [Hadoop S3A configuration](http://hadoop.apache.org/docs/current/hadoop-aws/tools/hadoop-aws/index.html) exposed in the UI.
 * Connect to additional LiveData Migrator or LiveData Plane instances and configure their respective storages.
@@ -76,7 +76,7 @@ Amazon S3 buckets as a source are currently supported as a preview feature.
 To configure an Amazon S3 bucket source for use with LiveData Migrator, provide the following details:
 
 * **File System ID** - Provide a name for your source storage.
-* **Storage Type** - The type of filesystem source. Choose _Amazon S3_.
+* **Storage Type** - The type of filesystem source. Choose _AWS S3_.
 * **Bucket Name** - The reference name of the Amazon S3 bucket you are using.
 * **Credentials Provider** - The Java class name of a credentials provider for authenticating with the S3 endpoint. This is not a required parameter when adding an IBM COS bucket through the UI.
 The Provider options available include:
@@ -105,8 +105,6 @@ The Provider options available include:
 
 :::note
 As an additional step, ensure your account has the [necessary SQS permissions](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-basic-examples-of-sqs-policies.html) to [access the bucket as storage](https://docs.aws.amazon.com/AmazonS3/latest/userguide/grant-destinations-permissions-to-s3.html#grant-sns-sqs-permission-for-s3).
-
-For example, configuring an allow rule for `sqs:*` will allow all organization users configured with SQS to perform the necessary actions with LiveData Migrator.
 :::
 
 #### Local filesystem source configuration
@@ -137,17 +135,13 @@ Selecting to configure your _Target_ storage on the Storage panel, see the links
   * [Service Principal (OAuth2)](./command-reference.md#mandatory-parameters-1)
 * [S3 / IBM Cloud Object Storage (S3)](./command-reference.md#s3a-mandatory-parameters)
 * [Google Cloud Storage](./command-reference.md#mandatory-parameters-3)
-* [HDFS](./command-reference.md/#mandatory-parameters-4)
-
-### Delete target storages
-
-Delete a target storage from its **Storage Configuration** panel. Click the **Delete Storage** button. Before you can delete a target storage you must ensure that you first [delete any associated migrations](./manage-migrations#delete-a-migration).
+* [HDFS](./command-reference/#mandatory-parameters-4)
 
 ## Configure storage with the CLI
 
 ### Validate your source
 
-LiveData Migrator migrates data from a source filesystem. Verify that the correct source filesystem is registered or delete the existing one (you'll define a new source in the [Add File Systems](#add-file-systems) step).
+LiveData Migrator migrates data from a source filesystem. Validate that the correct source filesystem is registered or delete the existing one (you'll define a new source in the [Add File Systems](#add-file-systems) step).
 
 If Kerberos is enabled or your Hadoop configuration does not contain the information needed to connect to the Hadoop file system, use the [`filesystem auto-discover-source hdfs`](./command-reference.md#filesystem-auto-discover-source-hdfs) command to provide your Kerberos credentials and auto-discover your source HDFS configuration.
 
@@ -195,52 +189,6 @@ You can define multiple target file systems, which you can migrate to at the sam
 | [`filesystem list`](./command-reference.md#filesystem-list) | List of target file systems |
 | [`filesystem show`](./command-reference.md#filesystem-show) | Get target file system details |
 | [`filesystem types`](./command-reference.md#filesystem-types) | List the types of target file systems available |
-
-## Check path status
-
-Check the status of a path on your source filesystem to view any scheduled work to be performed on it.
-
-### Check path status in the UI
-
-1. From the main LiveData Migrator dashboard, click the triple dot button next to one of your filesystems
-1. In the menu that appears, select **Path Status**
-1. Select a source filesystem from the **Select a source filesystem** dropdown menu
-1. Enter the full path of a file on the source filesystem
-1. Click **Search**
-
-You will be shown information about the file, such as the migration it's associated with, the target and file path it's expected to migrate to, and whether or not any work is scheduled on the file.
-
-### Check path status through the CLI
-
-Use the [`migration path status` command](./command-reference.md#migration-path-status) to view information about a file path, such as the migration it's associated with, the target and file path it's expected to migrate to, and whether or not any work is scheduled on the file.
-
-## Configure success files
-
-Use success files to determine when a specific directory has migrated successfully and the data within is ready for an application or job to process on the target side.
-
-Success files are migrated last within their containing directory, meaning they can be used to ascertain that the directory they are contained within has finished migration.
-
-:::note
-Success files can only be added to HDFS source filesystems.
-:::
-
-### Configure success files in the UI
-
-1. Click on an HDFS source filesystem of choice in the LiveData Migrator dashboard.
-1. Under **Success File**, supply a filename or glob pattern that matches any success files you want to add (for example: `/**_SUCCESS`).
-1. Click **Save**.
-
-### Configure success files through the CLI
-
-Add success files in the CLI by supplying a filename or glob pattern to the `--success-file` parameter of the [`filesystem add hdfs`](./command-reference.md#filesystem-add-hdfs) or [`filesystem update hdfs`](./command-reference.md#filesystem-update-hdfs) command:
-
-```text title="add"
-filesystem add hdfs --file-system-id mysource --source --success-file /mypath/myfile.txt
-```
-
-```text title="update"
-filesystem update hdfs --file-system-id mysource --success-file /**_SUCCESS
-```
 
 ## Configure storage for one-time migrations
 

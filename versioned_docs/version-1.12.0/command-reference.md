@@ -1083,12 +1083,6 @@ SYNOPSYS
 
 Create a new migration to initiate data migration from your source file system.
 
-:::caution
-Do not write to target filesystem paths when a migration is underway. This could interfere with LiveData Migrator functionality and lead to undetermined behavior.
-
-Use different filesystem paths when writing to the target storage directly (and not through LiveData Migrator).
-:::
-
 ```text title="Create a new migration"
 SYNOPSYS
         migration add [[--migration-id] string]
@@ -1167,28 +1161,6 @@ SYNOPSYS
 
 ```text
 migration show --migration-id myNewMigration
-```
-
-----
-
-### `migration pending-region add`
-
-Add a [pending region](./manage-migrations.md#pending-regions) to a migration.
-
-```text title="Add pending region for rescan to migration"
-SYNOPSYS
-        migration pending-region add [--migration-id] string [--path] string
-```
-
-#### Mandatory Parameters
-
-* **`--migration-id`** The migration name or identifier to add a pending region to.
-* **`--path`** The path string of the region to add for rescan.
-
-#### Example
-
-```text
-migration pending-region add --migration-id myMigration --path etc/files
 ```
 
 ----
@@ -1886,10 +1858,6 @@ If specifying Kerberos and config path information for remote agents, ensure tha
 Databricks agents are currently available as a preview feature.
 :::
 
-:::info
-The source table format must be [Parquet](https://databricks.com/glossary/what-is-parquet) to ensure a successful migration to Databricks Delta Lake.
-:::
-
 Add a [Databricks](https://databricks.com/product/delta-lake-on-databricks) hive agent to connect to a Databricks Delta Lake metastore ([AWS](https://docs.databricks.com/data/metastores/index.html), [Azure](https://docs.microsoft.com/en-us/azure/databricks/data/metastores/) or [GCP](https://docs.gcp.databricks.com/data/metastores/index.html)) using the `hive agent add databricks` command.
 
 If your LiveData Migrator host can communicate directly with the Databricks Delta Lake, then a local hive agent will be sufficient. Otherwise, consider using a remote hive agent.
@@ -1948,7 +1916,7 @@ The following steps are required to enable Java Database Connectivity (JDBC) to 
 Additionally, use only one of the following parameters:
 
 :::important
-If the `--convert-to-delta` option is used, the `--default-fs-override` parameter must also be provided with the value set to `dbfs:`, or a path inside the Databricks filesystem. For example, `dbfs:/mount/externalStorage`.
+If the `--convert-to-delta` option is used, the `--default-fs-override` parameter must also be provided with the value set to `dbfs:`.
 :::
 
 * **`--file-system-id`** The name of the filesystem that will be associated with this agent (for example: `myadls2` or `mys3bucket`). This will ensure any [path mappings](./create-path-mappings.md) are correctly linked between the filesystem and the agent. This is referenced in the UI as **Filesystem**.
@@ -1970,13 +1938,6 @@ If the `--convert-to-delta` option is used, the `--default-fs-override` paramete
     :::important
     Only use this option if you are performing [one-time migrations](./one-time-migration.md) for the underlying table data. The Databricks agent does not support continuous (live) updates of table data when transferring to Delta Lake on Databricks.
     :::
-
-- If a migration to Databricks runs without the **`--convert-to-delta`** option, then some migrated data may not be visible from the Databricks side. To avoid this issue, ensure that the value of `default-fs-override` is set to "`dbfs:`" with the value of `--fs-mount-point`.
-
-  **Example:**
-  ```
-  --default-fs-override dbfs:/mnt/mybucketname    
-  ```
 
 #### Parameters for remote hive agents only
 
@@ -2858,28 +2819,6 @@ SYNOPSYS
 
 ```text
 notification email types remove MISSING_EVENTS,EVENTS_BEHIND,MIGRATION_AUTO_STOPPED
-```
-
-----
-
-### `migration path status`
-
-View all actions scheduled on a source filesystem in the specified path.
-
-```text title="Show information on the migration status of a path on the source filesystem"
-SYNOPSYS
-        migration path status [--source-path] string [--source] string
-```
-
-#### Mandatory Parameters
-
-* **`--source-path`** The path on the filesystem to review actions for. Supply a full directory.
-* **`--source`** The filesystem ID of the source system the path is in.
-
-#### Example
-
-```text
-migration path status --source-path /root/mypath/ --source mySource
 ```
 
 ----
