@@ -6,6 +6,12 @@ sidebar_label: Manage migrations
 
 Manage your migrations with LiveData Migrator using either the [UI](#manage-migrations-with-the-ui) or [CLI](#manage-migrations-with-the-cli).
 
+:::caution
+Do not write to target filesystem paths when a migration is underway. This could interfere with LiveData Migrator functionality and lead to undetermined behavior.
+
+Use different filesystem paths when writing to the target storage directly (and not through LiveData Migrator).
+:::
+
 ## Manage migrations with the UI
 
 The Dashboard displays an overview of migrations and their status, showing what pre-existing data has been moved and data added since the migration started.
@@ -41,6 +47,10 @@ Adding exclusions to an existing migration will change the future actions perfor
 1. In the dashboard, select a migration.
 1. Under the sidebar that appears, select **Exclusions**.
 1. Remove any of the exclusions one at a time.
+
+### Start a migration
+
+To start a migration and initiate data transfer, click the **Start** button.
 
 ### Stop a migration
 
